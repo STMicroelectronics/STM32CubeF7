@@ -1,0 +1,162 @@
+/**
+  @page UART_HyperTerminal_DMA UART Hyperterminal DMA Example
+  
+  @verbatim
+  ******************************************************************************
+  * @file    UART/UART_HyperTerminal_DMA/readme.txt 
+  * @author  MCD Application Team
+  * @brief   Description of the UART Hyperterminal example.
+  ******************************************************************************
+  *
+  * Copyright (c) 2016 STMicroelectronics. All rights reserved.
+  *
+  * This software component is licensed by ST under BSD 3-Clause license,
+  * the "License"; You may not use this file except in compliance with the
+  * License. You may obtain a copy of the License at:
+  *                       opensource.org/licenses/BSD-3-Clause
+  *
+  ******************************************************************************
+  @endverbatim
+
+@par Example Description 
+
+UART transmission (transmit/receive) in DMA mode 
+between a board and an HyperTerminal PC application.
+
+Board: STM32F769I-EVAL
+Tx Pin: PA.09
+Rx Pin: PA.10
+   _________________________ 
+  |           ______________|                       _______________
+  |          |USART         |                      | HyperTerminal |
+  |          |              |                      |               |
+  |          |           TX |______________________|RX             |
+  |          |              |                      |               |
+  |          |              |     RS232 Cable      |               |             
+  |          |              |                      |               |
+  |          |           RX |______________________|TX             |          
+  |          |              |                      |               |           
+  |          |______________|                      |_______________|          
+  |                         |                       
+  |                         |                    
+  |                         |                      
+  |                         |                      
+  |_STM32_Board_____________|                      
+
+
+At the beginning of the main program the HAL_Init() function is called to reset 
+all the peripherals, initialize the Flash interface and the systick.
+Then the SystemClock_Config() function is used to configure the system
+clock (SYSCLK) to run at 216 MHz for STM32F7xx Devices.
+
+The UART peripheral configuration is ensured by the HAL_UART_Init() function.
+This later is calling the HAL_UART_MspInit()function which core is implementing
+the configuration of the needed UART resources according to the used hardware (CLOCK, 
+GPIO, DMA and NVIC). You may update this function to change UART configuration.
+
+The UART/Hyperterminal communication is then initiated.
+The HAL_UART_Receive_DMA() and the HAL_UART_Transmit_DMA() functions allow respectively 
+the reception of Data from Hyperterminal and the transmission of a predefined data 
+buffer.
+
+The Asynchronous communication aspect of the UART is clearly highlighted as the  
+data buffers transmission/reception to/from Hyperterminal are done simultaneously.
+
+For this example the TxBuffer is predefined and the RxBuffer size is limited to 
+10 data by the mean of the RXBUFFERSIZE define in the main.c file.
+
+In a first step the received data will be stored in the RxBuffer buffer and the 
+TxBuffer buffer content will be displayed in the Hyperterminal interface.
+In a second step the received data in the RxBuffer buffer will be sent back to 
+Hyperterminal and displayed.
+The end of this two steps are monitored through the HAL_UART_GetState() function
+result.
+
+STM32 board's LEDs can be used to monitor the transfer status:
+ - LED1 is ON when the transmission process is complete.
+ - LED4 is ON when the reception process is complete.
+ - LED3 is ON when there is an error in transmission/reception process.  
+
+The UART is configured as follows:
+    - BaudRate = 9600 baud  
+    - Word Length = 8 Bits (7 data bit + 1 parity bit)
+    - One Stop Bit
+    - Odd parity
+    - Hardware flow control disabled (RTS and CTS signals)
+    - Reception and transmission are enabled in the time
+
+@note USARTx/UARTx instance used and associated resources can be updated in "main.h"
+file depending hardware configuration used.
+
+@note When the parity is enabled, the computed parity is inserted at the MSB
+position of the transmitted data.
+
+@note When the UART parity is enabled (PCE = 1) the data received contain the parity bit.
+
+@note Care must be taken when using HAL_Delay(), this function provides accurate delay (in milliseconds)
+      based on variable incremented in SysTick ISR. This implies that if HAL_Delay() is called from
+      a peripheral ISR process, then the SysTick interrupt must have higher priority (numerically lower)
+      than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
+      To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
+      
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
+      to have correct HAL operation.
+
+@par Keywords
+
+Connectivity, UART, Printf, Baud rate, RS-232, HyperTerminal, full-duplex, HyperTerminal, DMA,
+Transmission, Reception, Asynchronous
+
+@Note If the user code size exceeds the DTCM-RAM size or starts from internal cacheable memories (SRAM1 and SRAM2),that is shared between several processors,
+      then it is highly recommended to enable the CPU cache and maintain its coherence at application level.
+      The address and the size of cacheable buffers (shared between CPU and other masters)  must be properly updated to be aligned to cache line size (32 bytes).
+
+@Note It is recommended to enable the cache and maintain its coherence, but depending on the use case
+      It is also possible to configure the MPU as "Write through", to guarantee the write access coherence.
+      In that case, the MPU must be configured as Cacheable/Bufferable/Not Shareable.
+      Even though the user must manage the cache coherence for read accesses.
+      Please refer to the AN4838 “Managing memory protection unit (MPU) in STM32 MCUs”
+      Please refer to the AN4839 “Level 1 cache on STM32F7 Series”
+
+@par Directory contents
+
+  - UART/UART_HyperTerminal_DMA/Inc/stm32f7xx_hal_conf.h    HAL configuration file
+  - UART/UART_HyperTerminal_DMA/Inc/stm32f7xx_it.h          DMA interrupt handlers header file
+  - UART/UART_HyperTerminal_DMA/Inc/main.h                  Header for main.c module  
+  - UART/UART_HyperTerminal_DMA/Src/stm32f7xx_it.c          DMA interrupt handlers
+  - UART/UART_HyperTerminal_DMA/Src/main.c                  Main program
+  - UART/UART_HyperTerminal_DMA/Src/stm32f7xx_hal_msp.c     HAL MSP module
+  - UART/UART_HyperTerminal_DMA/Src/system_stm32f7xx.c      STM32F7xx system source file
+
+
+@par Hardware and Software environment
+
+  - This example runs on STM32F767xx/STM32F769xx/STM32F777xx/STM32F779xx devices.
+    
+  - This example has been tested with STM32F769I-EVAL board and can be
+    easily tailored to any other supported device and development board.
+
+  - STM32F769I_EVAL Set-up
+    - Connect a null-modem female/female RS232 cable between the DB9 connector 
+      CN7 (USART1) and PC serial port if you want to display data on the HyperTerminal.
+
+@note Make sure that jumper JP11 is on RS232_RX position, and jumper JP21 is on USART1_RX position
+
+
+  - Hyperterminal configuration:
+    - Word Length = 7 Bits
+    - One Stop Bit
+    - Odd parity
+    - BaudRate = 9600 baud
+    - flow control: None 
+
+
+@par How to use it ? 
+
+In order to make the program work, you must do the following :
+ - Open your preferred toolchain 
+ - Rebuild all files and load your image into target memory
+ - Run the example
+
+ * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+ */

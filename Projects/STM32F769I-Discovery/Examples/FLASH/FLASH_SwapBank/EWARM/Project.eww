@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<workspace>
+  <project>
+    <path>$WS_DIR$\Project.ewp</path>
+  </project>
+  <batchBuild>
+    <batchDefinition>
+      <name>Bank 1 &amp; Bank 2</name>
+      <member>
+        <project>Project</project>
+        <configuration>FLASH_SwapBank_Bank1</configuration>
+      </member>
+      <member>
+        <project>Project</project>
+        <configuration>FLASH_SwapBank_Bank2</configuration>
+      </member>
+    </batchDefinition>
+  </batchBuild>
+</workspace>
+
+

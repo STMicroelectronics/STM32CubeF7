@@ -1,0 +1,72 @@
+/**
+  ******************************************************************************
+  * This file is part of the TouchGFX 4.10.0 distribution.
+  *
+  * <h2><center>&copy; Copyright (c) 2018 STMicroelectronics.
+  * All rights reserved.</center></h2>
+  *
+  * This software component is licensed by ST under Ultimate Liberty license
+  * SLA0044, the "License"; You may not use this file except in compliance with
+  * the License. You may obtain a copy of the License at:
+  *                             www.st.com/SLA0044
+  *
+  ******************************************************************************
+  */
+  
+
+#ifndef CIRCULAR_VALUE_INDICATOR_HPP
+#define CIRCULAR_VALUE_INDICATOR_HPP
+
+#include <touchgfx/widgets/Image.hpp>
+#include <touchgfx/containers/ListLayout.hpp>
+#include <touchgfx/widgets/TextureMapper.hpp>
+#include <touchgfx/widgets/TextArea.hpp>
+#include <touchgfx/widgets/TextAreaWithWildcard.hpp>
+#include <touchgfx/widgets/canvas/Circle.hpp>
+
+#if !defined(USE_BPP) || USE_BPP==16
+#include <touchgfx/widgets/canvas/PainterRGB565Bitmap.hpp>
+#elif USE_BPP==24
+#include <touchgfx/widgets/canvas/PainterRGB888Bitmap.hpp>
+#endif
+
+using namespace touchgfx;
+
+
+class CircularValueIndicator : public Container
+{
+public:
+    CircularValueIndicator();
+    virtual ~CircularValueIndicator();
+
+    void setValue(int percentage);
+    int getValue() { return value; }
+
+private:
+    static const int MIN_DEGREE = -138;
+    static const int MAX_DEGREE = 138;
+
+
+    Image background;
+    TextureMapper arrow;
+
+    TextAreaWithOneWildcard JunctionTempText;
+    Unicode::UnicodeChar JunctionTempTextBuffer[5];
+    TextArea JunctionTempPercentageText;
+
+    Circle circle;
+
+    int value;
+
+#if !defined(USE_BPP) || USE_BPP==16
+    PainterRGB565Bitmap myBitmapPainterCircle;
+    PainterRGB565Bitmap myBitmapPainterGlow;
+#elif USE_BPP==24
+    PainterRGB888Bitmap myBitmapPainterCircle;
+    PainterRGB888Bitmap myBitmapPainterGlow;
+#endif
+
+    void updateJunctionTempText(int value);
+};
+
+#endif /* CIRCULAR_VALUE_INDICATOR_HPP */

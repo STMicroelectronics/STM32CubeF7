@@ -1,0 +1,270 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>Simulation</ProjectName>
+    <SccProjectName />
+    <SccLocalPath />
+    <ProjectGuid>{8A3EDBFA-3EB7-4D28-941A-91AB807CF9BF}</ProjectGuid>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v110</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v110</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>.\Output\Exe\</OutDir>
+    <IntDir>.\Output\Obj\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>..\..\..\Middlewares\ST\STemWin\inc;$(IncludePath)</IncludePath>
+    <TargetName>simulation</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>.\Output\WIN32_MSVC60\Release\</OutDir>
+    <IntDir>.\Output\WIN32_MSVC60\Release\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <Optimization>Disabled</Optimization>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <WarningLevel>Level3</WarningLevel>
+      <MinimalRebuild>true</MinimalRebuild>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <AdditionalIncludeDirectories>.\GUI\inc;Config;GUI\Core;GUI\Widget;GUI\WM;System\Simulation;System\Simulation\Res;System\Simulation\SIM_GUI;GUI\DisplayDriver;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>LCD_USE_WINSIM;_DEBUG;WIN32;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AssemblerListingLocation>.\Output\Debug\</AssemblerListingLocation>
+      <BrowseInformation>true</BrowseInformation>
+      <PrecompiledHeaderOutputFile>.\Output\Debug\Simulation.pch</PrecompiledHeaderOutputFile>
+      <ObjectFileName>.\Output\Debug\</ObjectFileName>
+      <ProgramDataBaseFileName>.\Output\Debug\</ProgramDataBaseFileName>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+    </ClCompile>
+    <Midl>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <TypeLibraryName>.\Output\WIN32_MSVC60\Debug\Simulation.tlb</TypeLibraryName>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0009</Culture>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\Output\Debug\Simulation.bsc</OutputFile>
+    </Bscmake>
+    <Link>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <IgnoreSpecificDefaultLibraries>libcmt.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
+      <OutputFile>.\Output\Exe\Simulation.exe</OutputFile>
+      <AdditionalDependencies>libcmt.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalOptions>/SAFESEH:NO %(AdditionalOptions)</AdditionalOptions>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <StringPooling>true</StringPooling>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <Optimization>MinSpace</Optimization>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <WarningLevel>Level3</WarningLevel>
+      <AdditionalIncludeDirectories>Config;GUI\Core;GUI\Widget;GUI\WM;System\Simulation;System\Simulation\Res;System\Simulation\SIM_GUI;GUI\DisplayDriver;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>LCD_USE_WINSIM;NDEBUG;WIN32;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AssemblerListingLocation>.\Output\WIN32_MSVC60\Release\</AssemblerListingLocation>
+      <PrecompiledHeaderOutputFile>.\Output\WIN32_MSVC60\Release\Simulation.pch</PrecompiledHeaderOutputFile>
+      <ObjectFileName>.\Output\WIN32_MSVC60\Release\</ObjectFileName>
+      <ProgramDataBaseFileName>.\Output\WIN32_MSVC60\Release\</ProgramDataBaseFileName>
+    </ClCompile>
+    <Midl>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <TypeLibraryName>.\Output\WIN32_MSVC60\Release\Simulation.tlb</TypeLibraryName>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0407</Culture>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\Output\WIN32_MSVC60\Release\Simulation.bsc</OutputFile>
+    </Bscmake>
+    <Link>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
+      <OutputFile>.\Output\WIN32_MSVC60\Release\Simulation.exe</OutputFile>
+      <AdditionalDependencies>libcmt.lib;System\Simulation\GUISim.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Middlewares\ST\STemWin\Simulation\WinMain.c" />
+    <ClCompile Include="Application\MainTask.c" />
+    <ClCompile Include="Config\GUIConf.c" />
+    <ClCompile Include="Config\LCDConf.c" />
+    <ClCompile Include="Config\SIMConf.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\BUTTON.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\BUTTON_Private.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\CALENDAR.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\CHECKBOX.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\CHECKBOX_Private.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\CHOOSECOLOR.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\CHOOSEFILE.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\DIALOG.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\DIALOG_Intern.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\DROPDOWN.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\DROPDOWN_Private.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\EDIT.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\EDIT_Private.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\FRAMEWIN.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\FRAMEWIN_Private.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\Global.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\GRAPH.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\GRAPH_Private.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\GUI.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\GUIDRV_DCache.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\GUIDRV_DCache_Private.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\GUIDRV_Dist.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\GUIDRV_FlexColor.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\GUIDRV_FlexColor_Private.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\GUIDRV_Lin.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\GUIDRV_Lin_Opt_16.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\GUIDRV_Lin_Opt_24.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\GUIDRV_Lin_Opt_32.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\GUIDRV_Lin_Opt_8.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\GUIDRV_Lin_Private.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\GUIDRV_NoOpt_1_8.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\GUIDRV_Template.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\GUIDRV_TemplateI.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\GUIDRV_TemplateI_Private.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\GUIMTDRV_TangoC32.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\GUITDRV_ADS7846.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\GUI_ARRAY.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\GUI_ARRAY_Private.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\GUI_BMP_Private.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\GUI_ConfDefaults.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\GUI_Debug.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\GUI_FontIntern.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\GUI_GCache_Private.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\GUI_GIF_Private.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\GUI_HOOK.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\GUI_JPEG_Private.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\GUI_Private.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\GUI_SetOrientation.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\GUI_SetOrientationCX.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\GUI_SIM_Win32.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\GUI_SPRITE_Private.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\GUI_Type.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\GUI_Version.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\GUI_VNC.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\GUI__BiDi2_Brackets_800.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\GUI__BiDi2_Types_800.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\HEADER.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\HEADER_Private.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\ICONVIEW.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\ICONVIEW_Private.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\IMAGE.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\IMAGE_Private.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\IP_FS.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\KNOB.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\KNOB_Private.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\LCD.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\LCD_ConfDefaults.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\LCD_Private.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\LCD_Protected.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\LCD_SIM.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\LISTBOX.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\LISTBOX_Private.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\LISTVIEW.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\LISTVIEW_Private.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\LISTWHEEL.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\LISTWHEEL_Private.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\MENU.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\MENU_Private.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\MESSAGEBOX.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\MULTIEDIT.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\MULTIPAGE.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\MULTIPAGE_Private.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\PROGBAR.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\PROGBAR_Private.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\RADIO.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\RADIO_Private.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\SCROLLBAR.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\SCROLLBAR_Private.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\SEGGER.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\SLIDER.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\SLIDER_Private.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\SPINBOX.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\SPINBOX_Private.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\SWIPELIST.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\SWIPELIST_Private.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\TEXT.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\TEXT_Private.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\TREEVIEW.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\TREEVIEW_Private.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\WIDGET.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\WINDOW_Private.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\WM.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\WM_GUI.h" />
+    <ClInclude Include="..\..\..\Middlewares\ST\STemWin\inc\WM_Intern.h" />
+    <ClInclude Include="Config\GUIConf.h" />
+    <ClInclude Include="Config\LCDConf.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="..\..\..\Middlewares\ST\STemWin\Lib\STemWin540_WIN32.lib" />
+    <Library Include="..\..\..\Middlewares\ST\STemWin\Simulation\GUISim.lib" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="..\..\..\Middlewares\ST\STemWin\Simulation\SimulationMinGW.res" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

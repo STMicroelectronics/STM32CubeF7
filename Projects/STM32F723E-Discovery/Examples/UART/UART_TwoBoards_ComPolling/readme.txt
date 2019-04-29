@@ -1,0 +1,147 @@
+/**
+  @page UART_TwoBoards_ComPolling UART TwoBoards Communication Polling example
+
+  @verbatim
+  ******************************************************************************
+  * @file    UART/UART_TwoBoards_ComPolling/readme.txt 
+  * @author  MCD Application Team
+  * @brief   Description of the UART Two Boards Communication Polling example.
+  ******************************************************************************
+  *
+  * Copyright (c) 2016 STMicroelectronics. All rights reserved.
+  *
+  * This software component is licensed by ST under BSD 3-Clause license,
+  * the "License"; You may not use this file except in compliance with the
+  * License. You may obtain a copy of the License at:
+  *                       opensource.org/licenses/BSD-3-Clause
+  *
+  ******************************************************************************
+  @endverbatim
+
+@par Example Description 
+
+UART transmission (transmit/receive) in Polling mode 
+between two boards.
+
+Board: STM32F723E-DISCOVERY (embeds a STM32723E device)
+Tx Pin: PA2 (CN13.D1)
+Rx Pin: PA3 (CN13.D0)
+   _________________________                       _________________________ 
+  |           ______________|                     |______________           |
+  |          |USART         |                     |         USART|          |
+  |          |              |                     |              |          |
+  |          |           TX |_____________________| RX           |          |
+  |          |              |                     |              |          |
+  |          |              |                     |              |          |
+  |          |              |                     |              |          |
+  |          |           RX |_____________________| TX           |          |
+  |          |              |                     |              |          |
+  |          |______________|                     |______________|          |
+  |                         |                     |                         |
+  |                         |                     |                         |
+  |                      GND|_____________________|GND                      |
+  |_STM32_Board 1___________|                     |_STM32_Board 2___________|
+
+
+
+Two identical boards are connected as shown on the picture above.
+Board 1: transmitting then receiving board
+Board 2: receiving then transmitting board
+
+The user presses the User/WakeUp push-button on board 1.
+Then, board 1 sends in polling mode a message to board 2 that sends it back to 
+board 1 in polling mode as well.
+Finally, board 1 and 2 compare the received message to that sent.
+If the messages are the same, the test passes.
+
+
+WARNING: as both boards do not behave the same way, "TRANSMITTER_BOARD" compilation
+switch is defined in /Src/main.c and must be enabled
+at compilation time before loading the executable in the board that first transmits
+then receives.
+The receiving then transmitting board needs to be loaded with an executable
+software obtained with TRANSMITTER_BOARD disabled. 
+
+STM32F723E-DISCOVERY board LEDs are used to monitor the transfer status:
+- While board 1 is waiting for the user to press the User/WakeUp push-button, its LED6 is
+  blinking rapidly (100 ms period).
+- When the test passes, LED5 on both boards is turned on, otherwise the test has failed. 
+- When the transmission or reception process are complete, LED6 is turned on.
+- If there is an initialization or transfer error, LED6 is slowly blinking (1 sec. period).
+
+At the beginning of the main program the HAL_Init() function is called to reset 
+all the peripherals, initialize the Flash interface and the systick.
+Then the SystemClock_Config() function is used to configure the system
+clock (SYSCLK) to run at 216 MHz.
+
+
+The UART is configured as follows:
+    - BaudRate = 9600 baud  
+    - Word Length = 8 bits (8 data bits, no parity bit)
+    - One Stop Bit
+    - No parity
+    - Hardware flow control disabled (RTS and CTS signals)
+    - Reception and transmission are enabled in the time
+
+@note USARTx/UARTx instance used and associated resources can be updated in "main.h"
+file depending hardware configuration used.
+
+@note When the parity is enabled, the computed parity is inserted at the MSB
+position of the transmitted data.
+
+@note Care must be taken when using HAL_Delay(), this function provides accurate delay (in milliseconds)
+      based on variable incremented in SysTick ISR. This implies that if HAL_Delay() is called from
+      a peripheral ISR process, then the SysTick interrupt must have higher priority (numerically lower)
+      than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
+      To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
+      
+@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+      to have correct HAL operation.
+
+@par Keywords
+
+Connectivity, UART, Baud rate, RS-232, Full-duplex, Polling, Parity, Stop bit, Transmission, Reception,
+
+@Note If the user code size exceeds the DTCM-RAM size or starts from internal cacheable memories (SRAM1 and SRAM2),that is shared between several processors,
+      then it is highly recommended to enable the CPU cache and maintain its coherence at application level.
+      The address and the size of cacheable buffers (shared between CPU and other masters)  must be properly updated to be aligned to cache line size (32 bytes).
+
+@Note It is recommended to enable the cache and maintain its coherence, but depending on the use case
+      It is also possible to configure the MPU as "Write through", to guarantee the write access coherence.
+      In that case, the MPU must be configured as Cacheable/Bufferable/Not Shareable.
+      Even though the user must manage the cache coherence for read accesses.
+      Please refer to the AN4838 “Managing memory protection unit (MPU) in STM32 MCUs”
+      Please refer to the AN4839 “Level 1 cache on STM32F7 Series”
+
+@par Directory contents  
+
+  - UART/UART_TwoBoards_ComPolling/Inc/stm32f7xx_hal_conf.h    HAL configuration file
+  - UART/UART_TwoBoards_ComPolling/Inc/stm32f7xx_it.h          interrupt handlers header file
+  - UART/UART_TwoBoards_ComPolling/Inc/main.h                  Header for main.c module  
+  - UART/UART_TwoBoards_ComPolling/Src/stm32f7xx_it.c          interrupt handlers
+  - UART/UART_TwoBoards_ComPolling/Src/main.c                  Main program
+  - UART/UART_TwoBoards_ComPolling/Src/stm32f7xx_hal_msp.c     HAL MSP module
+  - UART/UART_TwoBoards_ComPolling/Src/system_stm32f7xx.c      STM32F7xx system source file
+
+
+@par Hardware and Software environment 
+
+  - This example runs on STM32F722xx/STM32F723xx/STM32F732xx/STM32F733xx devices.    
+  - This example has been tested with two STM32F723E-DISCOVERY boards embedding
+    a STM32723E device and can be easily tailored to any other supported device 
+    and development board.
+
+  - STM32F723E-DISCOVERY set-up
+    - Connect a wire between 1st board PA2 (CN13.D1) pin (Uart Tx) and 2nd board PA3 (CN13.D0) pin (Uart Rx)
+    - Connect a wire between 1st board PA3 (CN13.D0) pin (Uart Rx) and 2nd board PA2 (CN13.D1) pin (Uart Tx)
+    - Connect 1st board GND to 2nd Board GND    
+
+@par How to use it ? 
+
+In order to make the program work, you must do the following :
+ - Open your preferred toolchain 
+ - Rebuild all files and load your image into target memory
+ - Run the example
+
+ * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+ */

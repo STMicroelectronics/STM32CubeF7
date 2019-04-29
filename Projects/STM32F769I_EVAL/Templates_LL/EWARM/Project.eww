@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<workspace>
+  <project>
+    <path>$WS_DIR$\Project.ewp</path>
+  </project>
+  <batchBuild>
+    <batchDefinition>
+      <name>Build_all</name>
+      <member>
+        <project>Project</project>
+        <configuration>STM32F769I_EVAL_AXIM_FLASH</configuration>
+      </member>
+      <member>
+        <project>Project</project>
+        <configuration>STM32F769I_EVAL_ITCM_FLASH</configuration>
+      </member>
+    </batchDefinition>
+  </batchBuild>
+</workspace>
+
+
