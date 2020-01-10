@@ -967,12 +967,8 @@ HAL_StatusTypeDef USB_WritePacket(USB_OTG_GlobalTypeDef *USBx, uint8_t *src, uin
   * @brief  USB_ReadPacket : read a packet from the Tx FIFO associated
   *         with the EP/channel
   * @param  USBx  Selected device
-  * @param  dest  source pointer
+  * @param  dest  destination pointer
   * @param  len  Number of bytes to read
-  * @param  dma USB dma enabled or disabled
-  *          This parameter can be one of these values:
-  *           0 : DMA feature not used
-  *           1 : DMA feature used
   * @retval pointer to destination buffer
   */
 void *USB_ReadPacket(USB_OTG_GlobalTypeDef *USBx, uint8_t *dest, uint16_t len)
@@ -980,7 +976,7 @@ void *USB_ReadPacket(USB_OTG_GlobalTypeDef *USBx, uint8_t *dest, uint16_t len)
   uint32_t USBx_BASE = (uint32_t)USBx;
   uint32_t *pDest = (uint32_t *)dest;
   uint32_t i;
-  uint32_t count32b = ((uint32_t)len + 3U) / 4U;
+  uint32_t count32b = len / 4U;
 
   for (i = 0U; i < count32b; i++)
   {
@@ -988,7 +984,20 @@ void *USB_ReadPacket(USB_OTG_GlobalTypeDef *USBx, uint8_t *dest, uint16_t len)
     pDest++;
   }
 
-  return ((void *)pDest);
+  if (len & 3U)
+  {
+    uint32_t tmp = USBx_DFIFO(0U);
+    uint8_t *dst = (uint8_t *)pDest;
+    uint8_t *src = (uint8_t *)&tmp;
+    for (i = 0U; i < (len & 3U); i++)
+    {
+      *dst = *src;
+      dst++;
+      src++;
+    }
+  }
+
+  return ((void *)dest);
 }
 
 /**
