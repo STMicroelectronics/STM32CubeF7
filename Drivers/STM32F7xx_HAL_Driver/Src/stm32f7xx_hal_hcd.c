@@ -375,6 +375,8 @@ HAL_StatusTypeDef HAL_HCD_HC_SubmitRequest(HCD_HandleTypeDef *hhcd,
   if (token == 0U)
   {
     hhcd->hc[ch_num].data_pid = HC_PID_SETUP;
+    /* Clear do_ping in case previous transfer Status stage ended with NYET */
+    hhcd->hc[ch_num].do_ping = 0U;
   }
   else
   {
