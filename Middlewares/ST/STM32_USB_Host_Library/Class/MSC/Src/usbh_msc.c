@@ -451,7 +451,7 @@ static USBH_StatusTypeDef USBH_MSC_Process(USBH_HandleTypeDef *phost)
              (MSC_Handle->unit[MSC_Handle->current_lun].sense.key == SCSI_SENSE_KEY_NOT_READY) )
           {
 
-            if((phost->Timer - MSC_Handle->timer) < 10000U)
+            if((phost->Timer - MSC_Handle->timer) < 100000U)
             {
               MSC_Handle->unit[MSC_Handle->current_lun].state = MSC_TEST_UNIT_READY;
               break;
@@ -779,7 +779,7 @@ USBH_StatusTypeDef USBH_MSC_Read(USBH_HandleTypeDef *phost,
 
   while (USBH_MSC_RdWrProcess(phost, lun) == USBH_BUSY)
   {
-    if(((phost->Timer - timeout) > (10000U * length)) || (phost->device.is_connected == 0U))
+    if(((phost->Timer - timeout) > (100000U * length)) || (phost->device.is_connected == 0U))
     {
       MSC_Handle->state = MSC_IDLE;
       return USBH_FAIL;
@@ -825,7 +825,7 @@ USBH_StatusTypeDef USBH_MSC_Write(USBH_HandleTypeDef *phost,
   timeout = phost->Timer;
   while (USBH_MSC_RdWrProcess(phost, lun) == USBH_BUSY)
   {
-    if(((phost->Timer - timeout) >  (10000U * length)) || (phost->device.is_connected == 0U))
+    if(((phost->Timer - timeout) >  (100000U * length)) || (phost->device.is_connected == 0U))
     {
       MSC_Handle->state = MSC_IDLE;
       return USBH_FAIL;
