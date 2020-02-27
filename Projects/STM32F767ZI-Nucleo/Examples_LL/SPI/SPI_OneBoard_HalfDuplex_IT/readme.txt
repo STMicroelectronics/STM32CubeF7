@@ -42,6 +42,10 @@ LED1 is On if data is well received.
 
 In case of errors, LED1 is blinking Slowly (1s).
 
+@par Keywords
+
+Connectivity, SPI, Full-duplex, Advanced communication, Transmission, Reception, Master, Slave, MISO, MOSI
+
 @Note If the user code size exceeds the DTCM-RAM size or starts from internal cacheable memories (SRAM1 and SRAM2),that is shared between several processors,
       then it is highly recommended to enable the CPU cache and maintain its coherence at application level.
       The address and the size of cacheable buffers (shared between CPU and other masters)  must be properly updated to be aligned to cache line size (32 bytes).

@@ -138,7 +138,7 @@ Connectivity, Communicatin, I2C, SDA, SCL, Slave, 7 bits, 10 Bits, Interrupt, Tr
     - Connect GPIOs connected to I2C2 SCL/SDA (PB.10 and PB.11)
     to respectively SCL and SDA pins of I2C1 (PB.6 and PB.9).
       - I2C2_SCL  PB.10 (CN10, pin 32) : connected to I2C1_SCL PB.6 (CN10, pin 13)
-      - I2C2_SDA  PB.11 (CN10, pin 34) : connected to I2C1_SDA PB.9 (CN10, pin 4)
+      - I2C2_SDA  PB.11 (CN10, pin 34) : connected to I2C1_SDA PB.9 (CN7, pin 4)
 
   - Launch the program.
   - Press User push-button to initiate a write request by Master

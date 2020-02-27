@@ -102,7 +102,7 @@ on STM32Cube with FatFs".
 
 @par Keywords
 
-Middleware, RAMDisk, SDRAM, SD Card, FatFS, FAT, File system 
+RAMDisk, SDRAM, SD Card, FatFS, FAT, File system 
 
 @Note If the user code size exceeds the DTCM-RAM size or starts from internal cacheable memories (SRAM1 and SRAM2),that is shared between several processors,
       then it is highly recommended to enable the CPU cache and maintain its coherence at application level.

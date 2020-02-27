@@ -81,7 +81,7 @@ on STM32Cube with RTOS".
 
 @par Keywords
 
-Middleware, RTOS, FreeRTOS, Thread, Semaphore, Priorities
+RTOS, FreeRTOS, Thread, Semaphore, Priorities
 
 @Note If the user code size exceeds the DTCM-RAM size or starts from internal cacheable memories (SRAM1 and SRAM2),that is shared between several processors,
       then it is highly recommended to enable the CPU cache and maintain its coherence at application level.

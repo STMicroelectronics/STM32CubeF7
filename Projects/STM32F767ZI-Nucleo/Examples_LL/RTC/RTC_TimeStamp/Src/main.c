@@ -44,16 +44,16 @@
 
 #ifdef RTC_CLOCK_SOURCE_LSI
 /* ck_apre=LSIFreq/(ASYNC prediv + 1) with LSIFreq=32 kHz RC */
-#define RTC_ASYNCH_PREDIV          ((uint32_t)0x7C)
+#define RTC_ASYNCH_PREDIV          0x7F
 /* ck_spre=ck_apre/(SYNC prediv + 1) = 1 Hz */
-#define RTC_SYNCH_PREDIV           ((uint32_t)0x00FF)
+#define RTC_SYNCH_PREDIV           0x00F9
 #endif
 
 #ifdef RTC_CLOCK_SOURCE_LSE
 /* ck_apre=LSEFreq/(ASYNC prediv + 1) = 256Hz with LSEFreq=32768Hz */
-#define RTC_ASYNCH_PREDIV          ((uint32_t)0x7F)
+#define RTC_ASYNCH_PREDIV          0x7F
 /* ck_spre=ck_apre/(SYNC prediv + 1) = 1 Hz */
-#define RTC_SYNCH_PREDIV           ((uint32_t)0x00FF)
+#define RTC_SYNCH_PREDIV           0x00FF
 #endif
 
 /* Private macro -------------------------------------------------------------*/

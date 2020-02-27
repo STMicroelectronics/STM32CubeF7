@@ -21,7 +21,7 @@
 | STM32_USB_Device_Library        | SLA0044              | STMicroelectronics |
 | STM32_USB_Host_Library          | SLA0044              | STMicroelectronics |
 | STemWin                         | SLA0044              | STMicroelectronics |
-| STM32_Audio                     | SLA0047              | STMicroelectronics |
+| STM32_Audio                     | SLA0044              | STMicroelectronics |
 | TouchGFX                        | SLA0044              | STMicroelectronics |
 | STM32 Projects                  | ST SLA0044 (BSD-3-Clause for basic Examples) | STMicroelectronics |
 | STM32 Utilities                 | BSD-3-Clause         | STMicroelectronics |

@@ -259,20 +259,39 @@ static void LCD_Config(void)
   hltdc_F.Instance = LTDC;
   
   /* Layer1 Configuration ------------------------------------------------------*/
-  
-  /* Windowing configuration */ 
-  /*
-  WindowX0 = Horizontal start
-  WindowX1 = Horizontal stop      
-  WindowY0 = Vertical start 
-  WindowY1 = Vertical stop
-  Display image 240x130 at start position on display (120, 70).	 
-  */
-  pLayerCfg.WindowX0 = 200;
-  pLayerCfg.WindowX1 = 440;
-  pLayerCfg.WindowY0 = 175;
-  pLayerCfg.WindowY1 = 305;
-  
+  if(stmpe811_ts_drv.ReadID(TS_I2C_ADDRESS) == STMPE811_ID)
+  {
+    /* The AMPIRE LCD 480x272 is selected */
+    /* Windowing configuration */
+    /*
+    WindowX0 = Horizontal start
+    WindowX1 = Horizontal stop
+    WindowY0 = Vertical start
+    WindowY1 = Vertical stop
+    Display image 240x130 at start position on display (140, 80).
+    */
+    pLayerCfg.WindowX0 = 140;
+    pLayerCfg.WindowX1 = 370;
+    pLayerCfg.WindowY0 = 80;
+    pLayerCfg.WindowY1 = 210;
+  }
+  else
+  {
+    /* The AMPIRE LCD 640x480 is selected */
+    /* Windowing configuration */
+    /*
+    WindowX0 = Horizontal start
+    WindowX1 = Horizontal stop
+    WindowY0 = Vertical start
+    WindowY1 = Vertical stop
+    Display image 240x130 at start position on display (200, 175).
+    */
+    pLayerCfg.WindowX0 = 200;
+    pLayerCfg.WindowX1 = 440;
+    pLayerCfg.WindowY0 = 175;
+    pLayerCfg.WindowY1 = 305;
+  }
+
   /* Pixel Format configuration */ 
   pLayerCfg.PixelFormat = LTDC_PIXEL_FORMAT_RGB565;
   

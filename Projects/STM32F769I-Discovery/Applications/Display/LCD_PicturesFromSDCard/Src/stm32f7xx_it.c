@@ -142,19 +142,28 @@ void SysTick_Handler(void)
 }
 
 /**
- * @brief Handles SDMMC1 DMA Rx transfer interrupt request.
+ * @brief Handles SDMMC2 DMA Rx transfer interrupt request.
  * @retval None
  */
-void BSP_SDMMC1_DMA_Rx_IRQHandler(void)
+void BSP_SDMMC2_DMA_Rx_IRQHandler(void)
 {
   HAL_DMA_IRQHandler(uSdHandle.hdmarx); 
+}
+
+/**
+ * @brief Handles SDMMC2 DMA Tx transfer interrupt request.
+ * @retval None
+ */
+void BSP_SDMMC2_DMA_Tx_IRQHandler(void)
+{
+  HAL_DMA_IRQHandler(uSdHandle.hdmatx); 
 }
 
 /**
  * @brief Handles SD1 card interrupt request.
  * @retval None
  */
-void BSP_SDMMC1_IRQHandler(void)
+void BSP_SDMMC2_IRQHandler(void)
 {
   HAL_SD_IRQHandler(&uSdHandle);
 }

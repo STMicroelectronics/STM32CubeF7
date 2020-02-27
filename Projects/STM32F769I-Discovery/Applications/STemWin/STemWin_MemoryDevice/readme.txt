@@ -1,4 +1,4 @@
-/**
+﻿/**
   @page STemWin_MemoryDevice  STemWin memory device Readme file
  
   @verbatim
@@ -79,6 +79,10 @@ like rotations, shifts and zoom.
       Even though the user must manage the cache coherence for read accesses.
       Please refer to the AN4838 “Managing memory protection unit (MPU) in STM32 MCUs”
       Please refer to the AN4839 “Level 1 cache on STM32F7 Series”
+
+@par Keywords
+
+Display, STemWin, Memory device, HelloWorld, LCD, GUI, Demonstration, Touch screen
 
 @par Directory contents 
 

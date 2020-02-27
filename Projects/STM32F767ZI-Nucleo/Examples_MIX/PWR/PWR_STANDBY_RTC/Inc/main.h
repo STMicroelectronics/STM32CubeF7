@@ -33,7 +33,7 @@
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
 #define RTC_ASYNCH_PREDIV    0x7F
-#define RTC_SYNCH_PREDIV     0x122  /* 32 kHz RC/127 - 1 */
+#define RTC_SYNCH_PREDIV     0x00F9  /* 32 kHz RC/128 - 1 */
 
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */

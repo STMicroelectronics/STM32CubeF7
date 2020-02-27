@@ -80,8 +80,8 @@
    In this application the define USER_FLASH_FIRST_PAGE_ADDRESS is set to 128K boundary,
    but it can be changed to any other address outside the 1st 128 Kbytes of the Flash.
    */
-#define USER_FLASH_FIRST_PAGE_ADDRESS 0x08020000 /* Only as example see comment */
-#define USER_FLASH_LAST_PAGE_ADDRESS  0x080C0000
+#define USER_FLASH_FIRST_PAGE_ADDRESS 0x08030000 /* Only as example see comment */
+#define USER_FLASH_LAST_PAGE_ADDRESS  0x080D0000
 #define USER_FLASH_END_ADDRESS        0x080FFFFF  
    
 /* UserID and Password definition *********************************************/

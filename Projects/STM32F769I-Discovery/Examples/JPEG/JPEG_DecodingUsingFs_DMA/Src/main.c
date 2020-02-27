@@ -57,7 +57,7 @@ static JPEG_ConfTypeDef       JPEG_Info;
 static void SystemClock_Config(void);
 static void LCD_BriefDisplay(void);
 static void LCD_FileErrorDisplay(void);
-static void DMA2D_CopyBuffer(uint32_t *pSrc, uint32_t *pDst, uint16_t x, uint16_t y, uint16_t xsize, uint16_t ysize);
+static void DMA2D_CopyBuffer(uint32_t *pSrc, uint32_t *pDst, uint16_t x, uint16_t y, uint16_t xsize, uint16_t ysize, uint32_t width_offset);
 static void CPU_CACHE_Enable(void);
 
 /* Private functions ---------------------------------------------------------*/
@@ -70,6 +70,7 @@ static void CPU_CACHE_Enable(void);
 int main(void)
 {
   uint32_t xPos = 0, yPos = 0;
+  uint32_t width_offset = 0;
   uint8_t  lcd_status = LCD_OK; 
   
   /* Enable the CPU Cache */
@@ -145,8 +146,26 @@ int main(void)
         /*##-9- Copy RGB decoded Data to the display FrameBuffer  ############*/
         xPos = (BSP_LCD_GetXSize() - JPEG_Info.ImageWidth)/2;
         yPos = (BSP_LCD_GetYSize() - JPEG_Info.ImageHeight)/2;        
-          
-        DMA2D_CopyBuffer((uint32_t *)JPEG_OUTPUT_DATA_BUFFER, (uint32_t *)LCD_FRAME_BUFFER, xPos , yPos, JPEG_Info.ImageWidth, JPEG_Info.ImageHeight);
+
+        if(JPEG_Info.ChromaSubsampling == JPEG_420_SUBSAMPLING)
+        {
+          if((JPEG_Info.ImageWidth % 16) != 0)
+          width_offset = 16 - (JPEG_Info.ImageWidth % 16);
+        }
+
+        if(JPEG_Info.ChromaSubsampling == JPEG_422_SUBSAMPLING)
+        {
+          if((JPEG_Info.ImageWidth % 16) != 0)
+          width_offset = 16 - (JPEG_Info.ImageWidth % 16);
+        }
+
+        if(JPEG_Info.ChromaSubsampling == JPEG_444_SUBSAMPLING)
+        {
+          if((JPEG_Info.ImageWidth % 8) != 0)
+          width_offset = (JPEG_Info.ImageWidth % 8);
+        }
+
+        DMA2D_CopyBuffer((uint32_t *)JPEG_OUTPUT_DATA_BUFFER, (uint32_t *)LCD_FRAME_BUFFER, xPos , yPos, JPEG_Info.ImageWidth, JPEG_Info.ImageHeight, width_offset);
         
         /*##-10- Close the JPG file ##########################################*/
         f_close(&JPEG_File);  
@@ -286,7 +305,7 @@ static void LCD_FileErrorDisplay(void)
   * @param  ysize: image Height 
   * @retval None
   */
-static void DMA2D_CopyBuffer(uint32_t *pSrc, uint32_t *pDst, uint16_t x, uint16_t y, uint16_t xsize, uint16_t ysize)
+static void DMA2D_CopyBuffer(uint32_t *pSrc, uint32_t *pDst, uint16_t x, uint16_t y, uint16_t xsize, uint16_t ysize, uint32_t width_offset)
 {   
   
   uint32_t destination = (uint32_t)pDst + (y * BSP_LCD_GetXSize() + x) * 4;
@@ -318,7 +337,7 @@ static void DMA2D_CopyBuffer(uint32_t *pSrc, uint32_t *pDst, uint16_t x, uint16_
 #endif /* JPEG_RGB_FORMAT * */
   
 
-  DMA2D_Handle.LayerCfg[1].InputOffset = 0;
+  DMA2D_Handle.LayerCfg[1].InputOffset = width_offset;
   DMA2D_Handle.LayerCfg[1].RedBlueSwap = DMA2D_RB_REGULAR; /* No ForeGround Red/Blue swap */
   DMA2D_Handle.LayerCfg[1].AlphaInverted = DMA2D_REGULAR_ALPHA; /* No ForeGround Alpha inversion */  
 

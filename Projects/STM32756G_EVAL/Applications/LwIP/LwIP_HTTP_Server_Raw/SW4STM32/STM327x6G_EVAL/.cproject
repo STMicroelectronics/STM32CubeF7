@@ -34,7 +34,7 @@
 								<option id="gnu.c.compiler.option.debugging.level.951283238" name="Debug Level" superClass="gnu.c.compiler.option.debugging.level" useByScannerDiscovery="false" value="gnu.c.debugging.level.max" valueType="enumerated"/>
 								<option id="gnu.c.compiler.option.include.paths.1044356220" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="../../../Inc"/>
-									<listOptionValue builtIn="false" value="../../../../../../../../Middlewares/Third_Party/LwIP/src/apps/httpd"/>
+									<listOptionValue builtIn="false" value="../../../../../../../../Middlewares/Third_Party/LwIP/src/apps/http"/>
 									<listOptionValue builtIn="false" value="../../../Src"/>
 									<listOptionValue builtIn="false" value="../../../../../../../../Drivers/CMSIS/Device/ST/STM32F7xx/Include"/>
 									<listOptionValue builtIn="false" value="../../../../../../../../Drivers/STM32F7xx_HAL_Driver/Inc"/>

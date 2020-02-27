@@ -40,7 +40,7 @@
 									<listOptionValue builtIn="false" value="../../../../../../../../Drivers/BSP/STM32F769I_EVAL"/>
 									<listOptionValue builtIn="false" value="../../../../../../../../Drivers/BSP/Components"/>
 									<listOptionValue builtIn="false" value="../../../../../../../../Middlewares/Third_Party/LwIP/src/include"/>
-									<listOptionValue builtIn="false" value="../../../../../../../../Middlewares/Third_Party/LwIP/src/apps/httpd"/>
+									<listOptionValue builtIn="false" value="../../../../../../../../Middlewares/Third_Party/LwIP/src/apps/http"/>
 									<listOptionValue builtIn="false" value="../../../../../../../../Middlewares/Third_Party/LwIP/system"/>
 									<listOptionValue builtIn="false" value="../../../../../../../../Utilities/Log"/>
 									<listOptionValue builtIn="false" value="../../../../../../../../Drivers/CMSIS/Include"/>

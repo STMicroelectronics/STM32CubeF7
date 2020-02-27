@@ -170,7 +170,7 @@ uint32_t JPEG_OutputHandler(JPEG_HandleTypeDef *hjpeg)
     }
   }
   else if((Output_Is_Paused == 1) && \
-          (JPEG_OUT_Write_BufferIndex == JPEG_OUT_Read_BufferIndex) && \
+          (Jpeg_OUT_BufferTab[JPEG_OUT_Write_BufferIndex].State == JPEG_BUFFER_EMPTY) &&\
           (Jpeg_OUT_BufferTab[JPEG_OUT_Read_BufferIndex].State == JPEG_BUFFER_EMPTY))
   {
     Output_Is_Paused = 0;

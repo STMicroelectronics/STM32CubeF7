@@ -110,6 +110,11 @@ The UART is configured as follows:
       then it is highly recommended to enable the CPU cache and maintain its coherence at application level.
       The address and the size of cacheable buffers (shared between CPU and other masters)  must be properly updated to be aligned to cache line size (32 bytes).
 
+@par Keywords
+
+Connectivity, UART, Printf, Baud rate, RS-232, HyperTerminal, Polling, Transmission,
+Reception, Asynchronous
+
 @Note It is recommended to enable the cache and maintain its coherence, but depending on the use case
       It is also possible to configure the MPU as "Write through", to guarantee the write access coherence.
       In that case, the MPU must be configured as Cacheable/Bufferable/Not Shareable.

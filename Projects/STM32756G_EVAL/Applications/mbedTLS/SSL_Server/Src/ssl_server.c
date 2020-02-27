@@ -220,17 +220,17 @@ reset:
   /*
    * 5. Wait until a client connects
    */
-  mbedtls_printf( "  . Waiting for a remote connection ..." );
+  mbedtls_printf( "  . Waiting for a remote connection ...\n" );
 
   if((ret = mbedtls_net_accept(&listen_fd, &client_fd, NULL, 0, NULL)) != 0)
   {
-    mbedtls_printf( " failed\n  ! mbedtls_net_accept returned %d\n\n", ret );
+    mbedtls_printf( "  => connection failed\n  ! mbedtls_net_accept returned %d\n\n", ret );
     goto exit;
   }
 
   mbedtls_ssl_set_bio( &ssl, &client_fd, mbedtls_net_send, mbedtls_net_recv, NULL );
 
-  mbedtls_printf( " ok\n" );
+  mbedtls_printf( "  => connection ok\n" );
 
   /*
    * 6. Handshake
@@ -283,7 +283,7 @@ reset:
     }
 
     len = ret;
-    mbedtls_printf( " %d bytes read\n\n%s", len, (char *) buf );
+    mbedtls_printf( " %d bytes read\n%s", len, (char *) buf );
 
     if( ret > 0 )
 	{
@@ -313,7 +313,7 @@ reset:
   }
 
   len = ret;
-  mbedtls_printf( " %d bytes written\n\n%s\n", len, (char *) buf );
+  mbedtls_printf( " %d bytes written\n%s", len, (char *) buf );
 
   mbedtls_printf( "  . Closing the connection..." );
 

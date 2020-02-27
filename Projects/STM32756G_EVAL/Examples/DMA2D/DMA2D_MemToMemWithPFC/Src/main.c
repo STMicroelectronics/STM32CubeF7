@@ -252,20 +252,38 @@ static void LCD_Config(void)
 
   LtdcHandle.Instance = LTDC;
   
-/* Layer1 Configuration ------------------------------------------------------*/
-  
-  /* Windowing configuration */ 
-  /*
-     WindowX0 = Horizontal start
-     WindowX1 = Horizontal stop      
-     WindowY0 = Vertical start 
-     WindowY1 = Vertical stop      
-  */
-  pLayerCfg.WindowX0 = 170; /* Translation by vector (90, 15) for display on LCD of layer 1 */
-  pLayerCfg.WindowX1 = 470;
-  pLayerCfg.WindowY0 = 115;
-  pLayerCfg.WindowY1 = 235;
-  
+  /* Layer1 Configuration ------------------------------------------------------*/
+  if(stmpe811_ts_drv.ReadID(TS_I2C_ADDRESS) == STMPE811_ID)
+  {
+    /* The AMPIRE LCD 480x272 is selected */
+    /* Windowing configuration */
+    /*
+    WindowX0 = Horizontal start
+    WindowX1 = Horizontal stop
+    WindowY0 = Vertical start
+    WindowY1 = Vertical stop
+    */
+    pLayerCfg.WindowX0 = 90; /* Translation by vector (90, 15) for display on LCD of layer 1 */
+    pLayerCfg.WindowX1 = 390;
+    pLayerCfg.WindowY0 = 15;
+    pLayerCfg.WindowY1 = 135;
+  }
+  else
+  {
+    /* The AMPIRE LCD 640x480 is selected */
+    /* Windowing configuration */
+    /*
+    WindowX0 = Horizontal start
+    WindowX1 = Horizontal stop
+    WindowY0 = Vertical start
+    WindowY1 = Vertical stop
+    */
+    pLayerCfg.WindowX0 = 170; /* Translation by vector (170, 115) for display on LCD of layer 1 */
+    pLayerCfg.WindowX1 = 470;
+    pLayerCfg.WindowY0 = 115;
+    pLayerCfg.WindowY1 = 235;
+  }
+
   /* Pixel Format configuration*/ 
   /* Layer 1 is the original image ARGB8888 of size 300x120 from Flash */
   pLayerCfg.PixelFormat = LTDC_PIXEL_FORMAT_ARGB8888;
@@ -292,15 +310,28 @@ static void LCD_Config(void)
   pLayerCfg.ImageHeight = LAYER_SIZE_Y;
 
   /* Layer2 Configuration ------------------------------------------------------*/
-  
-  /* Windowing configuration */ 
-  /* In this case all the active display area is used to display a picture */
-  pLayerCfg1.WindowX0 = 170; /* Translation by vector (90, 137) for display on LCD of layer 2 */
-  pLayerCfg1.WindowX1 = 470;
-  pLayerCfg1.WindowY0 = 237;
-  pLayerCfg1.WindowY1 = 357;
-  
-  /* Pixel Format configuration*/ 
+  if(stmpe811_ts_drv.ReadID(TS_I2C_ADDRESS) == STMPE811_ID)
+  {
+    /* The AMPIRE LCD 480x272 is selected */
+    /* Windowing configuration */
+    /* In this case all the active display area is used to display a picture */
+    pLayerCfg1.WindowX0 = 90; /* Translation by vector (90, 137) for display on LCD of layer 2 */
+    pLayerCfg1.WindowX1 = 390;
+    pLayerCfg1.WindowY0 = 137;
+    pLayerCfg1.WindowY1 = 257;
+  }
+  else
+  {
+    /* The AMPIRE LCD 640x480 is selected */
+    /* Windowing configuration */
+    /* In this case all the active display area is used to display a picture */
+    pLayerCfg1.WindowX0 = 170; /* Translation by vector (170, 237) for display on LCD of layer 2 */
+    pLayerCfg1.WindowX1 = 470;
+    pLayerCfg1.WindowY0 = 237;
+    pLayerCfg1.WindowY1 = 357;
+  }
+
+  /* Pixel Format configuration*/
   pLayerCfg1.PixelFormat = LTDC_PIXEL_FORMAT_ARGB4444;
   
   /* Start Address configuration : frame buffer is located at FLASH memory */

@@ -33,6 +33,12 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
+
+enum {
+       TRANSFER_WAIT,
+       TRANSFER_OK,
+       TRANSFER_ERROR
+     };
 #define I2C_SLAVE_ADDRESS1 0x13E /* 10-Bit address */
 #define I2C_SLAVE_ADDRESS2 0x64  /* 7-Bit address  */
 
@@ -54,6 +60,9 @@ uint8_t aTxBuffer[] = " ****I2C_OneBoard communication based on IT****  ****I2C_
 
 /* Buffer used for reception */
 uint8_t aRxBuffer[RXBUFFERSIZE];
+
+/* transfer state */
+__IO uint32_t wTransferState = TRANSFER_WAIT;
 
 /* Private function prototypes -----------------------------------------------*/
 static void SystemClock_Config(void);
@@ -174,10 +183,18 @@ int main(void)
       is ongoing. */
   while (HAL_I2C_GetState(&I2cSlaveHandle) != HAL_I2C_STATE_READY)
   {
+    if (wTransferState == TRANSFER_ERROR)
+    {
+      Error_Handler();
+    }
   }
 
   while (HAL_I2C_GetState(&I2cMasterHandle) != HAL_I2C_STATE_READY)
   {
+    if (wTransferState == TRANSFER_ERROR)
+    {
+      Error_Handler();
+    }
   }
 
   /*##-6- Compare the sent and received buffers ##############################*/
@@ -241,10 +258,18 @@ int main(void)
       is ongoing. */
   while (HAL_I2C_GetState(&I2cSlaveHandle) != HAL_I2C_STATE_READY)
   {
+    if (wTransferState == TRANSFER_ERROR)
+    {
+      Error_Handler();
+    }
   }
 
   while (HAL_I2C_GetState(&I2cMasterHandle) != HAL_I2C_STATE_READY)
   {
+    if (wTransferState == TRANSFER_ERROR)
+    {
+      Error_Handler();
+    }
   }
 
   /*##-11- Compare the sent and received buffers #############################*/
@@ -326,6 +351,54 @@ static void SystemClock_Config(void)
 }
 
 /**
+  * @brief  Tx Transfer completed callback.
+  * @param  I2cHandle: I2C handle
+  * @note   This example shows a simple way to report end of Interrupt Tx transfer, and 
+  *         you can add your own implementation. 
+  * @retval None
+  */
+void HAL_I2C_MasterTxCpltCallback(I2C_HandleTypeDef *I2cHandle)
+{
+  wTransferState = TRANSFER_OK;
+}
+
+/**
+  * @brief  Rx Transfer completed callback.
+  * @param  I2cHandle: I2C handle
+  * @note   This example shows a simple way to report end of Interrupt Rx transfer, and 
+  *         you can add your own implementation. 
+  * @retval None
+  */
+void HAL_I2C_MasterRxCpltCallback(I2C_HandleTypeDef *I2cHandle)
+{
+  wTransferState = TRANSFER_OK;
+}
+
+/**
+  * @brief  Tx Transfer completed callback.
+  * @param  I2cHandle: I2C handle
+  * @note   This example shows a simple way to report end of Interrupt Tx transfer, and 
+  *         you can add your own implementation. 
+  * @retval None
+  */
+void HAL_I2C_SlaveTxCpltCallback(I2C_HandleTypeDef *I2cHandle)
+{
+  wTransferState = TRANSFER_OK;
+}
+
+/**
+  * @brief  Rx Transfer completed callback.
+  * @param  I2cHandle: I2C handle
+  * @note   This example shows a simple way to report end of Interrupt Rx transfer, and 
+  *         you can add your own implementation. 
+  * @retval None
+  */
+void HAL_I2C_SlaveRxCpltCallback(I2C_HandleTypeDef *I2cHandle)
+{
+  wTransferState = TRANSFER_OK;
+}
+
+/**
   * @brief  I2C error callbacks.
   * @param  I2cHandle: I2C handle
   * @note   This example shows a simple way to report transfer error, and you can
@@ -334,10 +407,7 @@ static void SystemClock_Config(void)
   */
 void HAL_I2C_ErrorCallback(I2C_HandleTypeDef *I2cHandle)
 {
-  /* Turn Off LED1 */
-  BSP_LED_Off(LED1);
-  /* Turn On LED3 */
-  BSP_LED_On(LED3);
+  wTransferState = TRANSFER_ERROR;
 }
 
 /**
@@ -347,11 +417,12 @@ void HAL_I2C_ErrorCallback(I2C_HandleTypeDef *I2cHandle)
   */
 static void Error_Handler(void)
 {
-  /* Turn LED3 on */
-  BSP_LED_On(LED3);
+  /* Error if LED3 is slowly blinking (1 sec. period) */
   while(1)
-  {
-  }
+  {    
+    BSP_LED_Toggle(LED3); 
+    HAL_Delay(1000);
+  } 
 }
 
 /**

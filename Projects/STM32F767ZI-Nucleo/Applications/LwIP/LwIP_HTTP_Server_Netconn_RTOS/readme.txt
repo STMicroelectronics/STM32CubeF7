@@ -80,6 +80,9 @@ that the System tick increments while executing the Ethernet Link ISR.
       
 For more details about this application, refer to UM1713 "STM32Cube interfacing with LwIP and applications"
 
+@par Keywords
+
+Connectivity, LwIP, Ethernet, HTTP Server, Netconn, TCP/IP, FreeRTOS, DHCP	
 
 @Note If the user code size exceeds the DTCM-RAM size or starts from internal cacheable memories (SRAM1 and SRAM2),that is shared between several processors,
       then it is highly recommended to enable the CPU cache and maintain its coherence at application level.

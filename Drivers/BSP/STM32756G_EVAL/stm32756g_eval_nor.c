@@ -149,27 +149,27 @@ uint8_t BSP_NOR_Init(void)
   /* NOR device configuration */
   /* Timing configuration derived from system clock (up to 216Mhz)
      for 108Mhz as NOR clock frequency */  
-  Timing.AddressSetupTime      = 4;
-  Timing.AddressHoldTime       = 3;
-  Timing.DataSetupTime         = 8;
-  Timing.BusTurnAroundDuration = 1;
-  Timing.CLKDivision           = 2;
+  Timing.AddressSetupTime      = 9;
+  Timing.AddressHoldTime       = 1;
+  Timing.DataSetupTime         = 5;
+  Timing.BusTurnAroundDuration = 4;
+  Timing.CLKDivision           = 4;
   Timing.DataLatency           = 2;
-  Timing.AccessMode            = FMC_ACCESS_MODE_A;
+  Timing.AccessMode            = FMC_ACCESS_MODE_B;
   
   norHandle.Init.NSBank             = FMC_NORSRAM_BANK1;
   norHandle.Init.DataAddressMux     = FMC_DATA_ADDRESS_MUX_DISABLE;
   norHandle.Init.MemoryType         = FMC_MEMORY_TYPE_NOR;
-  norHandle.Init.MemoryDataWidth    = NOR_MEMORY_WIDTH;
-  norHandle.Init.BurstAccessMode    = NOR_BURSTACCESS;
+  norHandle.Init.MemoryDataWidth    = FMC_NORSRAM_MEM_BUS_WIDTH_16;
+  norHandle.Init.BurstAccessMode    = FMC_BURST_ACCESS_MODE_DISABLE;
   norHandle.Init.WaitSignalPolarity = FMC_WAIT_SIGNAL_POLARITY_LOW;
   norHandle.Init.WaitSignalActive   = FMC_WAIT_TIMING_BEFORE_WS;
   norHandle.Init.WriteOperation     = FMC_WRITE_OPERATION_ENABLE;
   norHandle.Init.WaitSignal         = FMC_WAIT_SIGNAL_ENABLE;
   norHandle.Init.ExtendedMode       = FMC_EXTENDED_MODE_DISABLE;
   norHandle.Init.AsynchronousWait   = FMC_ASYNCHRONOUS_WAIT_ENABLE;
-  norHandle.Init.WriteBurst         = NOR_WRITEBURST;
-  norHandle.Init.ContinuousClock    = CONTINUOUSCLOCK_FEATURE;
+  norHandle.Init.WriteBurst         = FMC_WRITE_BURST_DISABLE;
+  norHandle.Init.ContinuousClock    = FMC_CONTINUOUS_CLOCK_SYNC_ONLY;
     
   /* NOR controller initialization */
   BSP_NOR_MspInit(&norHandle, NULL); /* __weak function can be rewritten by the application */

@@ -156,6 +156,10 @@
 			<name>Drivers/BSP/Components/s5k5cag.c</name>
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/BSP/Components/s5k5cag/s5k5cag.c</location>
+		</link><link>
+			<name>Drivers/BSP/Components/ov5640.c</name>
+			<type>1</type>
+			<location>PARENT-7-PROJECT_LOC/Drivers/BSP/Components/ov5640/ov5640.c</location>
 		</link>
 		
 	</linkedResources>

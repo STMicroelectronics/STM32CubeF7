@@ -30,6 +30,10 @@ a memory management fault is generated and LED3 is ON.
 To generate an MPU memory fault exception due to an access right error, press 
 user button.
 
+@par Keywords
+
+System, Cortex, Memory regions, Privileged area, permitted access, memory management fault, MPU memory fault
+
 @Note If the user code size exceeds the DTCM-RAM size or starts from internal cacheable memories (SRAM1 and SRAM2),that is shared between several processors,
       then it is highly recommended to enable the CPU cache and maintain its coherence at application level.
       The address and the size of cacheable buffers (shared between CPU and other masters)  must be properly updated to be aligned to cache line size (32 bytes).

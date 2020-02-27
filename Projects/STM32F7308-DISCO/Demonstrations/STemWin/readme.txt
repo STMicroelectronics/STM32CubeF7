@@ -77,8 +77,6 @@ Below you find an overview of the different offered module in the demonstration:
 
 @par How to use it ? 
 
-@par How to use it ?
-
 In order to make the program work, you must do the following:
 
   1. Select required configuration in memory.h in Templates\ExtMem_Boot\Inc.
@@ -96,7 +94,6 @@ In order to load the ExtMem_Boot code :
       - Load project image
       
 In order to load this demonstration to the external memory :
-In order to load this example to the external memory :
  - Open your preferred toolchain 
  - Rebuild all files. 
    - Using EWARM or MDK-ARM : Load project image from the IDE: Project->Debug

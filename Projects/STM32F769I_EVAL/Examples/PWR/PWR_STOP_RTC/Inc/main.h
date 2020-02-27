@@ -29,7 +29,7 @@
 /* Exported constants --------------------------------------------------------*/
 /* Uncomment the corresponding line to select the RTC Clock source */
   #define RTC_ASYNCH_PREDIV    0x7F
-  #define RTC_SYNCH_PREDIV     0x0130
+  #define RTC_SYNCH_PREDIV     0x00F9
 
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */

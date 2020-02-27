@@ -74,7 +74,7 @@ Please Refer to the bellow "Table 1. IAP implementation on STM32756G_Eval" for d
 
 @par Keywords
 
-Middleware, External Memory Boot, Loader, Boot
+External Memory Boot, Loader, Boot
 
 @Note If the user code size exceeds the DTCM-RAM size or starts from internal cacheable memories (SRAM1 and SRAM2),that is shared between several processors,
       then it is highly recommended to enable the CPU cache and maintain its coherence at application level.

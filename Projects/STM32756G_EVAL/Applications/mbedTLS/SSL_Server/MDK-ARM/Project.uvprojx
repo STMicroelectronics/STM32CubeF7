@@ -705,6 +705,11 @@
               <FilePath>../../../../../../Middlewares/Third_Party/mbedTLS/library/memory_buffer_alloc.c</FilePath>
             </File>
             <File>
+              <FileName>nist_kw.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Middlewares/Third_Party/mbedTLS/library/nist_kw.c</FilePath>
+            </File>
+            <File>
               <FileName>ecdsa.c</FileName>
               <FileType>1</FileType>
               <FilePath>../../../../../../Middlewares/Third_Party/mbedTLS/library/ecdsa.c</FilePath>
@@ -970,6 +975,16 @@
               <FilePath>../../../../../../Middlewares/Third_Party/mbedTLS/library/certs.c</FilePath>
             </File>
             <File>
+              <FileName>chacha20.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Middlewares/Third_Party/mbedTLS/library/chacha20.c</FilePath>
+            </File>
+            <File>
+              <FileName>chachapoly.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Middlewares/Third_Party/mbedTLS/library/chachapoly.c</FilePath>
+            </File>
+            <File>
               <FileName>sha256.c</FileName>
               <FileType>1</FileType>
               <FilePath>../../../../../../Middlewares/Third_Party/mbedTLS/library/sha256.c</FilePath>
@@ -998,6 +1013,11 @@
               <FileName>platform_util.c</FileName>
               <FileType>1</FileType>
               <FilePath>../../../../../../Middlewares/Third_Party/mbedTLS/library/platform_util.c</FilePath>
+            </File>
+            <File>
+              <FileName>poly1305.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Middlewares/Third_Party/mbedTLS/library/poly1305.c</FilePath>
             </File>
             <File>
               <FileName>hkdf.c</FileName>

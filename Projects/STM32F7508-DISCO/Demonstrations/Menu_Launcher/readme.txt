@@ -95,7 +95,7 @@ In order to rebuild from source code and load the Out of the Box Demonstration t
    - Browse and open the output binary file relative to TouchGFX Sub-Demo project
    - Load the file into the external QSPI flash using "Start Programming" at the address APPLICATION_ADDRESS (0x90780000)
    - Browse and open the output binary file relative to Menu_Launcher project
-   - Load the file into the internal flash and external QSPI flash using "Start Programming" at the address APPLICATION_ADDRESS (0x90F00000)
+   - Load the file into the internal flash
 
 
 @par How to regenerate and flash the OoB Demo Full HEX file?

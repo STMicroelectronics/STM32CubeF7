@@ -36,7 +36,7 @@
 /* Private variables ---------------------------------------------------------*/
 /* RTC handler declaration */
 RTC_HandleTypeDef RtcHandle;
-__IO FlagStatus TamperStatus = RESET;
+__IO FlagStatus TamperStatus;
 
 /* Backup registers table */
 uint32_t aBKPDataReg[BACKUP_COUNT] =
@@ -155,6 +155,9 @@ int main(void)
 
   /* Turn LED1 on */
   BSP_LED_On(LED1);
+  
+  /* Reset flag after writing of backup register in order to wait for new button press */
+  TamperStatus = RESET;
 
   /*##-5- Wait for the tamper button is pressed ##############################*/
   while (TamperStatus != SET);
@@ -263,6 +266,7 @@ void Error_Handler(void)
   */
 void HAL_RTCEx_Tamper1EventCallback(RTC_HandleTypeDef *hrtc)
 {
+  TamperStatus = SET;
 }
 
 /**

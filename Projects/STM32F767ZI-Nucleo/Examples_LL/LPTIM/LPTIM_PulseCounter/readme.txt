@@ -40,6 +40,10 @@ the frequency of the changes on the external Input1 signal should never exceed t
 frequency of the internal clock provided to the LPTIM1 (LSI for the
 present example).
 
+@par Keywords
+
+Timer, Low Power, Pulse Counter, Stop mode, Interrupt
+
 @Note If the user code size exceeds the DTCM-RAM size or starts from internal cacheable memories (SRAM1 and SRAM2),that is shared between several processors,
       then it is highly recommended to enable the CPU cache and maintain its coherence at application level.
       The address and the size of cacheable buffers (shared between CPU and other masters)  must be properly updated to be aligned to cache line size (32 bytes).

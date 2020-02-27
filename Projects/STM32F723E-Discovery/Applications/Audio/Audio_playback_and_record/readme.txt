@@ -116,7 +116,7 @@ record menu by pressing Stop button.
 
 @par Keywords
 
-Audio, Playback, Record, Middleware, MEMS, Microphone, Touch screen, USB, WAV, FatFS, SRAM, audio codec,
+Audio, Playback, Record, MEMS, Microphone, Touch screen, USB, WAV, FatFS, SRAM, audio codec,
 DMA, SAI
 
 @Note If the user code size exceeds the DTCM-RAM size or starts from internal cacheable memories (SRAM1 and SRAM2),that is shared between several processors,

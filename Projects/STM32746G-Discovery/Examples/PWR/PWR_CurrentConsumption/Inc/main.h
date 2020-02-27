@@ -30,7 +30,7 @@
 /* Exported constants --------------------------------------------------------*/
 /* Exported macro ------------------------------------------------------------*/
 #define RTC_ASYNCH_PREDIV    0x7F
-#define RTC_SYNCH_PREDIV     0x0130
+#define RTC_SYNCH_PREDIV     0x00F9
 
 /* Exported functions ------------------------------------------------------- */
 void Error_Handler(void);

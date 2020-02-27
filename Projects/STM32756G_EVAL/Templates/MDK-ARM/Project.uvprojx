@@ -373,7 +373,7 @@
               <MiscControls>--C99</MiscControls>
               <Define>USE_HAL_DRIVER,STM32F756xx,USE_STM32756G_EVAL,USE_IOEXPANDER</Define>
               <Undefine></Undefine>
-              <IncludePath>..\Inc;..\..\..\..\Drivers\CMSIS\Device\ST\STM32F7xx\Include;..\..\..\..\Drivers\STM32F7xx_HAL_Driver\Inc;..\..\..\..\Drivers\BSP\STM32756G_EVAL;..\..\..\..\Drivers\BSP\Components\Common;..\..\..\..\Drivers\BSP\Components\mfxstm32l152;..\..\..\..\Drivers\BSP\Components\s5k5cag;..\..\..\..\Drivers\BSP\Components\stmpe811;..\..\..\..\Drivers\BSP\Components\ts3510;..\..\..\..\Drivers\BSP\Components\wm8994;..\..\..\..\Utilities\Log;..\..\..\..\Utilities\Fonts;..\..\..\..\Utilities\CPU</IncludePath>
+              <IncludePath>..\Inc;..\..\..\..\Drivers\CMSIS\Device\ST\STM32F7xx\Include;..\..\..\..\Drivers\STM32F7xx_HAL_Driver\Inc;..\..\..\..\Drivers\BSP\STM32756G_EVAL;..\..\..\..\Drivers\BSP\Components\Common;..\..\..\..\Drivers\BSP\Components\mfxstm32l152;..\..\..\..\Drivers\BSP\Components\s5k5cag;..\..\..\..\Drivers\BSP\Components\ov5640;..\..\..\..\Drivers\BSP\Components\stmpe811;..\..\..\..\Drivers\BSP\Components\ts3510;..\..\..\..\Drivers\BSP\Components\wm8994;..\..\..\..\Utilities\Log;..\..\..\..\Utilities\Fonts;..\..\..\..\Utilities\CPU</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -825,6 +825,11 @@
               <FileName>s5k5cag.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\..\Drivers\BSP\Components\s5k5cag\s5k5cag.c</FilePath>
+            </File>
+            <File>
+              <FileName>ov5640.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\Drivers\BSP\Components\ov5640\ov5640.c</FilePath>
             </File>
             <File>
               <FileName>ts3510.c</FileName>
@@ -1245,7 +1250,7 @@
               <MiscControls>--C99</MiscControls>
               <Define>USE_HAL_DRIVER,STM32F756xx,USE_STM32756G_EVAL,USE_IOEXPANDER</Define>
               <Undefine></Undefine>
-              <IncludePath>..\Inc;..\..\..\..\Drivers\CMSIS\Device\ST\STM32F7xx\Include;..\..\..\..\Drivers\STM32F7xx_HAL_Driver\Inc;..\..\..\..\Drivers\BSP\STM32756G_EVAL;..\..\..\..\Drivers\BSP\Components\Common;..\..\..\..\Drivers\BSP\Components\mfxstm32l152;..\..\..\..\Drivers\BSP\Components\s5k5cag;..\..\..\..\Drivers\BSP\Components\stmpe811;..\..\..\..\Drivers\BSP\Components\ts3510;..\..\..\..\Drivers\BSP\Components\wm8994;..\..\..\..\Utilities\Log;..\..\..\..\Utilities\Fonts;..\..\..\..\Utilities\CPU;..\..\..\..\Middlewares\ST\STM32_Audio\Addons\PDM</IncludePath>
+              <IncludePath>..\Inc;..\..\..\..\Drivers\CMSIS\Device\ST\STM32F7xx\Include;..\..\..\..\Drivers\STM32F7xx_HAL_Driver\Inc;..\..\..\..\Drivers\BSP\STM32756G_EVAL;..\..\..\..\Drivers\BSP\Components\Common;..\..\..\..\Drivers\BSP\Components\mfxstm32l152;..\..\..\..\Drivers\BSP\Components\s5k5cag;..\..\..\..\Drivers\BSP\Components\ov5640;..\..\..\..\Drivers\BSP\Components\stmpe811;..\..\..\..\Drivers\BSP\Components\ts3510;..\..\..\..\Drivers\BSP\Components\wm8994;..\..\..\..\Utilities\Log;..\..\..\..\Utilities\Fonts;..\..\..\..\Utilities\CPU;..\..\..\..\Middlewares\ST\STM32_Audio\Addons\PDM</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -1697,6 +1702,11 @@
               <FileName>s5k5cag.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\..\Drivers\BSP\Components\s5k5cag\s5k5cag.c</FilePath>
+            </File>
+            <File>
+              <FileName>ov5640.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\Drivers\BSP\Components\ov5640\ov5640.c</FilePath>
             </File>
             <File>
               <FileName>ts3510.c</FileName>

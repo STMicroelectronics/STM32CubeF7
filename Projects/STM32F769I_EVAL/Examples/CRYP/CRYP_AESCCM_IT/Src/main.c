@@ -104,14 +104,15 @@ int main(void)
   /*## Initialize the CRYP IP  ###############################################*/ 
   
   /* Set the CRYP parameters */
-  hcryp.Instance        = CRYP;
-  hcryp.Init.DataType   = CRYP_DATATYPE_32B;
-  hcryp.Init.KeySize    = CRYP_KEYSIZE_192B;
-  hcryp.Init.pKey       = AES192Key; 
-  hcryp.Init.Algorithm  = CRYP_AES_CCM;
-  hcryp.Init.Header     = BlockB1;
-  hcryp.Init.HeaderSize = 4;
-  hcryp.Init.B0         = BlockB0; 
+  hcryp.Instance             = CRYP;
+  hcryp.Init.DataType        = CRYP_DATATYPE_32B;
+  hcryp.Init.KeySize         = CRYP_KEYSIZE_192B;
+  hcryp.Init.pKey            = AES192Key; 
+  hcryp.Init.Algorithm       = CRYP_AES_CCM;
+  hcryp.Init.KeyIVConfigSkip = CRYP_KEYIVCONFIG_ALWAYS;
+  hcryp.Init.Header          = BlockB1;
+  hcryp.Init.HeaderSize      = 4;
+  hcryp.Init.B0              = BlockB0; 
   
   /* Initialize CRYP */ 
   HAL_CRYP_Init(&hcryp);
@@ -220,7 +221,8 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLN = 432;  
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 9;
-  
+  RCC_OscInitStruct.PLL.PLLR = 7;
+
   ret = HAL_RCC_OscConfig(&RCC_OscInitStruct);
   if(ret != HAL_OK)
   {

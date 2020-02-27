@@ -335,7 +335,7 @@
               <MiscControls>--C99</MiscControls>
               <Define>USE_HAL_DRIVER,STM32F769xx,USE_STM32F769I_EVAL,USE_IOEXPANDER</Define>
               <Undefine></Undefine>
-              <IncludePath>../Inc;../Src;../../../../../../Drivers/CMSIS/Device/ST/STM32F7xx/Include;../../../../../../Drivers/STM32F7xx_HAL_Driver/Inc;../../../../../../Drivers/BSP/STM32F769I_EVAL;../../../../../../Drivers/BSP/Components;../../../../../../Middlewares/Third_Party/LwIP/src/include/;../../../../../../Middlewares/Third_Party/LwIP/system;../../../../../../Utilities/Log;..\..\..\..\..\..\Middlewares\Third_Party\LwIP\src\apps\httpd</IncludePath>
+              <IncludePath>../Inc;../Src;../../../../../../Drivers/CMSIS/Device/ST/STM32F7xx/Include;../../../../../../Drivers/STM32F7xx_HAL_Driver/Inc;../../../../../../Drivers/BSP/STM32F769I_EVAL;../../../../../../Drivers/BSP/Components;../../../../../../Middlewares/Third_Party/LwIP/src/include/;../../../../../../Middlewares/Third_Party/LwIP/system;../../../../../../Utilities/Log;..\..\..\..\..\..\Middlewares\Third_Party\LwIP\src\apps\http</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -600,17 +600,17 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Middlewares/LwIP/apps/httpd</GroupName>
+          <GroupName>Middlewares/LwIP/apps/http</GroupName>
           <Files>
             <File>
               <FileName>fs.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../Middlewares/Third_Party/LwIP/src/apps/httpd/fs.c</FilePath>
+              <FilePath>../../../../../../Middlewares/Third_Party/LwIP/src/apps/http/fs.c</FilePath>
             </File>
             <File>
               <FileName>httpd.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../Middlewares/Third_Party/LwIP/src/apps/httpd/httpd.c</FilePath>
+              <FilePath>../../../../../../Middlewares/Third_Party/LwIP/src/apps/http/httpd.c</FilePath>
             </File>
           </Files>
         </Group>

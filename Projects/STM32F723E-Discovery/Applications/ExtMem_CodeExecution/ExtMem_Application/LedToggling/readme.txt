@@ -70,6 +70,10 @@ This application provides sample LED toogling program with execution from extern
       the system clock is limited to 200MHz. Indeed proper functioning of the SDRAM is only guaranteed
       at a maximum system clock frequency of 200MHz.
 
+@par Keywords
+
+System, GPIO, Output, Alternate function, Toggle, AN5188, SDRAM, SRAM
+
 @Note If the user code size exceeds the DTCM-RAM size or starts from internal cacheable memories (SRAM1 and SRAM2),that is shared between several processors,
       then it is highly recommended to enable the CPU cache and maintain its coherence at application level.
       In case of constraints it is possible to configure the MPU as "Write through/not shareable" to guarantee the cache coherence at write access but the user

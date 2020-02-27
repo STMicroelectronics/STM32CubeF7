@@ -67,6 +67,9 @@ for test (located in main.h):
  - If literal "WAVEFORM_GENERATION" is not defined: no voltage is generated, user has
    to connect a voltage source to the selected ADC channel input to run this example.
 
+@par Keywords
+
+Analog, ADC, Analog to Digital, single conversion, Software trigger, interrupt
 
 @Note If the user code size exceeds the DTCM-RAM size or starts from internal cacheable memories (SRAM1 and SRAM2),that is shared between several processors,
       then it is highly recommended to enable the CPU cache and maintain its coherence at application level.

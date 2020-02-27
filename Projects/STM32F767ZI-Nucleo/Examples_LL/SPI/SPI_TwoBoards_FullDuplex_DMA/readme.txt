@@ -76,6 +76,9 @@ In case of errors, LED1 is blinking Slowly (1s).
 @note You need to perform a reset on Master board, then perform it on Slave board
       to have the correct behaviour of this example.
 
+@par Keywords
+
+Connectivity, SPI, DMA, Full-duplex, Advanced communication, Transmission, Reception, Master, Slave, MISO, MOSI
 
 @Note If the user code size exceeds the DTCM-RAM size or starts from internal cacheable memories (SRAM1 and SRAM2),that is shared between several processors,
       then it is highly recommended to enable the CPU cache and maintain its coherence at application level.

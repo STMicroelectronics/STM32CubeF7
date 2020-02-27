@@ -31,7 +31,6 @@
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 #define BLOCK_START_ADDR         0U                 /* Block start address      */
-#define BLOCKSIZE                ((uint32_t)512U)   /* Block Size in Bytes      */
 #define NUM_OF_BLOCKS            2U                 /* Total number of blocks   */
 #define BUFFER_WORDS_SIZE        ((BLOCKSIZE * NUM_OF_BLOCKS) >> 2) /* Total data size in bytes */
 /*tmp */

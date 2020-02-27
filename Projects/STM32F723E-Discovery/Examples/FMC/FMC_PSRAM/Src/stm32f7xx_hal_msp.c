@@ -101,8 +101,8 @@ void HAL_SRAM_MspInit(SRAM_HandleTypeDef *hsram)
   dma_handle.Init.MemDataAlignment    = DMA_MDATAALIGN_HALFWORD;
   dma_handle.Init.Mode                = DMA_NORMAL;
   dma_handle.Init.Priority            = DMA_PRIORITY_HIGH;
-  dma_handle.Init.FIFOMode            = DMA_FIFOMODE_DISABLE;
-  dma_handle.Init.FIFOThreshold       = DMA_FIFO_THRESHOLD_FULL;
+  dma_handle.Init.FIFOMode            = DMA_FIFOMODE_ENABLE;
+  dma_handle.Init.FIFOThreshold       = DMA_FIFO_THRESHOLD_1QUARTERFULL;
   dma_handle.Init.MemBurst            = DMA_MBURST_SINGLE;
   dma_handle.Init.PeriphBurst         = DMA_PBURST_SINGLE;
   

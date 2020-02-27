@@ -43,8 +43,9 @@ void DebugMon_Handler(void);
 void PendSV_Handler(void);
 void SysTick_Handler(void);
 void SysTick_Handler(void);
-void BSP_SDMMC1_DMA_Rx_IRQHandler(void);
-void BSP_SDMMC1_IRQHandler(void);
+void BSP_SDMMC2_DMA_Rx_IRQHandler(void);
+void BSP_SDMMC2_DMA_Tx_IRQHandler(void);
+void BSP_SDMMC2_IRQHandler(void);
 
 #ifdef __cplusplus
 }

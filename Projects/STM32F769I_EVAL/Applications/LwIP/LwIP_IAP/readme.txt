@@ -109,7 +109,7 @@ For more details about this application, refer to UM1709 "STM32Cube Ethernet IAP
 
 @par Keywords
 
-Middleware, IAP, In-Application Programming, Ethernet, ETH, LwIP, TFTP, TCP/IP, HTTP, LCD
+IAP, In-Application Programming, Ethernet, ETH, LwIP, TFTP, TCP/IP, HTTP, LCD
 
 @Note If the user code size exceeds the DTCM-RAM size or starts from internal cacheable memories (SRAM1 and SRAM2),that is shared between several processors,
       then it is highly recommended to enable the CPU cache and maintain its coherence at application level.

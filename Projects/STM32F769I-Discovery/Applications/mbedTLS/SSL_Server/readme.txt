@@ -106,7 +106,7 @@ For more details about this application, refer to UM1723 "STM32Cube mbedTLS appl
 
 @par Keywords
 
-Security, Middleware, mbedTLS, SSL Server, Crypto, TCP/IP, LwIP, AES 128,
+Security, mbedTLS, SSL Server, Crypto, TCP/IP, LwIP, AES 128,
 AES 192, AES 256, Triple DES, MD5, SHA-1, RNG
 
 @Note If the user code size exceeds the DTCM-RAM size or starts from internal cacheable memories (SRAM1 and SRAM2),that is shared between several processors,

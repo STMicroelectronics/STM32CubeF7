@@ -136,7 +136,7 @@ Below you find an overview of the different offered modules in the StemWin demon
       
 @par Keywords
 
-Demonstration, FreeRTOS, RTOS, Middleware, Audio record, wav, Video Player, avi, MP3, Audio player, Graphic,
+Demonstration, FreeRTOS, RTOS, Audio record, wav, Video Player, avi, MP3, Audio player, Graphic,
 Game, System, CPU, VNC, SAI, QSPI, USB, Microphone, 
 
 @par Hardware and Software environment

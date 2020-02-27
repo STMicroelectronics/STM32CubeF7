@@ -149,7 +149,7 @@ uint32_t JPEG_OutputHandler(JPEG_HandleTypeDef *hjpeg)
     }
   }
   else if((Output_Is_Paused == 1) && \
-          (JPEG_OUT_Write_BufferIndex == JPEG_OUT_Read_BufferIndex) && \
+          (Jpeg_OUT_BufferTab[JPEG_OUT_Write_BufferIndex].State == JPEG_BUFFER_EMPTY) &&\
           (Jpeg_OUT_BufferTab[JPEG_OUT_Read_BufferIndex].State == JPEG_BUFFER_EMPTY))
   {
     Output_Is_Paused = 0;
@@ -201,6 +201,33 @@ void JPEG_InputHandler(JPEG_HandleTypeDef *hjpeg)
   */
 void HAL_JPEG_InfoReadyCallback(JPEG_HandleTypeDef *hjpeg, JPEG_ConfTypeDef *pInfo)
 {
+  if(pInfo->ChromaSubsampling == JPEG_420_SUBSAMPLING)
+  {
+    if((pInfo->ImageWidth % 16) != 0)
+    pInfo->ImageWidth += (16 - (pInfo->ImageWidth % 16));
+
+    if((pInfo->ImageHeight % 16) != 0)
+    pInfo->ImageHeight += (16 - (pInfo->ImageHeight % 16));
+  }
+
+  if(pInfo->ChromaSubsampling == JPEG_422_SUBSAMPLING)
+  {
+    if((pInfo->ImageWidth % 16) != 0)
+    pInfo->ImageWidth += (16 - (pInfo->ImageWidth % 16));
+
+    if((pInfo->ImageHeight % 8) != 0)
+    pInfo->ImageHeight += (8 - (pInfo->ImageHeight % 8));
+  }
+
+  if(pInfo->ChromaSubsampling == JPEG_444_SUBSAMPLING)
+  {
+    if((pInfo->ImageWidth % 8) != 0)
+    pInfo->ImageWidth += (8 - (pInfo->ImageWidth % 8));
+
+    if((pInfo->ImageHeight % 8) != 0)
+    pInfo->ImageHeight += (8 - (pInfo->ImageHeight % 8));
+  }
+
   if(JPEG_GetDecodeColorConvertFunc(pInfo, &pConvert_Function, &MCU_TotalNb) != HAL_OK)
   {
     OnError_Handler();

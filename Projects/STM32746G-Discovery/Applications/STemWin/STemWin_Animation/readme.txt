@@ -1,4 +1,4 @@
-/**
+﻿/**
   @page STemWin_Animation  STemWin animation Readme file
  
   @verbatim
@@ -78,6 +78,10 @@ The application shows the capability of STemWin to do different animations of di
       Even though the user must manage the cache coherence for read accesses.
       Please refer to the AN4838 “Managing memory protection unit (MPU) in STM32 MCUs”
       Please refer to the AN4839 “Level 1 cache on STM32F7 Series”
+
+@par Keywords
+
+Display, STemWin, Animation, HelloWorld, LCD, GUI, Demonstration, Touch screen
 
 @par Directory contents 
 

@@ -324,6 +324,7 @@
           <state>$PROJ_DIR$\..\..\..\..\Drivers\BSP\Components\Common</state>
           <state>$PROJ_DIR$\..\..\..\..\Drivers\BSP\Components\mfxstm32l152</state>
           <state>$PROJ_DIR$\..\..\..\..\Drivers\BSP\Components\s5k5cag</state>
+          <state>$PROJ_DIR$\..\..\..\..\Drivers\BSP\Components\ov5640</state>
           <state>$PROJ_DIR$\..\..\..\..\Drivers\BSP\Components\stmpe811</state>
           <state>$PROJ_DIR$\..\..\..\..\Drivers\BSP\Components\ts3510</state>
           <state>$PROJ_DIR$\..\..\..\..\Drivers\BSP\Components\wm8994</state>
@@ -1294,6 +1295,7 @@
           <state>$PROJ_DIR$\..\..\..\..\Drivers\BSP\Components\Common</state>
           <state>$PROJ_DIR$\..\..\..\..\Drivers\BSP\Components\mfxstm32l152</state>
           <state>$PROJ_DIR$\..\..\..\..\Drivers\BSP\Components\s5k5cag</state>
+          <state>$PROJ_DIR$\..\..\..\..\Drivers\BSP\Components\ov5640</state>
           <state>$PROJ_DIR$\..\..\..\..\Drivers\BSP\Components\stmpe811</state>
           <state>$PROJ_DIR$\..\..\..\..\Drivers\BSP\Components\ts3510</state>
           <state>$PROJ_DIR$\..\..\..\..\Drivers\BSP\Components\wm8994</state>
@@ -1962,6 +1964,9 @@
         </file>
         <file>
           <name>$PROJ_DIR$\..\..\..\..\Drivers\BSP\Components\s5k5cag\s5k5cag.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\..\..\..\Drivers\BSP\Components\ov5640\ov5640.c</name>
         </file>
         <file>
           <name>$PROJ_DIR$\..\..\..\..\Drivers\BSP\Components\stmpe811\stmpe811.c</name>

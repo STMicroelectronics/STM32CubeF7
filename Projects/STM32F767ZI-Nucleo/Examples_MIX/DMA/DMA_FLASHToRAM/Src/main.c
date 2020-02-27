@@ -146,6 +146,10 @@ static void DMA_Config(void)
   DmaHandle.Init.MemDataAlignment = DMA_MDATAALIGN_WORD;    /* memory data alignment : Word     */
   DmaHandle.Init.Mode = DMA_NORMAL;                         /* Normal DMA mode                  */
   DmaHandle.Init.Priority = DMA_PRIORITY_HIGH;              /* priority level : high            */
+  DmaHandle.Init.FIFOMode = DMA_FIFOMODE_ENABLE;            /* FIFO mode enabled                */
+  DmaHandle.Init.FIFOThreshold = DMA_FIFO_THRESHOLD_1QUARTERFULL; /* FIFO threshold: 1/4 full   */
+  DmaHandle.Init.MemBurst = DMA_MBURST_SINGLE;              /* Memory burst                     */
+  DmaHandle.Init.PeriphBurst = DMA_PBURST_SINGLE;           /* Peripheral burst                 */
 
   /*##-3- Select the DMA instance to be used for the transfer : DMA2_Stream0 #*/
   DmaHandle.Instance = DMA_INSTANCE;

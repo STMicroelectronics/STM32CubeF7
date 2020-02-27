@@ -201,7 +201,7 @@ void HAL_ETH_MspInit(ETH_HandleTypeDef *heth)
   (which MII_CRS is not connected to PA0 of STM32F769NI) because PA0 is shared
   with MC_ENA.
   If Half duplex mode is needed, uncomment PA0 configuration code source (above 
-  the note) and close the SB36 solder bridge of the STM32F769I-EVAL board .
+  the note) and close the SB47 solder bridge of the STM32F769I-EVAL board .
   */
 
   /* Configure PH3 
@@ -212,7 +212,7 @@ void HAL_ETH_MspInit(ETH_HandleTypeDef *heth)
   (which MII_COL is not connected to PH3 of STM32F769NI) because PH3 is shared
   with SDRAM chip select SDNE0. 
   If Half duplex mode is needed, uncomment PH3 configuration code source (above 
-  the note) and close SB47 solder bridge of the STM32F769I-EVAL board.
+  the note) and close SB58 solder bridge of the STM32F769I-EVAL board.
   */
 
   /* Configure PI10
@@ -223,7 +223,7 @@ void HAL_ETH_MspInit(ETH_HandleTypeDef *heth)
   connected to PI10 of STM32F769NI) because PI10 is shared with data signal 
   of SDRAM. 
   If RX_ER signal is needed, uncomment PI10 configuration code source (above 
-  the note) then remove R248 and solder SB9 of the STM32F769I-EVAL board.
+  the note) then remove R252 and solder SB12 of the STM32F769I-EVAL board.
   */
   
   /* Enable ETHERNET clock  */

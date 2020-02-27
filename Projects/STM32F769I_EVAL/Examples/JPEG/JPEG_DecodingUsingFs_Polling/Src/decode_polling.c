@@ -98,6 +98,33 @@ uint32_t JPEG_DecodePolling(JPEG_HandleTypeDef *hjpeg, FIL *file, uint32_t DestA
   */
 void HAL_JPEG_InfoReadyCallback(JPEG_HandleTypeDef *hjpeg, JPEG_ConfTypeDef *pInfo)
 {
+  if(pInfo->ChromaSubsampling == JPEG_420_SUBSAMPLING)
+  {
+    if((pInfo->ImageWidth % 16) != 0)
+    pInfo->ImageWidth += (16 - (pInfo->ImageWidth % 16));
+
+    if((pInfo->ImageHeight % 16) != 0)
+    pInfo->ImageHeight += (16 - (pInfo->ImageHeight % 16));
+  }
+
+  if(pInfo->ChromaSubsampling == JPEG_422_SUBSAMPLING)
+  {
+    if((pInfo->ImageWidth % 16) != 0)
+    pInfo->ImageWidth += (16 - (pInfo->ImageWidth % 16));
+
+    if((pInfo->ImageHeight % 8) != 0)
+    pInfo->ImageHeight += (8 - (pInfo->ImageHeight % 8));
+  }
+
+  if(pInfo->ChromaSubsampling == JPEG_444_SUBSAMPLING)
+  {
+    if((pInfo->ImageWidth % 8) != 0)
+    pInfo->ImageWidth += (8 - (pInfo->ImageWidth % 8));
+
+    if((pInfo->ImageHeight % 8) != 0)
+    pInfo->ImageHeight += (8 - (pInfo->ImageHeight % 8));
+  }
+
   if(JPEG_GetDecodeColorConvertFunc(pInfo, &pConvert_Function, &MCU_TotalNb) != HAL_OK)
   {
     OnError_Handler();

@@ -268,7 +268,7 @@ static void RTC_AlarmConfig(void)
   salarmstructure.AlarmTime.Hours = 0x16;
   salarmstructure.AlarmTime.Minutes = 0x30;
   salarmstructure.AlarmTime.Seconds = 0x30;
-  salarmstructure.AlarmTime.SubSeconds = 0x00;
+  salarmstructure.AlarmTime.SubSeconds = 0xF9;
   
   if(HAL_RTC_SetAlarm_IT(&RtcHandle,&salarmstructure,RTC_FORMAT_BCD) != HAL_OK)
   {

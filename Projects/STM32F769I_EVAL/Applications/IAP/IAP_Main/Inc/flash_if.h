@@ -91,7 +91,7 @@
   #define ADDR_FLASH_SECTOR_8     ((uint32_t)0x08100000) /* Base @ of Sector 8, 256 Kbyte */
   #define ADDR_FLASH_SECTOR_9     ((uint32_t)0x08140000) /* Base @ of Sector 9, 256 Kbyte */
   #define ADDR_FLASH_SECTOR_10    ((uint32_t)0x08180000) /* Base @ of Sector 10, 256 Kbyte */
-  #define ADDR_FLASH_SECTOR_11    ((uint32_t)0x08C00000) /* Base @ of Sector 11, 256 Kbyte */
+  #define ADDR_FLASH_SECTOR_11    ((uint32_t)0x081C0000) /* Base @ of Sector 11, 256 Kbyte */
 #endif /* #define USE_DUAL_BANK_FLASH */
 
 /* Error code */

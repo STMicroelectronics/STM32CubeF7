@@ -1,0 +1,3265 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Release Notes for Projects of STM32CubeF7 Firmware Package</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="../_htmresc/mini-st.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<div class="row">
+<div class="col-sm-12 col-lg-4">
+<div class="card fluid">
+<div class="sectione dark">
+<center>
+<h1 id="release-notes-for-projects-of-stm32cubef7-firmware-package"><small>Release Notes for</small> <strong>Projects of STM32CubeF7 Firmware Package</strong></h1>
+<p>Copyright © 2019 STMicroelectronics<br />
+</p>
+<a href="https://www.st.com" class="logo"><img src="../_htmresc/st_logo.png" alt="ST logo" /></a>
+</center>
+</div>
+</div>
+<h1 id="license">License</h1>
+<p>The projects covered by these release notes are delivered under different licenses. Details of applicable license for each project are provided in the table of the "Contents" section below.</p>
+<h1 id="purpose">Purpose</h1>
+<p>The projects are a set of applicative tasks that aim to explain and provide use cases of the different products features based on the products hardware (Boards, STM32 Core(s) features, interconnections and peripherals) and built around the different firmware components. They can be directly used or adapted by the STM32CubeF7 Firmware Package users. They provide basic functionalities, show main features or demonstrate performance. They are provided with preconfigured projects for the main supported toolchains.</p>
+<p>In the STM32CubeF7 Firmware Package, the projects are organized in a sequential scheme based on the following levels:</p>
+<ul>
+<li>Boards : Hardware platform (evaluation, discovery, nucleo boards)</li>
+<li>Project Category:
+<ul>
+<li>Applications</li>
+<li>Demonstrations</li>
+<li>Examples</li>
+<li>Examples_LL</li>
+<li>Examples_MIX</li>
+<li>Templates</li>
+<li>Templates_LL</li>
+</ul></li>
+</ul>
+<p>The exhaustive list of projects is provided in this table: <a href="STM32CubeProjectsList.html">STM32CubeProjectsList</a>.</p>
+</div>
+<div class="col-sm-12 col-lg-8">
+<h1 id="update-history">Update History</h1>
+<div class="collapse">
+<input type="checkbox" id="collapse-section1_16_0" checked aria-hidden="true"> <label for="collapse-section1_16_0" aria-hidden="true">V1.16.0 / 13-February-2020</label>
+<div>
+<h2 id="main-changes">Main Changes</h2>
+<ul>
+<li>General updates to fix known defects and enhancements implementation</li>
+<li>USB Applications Impact:
+<ul>
+<li>Make sure to follow the required changes provided on the device library template files.</li>
+<li>usbd_conf.c: USB_LL_Transmit() and USBD_LL_PrepareReceive() API argument update</li>
+<li>usbd_conf.h: make sure to do not keep USBD_memset, USBD_memcpy, USBD_Delay undefined, USBD_malloc should return a void pointer</li>
+<li>USB CDC: new user interface callback added TransmitCplt(), required changes available in usbd_cdc_if_template.c file</li>
+<li>USB Audio: Audio_PeriodicTC() args updated, adding pointer to received buffer and data size.</li>
+<li>USB CustomHID: added new API to restart OUT transfers, USBD_CUSTOM_HID_ReceivePacket() should be called after finishing DATA processing</li>
+</ul></li>
+<li>Add 2 new USB CDC applications running on STM32746G-Discovery boards
+<ul>
+<li>CDC_ECM_Server</li>
+<li>CDC_RNDIS_Server</li>
+</ul></li>
+<li>Update STM32756G_EVAL Demo to support new NOR flash component: MT28EW128ABA1LPC</li>
+<li>Update STM32756G_EVAL and STM32F769I_EVAL to support new Camera component: OV5640</li>
+<li>LwIP Applications Impact:
+<ul>
+<li>Folder src/apps/httpd has been renamed to src/apps/http :ALL projects/applications include this folder are impacted</li>
+</ul></li>
+<li>MbedTLS Applications Impact:
+<ul>
+<li>Update to use new mbedtls_config.h file</li>
+<li>Add chacha20.c, chachapol.c, nist_kw.c and poly1305.c files in toolchain project source files.</li>
+<li>Remove dhcp_stop() call in the net_sockets.c</li>
+</ul>
+: Additional features</li>
+</ul>
+<h2 id="contents">Contents</h2>
+<h3 id="projects">Projects</h3>
+<table>
+<caption>Projects :</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Board</th>
+<th style="text-align: left;">Project category</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: left;">License</th>
+<th style="text-align: left;">Path</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">STM32F7308-DISCO</td>
+<td style="text-align: left;">Demonstrations</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32F7308-DISCO/Demonstrations</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F7308-DISCO</td>
+<td style="text-align: left;">Applications</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32F7308-DISCO/Applications</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F7308-DISCO</td>
+<td style="text-align: left;">HAL Examples</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F7308-DISCO/Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F7308-DISCO</td>
+<td style="text-align: left;">HAL Templates</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F7308-DISCO/Templates</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F7508-DISCO</td>
+<td style="text-align: left;">Demonstrations</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32F7508-DISCO/Demonstrations</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F7508-DISCO</td>
+<td style="text-align: left;">Applications</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32F7508-DISCO/Applications</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F7508-DISCO</td>
+<td style="text-align: left;">HAL Examples</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F7508-DISCO/Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F7508-DISCO</td>
+<td style="text-align: left;">HAL Templates</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F7508-DISCO/Templates</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32746G-Discovery</td>
+<td style="text-align: left;">Demonstrations</td>
+<td style="text-align: left;">v2.0.2</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32746G-Discovery/Demonstrations</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32746G-Discovery</td>
+<td style="text-align: left;">Applications</td>
+<td style="text-align: left;">v2.0.2</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32746G-Discovery/Applications</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32746G-Discovery</td>
+<td style="text-align: left;">HAL Examples</td>
+<td style="text-align: left;">v2.0.2</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32746G-Discovery/Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32746G-Discovery</td>
+<td style="text-align: left;">HAL Templates</td>
+<td style="text-align: left;">v2.0.2</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32746G-Discovery/Templates</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32746G-Discovery</td>
+<td style="text-align: left;">LL Templates</td>
+<td style="text-align: left;">v2.0.2</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32746G-Discovery/Templates_LL</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F769I_EVAL</td>
+<td style="text-align: left;">Demonstrations</td>
+<td style="text-align: left;">v2.0.0</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32F769I_EVAL/Demonstrations</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F769I_EVAL</td>
+<td style="text-align: left;">Applications</td>
+<td style="text-align: left;">v2.0.0</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32F769I_EVAL/Applications</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F769I_EVAL</td>
+<td style="text-align: left;">HAL Examples</td>
+<td style="text-align: left;">v2.0.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F769I_EVAL/Examples</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F769I_EVAL</td>
+<td style="text-align: left;">HAL Templates</td>
+<td style="text-align: left;">v2.0.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F769I_EVAL/Templates</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F769I_EVAL</td>
+<td style="text-align: left;">LL Templates</td>
+<td style="text-align: left;">v2.0.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F769I_EVAL/Templates_LL</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F723E-Discovery</td>
+<td style="text-align: left;">Demonstrations</td>
+<td style="text-align: left;">v1.0.2</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32F723E-Discovery/Demonstrations</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F723E-Discovery</td>
+<td style="text-align: left;">Applications</td>
+<td style="text-align: left;">v1.0.2</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32F723E-Discovery/Applications</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F723E-Discovery</td>
+<td style="text-align: left;">HAL Examples</td>
+<td style="text-align: left;">v1.0.2</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F723E-Discovery/Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F723E-Discovery</td>
+<td style="text-align: left;">HAL Templates</td>
+<td style="text-align: left;">v1.0.2</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F723E-Discovery/Templates</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F723E-Discovery</td>
+<td style="text-align: left;">LL Templates</td>
+<td style="text-align: left;">v1.0.2</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F723E-Discovery/Templates_LL</td>
+</tr>
+</tbody>
+</table>
+<p><br />
+</p>
+<h2 id="known-limitations">Known Limitations</h2>
+<ul>
+<li>STemWin demonstration for STM32F7308-DISCO</li>
+<li>SW4STM32 project is not provided</li>
+</ul>
+<h2 id="development-toolchains-and-compilers">Development Toolchains and Compilers</h2>
+<table>
+<caption>Development Toolchains :</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Version</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">IAR Embedded Workbench for ARM (EWARM)toolchain</td>
+<td style="text-align: left;">V8.20.2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">RealView Microcontroller DevelopmentKit (MDK-ARM) toolchain</td>
+<td style="text-align: left;">V5.27.1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">System Workbench for STM32 (SW4STM32)toolchain</td>
+<td style="text-align: left;">V2.9.0</td>
+</tr>
+</tbody>
+</table>
+<h2 id="supported-devices-and-boards">Supported Devices and boards</h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">STM32F765xx, STM32F767xx, STM32F769xx, STM32F777xx, STM32F779xx devices</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F756/746/745 devices</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F723/33/22/32 devices</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F730xx, STM32F750xx devices</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F769I-EVAL RevB</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F769I-DISCO RevB</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F767ZI-Nucleo RevB</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32756G-EVAL, STM32746G-EVAL RevB</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F746G-DISCO RevB</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F746ZG-Nucleo RevB</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F722ZE-Nucleo RevB</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F723E-Discovery RevC</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F7308-DISCO RevA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F7508-DISCO RevA</td>
+</tr>
+</tbody>
+</table>
+<h2 id="backward-compatibility">Backward Compatibility</h2>
+<p>None</p>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section1_15_0" checked aria-hidden="true"> <label for="collapse-section1_15_0" aria-hidden="true">V1.15.0 / 08-February-2019</label>
+<div>
+<h2 id="main-changes-1">Main Changes</h2>
+<ul>
+<li>General updates to fix known defects and enhancements implementation</li>
+<li>Add support of HAL callback registration feature</li>
+<li>Add new <strong>HAL EXTI</strong> driver</li>
+<li>General updates to fix CodeSonar compilation warnings</li>
+<li>General updates to fix SW4STM32 compilation errors under Linux</li>
+<li>General updates to fix the user manual .chm files</li>
+<li><strong>The following changes done on the HAL drivers require an update on the application code based on older HAL versions</strong>
+<ul>
+<li><strong>HAL/LL Generic</strong> update
+<ul>
+<li>Rework of HAL CRYP driver <strong>(compatibility break)</strong>
+<ul>
+<li>HAL CRYP driver has been redesigned with new API’s, to bypass limitations on data Encryption/Decryption management present with previous HAL CRYP driver version.</li>
+<li>The new HAL CRYP driver is the recommended version. It is located as usual in Drivers/STM32F7xx_HAL_Driver/Src and Drivers/STM32f7xx_HAL_Driver/Inc folders. It can be enabled through switch HAL_CRYP_MODULE_ENABLED in stm32f7xx_hal_conf.h</li>
+<li>The legacy HAL CRYP driver is no longer supported.</li>
+</ul></li>
+<li>For USB Host application add the following USB callback in usbh_conf.c user file to be compliant with latest changes done on USB Host (HAL/Stack)
+<ul>
+<li>HAL_HCD_PortEnabled_Callback()</li>
+<li>HAL_HCD_PortDisabled_Callback()</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+<dl>
+<dt>For the complete list of changes, please refer to the release notes of each firmware component</dt>
+<dd><p>Additional features</p>
+</dd>
+</dl>
+<h2 id="contents-1">Contents</h2>
+<h3 id="projects-1">Projects</h3>
+<table>
+<caption>Projects :</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Board</th>
+<th style="text-align: left;">Project category</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: left;">License</th>
+<th style="text-align: left;">Path</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">STM32F7308-DISCO</td>
+<td style="text-align: left;">Demonstrations</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32F7308-DISCO/Demonstrations</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F7308-DISCO</td>
+<td style="text-align: left;">Applications</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32F7308-DISCO/Applications</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F7308-DISCO</td>
+<td style="text-align: left;">HAL Examples</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F7308-DISCO/Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F7308-DISCO</td>
+<td style="text-align: left;">HAL Templates</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F7308-DISCO/Templates</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F7508-DISCO</td>
+<td style="text-align: left;">Demonstrations</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32F7508-DISCO/Demonstrations</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F7508-DISCO</td>
+<td style="text-align: left;">Applications</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32F7508-DISCO/Applications</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F7508-DISCO</td>
+<td style="text-align: left;">HAL Examples</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F7508-DISCO/Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F7508-DISCO</td>
+<td style="text-align: left;">HAL Templates</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F7508-DISCO/Templates</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32746G-Discovery</td>
+<td style="text-align: left;">Demonstrations</td>
+<td style="text-align: left;">v2.0.2</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32746G-Discovery/Demonstrations</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32746G-Discovery</td>
+<td style="text-align: left;">Applications</td>
+<td style="text-align: left;">v2.0.2</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32746G-Discovery/Applications</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32746G-Discovery</td>
+<td style="text-align: left;">HAL Examples</td>
+<td style="text-align: left;">v2.0.2</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32746G-Discovery/Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32746G-Discovery</td>
+<td style="text-align: left;">HAL Templates</td>
+<td style="text-align: left;">v2.0.2</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32746G-Discovery/Templates</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32746G-Discovery</td>
+<td style="text-align: left;">LL Templates</td>
+<td style="text-align: left;">v2.0.2</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32746G-Discovery/Templates_LL</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F769I_EVAL</td>
+<td style="text-align: left;">Demonstrations</td>
+<td style="text-align: left;">v2.0.0</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32F769I_EVAL/Demonstrations</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F769I_EVAL</td>
+<td style="text-align: left;">Applications</td>
+<td style="text-align: left;">v2.0.0</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32F769I_EVAL/Applications</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F769I_EVAL</td>
+<td style="text-align: left;">HAL Examples</td>
+<td style="text-align: left;">v2.0.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F769I_EVAL/Examples</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F769I_EVAL</td>
+<td style="text-align: left;">HAL Templates</td>
+<td style="text-align: left;">v2.0.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F769I_EVAL/Templates</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F769I_EVAL</td>
+<td style="text-align: left;">LL Templates</td>
+<td style="text-align: left;">v2.0.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F769I_EVAL/Templates_LL</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F723E-Discovery</td>
+<td style="text-align: left;">Demonstrations</td>
+<td style="text-align: left;">v1.0.2</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32F723E-Discovery/Demonstrations</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F723E-Discovery</td>
+<td style="text-align: left;">Applications</td>
+<td style="text-align: left;">v1.0.2</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32F723E-Discovery/Applications</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F723E-Discovery</td>
+<td style="text-align: left;">HAL Examples</td>
+<td style="text-align: left;">v1.0.2</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F723E-Discovery/Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F723E-Discovery</td>
+<td style="text-align: left;">HAL Templates</td>
+<td style="text-align: left;">v1.0.2</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F723E-Discovery/Templates</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F723E-Discovery</td>
+<td style="text-align: left;">LL Templates</td>
+<td style="text-align: left;">v1.0.2</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F723E-Discovery/Templates_LL</td>
+</tr>
+</tbody>
+</table>
+<p><br />
+</p>
+<h2 id="known-limitations-1">Known Limitations</h2>
+<ul>
+<li>STemWin demonstration for STM32F7308-DISCO</li>
+<li>SW4STM32 project is not provided</li>
+</ul>
+<h2 id="development-toolchains-and-compilers-1">Development Toolchains and Compilers</h2>
+<table>
+<caption>Development Toolchains :</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Version</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">IAR Embedded Workbench for ARM (EWARM)toolchain</td>
+<td style="text-align: left;">V8.20.2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">RealView Microcontroller DevelopmentKit (MDK-ARM) toolchain</td>
+<td style="text-align: left;">V5.25</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">System Workbench for STM32 (SW4STM32)toolchain</td>
+<td style="text-align: left;">V2.7.0</td>
+</tr>
+</tbody>
+</table>
+<h2 id="supported-devices-and-boards-1">Supported Devices and boards</h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">STM32F765xx, STM32F767xx, STM32F769xx, STM32F777xx, STM32F779xx devices</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F756/746/745 devices</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F723/33/22/32 devices</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F730xx, STM32F750xx devices</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F769I-EVAL RevB</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F769I-DISCO RevB</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F767ZI-Nucleo RevB</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32756G-EVAL, STM32746G-EVAL RevB</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F746G-DISCO RevB</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F746ZG-Nucleo RevB</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F722ZE-Nucleo RevB</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F723E-Discovery RevC</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F7308-DISCO RevA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F7508-DISCO RevA</td>
+</tr>
+</tbody>
+</table>
+<h2 id="backward-compatibility-1">Backward Compatibility</h2>
+<p>None</p>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section1_13_0" aria-hidden="true"> <label for="collapse-section1_13_0" aria-hidden="true">V1.13.0 / 05-November-2018</label>
+<div>
+<h2 id="main-changes-2">Main Changes</h2>
+<ul>
+<li><strong>Templates:</strong>
+<ul>
+<li>Add template projects for STM32F7508-DISCO/STM32F7308-DISCO
+<ul>
+<li>ExtMem_Boot : Reference Boot code from internal flash with two possible use cases : XiP and BootROM.
+<ul>
+<li>XiP use case is intended for eXecution in Place from external flash memory (QSPI).
+<ul>
+<li>In this case, the user application code shall be linked with the target execution memory address (External QSPI Flash).</li>
+</ul></li>
+<li>BootROM use case is intended to demonstrate how to boot from internal flash, configure the external SDRAM memory, copy user application binary from a micro-SD or from QSPI-Flash to the external SDRAM then jump to the user application.
+<ul>
+<li>In this case, the user application code shall be linked with the target execution memory address (external SDRAM )</li>
+<li>This use case is supported only on STM32F7508-DISCO</li>
+</ul></li>
+<li>Template_Project : Typical template with execution from external memory. Different configurations are available respecting the possibilities offered by the external memory boot:
+<ul>
+<li>STM32F7508-DISCO:
+<ul>
+<li>XiP From QSPI, Data on Internal SRAM</li>
+<li>XiP From QSPI, Data on External SDRAM</li>
+<li>BootROM : Execution From External SDRAM , Data on Internal SRAM</li>
+</ul></li>
+<li>STM32F7308-DISCO:
+<ul>
+<li>XiP From QSPI, Data on Internal SRAM</li>
+<li>XiP From QSPI, Data on External PSRAM</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li><strong>Examples:</strong>
+<ul>
+<li>Add examples for STM32F7508-DISCO/STM32F7308-DISCO
+<ul>
+<li>Different examples for different peripherals are available using the following configuration : XiP From QSPI, Data on Internal SRAM</li>
+<li>GPIO example comes with all the possible configurations ( same as for Template project )</li>
+<li>QSPI example running from internal flash to show how to read and write from the QSPI flash</li>
+</ul></li>
+</ul></li>
+<li><strong>Applications:</strong>
+<ul>
+<li>Add applications for STM32F7508-DISCO/STM32F7308-DISCO
+<ul>
+<li>Different applications are available( Display , LibJPEG, STemWin … ) using the following configuration : XiP From QSPI, Data on Internal SRAM</li>
+<li>FreeRTOS applications come with all the possible configurations ( same as for Template project )</li>
+</ul></li>
+<li>Update applications to refer to the new PDM libraries:
+<ul>
+<li>This version is not backward compatible with previous V3.0.1 and earlier version, below the list of complete changes requiring updates on User applications:
+<ul>
+<li>libPDMFilter_CM7_IAR.a updated and renamed to:
+<ul>
+<li>libPDMFilter_CM7_IAR_wc32.a for EWARM V8.x and later versions.</li>
+<li>libPDMFilter_CM7_IAR_wc16.a for EWARM V7.80.x and earlier versions.</li>
+</ul></li>
+<li>libPDMFilter_CM7_Keil.lib updated and renamed to libPDMFilter_CM7_Keil_wc16.lib for MDK-ARM projects.</li>
+<li>libPDMFilter_CM7_GCC.a updated and renamed to libPDMFilter_CM7_GCC_wc32 for SW4STM32 projects.</li>
+</ul></li>
+</ul></li>
+<li>Update SW4STM32 applications to be compliant to new version 2.7</li>
+</ul></li>
+<li><strong>Demonstrations:</strong>
+<ul>
+<li>Add demonstration for STM32F7508-DISCO composed of:
+<ul>
+<li>Menu Launcher: Executing from internal flash, it configures the external QSPI flash and allows user to jump either to STemWin demonstration or TouchGFX demonstration</li>
+<li>STemWin demonstration executing from external QSPI flash</li>
+<li>TouchGFX demonstration executing from external QSPI flash</li>
+</ul></li>
+<li>Add STemWin demonstration for STM32F7308-DISCO:
+<ul>
+<li>STemWin demonstration executing from external QSPI flash. User must rely first on the ExtMem_Boot template configured in XiP mode</li>
+</ul></li>
+<li>Add new demonstrations for STemWin and TouchGFX for STM32F769I_EVAL, STM32F769I-Discovery, STM32756G_EVAL, STM32746-Discovery platforms.</li>
+<li>Update demonstration for STemWin for STM32F723E-Discovery</li>
+</ul></li>
+</ul>
+<p>For the complete list of changes, please refer to the release notes of each firmware component</p>
+<h2 id="contents-2">Contents</h2>
+<h3 id="projects-2">Projects</h3>
+<table>
+<caption>Projects :<br />
+<br />
+</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Board</th>
+<th style="text-align: left;">Project category</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: left;">License</th>
+<th style="text-align: left;">Path</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">STM32F7308-DISCO</td>
+<td style="text-align: left;">Demonstrations</td>
+<td style="text-align: left;">v1.0.0</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32F7308-DISCO/Demonstrations</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F7308-DISCO</td>
+<td style="text-align: left;">Applications</td>
+<td style="text-align: left;">v1.0.0</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32F7308-DISCO/Applications</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F7308-DISCO</td>
+<td style="text-align: left;">HAL Examples</td>
+<td style="text-align: left;">v1.0.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F7308-DISCO/Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F7308-DISCO</td>
+<td style="text-align: left;">HAL Templates</td>
+<td style="text-align: left;">v1.0.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F7308-DISCO/Templates</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F7508-DISCO</td>
+<td style="text-align: left;">Demonstrations</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32F7508-DISCO/Demonstrations</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F7508-DISCO</td>
+<td style="text-align: left;">Applications</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32F7508-DISCO/Applications</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F7508-DISCO</td>
+<td style="text-align: left;">HAL Examples</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F7508-DISCO/Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F7508-DISCO</td>
+<td style="text-align: left;">HAL Templates</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F7508-DISCO/Templates</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32746G-Discovery</td>
+<td style="text-align: left;">Demonstrations</td>
+<td style="text-align: left;">v2.0.2</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32746G-Discovery/Demonstrations</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32746G-Discovery</td>
+<td style="text-align: left;">Applications</td>
+<td style="text-align: left;">v2.0.2</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32746G-Discovery/Applications</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32746G-Discovery</td>
+<td style="text-align: left;">HAL Examples</td>
+<td style="text-align: left;">v2.0.2</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32746G-Discovery/Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32746G-Discovery</td>
+<td style="text-align: left;">HAL Templates</td>
+<td style="text-align: left;">v2.0.2</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32746G-Discovery/Templates</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32746G-Discovery</td>
+<td style="text-align: left;">LL Templates</td>
+<td style="text-align: left;">v2.0.2</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32746G-Discovery/Templates_LL</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32756G_EVAL</td>
+<td style="text-align: left;">Demonstrations</td>
+<td style="text-align: left;">v2.0.3</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32756G_EVAL/Demonstrations</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32756G_EVAL</td>
+<td style="text-align: left;">Applications</td>
+<td style="text-align: left;">v2.0.3</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32756G_EVAL/Applications</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32756G_EVAL</td>
+<td style="text-align: left;">HAL Examples</td>
+<td style="text-align: left;">v2.0.3</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32756G_EVAL/Examples</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32756G_EVAL</td>
+<td style="text-align: left;">HAL Templates</td>
+<td style="text-align: left;">v2.0.3</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32756G_EVAL/Templates</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32756G_EVAL</td>
+<td style="text-align: left;">LL Templates</td>
+<td style="text-align: left;">v2.0.3</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32756G_EVAL/Templates_LL</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F769I-Discovery</td>
+<td style="text-align: left;">Demonstrations</td>
+<td style="text-align: left;">v2.0.1</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32F769I-Discovery/Demonstrations</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F769I-Discovery</td>
+<td style="text-align: left;">Applications</td>
+<td style="text-align: left;">v2.0.1</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32F769I-Discovery/Applications</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F769I-Discovery</td>
+<td style="text-align: left;">HAL Examples</td>
+<td style="text-align: left;">v2.0.1</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F769I-Discovery/Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F769I-Discovery</td>
+<td style="text-align: left;">HAL Templates</td>
+<td style="text-align: left;">v2.0.1</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F769I-Discovery/Templates</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F769I-Discovery</td>
+<td style="text-align: left;">LL Templates</td>
+<td style="text-align: left;">v2.0.1</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F769I-Discovery/Templates_LL</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F769I_EVAL</td>
+<td style="text-align: left;">Demonstrations</td>
+<td style="text-align: left;">v2.0.2</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32F769I_EVAL/Demonstrations</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F769I_EVAL</td>
+<td style="text-align: left;">Applications</td>
+<td style="text-align: left;">v2.0.2</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32F769I_EVAL/Applications</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F769I_EVAL</td>
+<td style="text-align: left;">HAL Examples</td>
+<td style="text-align: left;">v2.0.2</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F769I_EVAL/Examples</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F769I_EVAL</td>
+<td style="text-align: left;">HAL Templates</td>
+<td style="text-align: left;">v2.0.2</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F769I_EVAL/Templates</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F769I_EVAL</td>
+<td style="text-align: left;">LL Templates</td>
+<td style="text-align: left;">v2.0.2</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F769I_EVAL/Templates_LL</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F723E-Discovery</td>
+<td style="text-align: left;">Demonstrations</td>
+<td style="text-align: left;">v1.0.2</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32F723E-Discovery/Demonstrations</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F723E-Discovery</td>
+<td style="text-align: left;">Applications</td>
+<td style="text-align: left;">v1.0.2</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32F723E-Discovery/Applications</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F723E-Discovery</td>
+<td style="text-align: left;">HAL Examples</td>
+<td style="text-align: left;">v1.0.2</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F723E-Discovery/Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F723E-Discovery</td>
+<td style="text-align: left;">HAL Templates</td>
+<td style="text-align: left;">v1.0.2</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F723E-Discovery/Templates</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F723E-Discovery</td>
+<td style="text-align: left;">LL Templates</td>
+<td style="text-align: left;">v1.0.2</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F723E-Discovery/Templates_LL</td>
+</tr>
+</tbody>
+</table>
+<h2 id="known-limitations-2">Known Limitations</h2>
+<ul>
+<li>STemWin demonstration for STM32F7308-DISCO
+<ul>
+<li>SW4STM32 project is not provided</li>
+</ul></li>
+</ul>
+<h2 id="development-toolchains-and-compilers-2">Development Toolchains and Compilers</h2>
+<table>
+<caption>Development Toolchains :</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Version</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">IAR Embedded Workbench for ARM (EWARM)toolchain</td>
+<td style="text-align: left;">V8.20.2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">RealView Microcontroller DevelopmentKit (MDK-ARM) toolchain</td>
+<td style="text-align: left;">V5.25</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">System Workbench for STM32 (SW4STM32)toolchain</td>
+<td style="text-align: left;">V2.7.0</td>
+</tr>
+</tbody>
+</table>
+<h2 id="supported-devices-and-boards-2">Supported Devices and boards</h2>
+<table>
+<caption>Supported Devices :</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">STM32F765xx, STM32F767xx, STM32F769xx, STM32F777xx, STM32F779xx</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F756/746/745</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F723/33/22/32</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F730xx, STM32F750xx</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">STM32F769I-EVAL RevB</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F769I-DISCO RevB</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F767ZI-Nucleo RevB</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32756G-EVAL, STM32746G-EVAL RevB</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F746G-DISCO RevB</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F746ZG-Nucleo RevB</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F722ZE-Nucleo RevB</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F723E-Discovery RevC</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F7308-DISCO RevA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F7508-DISCO RevA</td>
+</tr>
+</tbody>
+</table>
+<h2 id="backward-compatibility-2">Backward Compatibility</h2>
+<p>None</p>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section_1.12.0" aria-hidden="true"> <label for="collapse-section_1.12.0" aria-hidden="true">V1.12.0 / 29-June-2018</label>
+<div>
+<h2 id="main-changes-3">Main Changes</h2>
+<ul>
+<li>Add Following applications for <strong>STM32F756G_EVAL</strong> and <strong>STM32F723E-Discovery</strong>: - <strong>ExtMem_Boot</strong>: - This application shows how to boot from internal flash, configure external memories then jump to user application located on external memory - User can select QSPI flash , FMC-NOR flash, external SDRAM or external SRAM for code execution. - <strong>ExtMem_Application\LedToggling</strong>: - Sample application runing from external flash (QSPI flash or FMC-NOR flash) or external RAM - <strong>ExtMem_Application\FreeRTOS</strong>: - Sample FreeRTOS application with execution from external flash (QSPI flash or FMC-NOR flash) or external RAM</li>
+<li>For the complete list of changes, please refer to the release notes of each firmware component</li>
+</ul>
+<h2 id="contents-3">Contents</h2>
+<h3 id="projects-3">Projects</h3>
+<table>
+<caption>Projects :<br />
+<br />
+</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Board</th>
+<th style="text-align: left;">Project category</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: left;">License</th>
+<th style="text-align: left;">Path</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">STM32746G-Discovery</td>
+<td style="text-align: left;">Demonstrations</td>
+<td style="text-align: left;">v2.0.2</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32746G-Discovery/Demonstrations</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32746G-Discovery</td>
+<td style="text-align: left;">Applications</td>
+<td style="text-align: left;">v2.0.2</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32746G-Discovery/Applications</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32746G-Discovery</td>
+<td style="text-align: left;">HAL Examples</td>
+<td style="text-align: left;">v2.0.2</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32746G-Discovery/Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32746G-Discovery</td>
+<td style="text-align: left;">HAL Templates</td>
+<td style="text-align: left;">v2.0.2</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32746G-Discovery/Templates</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32746G-Discovery</td>
+<td style="text-align: left;">LL Templates</td>
+<td style="text-align: left;">v2.0.2</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32746G-Discovery/Templates_LL</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32756G_EVAL</td>
+<td style="text-align: left;">Demonstrations</td>
+<td style="text-align: left;">v2.0.3</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32756G_EVAL/Demonstrations</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32756G_EVAL</td>
+<td style="text-align: left;">Applications</td>
+<td style="text-align: left;">v2.0.3</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32756G_EVAL/Applications</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32756G_EVAL</td>
+<td style="text-align: left;">HAL Examples</td>
+<td style="text-align: left;">v2.0.3</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32756G_EVAL/Examples</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32756G_EVAL</td>
+<td style="text-align: left;">HAL Templates</td>
+<td style="text-align: left;">v2.0.3</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32756G_EVAL/Templates</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32756G_EVAL</td>
+<td style="text-align: left;">LL Templates</td>
+<td style="text-align: left;">v2.0.3</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32756G_EVAL/Templates_LL</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F769I-Discovery</td>
+<td style="text-align: left;">Demonstrations</td>
+<td style="text-align: left;">v2.0.1</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32F769I-Discovery/Demonstrations</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F769I-Discovery</td>
+<td style="text-align: left;">Applications</td>
+<td style="text-align: left;">v2.0.1</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32F769I-Discovery/Applications</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F769I-Discovery</td>
+<td style="text-align: left;">HAL Examples</td>
+<td style="text-align: left;">v2.0.1</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F769I-Discovery/Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F769I-Discovery</td>
+<td style="text-align: left;">HAL Templates</td>
+<td style="text-align: left;">v2.0.1</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F769I-Discovery/Templates</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F769I-Discovery</td>
+<td style="text-align: left;">LL Templates</td>
+<td style="text-align: left;">v2.0.1</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F769I-Discovery/Templates_LL</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F769I_EVAL</td>
+<td style="text-align: left;">Demonstrations</td>
+<td style="text-align: left;">v2.0.2</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32F769I_EVAL/Demonstrations</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F769I_EVAL</td>
+<td style="text-align: left;">Applications</td>
+<td style="text-align: left;">v2.0.2</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32F769I_EVAL/Applications</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F769I_EVAL</td>
+<td style="text-align: left;">HAL Examples</td>
+<td style="text-align: left;">v2.0.2</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F769I_EVAL/Examples</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F769I_EVAL</td>
+<td style="text-align: left;">HAL Templates</td>
+<td style="text-align: left;">v2.0.2</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F769I_EVAL/Templates</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F769I_EVAL</td>
+<td style="text-align: left;">LL Templates</td>
+<td style="text-align: left;">v2.0.2</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F769I_EVAL/Templates_LL</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F723E-Discovery</td>
+<td style="text-align: left;">Demonstrations</td>
+<td style="text-align: left;">v1.0.2</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32F723E-Discovery/Demonstrations</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F723E-Discovery</td>
+<td style="text-align: left;">Applications</td>
+<td style="text-align: left;">v1.0.2</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32F723E-Discovery/Applications</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F723E-Discovery</td>
+<td style="text-align: left;">HAL Examples</td>
+<td style="text-align: left;">v1.0.2</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F723E-Discovery/Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F723E-Discovery</td>
+<td style="text-align: left;">HAL Templates</td>
+<td style="text-align: left;">v1.0.2</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F723E-Discovery/Templates</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F723E-Discovery</td>
+<td style="text-align: left;">LL Templates</td>
+<td style="text-align: left;">v1.0.2</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F723E-Discovery/Templates_LL</td>
+</tr>
+</tbody>
+</table>
+<h2 id="known-limitations-3">Known Limitations</h2>
+<p>None</p>
+<h2 id="development-toolchains-and-compilers-3">Development Toolchains and Compilers</h2>
+<table>
+<caption>Development Toolchains :</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Version</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">IAR Embedded Workbench for ARM (EWARM)toolchain</td>
+<td style="text-align: left;">V7.80.4</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">RealView Microcontroller DevelopmentKit (MDK-ARM) toolchain</td>
+<td style="text-align: left;">V5.25</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">System Workbench for STM32 (SW4STM32)toolchain</td>
+<td style="text-align: left;">V2.5.0</td>
+</tr>
+</tbody>
+</table>
+<h2 id="supported-devices-and-boards-3">Supported Devices and boards</h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">STM32F765xx, STM32F767xx, STM32F769xx, STM32F777xx, STM32F779xx</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F756/746/745</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F723/33/22/32</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F730xx, STM32F750xx</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F769I-EVAL RevB</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F769I-DISCO RevB</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F767ZI-Nucleo RevB</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32756G-EVAL, STM32746G-EVAL RevB</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F746G-DISCO RevB</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F746ZG-Nucleo RevB</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F722ZE-Nucleo RevB</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F723E-Discovery RevB</td>
+</tr>
+</tbody>
+</table>
+<h2 id="backward-compatibility-3">Backward Compatibility</h2>
+<p>None</p>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section_1.11.0" aria-hidden="true"> <label for="collapse-section_1.11.0" aria-hidden="true">V1.11.0 / 23-February-2018</label>
+<div>
+<h2 id="main-changes-4">Main Changes</h2>
+<ul>
+<li>Add new STemWin applications for STM32F769I_EVAL, STM32F769I-Discovery, STM32756G_EVAL and STM32746-Discovery platforms.</li>
+<li>Improve cache management for all examples and applications using cache maintenance routines.</li>
+<li>For the complete list of changes, please refer to the release notes of each firmware component</li>
+</ul>
+<h2 id="contents-4">Contents</h2>
+<h3 id="projects-4">Projects</h3>
+<table>
+<caption>Projects :<br />
+<br />
+</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Board</th>
+<th style="text-align: left;">Project category</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: left;">License</th>
+<th style="text-align: left;">Path</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">STM32746G-Discovery</td>
+<td style="text-align: left;">Demonstrations</td>
+<td style="text-align: left;">v2.0.2</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32746G-Discovery/Demonstrations</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32746G-Discovery</td>
+<td style="text-align: left;">Applications</td>
+<td style="text-align: left;">v2.0.2</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32746G-Discovery/Applications</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32746G-Discovery</td>
+<td style="text-align: left;">HAL Examples</td>
+<td style="text-align: left;">v2.0.2</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32746G-Discovery/Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32746G-Discovery</td>
+<td style="text-align: left;">HAL Templates</td>
+<td style="text-align: left;">v2.0.2</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32746G-Discovery/Templates</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32746G-Discovery</td>
+<td style="text-align: left;">LL Templates</td>
+<td style="text-align: left;">v2.0.2</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32746G-Discovery/Templates_LL</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32756G_EVAL</td>
+<td style="text-align: left;">Demonstrations</td>
+<td style="text-align: left;">v2.0.3</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32756G_EVAL/Demonstrations</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32756G_EVAL</td>
+<td style="text-align: left;">Applications</td>
+<td style="text-align: left;">v2.0.3</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32756G_EVAL/Applications</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32756G_EVAL</td>
+<td style="text-align: left;">HAL Examples</td>
+<td style="text-align: left;">v2.0.3</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32756G_EVAL/Examples</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32756G_EVAL</td>
+<td style="text-align: left;">HAL Templates</td>
+<td style="text-align: left;">v2.0.3</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32756G_EVAL/Templates</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32756G_EVAL</td>
+<td style="text-align: left;">LL Templates</td>
+<td style="text-align: left;">v2.0.3</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32756G_EVAL/Templates_LL</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F769I-Discovery</td>
+<td style="text-align: left;">Demonstrations</td>
+<td style="text-align: left;">v2.0.1</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32F769I-Discovery/Demonstrations</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F769I-Discovery</td>
+<td style="text-align: left;">Applications</td>
+<td style="text-align: left;">v2.0.1</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32F769I-Discovery/Applications</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F769I-Discovery</td>
+<td style="text-align: left;">HAL Examples</td>
+<td style="text-align: left;">v2.0.1</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F769I-Discovery/Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F769I-Discovery</td>
+<td style="text-align: left;">HAL Templates</td>
+<td style="text-align: left;">v2.0.1</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F769I-Discovery/Templates</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F769I-Discovery</td>
+<td style="text-align: left;">LL Templates</td>
+<td style="text-align: left;">v2.0.1</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F769I-Discovery/Templates_LL</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F769I_EVAL</td>
+<td style="text-align: left;">Demonstrations</td>
+<td style="text-align: left;">v2.0.2</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32F769I_EVAL/Demonstrations</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F769I_EVAL</td>
+<td style="text-align: left;">Applications</td>
+<td style="text-align: left;">v2.0.2</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32F769I_EVAL/Applications</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F769I_EVAL</td>
+<td style="text-align: left;">HAL Examples</td>
+<td style="text-align: left;">v2.0.2</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F769I_EVAL/Examples</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F769I_EVAL</td>
+<td style="text-align: left;">HAL Templates</td>
+<td style="text-align: left;">v2.0.2</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F769I_EVAL/Templates</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F769I_EVAL</td>
+<td style="text-align: left;">LL Templates</td>
+<td style="text-align: left;">v2.0.2</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F769I_EVAL/Templates_LL</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F723E-Discovery</td>
+<td style="text-align: left;">Demonstrations</td>
+<td style="text-align: left;">v1.0.2</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32F723E-Discovery/Demonstrations</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F723E-Discovery</td>
+<td style="text-align: left;">Applications</td>
+<td style="text-align: left;">v1.0.2</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32F723E-Discovery/Applications</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F723E-Discovery</td>
+<td style="text-align: left;">HAL Examples</td>
+<td style="text-align: left;">v1.0.2</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F723E-Discovery/Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F723E-Discovery</td>
+<td style="text-align: left;">HAL Templates</td>
+<td style="text-align: left;">v1.0.2</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F723E-Discovery/Templates</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F723E-Discovery</td>
+<td style="text-align: left;">LL Templates</td>
+<td style="text-align: left;">v1.0.2</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F723E-Discovery/Templates_LL</td>
+</tr>
+</tbody>
+</table>
+<h2 id="known-limitations-4">Known Limitations</h2>
+<p>None</p>
+<h2 id="development-toolchains-and-compilers-4">Development Toolchains and Compilers</h2>
+<table>
+<caption>Development Toolchains :</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: center;">Version</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">IAR Embedded Workbench for ARM (EWARM)toolchain</td>
+<td style="text-align: center;">V7.80.4</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">RealView Microcontroller DevelopmentKit (MDK-ARM) toolchain</td>
+<td style="text-align: center;">V5.23</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">System Workbench for STM32 (SW4STM32)toolchain</td>
+<td style="text-align: center;">V2.3.0</td>
+</tr>
+</tbody>
+</table>
+<h2 id="supported-devices-and-boards-4">Supported Devices and boards</h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">STM32F765xx, STM32F767xx, STM32F769xx, STM32F777xx, STM32F779xx</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F756/746/745</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F723/33/22/32</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F769I-EVAL RevB</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F769I-DISCO RevB</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F767ZI-Nucleo RevB</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32756G-EVAL, STM32746G-EVAL RevB</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F746G-DISCO RevB</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F746ZG-Nucleo RevB</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F722ZE-Nucleo RevB</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F723E-Discovery RevB</td>
+</tr>
+</tbody>
+</table>
+<h2 id="backward-compatibility-4">Backward Compatibility</h2>
+<p>None</p>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section_1.9.0" aria-hidden="true"> <label for="collapse-section_1.9.0" aria-hidden="true">V1.9.0 / 29-December-2017</label>
+<div>
+<h2 id="main-changes-5">Main Changes</h2>
+<ul>
+<li>Update CAN examples to support new HAL CAN driver</li>
+<li>Update FatFs projects to be aligned with new FatFs stack</li>
+<li>Update LwIP projects to be aligned with new LwIP stack V2.0.3</li>
+<li>Update projects to be aligned with new PDM Lib version V3.0.1</li>
+<li>Updtae FreeRTOS MPU application to support MDK-ARM and SW4STM32</li>
+</ul>
+<h2 id="contents-5">Contents</h2>
+<h3 id="projects-5">Projects</h3>
+<table>
+<caption>Projects :<br />
+<br />
+</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Board</th>
+<th style="text-align: left;">Project category</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: left;">License</th>
+<th style="text-align: left;">Path</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">STM32746G-Discovery</td>
+<td style="text-align: left;">Demonstrations</td>
+<td style="text-align: left;">v2.0.2</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32746G-Discovery/Demonstrations</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32746G-Discovery</td>
+<td style="text-align: left;">Applications</td>
+<td style="text-align: left;">v2.0.2</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32746G-Discovery/Applications</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32746G-Discovery</td>
+<td style="text-align: left;">HAL Examples</td>
+<td style="text-align: left;">v2.0.2</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32746G-Discovery/Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32746G-Discovery</td>
+<td style="text-align: left;">HAL Templates</td>
+<td style="text-align: left;">v2.0.2</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32746G-Discovery/Templates</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32746G-Discovery</td>
+<td style="text-align: left;">LL Templates</td>
+<td style="text-align: left;">v2.0.2</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32746G-Discovery/Templates_LL</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32756G_EVAL</td>
+<td style="text-align: left;">Demonstrations</td>
+<td style="text-align: left;">v2.0.3</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32756G_EVAL/Demonstrations</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32756G_EVAL</td>
+<td style="text-align: left;">Applications</td>
+<td style="text-align: left;">v2.0.3</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32756G_EVAL/Applications</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32756G_EVAL</td>
+<td style="text-align: left;">HAL Examples</td>
+<td style="text-align: left;">v2.0.3</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32756G_EVAL/Examples</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32756G_EVAL</td>
+<td style="text-align: left;">HAL Templates</td>
+<td style="text-align: left;">v2.0.3</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32756G_EVAL/Templates</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32756G_EVAL</td>
+<td style="text-align: left;">LL Templates</td>
+<td style="text-align: left;">v2.0.3</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32756G_EVAL/Templates_LL</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F769I-Discovery</td>
+<td style="text-align: left;">Demonstrations</td>
+<td style="text-align: left;">v2.0.1</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32F769I-Discovery/Demonstrations</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F769I-Discovery</td>
+<td style="text-align: left;">Applications</td>
+<td style="text-align: left;">v2.0.1</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32F769I-Discovery/Applications</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F769I-Discovery</td>
+<td style="text-align: left;">HAL Examples</td>
+<td style="text-align: left;">v2.0.1</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F769I-Discovery/Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F769I-Discovery</td>
+<td style="text-align: left;">HAL Templates</td>
+<td style="text-align: left;">v2.0.1</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F769I-Discovery/Templates</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F769I-Discovery</td>
+<td style="text-align: left;">LL Templates</td>
+<td style="text-align: left;">v2.0.1</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F769I-Discovery/Templates_LL</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F769I_EVAL</td>
+<td style="text-align: left;">Demonstrations</td>
+<td style="text-align: left;">v2.0.2</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32F769I_EVAL/Demonstrations</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F769I_EVAL</td>
+<td style="text-align: left;">Applications</td>
+<td style="text-align: left;">v2.0.2</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32F769I_EVAL/Applications</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F769I_EVAL</td>
+<td style="text-align: left;">HAL Examples</td>
+<td style="text-align: left;">v2.0.2</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F769I_EVAL/Examples</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F769I_EVAL</td>
+<td style="text-align: left;">HAL Templates</td>
+<td style="text-align: left;">v2.0.2</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F769I_EVAL/Templates</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F769I_EVAL</td>
+<td style="text-align: left;">LL Templates</td>
+<td style="text-align: left;">v2.0.2</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F769I_EVAL/Templates_LL</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F723E-Discovery</td>
+<td style="text-align: left;">Demonstrations</td>
+<td style="text-align: left;">v1.0.2</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32F723E-Discovery/Demonstrations</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F723E-Discovery</td>
+<td style="text-align: left;">Applications</td>
+<td style="text-align: left;">v1.0.2</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32F723E-Discovery/Applications</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F723E-Discovery</td>
+<td style="text-align: left;">HAL Examples</td>
+<td style="text-align: left;">v1.0.2</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F723E-Discovery/Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F723E-Discovery</td>
+<td style="text-align: left;">HAL Templates</td>
+<td style="text-align: left;">v1.0.2</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F723E-Discovery/Templates</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F723E-Discovery</td>
+<td style="text-align: left;">LL Templates</td>
+<td style="text-align: left;">v1.0.2</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F723E-Discovery/Templates_LL</td>
+</tr>
+</tbody>
+</table>
+<h2 id="known-limitations-5">Known Limitations</h2>
+<p>None</p>
+<h2 id="development-toolchains-and-compilers-5">Development Toolchains and Compilers</h2>
+<table>
+<caption>Development Toolchains :</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: center;">Version</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">IAR Embedded Workbench for ARM (EWARM)toolchain</td>
+<td style="text-align: center;">V7.80.4</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">RealView Microcontroller DevelopmentKit (MDK-ARM) toolchain</td>
+<td style="text-align: center;">V5.23</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">System Workbench for STM32 (SW4STM32)toolchain</td>
+<td style="text-align: center;">V2.3.0</td>
+</tr>
+</tbody>
+</table>
+<h2 id="supported-devices-and-boards-5">Supported Devices and boards</h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">STM32F765xx, STM32F767xx, STM32F769xx, STM32F777xx, STM32F779xx</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F756/746/745</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F723/33/22/32</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F769I-EVAL RevB</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F769I-DISCO RevB</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F767ZI-Nucleo RevB</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32756G-EVAL, STM32746G-EVAL RevB</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F746G-DISCO RevB</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F746ZG-Nucleo RevB</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F722ZE-Nucleo RevB</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F723E-Discovery RevB</td>
+</tr>
+</tbody>
+</table>
+<h2 id="backward-compatibility-5">Backward Compatibility</h2>
+<p>None</p>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section_1.6.0" aria-hidden="true"> <label for="collapse-section_1.6.0" aria-hidden="true">V1.6.0 / 30-December-2016</label>
+<div>
+<h2 id="main-changes-6">Main Changes</h2>
+<ul>
+<li>Add Examples, Applications and Demonstrations firmware for STM32F722ZE-Nucleo and STM32F723E-Discovery boards
+<ul>
+<li>new <strong>GPS</strong> application based on the Nano GPS Click module plugged on <strong>Fanout</strong> board coming with the <strong>STM32F723E-Discovery</strong> board</li>
+<li>support of the IAP over Wifi application based on the ESP8266 module with the <strong>STM32F723E-Discovery</strong> board</li>
+</ul></li>
+<li>Add new mbedTLS applications to replace PolarSSL middleware applications</li>
+<li>Update overall projects to be aligned with latest version of HAL, BSP and Middleware drivers</li>
+<li><strong>Note:</strong>
+<ul>
+<li>Demonstrations Firmware for STM32F7x9I_EVAL and STM32F769I-Discovery, provided within this package, don’t embed:
+<ul>
+<li>TouchGFX demonstration module. Free evaluation version of the TouchGFX demonstration, based on Draupner Graphics’ commercial graphic library, is available at <a href="http://www.touchgfx.com/stmicroelectronics">www.touchgfx.com/stmicroelectronics</a></li>
+<li>Embedded Wizard demonstration module. Free evaluation version of the TARA Systems demonstration, is available at <a href="http://www.embedded-wizard.de/stm32">www.embedded-wizard.de/stm32</a></li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="contents-6">Contents</h2>
+<h3 id="projects-6">Projects</h3>
+<table>
+<caption>Projects :<br />
+<br />
+</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Board</th>
+<th style="text-align: left;">Project category</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: left;">License</th>
+<th style="text-align: left;">Path</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">STM32746G-Discovery</td>
+<td style="text-align: left;">Demonstrations</td>
+<td style="text-align: left;">v2.0.0</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32746G-Discovery/Demonstrations</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32746G-Discovery</td>
+<td style="text-align: left;">Applications</td>
+<td style="text-align: left;">v2.0.0</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32746G-Discovery/Applications</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32746G-Discovery</td>
+<td style="text-align: left;">HAL Examples</td>
+<td style="text-align: left;">v2.0.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32746G-Discovery/Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32746G-Discovery</td>
+<td style="text-align: left;">HAL Templates</td>
+<td style="text-align: left;">v2.0.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32746G-Discovery/Templates</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32746G-Discovery</td>
+<td style="text-align: left;">LL Templates</td>
+<td style="text-align: left;">v2.0.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32746G-Discovery/Templates_LL</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32756G_EVAL</td>
+<td style="text-align: left;">Demonstrations</td>
+<td style="text-align: left;">v2.0.0</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32756G_EVAL/Demonstrations</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32756G_EVAL</td>
+<td style="text-align: left;">Applications</td>
+<td style="text-align: left;">v2.0.0</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32756G_EVAL/Applications</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32756G_EVAL</td>
+<td style="text-align: left;">HAL Examples</td>
+<td style="text-align: left;">v2.0.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32756G_EVAL/Examples</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32756G_EVAL</td>
+<td style="text-align: left;">HAL Templates</td>
+<td style="text-align: left;">v2.0.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32756G_EVAL/Templates</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32756G_EVAL</td>
+<td style="text-align: left;">LL Templates</td>
+<td style="text-align: left;">v2.0.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32756G_EVAL/Templates_LL</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F769I-Discovery</td>
+<td style="text-align: left;">Demonstrations</td>
+<td style="text-align: left;">v2.0.0</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32F769I-Discovery/Demonstrations</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F769I-Discovery</td>
+<td style="text-align: left;">Applications</td>
+<td style="text-align: left;">v2.0.0</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32F769I-Discovery/Applications</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F769I-Discovery</td>
+<td style="text-align: left;">HAL Examples</td>
+<td style="text-align: left;">v2.0.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F769I-Discovery/Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F769I-Discovery</td>
+<td style="text-align: left;">HAL Templates</td>
+<td style="text-align: left;">v2.0.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F769I-Discovery/Templates</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F769I-Discovery</td>
+<td style="text-align: left;">LL Templates</td>
+<td style="text-align: left;">v2.0.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F769I-Discovery/Templates_LL</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F769I_EVAL</td>
+<td style="text-align: left;">Demonstrations</td>
+<td style="text-align: left;">v2.0.0</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32F769I_EVAL/Demonstrations</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F769I_EVAL</td>
+<td style="text-align: left;">Applications</td>
+<td style="text-align: left;">v2.0.0</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32F769I_EVAL/Applications</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F769I_EVAL</td>
+<td style="text-align: left;">HAL Examples</td>
+<td style="text-align: left;">v2.0.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F769I_EVAL/Examples</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F769I_EVAL</td>
+<td style="text-align: left;">HAL Templates</td>
+<td style="text-align: left;">v2.0.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F769I_EVAL/Templates</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F769I_EVAL</td>
+<td style="text-align: left;">LL Templates</td>
+<td style="text-align: left;">v2.0.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F769I_EVAL/Templates_LL</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F723E-Discovery</td>
+<td style="text-align: left;">Demonstrations</td>
+<td style="text-align: left;">v1.0.0</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32F723E-Discovery/Demonstrations</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F723E-Discovery</td>
+<td style="text-align: left;">Applications</td>
+<td style="text-align: left;">v1.0.0</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32F723E-Discovery/Applications</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F723E-Discovery</td>
+<td style="text-align: left;">HAL Examples</td>
+<td style="text-align: left;">v1.0.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F723E-Discovery/Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F723E-Discovery</td>
+<td style="text-align: left;">HAL Templates</td>
+<td style="text-align: left;">v1.0.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F723E-Discovery/Templates</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F723E-Discovery</td>
+<td style="text-align: left;">LL Templates</td>
+<td style="text-align: left;">v1.0.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F723E-Discovery/Templates_LL</td>
+</tr>
+</tbody>
+</table>
+<h2 id="known-limitations-6">Known Limitations</h2>
+<p>None</p>
+<h2 id="development-toolchains-and-compilers-6">Development Toolchains and Compilers</h2>
+<table>
+<caption>Development Toolchains :</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: center;">Version</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">IAR Embedded Workbench for ARM (EWARM)toolchain</td>
+<td style="text-align: center;">V7.70</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">RealView Microcontroller DevelopmentKit (MDK-ARM) toolchain</td>
+<td style="text-align: center;">V5.21</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">System Workbench for STM32 (SW4STM32)toolchain</td>
+<td style="text-align: center;">V1.13</td>
+</tr>
+</tbody>
+</table>
+<h2 id="supported-devices-and-boards-6">Supported Devices and boards</h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">STM32F765xx, STM32F767xx, STM32F769xx, STM32F777xx, STM32F779xx</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F756/746/745</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F723/33/22/32</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F769I-EVAL RevB</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F769I-DISCO RevB</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F767ZI-Nucleo RevB</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32756G-EVAL, STM32746G-EVAL RevB</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F746G-DISCO RevB</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F746ZG-Nucleo RevB</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F722ZE-Nucleo RevB</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F723E-Discovery RevB</td>
+</tr>
+</tbody>
+</table>
+<h2 id="backward-compatibility-6">Backward Compatibility</h2>
+<p>None</p>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section_1.5.0" aria-hidden="true"> <label for="collapse-section_1.5.0" aria-hidden="true">V1.5.0 / 23-September-2016</label>
+<div>
+<h2 id="main-changes-7">Main Changes</h2>
+<ul>
+<li>Update LCD_DSI examples for the STM32F769I-Discovery and STM32F769I_EVAL boards to support the DSI_HDMI adapter</li>
+<li>Add new JPEG_EncodingUsingFs_DMA for the STM32F769I_EVAL board</li>
+<li>Add new FPU_Fractal application for the STM32F769I_EVAL board</li>
+<li>All STemWin and LibJPEG projects are updated following changes in latest version of respective Middlewares versions</li>
+<li>Update STM32F746G-Discovery and STM32F7x6G_EVAL boards demonstration firmware to add the support of AVI video files</li>
+<li><strong>Note:</strong>
+<ul>
+<li>Demonstrations Firmware for STM32F7x9I_EVAL and STM32F769I-Discovery, provided within this package, don’t embed:**
+<ul>
+<li>TouchGFX demonstration module. Free evaluation version of the TouchGFX demonstration, based on Draupner Graphics’ commercial graphic library, is available at <a href="http://www.touchgfx.com/stmicroelectronics">www.touchgfx.com/stmicroelectronics</a></li>
+<li>Embedded Wizard demonstration module. Free evaluation version of the TARA Systems demonstration, is available at <a href="http://www.embedded-wizard.de/stm32">www.embedded-wizard.de/stm32</a></li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="contents-7">Contents</h2>
+<h3 id="projects-7">Projects</h3>
+<table>
+<caption>Projects :<br />
+<br />
+</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Board</th>
+<th style="text-align: left;">Project category</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: left;">License</th>
+<th style="text-align: left;">Path</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">STM32746G-Discovery</td>
+<td style="text-align: left;">Demonstrations</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32746G-Discovery/Demonstrations</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32746G-Discovery</td>
+<td style="text-align: left;">Applications</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32746G-Discovery/Applications</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32746G-Discovery</td>
+<td style="text-align: left;">HAL Examples</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32746G-Discovery/Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32746G-Discovery</td>
+<td style="text-align: left;">HAL Templates</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32746G-Discovery/Templates</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32746G-Discovery</td>
+<td style="text-align: left;">LL Templates</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32746G-Discovery/Templates_LL</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32756G_EVAL</td>
+<td style="text-align: left;">Demonstrations</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32756G_EVAL/Demonstrations</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32756G_EVAL</td>
+<td style="text-align: left;">Applications</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32756G_EVAL/Applications</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32756G_EVAL</td>
+<td style="text-align: left;">HAL Examples</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32756G_EVAL/Examples</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32756G_EVAL</td>
+<td style="text-align: left;">HAL Templates</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32756G_EVAL/Templates</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32756G_EVAL</td>
+<td style="text-align: left;">LL Templates</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32756G_EVAL/Templates_LL</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F769I-Discovery</td>
+<td style="text-align: left;">Demonstrations</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32F769I-Discovery/Demonstrations</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F769I-Discovery</td>
+<td style="text-align: left;">Applications</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32F769I-Discovery/Applications</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F769I-Discovery</td>
+<td style="text-align: left;">HAL Examples</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F769I-Discovery/Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F769I-Discovery</td>
+<td style="text-align: left;">HAL Templates</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F769I-Discovery/Templates</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F769I-Discovery</td>
+<td style="text-align: left;">LL Templates</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F769I-Discovery/Templates_LL</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F769I_EVAL</td>
+<td style="text-align: left;">Demonstrations</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32F769I_EVAL/Demonstrations</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F769I_EVAL</td>
+<td style="text-align: left;">Applications</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32F769I_EVAL/Applications</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F769I_EVAL</td>
+<td style="text-align: left;">HAL Examples</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F769I_EVAL/Examples</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F769I_EVAL</td>
+<td style="text-align: left;">HAL Templates</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F769I_EVAL/Templates</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F769I_EVAL</td>
+<td style="text-align: left;">LL Templates</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F769I_EVAL/Templates_LL</td>
+</tr>
+</tbody>
+</table>
+<h2 id="known-limitations-7">Known Limitations</h2>
+<p>None</p>
+<h2 id="development-toolchains-and-compilers-7">Development Toolchains and Compilers</h2>
+<table>
+<caption>Development Toolchains :</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: center;">Version</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">IAR Embedded Workbench for ARM (EWARM)toolchain</td>
+<td style="text-align: center;">V7.70</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">RealView Microcontroller DevelopmentKit (MDK-ARM) toolchain</td>
+<td style="text-align: center;">V5.21</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">System Workbench for STM32 (SW4STM32)toolchain</td>
+<td style="text-align: center;">V1.10</td>
+</tr>
+</tbody>
+</table>
+<h2 id="supported-devices-and-boards-7">Supported Devices and boards</h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">STM32F765xx, STM32F767xx, STM32F769xx, STM32F777xx, STM32F779xx</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F756/746/745 RevZ</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F769I-EVAL RevB</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F769I-DISCO RevB</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F767ZI-Nucleo RevB</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32756G-EVAL, STM32746G-EVAL RevB</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F746G-DISCO RevB</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F746ZG-Nucleo RevB</td>
+</tr>
+</tbody>
+</table>
+<h2 id="backward-compatibility-7">Backward Compatibility</h2>
+<p>None</p>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section_1.4.0" aria-hidden="true"> <label for="collapse-section_1.4.0" aria-hidden="true">V1.4.0 / 22-April-2016</label>
+<div>
+<h2 id="main-changes-8">Main Changes</h2>
+<ul>
+<li>Add Examples, Applications and Demonstrations firmware for STM32F767ZI-Nucleo, STM32F7x9I_EVAL and STM32F769I-Discovery boards</li>
+<li>Add new examples for STM32756G_EVAL, STM32F746ZG-Nucleo and STM32F746G-Discovery board (13 in total)</li>
+<li>All projects are updated following changes in latest version of HAL and Middlewares</li>
+<li><strong>Note:</strong>
+<ul>
+<li>Demonstrations Firmware for STM32F7x9I_EVAL and STM32F769I-Discovery, provided within this package, don’t embed:**
+<ul>
+<li>TouchGFX demonstration module. Free evaluation version of the TouchGFX demonstration, based on Draupner Graphics’ commercial graphic library, is available at <a href="http://www.touchgfx.com/stmicroelectronics">www.touchgfx.com/stmicroelectronics</a></li>
+<li>Embedded Wizard demonstration module. Free evaluation version of the TARA Systems demonstration, is available at <a href="http://www.embedded-wizard.de/stm32">www.embedded-wizard.de/stm32</a></li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="contents-8">Contents</h2>
+<h3 id="projects-8">Projects</h3>
+<table>
+<caption>Projects :<br />
+<br />
+</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Board</th>
+<th style="text-align: left;">Project category</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: left;">License</th>
+<th style="text-align: left;">Path</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">STM32746G-Discovery</td>
+<td style="text-align: left;">Demonstrations</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32746G-Discovery/Demonstrations</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32746G-Discovery</td>
+<td style="text-align: left;">Applications</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32746G-Discovery/Applications</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32746G-Discovery</td>
+<td style="text-align: left;">HAL Examples</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32746G-Discovery/Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32746G-Discovery</td>
+<td style="text-align: left;">HAL Templates</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32746G-Discovery/Templates</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32746G-Discovery</td>
+<td style="text-align: left;">LL Templates</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32746G-Discovery/Templates_LL</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32756G_EVAL</td>
+<td style="text-align: left;">Demonstrations</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32756G_EVAL/Demonstrations</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32756G_EVAL</td>
+<td style="text-align: left;">Applications</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32756G_EVAL/Applications</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32756G_EVAL</td>
+<td style="text-align: left;">HAL Examples</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32756G_EVAL/Examples</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32756G_EVAL</td>
+<td style="text-align: left;">HAL Templates</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32756G_EVAL/Templates</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32756G_EVAL</td>
+<td style="text-align: left;">LL Templates</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32756G_EVAL/Templates_LL</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F769I-Discovery</td>
+<td style="text-align: left;">Demonstrations</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32F769I-Discovery/Demonstrations</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F769I-Discovery</td>
+<td style="text-align: left;">Applications</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32F769I-Discovery/Applications</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F769I-Discovery</td>
+<td style="text-align: left;">HAL Examples</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F769I-Discovery/Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F769I-Discovery</td>
+<td style="text-align: left;">HAL Templates</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F769I-Discovery/Templates</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F769I-Discovery</td>
+<td style="text-align: left;">LL Templates</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F769I-Discovery/Templates_LL</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F769I_EVAL</td>
+<td style="text-align: left;">Demonstrations</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32F769I_EVAL/Demonstrations</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F769I_EVAL</td>
+<td style="text-align: left;">Applications</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32F769I_EVAL/Applications</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F769I_EVAL</td>
+<td style="text-align: left;">HAL Examples</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F769I_EVAL/Examples</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F769I_EVAL</td>
+<td style="text-align: left;">HAL Templates</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F769I_EVAL/Templates</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F769I_EVAL</td>
+<td style="text-align: left;">LL Templates</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32F769I_EVAL/Templates_LL</td>
+</tr>
+</tbody>
+</table>
+<h2 id="known-limitations-8">Known Limitations</h2>
+<p>None</p>
+<h2 id="development-toolchains-and-compilers-8">Development Toolchains and Compilers</h2>
+<table>
+<caption>Development Toolchains :</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: center;">Version</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">IAR Embedded Workbench for ARM (EWARM)toolchain</td>
+<td style="text-align: center;">V7.50</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">RealView Microcontroller DevelopmentKit (MDK-ARM) toolchain</td>
+<td style="text-align: center;">V5.17</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">System Workbench for STM32 (SW4STM32)toolchain</td>
+<td style="text-align: center;">V1.9</td>
+</tr>
+</tbody>
+</table>
+<h2 id="supported-devices-and-boards-8">Supported Devices and boards</h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">STM32F765xx, STM32F767xx, STM32F769xx, STM32F777xx, STM32F779xx</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F756/746/745 RevZ</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F769I-EVAL RevB</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F769I-DISCO RevB</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F767ZI-Nucleo RevB</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32756G-EVAL, STM32746G-EVAL RevB</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F746G-DISCO RevB</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F746ZG-Nucleo RevB</td>
+</tr>
+</tbody>
+</table>
+<h2 id="backward-compatibility-8">Backward Compatibility</h2>
+<p>None</p>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section_1.3.0" aria-hidden="true"> <label for="collapse-section_1.3.0" aria-hidden="true">V1.3.0 / 18-November-2015</label>
+<div>
+<h2 id="main-changes-9">Main Changes</h2>
+<ul>
+<li>General updates to fix known defects and enhancements implementation</li>
+<li>Add 35 projects STM32F746ZG NUCLEO144 board</li>
+</ul>
+<h2 id="contents-9">Contents</h2>
+<h3 id="projects-9">Projects</h3>
+<table>
+<caption>Projects :<br />
+<br />
+</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Board</th>
+<th style="text-align: left;">Project category</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: left;">License</th>
+<th style="text-align: left;">Path</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">STM32756G_EVAL</td>
+<td style="text-align: left;">Demonstrations</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32756G_EVAL/Demonstrations</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32756G_EVAL</td>
+<td style="text-align: left;">Applications</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32756G_EVAL/Applications</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32756G_EVAL</td>
+<td style="text-align: left;">HAL Examples</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32756G_EVAL/Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32756G_EVAL</td>
+<td style="text-align: left;">HAL Templates</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32756G_EVAL/Templates</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32756G_EVAL</td>
+<td style="text-align: left;">LL Templates</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32756G_EVAL/Templates_LL</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32756G-Discovery</td>
+<td style="text-align: left;">Demonstrations</td>
+<td style="text-align: left;">v1.0.2</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32756G-Discovery/Demonstrations</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32756G-Discovery</td>
+<td style="text-align: left;">Applications</td>
+<td style="text-align: left;">v1.0.2</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32756G-Discovery/Applications</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32756G-Discovery</td>
+<td style="text-align: left;">HAL Examples</td>
+<td style="text-align: left;">v1.0.2</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32756G-Discovery/Examples</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32756G-Discovery</td>
+<td style="text-align: left;">HAL Templates</td>
+<td style="text-align: left;">v1.0.2</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32756G-Discovery/Templates</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32756G-Discovery</td>
+<td style="text-align: left;">LL Templates</td>
+<td style="text-align: left;">v1.0.2</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32756G-Discovery/Templates_LL</td>
+</tr>
+</tbody>
+</table>
+<h2 id="known-limitations-9">Known Limitations</h2>
+<ul>
+<li>EWARM projects for PWR_STOP and FMC_SDRAM_LowPower examples are provided with medium size optimization due to a compiler limitation observed with V7.40</li>
+</ul>
+<h2 id="development-toolchains-and-compilers-9">Development Toolchains and Compilers</h2>
+<table>
+<caption>Development Toolchains :</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: center;">Version</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">IAR Embedded Workbench for ARM (EWARM)toolchain</td>
+<td style="text-align: center;">V5.14</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">RealView Microcontroller DevelopmentKit (MDK-ARM) toolchain</td>
+<td style="text-align: center;">V7.40</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">System Workbench for STM32 (SW4STM32)toolchain</td>
+<td style="text-align: center;">V1.4</td>
+</tr>
+</tbody>
+</table>
+<h2 id="supported-devices-and-boards-9">Supported Devices and boards</h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">STM32F756/746/745 RevZ</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32756G-EVAL, STM32746G-EVAL RevB</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F746G-DISCO RevB</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F746ZG-Nucleo RevB</td>
+</tr>
+</tbody>
+</table>
+<h2 id="backward-compatibility-9">Backward Compatibility</h2>
+<p>None</p>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section_1.2.0" aria-hidden="true"> <label for="collapse-section_1.2.0" aria-hidden="true">V1.2.0 / 21-September-2015</label>
+<div>
+<h2 id="main-changes-10">Main Changes</h2>
+<ul>
+<li>STM32746G-Discovery projects:
+<ul>
+<li>Update PWR_CurrentConsumption example to disable USB and ETH Phy for better current consumption measurement</li>
+<li>Update all stm32f7xx_hal_conf.h files for proper ETH PHY support</li>
+<li>Update all system_stm32f7xx.c files for proper external SDRAM configuration</li>
+<li>Update demonstration icons and pictures for size optimization</li>
+<li>Update FreeRTOS based application for Heap size optimization</li>
+<li>Add new example FMC_SDRAM_DataMemory</li>
+</ul></li>
+<li>STM327x6G-EVAL projects:
+<ul>
+<li>Update LCD based examples and application to be aligned with BSP drivers update</li>
+<li>Update demonstration icons and pictures for size optimization</li>
+<li>Update demonstration firmware to enhance the response of the long touch on LCD</li>
+<li>Update FreeRTOS based application for Heap size optimization</li>
+</ul></li>
+</ul>
+<h2 id="contents-10">Contents</h2>
+<h3 id="projects-10">Projects</h3>
+<table>
+<caption>Projects :<br />
+<br />
+</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Board</th>
+<th style="text-align: left;">Project category</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: left;">License</th>
+<th style="text-align: left;">Path</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">STM32756G_EVAL</td>
+<td style="text-align: left;">Demonstrations</td>
+<td style="text-align: left;">v1.0.2</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32756G_EVAL/Demonstrations</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32756G_EVAL</td>
+<td style="text-align: left;">Applications</td>
+<td style="text-align: left;">v1.0.2</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32756G_EVAL/Applications</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32756G_EVAL</td>
+<td style="text-align: left;">HAL Examples</td>
+<td style="text-align: left;">v1.0.2</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32756G_EVAL/Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32756G_EVAL</td>
+<td style="text-align: left;">HAL Templates</td>
+<td style="text-align: left;">v1.0.2</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32756G_EVAL/Templates</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32756G_EVAL</td>
+<td style="text-align: left;">LL Templates</td>
+<td style="text-align: left;">v1.0.2</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32756G_EVAL/Templates_LL</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32756G-Discovery</td>
+<td style="text-align: left;">Demonstrations</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32756G-Discovery/Demonstrations</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32756G-Discovery</td>
+<td style="text-align: left;">Applications</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32756G-Discovery/Applications</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32756G-Discovery</td>
+<td style="text-align: left;">HAL Examples</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32756G-Discovery/Examples</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32756G-Discovery</td>
+<td style="text-align: left;">HAL Templates</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32756G-Discovery/Templates</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32756G-Discovery</td>
+<td style="text-align: left;">LL Templates</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32756G-Discovery/Templates_LL</td>
+</tr>
+</tbody>
+</table>
+<h2 id="known-limitations-10">Known Limitations</h2>
+<ul>
+<li>EWARM projects for PWR_STOP and FMC_SDRAM_LowPower examples are provided with medium size optimization due to a compiler limitation observed with V7.40</li>
+</ul>
+<h2 id="development-toolchains-and-compilers-10">Development Toolchains and Compilers</h2>
+<table>
+<caption>Development Toolchains :</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: center;">Version</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">IAR Embedded Workbench for ARM (EWARM)toolchain</td>
+<td style="text-align: center;">V7.40</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">RealView Microcontroller DevelopmentKit (MDK-ARM) toolchain</td>
+<td style="text-align: center;">V5.14</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">System Workbench for STM32 (SW4STM32)toolchain</td>
+<td style="text-align: center;">V1.4</td>
+</tr>
+</tbody>
+</table>
+<h2 id="supported-devices-and-boards-10">Supported Devices and boards</h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">STM32F756/746/745 RevZ</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32756G-EVAL, STM32746G-EVAL RevB</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F746G-DISCO RevB</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F746ZG-Nucleo RevB</td>
+</tr>
+</tbody>
+</table>
+<h2 id="backward-compatibility-10">Backward Compatibility</h2>
+<p>None</p>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section_1.1.0" aria-hidden="true"> <label for="collapse-section_1.1.0" aria-hidden="true">V1.1.0 / 25-June-2015</label>
+<div>
+<h2 id="main-changes-11">Main Changes</h2>
+<ul>
+<li>Add Examples, Applications and Demonstration firmware running on the STM32F746G_DISCO board</li>
+<li>All projects updated following changes in latest version of HAL and Middlewares</li>
+<li>Add support of SW4STM32 for the STM327x6G-EVAL demonstration firmware</li>
+</ul>
+<h2 id="contents-11">Contents</h2>
+<h3 id="projects-11">Projects</h3>
+<table>
+<caption>Projects :<br />
+<br />
+</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Board</th>
+<th style="text-align: left;">Project category</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: left;">License</th>
+<th style="text-align: left;">Path</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">STM32756G_EVAL</td>
+<td style="text-align: left;">Demonstrations</td>
+<td style="text-align: left;">v1.0.1</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32756G_EVAL/Demonstrations</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32756G_EVAL</td>
+<td style="text-align: left;">Applications</td>
+<td style="text-align: left;">v1.0.1</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32756G_EVAL/Applications</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32756G_EVAL</td>
+<td style="text-align: left;">HAL Examples</td>
+<td style="text-align: left;">v1.0.1</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32756G_EVAL/Examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32756G_EVAL</td>
+<td style="text-align: left;">HAL Templates</td>
+<td style="text-align: left;">v1.0.1</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32756G_EVAL/Templates</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32756G_EVAL</td>
+<td style="text-align: left;">LL Templates</td>
+<td style="text-align: left;">v1.0.1</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32756G_EVAL/Templates_LL</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32756G-Discovery</td>
+<td style="text-align: left;">Demonstrations</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32756G-Discovery/Demonstrations</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32756G-Discovery</td>
+<td style="text-align: left;">Applications</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32756G-Discovery/Applications</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32756G-Discovery</td>
+<td style="text-align: left;">HAL Examples</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32756G-Discovery/Examples</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32756G-Discovery</td>
+<td style="text-align: left;">HAL Templates</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32756G-Discovery/Templates</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32756G-Discovery</td>
+<td style="text-align: left;">LL Templates</td>
+<td style="text-align: left;">v1.1.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32756G-Discovery/Templates_LL</td>
+</tr>
+</tbody>
+</table>
+<h2 id="known-limitations-11">Known Limitations</h2>
+<ul>
+<li>EWARM projects for PWR_STOP and FMC_SDRAM_LowPower examples are provided with medium size optimization due to a compiler limitation observed with V7.40</li>
+</ul>
+<h2 id="development-toolchains-and-compilers-11">Development Toolchains and Compilers</h2>
+<table>
+<caption>Development Toolchains :</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: center;">Version</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">IAR Embedded Workbench for ARM (EWARM)toolchain</td>
+<td style="text-align: center;">V7.40</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">RealView Microcontroller DevelopmentKit (MDK-ARM) toolchain</td>
+<td style="text-align: center;">V5.14</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">System Workbench for STM32 (SW4STM32)toolchain</td>
+<td style="text-align: center;">V1.1.0</td>
+</tr>
+</tbody>
+</table>
+<h2 id="supported-devices-and-boards-11">Supported Devices and boards</h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">STM32F756/746/745 RevZ</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32756G-EVAL, STM32746G-EVAL RevB</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F746G-DISCO RevB</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F746ZG-Nucleo RevB</td>
+</tr>
+</tbody>
+</table>
+<h2 id="backward-compatibility-11">Backward Compatibility</h2>
+<p>None</p>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section_1.0.0" aria-hidden="true"> <label for="collapse-section_1.0.0" aria-hidden="true">V1.0.0 / 22-May-2015</label>
+<div>
+<h2 id="main-changes-12">Main Changes</h2>
+<h3 id="first-release">First release</h3>
+<ul>
+<li>First official release of STM32CubeF7 (STM32Cube for STM32F7 Series)</li>
+</ul>
+<h2 id="contents-12">Contents</h2>
+<h3 id="projects-12">Projects</h3>
+<table>
+<caption>Projects :<br />
+<br />
+</caption>
+<thead>
+<tr class="header">
+<th>Board P</th>
+<th>roject category Ve</th>
+<th>rsion Li</th>
+<th style="text-align: left;">cense</th>
+<th style="text-align: left;">Path</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>STM32756G_EVAL</td>
+<td>Demonstrations</td>
+<td>v1.0.0</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32756G_EVAL/Demonstrations</td>
+</tr>
+<tr class="even">
+<td>STM32756G_EVAL</td>
+<td>Applications</td>
+<td>v1.0.0</td>
+<td style="text-align: left;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: left;">Projects/STM32756G_EVAL/Applications</td>
+</tr>
+<tr class="odd">
+<td>STM32756G_EVAL</td>
+<td>HAL Examples</td>
+<td>v1.0.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32756G_EVAL/Examples</td>
+</tr>
+<tr class="even">
+<td>STM32756G_EVAL</td>
+<td>HAL Templates</td>
+<td>v1.0.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32756G_EVAL/Templates</td>
+</tr>
+<tr class="odd">
+<td>STM32756G_EVAL</td>
+<td>LL Templates</td>
+<td>v1.0.0</td>
+<td style="text-align: left;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: left;">Projects/STM32756G_EVAL/Templates_LL</td>
+</tr>
+</tbody>
+</table>
+<h2 id="known-limitations-12">Known Limitations</h2>
+<ul>
+<li>SW4STM32 project is not provided for the STM327x6G-EVAL demonstration</li>
+<li>EWARM projects for PWR_STOP and FMC_SDRAM_LowPower examples are provided with medium size optimization due to a compiler limitation observed with V7.40</li>
+</ul>
+<h2 id="development-toolchains-and-compilers-12">Development Toolchains and Compilers</h2>
+<table>
+<caption>Development Toolchains :</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Version</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">IAR Embedded Workbench for ARM (EWARM)toolchain</td>
+<td style="text-align: left;">V7.40</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">RealView Microcontroller DevelopmentKit (MDK-ARM) toolchain</td>
+<td style="text-align: left;">V5.14</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">System Workbench for STM32 (SW4STM32)toolchain</td>
+<td style="text-align: left;">V1.1.0</td>
+</tr>
+</tbody>
+</table>
+<h2 id="supported-devices-and-boards-12">Supported Devices and boards</h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">STM32F756/746/745 RevZ</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32756G-EVAL, STM32746G-EVAL RevB</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32F746G-DISCO RevB</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32F746ZG-Nucleo RevB</td>
+</tr>
+</tbody>
+</table>
+<h2 id="backward-compatibility-12">Backward Compatibility</h2>
+<p>None</p>
+</div>
+</div>
+</div>
+</div>
+<footer class="sticky">
+<p>For complete documentation on STM32F4xx,visit: [<a href="http://www.st.com/stm32f4">www.st.com/stm32f4</a>]</p>
+<em>This release note uses up to date web standards and, for this reason, should not be opened with Internet Explorer but preferably with popular browsers such as Google Chrome, Mozilla Firefox, Opera or Microsoft Edge.</em>
+</footer>
+</body>
+</html>

@@ -36,7 +36,7 @@
 
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-__IO FlagStatus TamperStatus = RESET;
+__IO FlagStatus TamperStatus;
 
 /* Backup registers table */
 uint32_t aBKPDataReg[BACKUP_COUNT] =
@@ -104,6 +104,9 @@ int main(void)
     }
   }
 
+  /* Reset flag after writing of backup register in order to wait for new button press */
+  TamperStatus = RESET;
+  
   /* Wait for Tamper detection */
   while(TamperStatus != SET)
   {

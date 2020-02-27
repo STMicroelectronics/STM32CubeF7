@@ -61,6 +61,9 @@ These steps are repeated in an infinite loop.
 @note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
       
+@par Keywords
+
+Power, PWR, Stop mode, Interrupt, EXTI, Wakeup, Low Power, External reset,
 
 @Note If the user code size exceeds the DTCM-RAM size or starts from internal cacheable memories (SRAM1 and SRAM2),that is shared between several processors,
       then it is highly recommended to enable the CPU cache and maintain its coherence at application level.

@@ -52,6 +52,10 @@
      resolution   : up to 800x480.
      pixel format : RGB565, RGB888 or ARGB8888
 
+@par Keywords
+
+Graphic, Display, LCD, Pictures, SD Card, BMP, RGB565, RGB888, ARGB8888
+
 @Note If the user code size exceeds the DTCM-RAM size or starts from internal cacheable memories (SRAM1 and SRAM2),that is shared between several processors,
       then it is highly recommended to enable the CPU cache and maintain its coherence at application level.
       The address and the size of cacheable buffers (shared between CPU and other masters)  must be properly updated to be aligned to cache line size (32 bytes).

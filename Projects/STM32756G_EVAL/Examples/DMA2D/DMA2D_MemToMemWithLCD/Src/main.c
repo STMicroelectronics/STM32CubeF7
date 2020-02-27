@@ -245,20 +245,38 @@ static void LCD_Config(void)
   hltdc_F.Instance = LTDC;
   
   /* Layer1 Configuration ------------------------------------------------------*/
-  
-  /* Windowing configuration */ 
-  /*
-     WindowX0 = Horizontal start
-     WindowX1 = Horizontal stop      
-     WindowY0 = Vertical start 
-     WindowY1 = Vertical stop      
-  */
-  pLayerCfg.WindowX0 = 245;
-  pLayerCfg.WindowX1 = 395;
-  pLayerCfg.WindowY0 = 165;
-  pLayerCfg.WindowY1 = 315;  
-  
-  /* Pixel Format configuration*/ 
+  if(stmpe811_ts_drv.ReadID(TS_I2C_ADDRESS) == STMPE811_ID)
+  {
+    /* The AMPIRE LCD 480x272 is selected */
+    /* Windowing configuration */
+    /*
+    WindowX0 = Horizontal start
+    WindowX1 = Horizontal stop
+    WindowY0 = Vertical start
+    WindowY1 = Vertical stop
+    */
+    pLayerCfg.WindowX0 = 190;
+    pLayerCfg.WindowX1 = 340;
+    pLayerCfg.WindowY0 = 60;
+    pLayerCfg.WindowY1 = 206;
+  }
+  else
+  {
+    /* The AMPIRE LCD 640x480 is selected */
+    /* Windowing configuration */
+    /*
+    WindowX0 = Horizontal start
+    WindowX1 = Horizontal stop
+    WindowY0 = Vertical start
+    WindowY1 = Vertical stop
+    */
+    pLayerCfg.WindowX0 = 245;
+    pLayerCfg.WindowX1 = 395;
+    pLayerCfg.WindowY0 = 165;
+    pLayerCfg.WindowY1 = 315;
+  }
+
+  /* Pixel Format configuration*/
   pLayerCfg.PixelFormat = LTDC_PIXEL_FORMAT_ARGB4444;
   
   /* Start Address configuration : frame buffer is located at FLASH memory */

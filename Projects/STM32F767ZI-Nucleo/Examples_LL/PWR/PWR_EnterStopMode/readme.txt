@@ -36,6 +36,10 @@ LED1 is used to monitor the system state as follows:
       that the Cortex-M7 core is no longer clocked during low power mode 
       so debugging features are disabled.
 
+@par Keywords
+
+Power, PWR, stop mode, Interrupt, Low Power
+
 @Note If the user code size exceeds the DTCM-RAM size or starts from internal cacheable memories (SRAM1 and SRAM2),that is shared between several processors,
       then it is highly recommended to enable the CPU cache and maintain its coherence at application level.
       The address and the size of cacheable buffers (shared between CPU and other masters)  must be properly updated to be aligned to cache line size (32 bytes).

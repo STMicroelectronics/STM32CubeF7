@@ -47,6 +47,7 @@
 #include "stm32f7xx_hal.h"
 #include "lwip/opt.h"
 #include "lwip/timeouts.h"
+#include "lwip/tcpip.h"
 #include "netif/ethernet.h"
 #include "netif/etharp.h"
 #include "ethernetif.h"
@@ -461,6 +462,8 @@ void ethernetif_input( void const * argument )
     {
       do
       {
+        LOCK_TCPIP_CORE();
+
         p = low_level_input( netif );
         if (p != NULL)
         {
@@ -469,6 +472,9 @@ void ethernetif_input( void const * argument )
             pbuf_free(p);
           }
         }
+
+        UNLOCK_TCPIP_CORE();
+
       }while(p!=NULL);
     }
   }

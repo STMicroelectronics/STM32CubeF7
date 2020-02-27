@@ -129,7 +129,7 @@ Device's end address is the end address of the flash memory and it is dependent 
 
 @par Keywords
 
-Middleware, USB Device, DFU, Firmware upgrade
+USB Device, DFU, Firmware upgrade
 
 @Note If the user code size exceeds the DTCM-RAM size or starts from internal cacheable memories (SRAM1 and SRAM2),that is shared between several processors,
       then it is highly recommended to enable the CPU cache and maintain its coherence at application level.

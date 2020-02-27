@@ -78,9 +78,17 @@ void mbedtls_net_init( mbedtls_net_context *ctx )
  /* add the network interface */    
   netif_add(&netif, &addr, &netmask, &gw, NULL, &ethernetif_init, &ethernet_input);
 
-  /* register the default network interface */
-  netif_set_up(&netif);
+  /* register the default network interface. */
+  netif_set_default(&netif);
 
+  if (netif_is_link_up(&netif))
+  {
+    netif_set_up(&netif);
+  }
+  else
+  {
+    netif_set_down(&netif);
+  }
 #ifdef USE_DHCP
   dhcp_start(&netif);
 #endif
@@ -101,9 +109,6 @@ void mbedtls_net_init( mbedtls_net_context *ctx )
   {
      printf("\nIpAdress = %d.%d.%d.%d\n", (netif.ip_addr.addr & 0xff), ((netif.ip_addr.addr >> 8) & 0xff)
                                         , ((netif.ip_addr.addr >> 16) & 0xff), ((netif.ip_addr.addr >> 24)& 0xff));
-#ifdef USE_DHCP
-    dhcp_stop(&netif);
-#endif
   }
 }
 

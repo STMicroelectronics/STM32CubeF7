@@ -208,9 +208,6 @@ void AUDIO_MenuProcess(void)
           
           /* Clear the LCD */
           LCD_ClearTextZone();
-
-          /* Init storage */
-          AUDIO_StorageInit();
           
           /* Configure the audio recorder: sampling frequency, bits-depth, number of channels */
           if(AUDIO_REC_Start() == AUDIO_ERROR_IO)

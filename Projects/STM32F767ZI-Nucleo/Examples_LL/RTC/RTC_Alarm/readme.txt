@@ -52,6 +52,10 @@ and aShowDate variables (watch or live watch).
 - LED1 is turned ON when the RTC Alarm is generated correctly.
 - LED1 is toggling : This indicates that the system generates an error.
 
+@par Keywords
+
+System, RTC, Alarm, wakeup timer, Backup domain, Counter, LSE, LSI
+
 @Note If the user code size exceeds the DTCM-RAM size or starts from internal cacheable memories (SRAM1 and SRAM2),that is shared between several processors,
       then it is highly recommended to enable the CPU cache and maintain its coherence at application level.
       The address and the size of cacheable buffers (shared between CPU and other masters)  must be properly updated to be aligned to cache line size (32 bytes).

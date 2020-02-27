@@ -106,14 +106,15 @@ int main(void)
   
   /*## Set the CRYP parameters and initialize the CRYP IP  ###################*/ 
   
-  hcryp.Instance        = CRYP;
-  hcryp.Init.DataType   = CRYP_DATATYPE_32B;
-  hcryp.Init.KeySize    = CRYP_KEYSIZE_128B;
-  hcryp.Init.pKey       = AES128Key; 
-  hcryp.Init.Algorithm  = CRYP_AES_GCM;
-  hcryp.Init.pInitVect  = InitVector;
-  hcryp.Init.Header     = HeaderMessage;
-  hcryp.Init.HeaderSize = 5;
+  hcryp.Instance             = CRYP;
+  hcryp.Init.DataType        = CRYP_DATATYPE_32B;
+  hcryp.Init.KeySize         = CRYP_KEYSIZE_128B;
+  hcryp.Init.pKey            = AES128Key; 
+  hcryp.Init.Algorithm       = CRYP_AES_GCM;
+  hcryp.Init.KeyIVConfigSkip = CRYP_KEYIVCONFIG_ALWAYS;
+  hcryp.Init.pInitVect       = InitVector;
+  hcryp.Init.Header          = HeaderMessage;
+  hcryp.Init.HeaderSize      = 5;
   HAL_CRYP_Init(&hcryp);
   
   /*## AES GCM Encryption and TAG generation  ################################*/ 
@@ -206,7 +207,8 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLN = 432;  
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 9;
-  
+  RCC_OscInitStruct.PLL.PLLR = 7;
+
   ret = HAL_RCC_OscConfig(&RCC_OscInitStruct);
   if(ret != HAL_OK)
   {

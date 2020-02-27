@@ -38,8 +38,6 @@
 /* RTC handler declared in "main.c" file */
 extern RTC_HandleTypeDef RtcHandle;
 
-extern __IO FlagStatus TamperStatus;
-
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
@@ -160,7 +158,6 @@ void SysTick_Handler(void)
 void TAMP_STAMP_IRQHandler(void)
 {
   HAL_RTCEx_TamperTimeStampIRQHandler(&RtcHandle);
-  TamperStatus = SET;
 }
 
 /**

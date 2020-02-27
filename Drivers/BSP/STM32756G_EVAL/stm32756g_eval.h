@@ -326,6 +326,7 @@ typedef enum
 #define TS3510_I2C_ADDRESS               ((uint16_t)0x80)
 #define EXC7200_I2C_ADDRESS              ((uint16_t)0x08)
 #define CAMERA_I2C_ADDRESS               ((uint16_t)0x5A)
+#define CAMERA_I2C_ADDRESS_2             ((uint16_t)0x78)
 #define AUDIO_I2C_ADDRESS                ((uint16_t)0x34)
 #define EEPROM_I2C_ADDRESS_A01           ((uint16_t)0xA0)
 #define EEPROM_I2C_ADDRESS_A02           ((uint16_t)0xA6)  

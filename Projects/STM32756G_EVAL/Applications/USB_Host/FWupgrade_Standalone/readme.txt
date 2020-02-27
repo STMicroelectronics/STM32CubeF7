@@ -95,7 +95,7 @@ application is built by the following configuration settings:
 
 @par Keywords
 
-Middleware, Firmware upgrade, USB Host, IAP, Binary
+Firmware upgrade, USB Host, IAP, Binary
 
 @Note If the user code size exceeds the DTCM-RAM size or starts from internal cacheable memories (SRAM1 and SRAM2),that is shared between several processors,
       then it is highly recommended to enable the CPU cache and maintain its coherence at application level.

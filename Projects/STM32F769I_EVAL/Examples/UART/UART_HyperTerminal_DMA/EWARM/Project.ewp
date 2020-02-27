@@ -1030,6 +1030,9 @@
       <file>
         <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_uart.c</name>
       </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_uart_ex.c</name>
+      </file>
     </group>
   </group>
   <group>

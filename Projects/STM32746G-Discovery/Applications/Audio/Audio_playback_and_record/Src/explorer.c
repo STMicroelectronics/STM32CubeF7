@@ -47,8 +47,7 @@
 #include "main.h"
 
 /* Private typedef -----------------------------------------------------------*/
-FATFS USBH_FatFs;
-char USBKey_Path[4] = "0:/"; 
+extern char USBDISKPath[4];
 FILELIST_FileTypeDef FileList;
 uint16_t NumObs = 0;
 
@@ -57,27 +56,6 @@ uint16_t NumObs = 0;
 /* Private variables ---------------------------------------------------------*/
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
-
-/**
-  * @brief  Initializes the USB KEY Storage.
-  * @param  None
-  * @retval Status
-  */
-uint8_t AUDIO_StorageInit(void)
-{
-  /* Link the USB Key disk I/O driver */
-  if((f_mount(&USBH_FatFs, (TCHAR const*)USBKey_Path, 0) != FR_OK))
-  {
-    /* FatFs Initialization Error */
-    LCD_ErrLog("Cannot Initialize FatFs! \n");
-    return 1;
-  }
-  else
-  {
-    LCD_DbgLog ("INFO : FatFs Initialized! \n");
-    return 0;
-  }
-}
 
 /**
   * @brief  Copies disk content in the explorer list.
@@ -91,7 +69,7 @@ FRESULT AUDIO_StorageParse(void)
   DIR dir;
   char *fn;
   
-  res = f_opendir(&dir, USBKey_Path);
+  res = f_opendir(&dir, USBDISKPath);
   FileList.ptr = 0;
   
   if(res == FR_OK)
@@ -138,34 +116,28 @@ uint8_t AUDIO_ShowWavFiles(void)
 {
   uint8_t i = 0;
   uint8_t line_idx = 0;
-  if(AUDIO_StorageInit() == FR_OK)
+
+  if(AUDIO_StorageParse() ==  FR_OK)
   {
-    if(AUDIO_StorageParse() ==  FR_OK)
+    if(FileList.ptr > 0)
     {
-      if(FileList.ptr > 0)
+      BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
+      LCD_UsrLog("audio file(s) [ROOT]:\n\n");
+      
+      for(i = 0; i < FileList.ptr; i++)
       {
-        BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-        LCD_UsrLog("audio file(s) [ROOT]:\n\n");
-        
-        for(i = 0; i < FileList.ptr; i++)
-        {
-          line_idx++;
-          LCD_DbgLog("   |__");
-          LCD_DbgLog((char *)FileList.file[i].name);
-          LCD_DbgLog("\n");
-        }
-        BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-        LCD_UsrLog("\nEnd of files list.\n");
-        return 0;
+        line_idx++;
+        LCD_DbgLog("   |__");
+        LCD_DbgLog((char *)FileList.file[i].name);
+        LCD_DbgLog("\n");
       }
-      return 1;
+      BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
+      LCD_UsrLog("\nEnd of files list.\n");
+      return 0;
     }
-    return 2;
+    return 1;
   }
-  else
-  {
-    return 3;
-  }
+  return 2;
 }
 
 /**

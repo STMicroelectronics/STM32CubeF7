@@ -51,7 +51,7 @@ static char LeftBytesTab[4];
 static uint8_t LeftBytes=0;
 static __IO uint8_t resetpage=0;
 static uint32_t ContentLengthOffset =0,BrowserFlag=0;
-static __IO uint32_t TotalData=0, checklogin=0;
+static __IO uint32_t TotalData=0;
 struct http_state
 {
   char *file;
@@ -208,7 +208,7 @@ static err_t http_recv(void *arg, struct tcp_pcb *pcb,  struct pbuf *p, err_t er
 {
   int32_t i,len=0;
   uint32_t DataOffset, FilenameOffset;
-  char *data, *ptr, filename[35], login[LOGIN_SIZE];
+  char *data, *ptr, filename[35], login[LOGIN_SIZE+1];
   struct fs_file file = {0, 0};
   struct http_state *hs;
 

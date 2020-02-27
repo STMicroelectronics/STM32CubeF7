@@ -1006,6 +1006,9 @@
         <file>
           <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32F769I_EVAL\stm32f769i_eval_sdram.c</name>
         </file>
+        <file>
+          <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\Components\ov5640\ov5640.c</name>
+        </file>
       </group>
     </group>
     <group>

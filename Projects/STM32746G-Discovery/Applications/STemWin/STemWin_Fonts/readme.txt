@@ -1,4 +1,4 @@
-/**
+﻿/**
   @page STemWin_Fonts  STemWin fonts Readme file
  
   @verbatim
@@ -112,6 +112,10 @@ Font generation
       Even though the user must manage the cache coherence for read accesses.
       Please refer to the AN4838 “Managing memory protection unit (MPU) in STM32 MCUs”
       Please refer to the AN4839 “Level 1 cache on STM32F7 Series”
+
+@par Keywords
+
+Display, STemWin, Fonts, LCD, GUI, Demonstration
 
 @par Directory contents 
 
