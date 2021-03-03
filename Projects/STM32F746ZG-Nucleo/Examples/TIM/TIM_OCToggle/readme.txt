@@ -65,7 +65,7 @@ signals at four different frequencies.
 
 @par Keywords
 
-Timers, Output, signals, Outpur compare toggle, PWM, Oscilloscope
+Timers, Output, signals, Output compare toggle, PWM, Oscilloscope
 
 @Note If the user code size exceeds the DTCM-RAM size or starts from internal cacheable memories (SRAM1 and SRAM2),that is shared between several processors,
       then it is highly recommended to enable the CPU cache and maintain its coherence at application level.

@@ -58,7 +58,7 @@ Other peripherals used:
 
 @par Keywords
 
-Analog, ADC, Temperatuer Sensor, Single Conversion, Polling, Software trigger, Signal measurement,
+Analog, ADC, Temperature Sensor, Single Conversion, Polling, Software trigger, Signal measurement,
 
 @Note If the user code size exceeds the DTCM-RAM size or starts from internal cacheable memories (SRAM1 and SRAM2),that is shared between several processors,
       then it is highly recommended to enable the CPU cache and maintain its coherence at application level.

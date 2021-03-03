@@ -1,9 +1,9 @@
 /**
-  @page Demo   STM32F7308-DISCO Demonstration Firmware
+  @page STemWin   STM32F7308-DISCO Demonstration Firmware
  
   @verbatim
   ******************** (C) COPYRIGHT 2018 STMicroelectronics *******************
-  * @file    Demonstration/readme.txt 
+  * @file    Demonstrations/STemWin/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of STM32F7308-DISCO Demonstration
   ******************************************************************************

@@ -235,7 +235,7 @@ int main(void)
           
           /* Get the Current sub second and time */
           SecondFraction  = (( sTimeStructureGet.SecondFraction - sTimeStructureGet.SubSeconds) * 1000)/( sTimeStructureGet.SecondFraction + 1);
-          timestore = ((sTimeStructureGet.Hours&0xFF)<<16)|((sTimeStructureGet.Minutes)&0xFF<<8)|((sTimeStructureGet.Seconds)&0xFF);
+          timestore = ((sTimeStructureGet.Hours)<<16)|((sTimeStructureGet.Minutes)<<8)|((sTimeStructureGet.Seconds));
           HAL_RTCEx_BKUPWrite(&RtcHandle, RTC_BKP_DR0 + BackupIndex , timestore);
           BackupIndex++;
           HAL_RTCEx_BKUPWrite(&RtcHandle,( RTC_BKP_DR0 + BackupIndex) , SecondFraction);

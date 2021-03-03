@@ -1,5 +1,5 @@
 /**
-  @page Demo   Demo STM32F722ZE-Nucleo
+  @page Demonstrations   Demonstrations STM32F722ZE-Nucleo
  
   @verbatim
   ******************************************************************************

@@ -111,7 +111,7 @@ Note: After save operation, the touch positions are not cleared from STMPE811 FI
 
 @par Keywords
 
-Display, LTCD, Pictures, USB, BMP, Background, Foreground, Layers, Touchscreen, Calibration
+Display, Graphic, LTCD, Pictures, USB, BMP, Background, Foreground, Layers, Touchscreen, Calibration
 
 @Note If the user code size exceeds the DTCM-RAM size or starts from internal cacheable memories (SRAM1 and SRAM2),that is shared between several processors,
       then it is highly recommended to enable the CPU cache and maintain its coherence at application level.

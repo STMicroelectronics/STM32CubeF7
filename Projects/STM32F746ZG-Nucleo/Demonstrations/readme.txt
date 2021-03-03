@@ -1,5 +1,5 @@
 /**
-  @page Demo   Demo STM32F746ZG-Nucleo
+  @page Demonstrations   Demonstrations STM32F746ZG-Nucleo
  
   @verbatim
   ******************************************************************************

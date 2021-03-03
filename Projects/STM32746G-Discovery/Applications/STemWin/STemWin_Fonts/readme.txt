@@ -115,7 +115,7 @@ Font generation
 
 @par Keywords
 
-Display, STemWin, Fonts, LCD, GUI, Demonstration
+Display, Graphic, STemWin, Fonts, LCD, GUI, Demonstration
 
 @par Directory contents 
 

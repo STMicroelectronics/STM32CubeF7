@@ -104,7 +104,7 @@ compiler preprocessor (already done in the preconfigured projects provided with 
 
 @par Keywords
 
-Connectivity, USB Device, HID, Full Speed, High Speed, Joystick, Mouse, Power Management, LPM, LPM-L1,
+Connectivity, USB_Device, USB, HID, Full Speed, High Speed, Joystick, Mouse, Power Management, LPM, LPM-L1,
 ECN, Suspend mode, Stop mode, 
 
 @Note If the user code size exceeds the DTCM-RAM size or starts from internal cacheable memories (SRAM1 and SRAM2),that is shared between several processors,

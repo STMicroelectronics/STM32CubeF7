@@ -1,9 +1,9 @@
 /**
-  @page Demo   STM32746G-DISCO Demonstration Firmware
+  @page STemWin   STM32746G-DISCO Demonstration Firmware
  
   @verbatim
   ******************************************************************************
-  * @file    Demonstrations/readme.txt 
+  * @file    Demonstrations/STemWin/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of STM32746G-DISCO Demonstration
   ******************************************************************************

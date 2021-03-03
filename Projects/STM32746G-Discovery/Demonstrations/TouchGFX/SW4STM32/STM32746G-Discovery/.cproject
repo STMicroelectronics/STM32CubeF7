@@ -38,12 +38,9 @@
 								<option id="gnu.c.compiler.option.debugging.level.277596929" name="Debug Level" superClass="gnu.c.compiler.option.debugging.level" useByScannerDiscovery="false" value="gnu.c.debugging.level.max" valueType="enumerated"/>
 								<option id="gnu.c.compiler.option.include.paths.1499205599" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="../../../Gui/gui/include"/>
-									<listOptionValue builtIn="false" value="../../../Gui/target/include"/>
-									<listOptionValue builtIn="false" value="../../../Gui/platform/os"/>
 									<listOptionValue builtIn="false" value="../../../Gui/generated/fonts/include"/>
 									<listOptionValue builtIn="false" value="../../../Gui/generated/images/include"/>
 									<listOptionValue builtIn="false" value="../../../Gui/generated/texts/include"/>
-									<listOptionValue builtIn="false" value="../../../Gui/generated/gui_generated/include"/>
 									<listOptionValue builtIn="false" value="../../../../../../../Middlewares/ST/TouchGFX/touchgfx/framework/include"/>
 									<listOptionValue builtIn="false" value="../../../../../../../Middlewares/Third_Party/FreeRTOS/Source/include"/>
 									<listOptionValue builtIn="false" value="../../../../../../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS"/>
@@ -71,12 +68,9 @@
 								<option id="gnu.cpp.compiler.option.debugging.level.1892751571" name="Debug Level" superClass="gnu.cpp.compiler.option.debugging.level" useByScannerDiscovery="false" value="gnu.cpp.compiler.debugging.level.max" valueType="enumerated"/>
 								<option id="gnu.cpp.compiler.option.include.paths.1953896138" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="../../../Gui/gui/include"/>
-									<listOptionValue builtIn="false" value="../../../Gui/target/include"/>
-									<listOptionValue builtIn="false" value="../../../Gui/platform/os"/>
 									<listOptionValue builtIn="false" value="../../../Gui/generated/fonts/include"/>
 									<listOptionValue builtIn="false" value="../../../Gui/generated/images/include"/>
 									<listOptionValue builtIn="false" value="../../../Gui/generated/texts/include"/>
-									<listOptionValue builtIn="false" value="../../../Gui/generated/gui_generated/include"/>
 									<listOptionValue builtIn="false" value="../../../../../../../Middlewares/ST/TouchGFX/touchgfx/framework/include"/>
 									<listOptionValue builtIn="false" value="../../../../../../../Middlewares/Third_Party/FreeRTOS/Source/include"/>
 									<listOptionValue builtIn="false" value="../../../../../../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS"/>
@@ -132,8 +126,6 @@
 							<tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.1290411496" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler">
 								<option id="gnu.both.asm.option.include.paths.1662064600" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="../../../Gui/gui/include"/>
-									<listOptionValue builtIn="false" value="../../../Gui/target/include"/>
-									<listOptionValue builtIn="false" value="../../../Gui/platform/os"/>
 									<listOptionValue builtIn="false" value="../../../Gui/generated/fonts/include"/>
 									<listOptionValue builtIn="false" value="../../../Gui/generated/images/include"/>
 									<listOptionValue builtIn="false" value="../../../Gui/generated/texts/include"/>
@@ -146,8 +138,7 @@
 									<listOptionValue builtIn="false" value="../../../../../../../Drivers/CMSIS/Device/ST/STM32F7xx/Include"/>
 									<listOptionValue builtIn="false" value="../../../Gui/target"/>
 									<listOptionValue builtIn="false" value="../../../Core/Inc"/>
-									<listOptionValue builtIn="false" value="../../../../../../../../../../../Drivers/CMSIS/Include"/>
-									<listOptionValue builtIn="false" value="../../../../../../../../../../../../../Drivers/CMSIS/Include"/>
+									<listOptionValue builtIn="false" value="../../../../../../../Drivers/CMSIS/Include"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.1448721776" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
 								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.assembler.input.735915414" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.input"/>

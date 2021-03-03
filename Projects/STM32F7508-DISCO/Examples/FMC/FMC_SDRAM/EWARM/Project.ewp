@@ -89,7 +89,7 @@
         </option>
         <option>
           <name>OGChipSelectEditMenu</name>
-          <state>STM32F7508-DISCO	ST STM32F7508-DISCO</state>
+          <state>STM32F750V8	ST STM32F750V8</state>
         </option>
         <option>
           <name>GenLowLevelInterface</name>
@@ -149,7 +149,7 @@
         </option>
         <option>
           <name>GFPUDeviceSlave</name>
-          <state>STM32F7508-DISCO	ST STM32F7508-DISCO</state>
+          <state>STM32F750V8	ST STM32F750V8</state>
         </option>
         <option>
           <name>FPU2</name>
@@ -1043,7 +1043,7 @@
     <group>
       <name>EWARM</name>
       <file>
-        <name>$PROJ_DIR$\startup_stm32h750xx.s</name>
+        <name>$PROJ_DIR$\startup_stm32f750xx.s</name>
       </file>
     </group>
     <group>

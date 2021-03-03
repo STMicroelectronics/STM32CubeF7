@@ -149,10 +149,5 @@
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/BSP/Components/otm8009a/otm8009a.c</location>
 		</link>
-		<link>
-			<name />
-			<type />
-			<location />
-		</link>
 	</linkedResources>
 </projectDescription>

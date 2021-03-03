@@ -99,7 +99,7 @@ In this example, HCLK is configured at 200 MHz.
 
 @par Keywords
 
-Connectivity, CEC, Transmission, Reception, joystick, Data exchange
+Connectivity, CEC, Transmission, Reception, Joystick, Data exchange
 
 @Note If the user code size exceeds the DTCM-RAM size or starts from internal cacheable memories (SRAM1 and SRAM2),that is shared between several processors,
       then it is highly recommended to enable the CPU cache and maintain its coherence at application level.

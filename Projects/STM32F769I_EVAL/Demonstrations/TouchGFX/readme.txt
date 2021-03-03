@@ -1,9 +1,9 @@
 /**
-  @page Demo   STM32769I_EVAL TouchGFX Demonstration Firmware
+  @page TouchGFX   STM32769I_EVAL TouchGFX Demonstration Firmware
  
   @verbatim
   ******************************************************************************
-  * @file    Demonstrations/readme.txt 
+  * @file    TouchGFX/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of STM32769I_EVAL TouchGFX Demonstration
   ******************************************************************************

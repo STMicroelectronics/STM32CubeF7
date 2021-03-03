@@ -19,7 +19,7 @@
 						<toolChain id="fr.ac6.managedbuild.toolchain.gnu.cross.exe.debug.1007148591" name="Ac6 STM32 MCU GCC" superClass="fr.ac6.managedbuild.toolchain.gnu.cross.exe.debug">
 							<option id="fr.ac6.managedbuild.option.gnu.cross.prefix.688477653" name="Prefix" superClass="fr.ac6.managedbuild.option.gnu.cross.prefix" value="arm-none-eabi-" valueType="string"/>
 							<option id="fr.ac6.managedbuild.option.gnu.cross.mcu.1016069605" name="Mcu" superClass="fr.ac6.managedbuild.option.gnu.cross.mcu" value="STM32F723IEKx" valueType="string"/>
-							<option id="fr.ac6.managedbuild.option.gnu.cross.board.1015550970" name="Board" superClass="fr.ac6.managedbuild.option.gnu.cross.board" value="STM32F723E-DISCO" valueType="string"/>
+							<option id="fr.ac6.managedbuild.option.gnu.cross.board.1015550970" name="Board" superClass="fr.ac6.managedbuild.option.gnu.cross.board" value="STM32F723E-Discovery" valueType="string"/>
 							<option id="fr.ac6.managedbuild.option.gnu.cross.instructionSet.244227808" name="Instruction Set" superClass="fr.ac6.managedbuild.option.gnu.cross.instructionSet" value="fr.ac6.managedbuild.option.gnu.cross.instructionSet.thumbII" valueType="enumerated"/>
 							<option id="fr.ac6.managedbuild.option.gnu.cross.fpu.1825124484" name="Floating point hardware" superClass="fr.ac6.managedbuild.option.gnu.cross.fpu" value="fr.ac6.managedbuild.option.gnu.cross.fpu.fpv5-sp-d16" valueType="enumerated"/>
 							<option id="fr.ac6.managedbuild.option.gnu.cross.floatabi.1888707105" name="Floating-point ABI" superClass="fr.ac6.managedbuild.option.gnu.cross.floatabi" value="fr.ac6.managedbuild.option.gnu.cross.floatabi.hard" valueType="enumerated"/>
@@ -65,7 +65,7 @@
 							<tool id="fr.ac6.managedbuild.tool.gnu.archiver.1243469548" name="MCU GCC Archiver" superClass="fr.ac6.managedbuild.tool.gnu.archiver"/>
 							<tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.700851444" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler">
 								<option id="gnu.both.asm.option.include.paths.506655099" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" valueType="includePath">
-									<listOptionValue builtIn="false" value=""/>
+
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.666010411" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
 								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.assembler.input.1891384304" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.input"/>

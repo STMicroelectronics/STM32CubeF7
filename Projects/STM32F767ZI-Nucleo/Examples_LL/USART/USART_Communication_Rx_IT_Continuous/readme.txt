@@ -44,7 +44,7 @@ Virtual Com port feature of STLINK could be used for UART communication between 
 
 @par Keywords
 
-Connectivity, USART, Asynchroneous mode, RS-232, baud rate, Interrupt, HyperTerminal, Continuous Reception
+Connectivity, USART, Asynchronous mode, RS-232, baud rate, Interrupt, HyperTerminal, Continuous Reception
 VCP, 
 
 @Note If the user code size exceeds the DTCM-RAM size or starts from internal cacheable memories (SRAM1 and SRAM2),that is shared between several processors,

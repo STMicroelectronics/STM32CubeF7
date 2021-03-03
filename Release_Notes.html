@@ -5,11 +5,14 @@
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <title>Release Notes for STM32CubeF7 Firmware Package</title>
-  <style type="text/css">
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
   </style>
   <link rel="stylesheet" href="_htmresc/mini-st.css" />
   <!--[if lt IE 9]>
@@ -35,10 +38,10 @@
 <p><strong>STMCube is an STMicroelectronics original initiative to ease developers life by reducing development efforts, time and cost</strong>. STM32Cube covers STM32 portfolio.</p>
 <p>STM32Cube Version 1.x includes:</p>
 <ul>
-<li>The STM32CubeMX, a graphical software configuration tool that allows to generate C initialization code using graphical wizards.</li>
-<li><strong>A comprehensive embedded software platform, delivered per series (such as STM32CubeF7 for STM32F7 series)</strong></li>
-<li><strong>The STM32Cube HAL, an STM32 abstraction layer embedded software, ensuring maximized portability across STM32 portfolio</strong></li>
-<li><strong>A consistent set of middleware components such as RTOS, USB, TCP/IP, Graphics, FatFS</strong></li>
+<li><p>The STM32CubeMX, a graphical software configuration tool that allows to generate C initialization code using graphical wizards.</p></li>
+<li><p><strong>A comprehensive embedded software platform, delivered per series (such as STM32CubeF7 for STM32F7 series)</strong></p></li>
+<li><p><strong>The STM32Cube HAL, an STM32 abstraction layer embedded software, ensuring maximized portability across STM32 portfolio</strong></p></li>
+<li><p><strong>A consistent set of middleware components such as RTOS, USB, TCP/IP, Graphics, FatFS</strong></p></li>
 <li><p><strong>All embedded software utilities come with a full set of examples.</strong></p></li>
 <li><p>The STM32Cube firmware solution offers a straightforward API with a modular architecture, making it simple to fine tune custom applications and scalable to fit most requirements <img src="_htmresc/STM32Cube.bmp" alt="STM32Cube architecture" /></p></li>
 </ul>
@@ -57,19 +60,586 @@
 </ul></li>
 </ul>
 </div>
-<div class="col-sm-12 col-lg-8">
-<h1 id="update-history">Update History</h1>
+<section id="update-history" class="col-sm-12 col-lg-8">
+<h1>Update History</h1>
 <div class="collapse">
-<input type="checkbox" id="collapse-section1_16_0" aria-hidden="true"> <label for="collapse-section1_16_0" aria-hidden="true"><strong>V1.16.0 / 13-February-2020</strong></label>
+<input type="checkbox" id="collapse-section1_16_1" checked aria-hidden="true"> <label for="collapse-section1_16_1" aria-hidden="true"><strong>V1.16.1 / 12-February-2021</strong></label>
 <div>
 <h2 id="main-changes">Main Changes</h2>
 <ul>
-<li>General updates to fix known defects and enhancements implementation</li>
-<li>Update HAL CRYP driver to support block by block decryption without reinitializes the IV and KEY for each call.</li>
-<li>Integration of three new USB class drivers, CDC-ECM, CDC-RNDIS for Ethernet communication and Billboard class driver for USB power delivery usage</li>
-<li>Update on USB MSC, CDC, DFU, AUDIO, CustomHID class drivers with bug fixes</li>
+<li><p>General updates to fix known defects and enhancements implementation</p></li>
+<li><p><strong>HAL</strong></p>
+<ul>
+<li>Update hal_def.h to support new ARM compiler Keil V6.</li>
+<li>Add new defines for ARM compiler V6:
+<ul>
+<li>__weak</li>
+<li>__packed</li>
+<li>__NOINLINE</li>
+</ul></li>
+<li>Update HAL TimeBase TIM, RTC alarm and RTC WakeUp templates for more robustness.
+<ul>
+<li>Update Hal_Init_Tick() API to properly store the priority when using the non-default time base.</li>
+</ul></li>
+<li>‘register’ keyword retired to be compliant with C++17 (already deprecated in C++11).</li>
+<li>Add License.md and Readme.md files required for GitHub publication.</li>
+<li><strong>HAL/LL TIM</strong> update
+<ul>
+<li>Support multiple simultaneous DMA requests with different channels:
+<ul>
+<li>Implement DMA burst state management mechanism.</li>
+<li>Implement TIM channel state management mechanism.</li>
+</ul></li>
+<li>Update HAL_TIM_IC_Stop_DMA implementation to disable the TIM channel before disabling DMA transfer.</li>
+<li>Update HAL_TIM_xxx_Start- functions to systematically access to the TIMx_SMCR register even if the TIMx instance cannot be used as slave timer.</li>
+<li>Make TIM_DMADelayPulseCplt callback as a private function.</li>
+<li>Update HAL_TIMEx_OnePulseN_Start and HAL_TIMEx_OnePulseN_Stop (pooling and IT mode) to take into consideration all OutputChannel parameters.</li>
+<li>Correct reversed description of TIM_LL_EC_ONEPULSEMODE One Pulse Mode.</li>
+<li>Update LL_TIM_GetCounterMode() API to return the correct counter mode.</li>
+</ul></li>
+<li><strong>HAL LPTIM</strong> update
+<ul>
+<li>Update HAL_LPTIM_Init implementation to configure digital filter for external clock when LPTIM is clocked by an internal clock source.</li>
+</ul></li>
+<li><strong>HAL UART</strong> update
+<ul>
+<li>Rework BRR register calculation algorithm in UART_SetConfig() to optimize ROM size.</li>
+<li>Update HAL_UART_IRQHandler() to handle receiver timeout interruption.</li>
+<li>Enhance reception for idle services (ReceptionToIdle):
+<ul>
+<li>Add a new field (HAL_UART_RxTypeTypeDef) to the UART_HandleTypeDef structure to identify the type of ongoing reception.</li>
+<li>Add UART Reception Event Callback registration.</li>
+</ul></li>
+<li>Add reception specific APIs specific to reception for Idle transfer in different modes:
+<ul>
+<li>HAL_UARTEx_ReceiveToIdle(): Receive an amount of data in blocking mode until either the expected number of data is received or an IDLE event occurs.</li>
+<li>HAL_UARTEx_ReceiveToIdle_IT(): Receive an amount of data in interrupt mode until either the expected number of data is received or an IDLE event occurs.</li>
+<li>HAL_UARTEx_ReceiveToIdle_DMA(): Receive an amount of data in DMA mode until either the expected number of data is received or an IDLE event occurs.</li>
+</ul></li>
+<li>Update HAL_UART_Receive(), HAL_UART_Receive_IT() and HAL_UART_Receive_DMA() APIs to support the new enhancement of ReceptionToIdle.</li>
+<li>Update HAL_UART_IRQHandler() to handle receiver timeout interrupt.</li>
+<li>Update UART receive processes (IT and DMA) to handle the UART receiver’s timeout interrupt.</li>
+</ul></li>
+<li><strong>HAL SMARTCARD</strong> update
+<ul>
+<li>Add support for data re-transmission when a NACK is received in SmartCard T=0.</li>
+<li>Fix typos in the SMARTCARD State definition description.</li>
+</ul></li>
+<li><strong>HAL PWR</strong> update
+<ul>
+<li>Update __HAL_PWR_CLEAR_ODRUDR_FLAG() macro in order to be able to set the Enable Internal Wakeup (EIWUP) bit.</li>
+</ul></li>
+<li><strong>HAL SPI</strong> update
+<ul>
+<li>Update SPI_DMAReceiveCplt() API to handle efficiently the repeated transfers.
+<ul>
+<li>Disable TX DMA request only in bidirectional receive mode.</li>
+</ul></li>
+<li>Update HAL_SPI_Init() API:
+<ul>
+<li>Avoid setting the BaudRatePrescaler in case of Slave Motorola Mode.</li>
+<li>Use the bit-mask for SPI configuration.</li>
+</ul></li>
+<li>Update Transmit/Receive processes in half-duplex mode.
+<ul>
+<li>Disable the SPI instance before setting BDIOE bit.</li>
+</ul></li>
+<li>Fix wrong timeout management.
+<ul>
+<li>Calculate the timeout based on a software loop in order to avoid a blocking issue if systick is disabled.</li>
+</ul></li>
+</ul></li>
+<li><strong>HAL RCC</strong> update
+<ul>
+<li>Update HAL_RCCEx_PeriphCLKConfig() to allow PLLI2S configuration independently from peripherals.</li>
+</ul></li>
+<li><strong>HAL IRDA</strong> update
+<ul>
+<li>Fix typos in the IRDA State definition description.</li>
+</ul></li>
+<li><strong>HAL RTC_BKP</strong> update
+<ul>
+<li>New APIs to subtract or add one hour to the calendar in one single operation without going through the initialization procedure (Daylight Saving):
+<ul>
+<li>Add HAL_RTC_DST_Add1Hour()</li>
+<li>HAL_RTC_DST_Sub1Hour()</li>
+<li>HAL_RTC_DST_SetStoreOperation()</li>
+<li>HAL_RTC_DST_ClearStoreOperation()</li>
+<li>HAL_RTC_DST_ReadStoreOperation()</li>
+</ul></li>
+</ul></li>
+<li><strong>HAL CRYP</strong> update
+<ul>
+<li>Update HAL_CRYP_SetConfig() and HAL_CRYP_GetConfig() APIs to set/get the continent of KeyIVConfigSkip correctly.</li>
+<li>Support of message head no multiple of word for GCM and CCM algorithms.</li>
+</ul></li>
+<li><strong>HAL SAI</strong> update
+<ul>
+<li>Update HAL_SAI_Init() API to correct the formula in case of SPDIF is wrong.</li>
+<li>Update HAL_SAI_IRQHandler() API:
+<ul>
+<li>Clear interrupt flags: AFSDET, LFSDET and WCKCFG.</li>
+</ul></li>
+<li>Update HAL_SAI_Receive_DMA() API to follow the sequence described in the reference manual.</li>
+<li>Update to avoid the incorrect left/right synchronization.
+<ul>
+<li>Update HAL_SAI_Transmit_DMA() API to follow the sequence described in the reference manual for slave transmitter mode.</li>
+</ul></li>
+</ul></li>
+<li><strong>HAL GPIO</strong> update
+<ul>
+<li>Update LL/HAL GPIO_TogglePin() APIs to allow multi Pin’s toggling.</li>
+</ul></li>
+<li><strong>HAL I2C</strong> update
+<ul>
+<li>Update STM32F745xx, STM32F746xx, STM32F750xx, STM32F756xx headers files to support I2C Fast mode plus.</li>
+</ul></li>
+<li><strong>HAL DAC</strong> update
+<ul>
+<li>Update HAL_DACEx_DualStart() API when checking the software trigger with the right values:
+<ul>
+<li>DAC_TRIGGER_SOFTWARE instead of DAC_CR_TEN1.</li>
+<li>(DAC_TRIGGER_SOFTWARE &lt;&lt; (DAC_CHANNEL_2 &amp; 0x10UL)) instead of DAC_CR_TEN2.</li>
+</ul></li>
+<li>Update driver to support dual mode. Two new APIs added:
+<ul>
+<li>HAL_DACEx_DualStart()</li>
+<li>HAL_DACEx_DualStop()</li>
+</ul></li>
+</ul></li>
+<li><strong>HAL/LL ADC</strong> update
+<ul>
+<li>Update the following APIs to set status HAL_ADC_STATE_ERROR_INTERNAL and error code HAL_ADC_ERROR_INTERNAL when error occurs:
+<ul>
+<li>HAL_ADC_Start()</li>
+<li>HAL_ADC_Start_IT()</li>
+<li>HAL_ADC_Start_DMA()</li>
+<li>HAL_ADCEx_InjectedStart()</li>
+<li>HAL_ADCEx_InjectedStart_IT()</li>
+<li>HAL_ADCEx_MultiModeStart_DMA()</li>
+</ul></li>
+<li>Update HAL_ADC_Stop_DMA() API to check if DMA state is Busy before calling HAL_DMA_Abort() API to avoid DMA internal error.</li>
+<li>Update LL_ADC_REG_Init() API to avoid enabling continuous mode and discontinuous mode simultaneously.</li>
+</ul></li>
+<li><strong>HAL I2S</strong> update
+<ul>
+<li>Update HAL_I2S_DMAStop() API to be more safe.
+<ul>
+<li>Add a check on BSY, TXE and RXNE flags before disabling the I2S.</li>
+</ul></li>
+<li>Update HAL_I2S_DMAStop() API to fix multi-call transfer issue(to avoid re-initializing the I2S for the next transfer).
+<ul>
+<li>Add __HAL_I2SEXT_FLUSH_RX_DR() and __HAL_I2S_FLUSH_RX_DR() macros to flush the remaining data inside DR registers.</li>
+<li>Add new ErrorCode define: HAL_I2S_ERROR_BUSY_LINE_RX.</li>
+</ul></li>
+</ul></li>
+<li><strong>HAL UTILS</strong> update
+<ul>
+<li>UTILS_SetFlashLatency() API renamed to LL_SetFlashLatency() and made public.</li>
+</ul></li>
+<li><strong>HAL WWDG</strong> update
+<ul>
+<li>Update HAL driver description.</li>
+</ul></li>
+<li><strong>HAL IWDG</strong> update
+<ul>
+<li>HAL_IWDG_DEFAULT_TIMEOUT has become configurable via LSI_VALUE (defined in stm32f7xx_hal_conf.h).</li>
+</ul></li>
+<li><strong>HAL EXTI</strong> update
+<ul>
+<li>Update macros using __LINE__ as a macro parameter in order to use EXTI_LINE instead to resolve parameter conflicts with standard C usage.</li>
+</ul></li>
+<li><strong>HAL IWDG</strong> update
+<ul>
+<li>Update HAL_IWDG_Init() API in order to fix HAL_GetTick() timeout vulnerability issue.</li>
+</ul></li>
+<li><strong>HAL USB</strong> update
+<ul>
+<li>Enhance HAL HCD driver when USB DMA is enabled:
+<ul>
+<li>Fix ping and data toggle issue.</li>
+<li>Rework Channel error report management.</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li><p><strong>CMSIS</strong></p>
+<ul>
+<li>Improve GCC startup files robustness.</li>
+<li>Protect Vector table modification following SRAM or FLASH preprocessor directive by a generic preprocessor directive : USER_VECT_TAB_ADDRESS.</li>
+<li>Add License.md and Readme.md files required for GitHub publication.</li>
+<li>Add PTPPPSCR register to ETH_TypeDef.</li>
+</ul></li>
+<li><p><strong>BSP</strong></p>
+<ul>
+<li>OTM8009A PWM backlight frequency set to 22.7kHz (outside of audible audio range)</li>
+<li>Update stm32746g_discovery_lcd.c driver to avoid conflict with stm32746g_discovery_ts.c driver:
+<ul>
+<li>Remove GPIO PIN 13 (LCD VSYNC) configuration from BSP_LCD_MspInit() API.</li>
+</ul></li>
+</ul></li>
+<li><p><strong>Projects</strong></p>
+<ul>
+<li>Update the board name in STM32F723E-Discovery and STM32756G-EVAL SW4STM32 projects.</li>
+<li>STM32F769I-Discovery BSP Example updated to remove metallic noise and to be able to playback the recorded audio file under MDK-ARM.</li>
+<li>STM32746G-DISCOVERY USB device CDC_RNDIS_Server SW4STM32 projects fixed.</li>
+<li>FPU_Fractal SW4STM32 project fixed.</li>
+<li>Templates MDK-ARM projects migrated to ARM Compiler 6 (AC-5 like warnings).</li>
+</ul></li>
+<li><p>For the complete list of changes, please refer to the release notes of each firmware component</p></li>
+</ul>
+<h2 id="contents">Contents</h2>
+<ul>
+<li><p>The STM32CubeF7 Firmware package comes with a rich set of examples running on STMicroelectronics boards, organized by board and provided with pre-configured projects for the main supported toolchains. The exhaustive list of projects is provided in this table <a href="Projects/STM32CubeProjectsList.html">STM32CubeProjectsList.html</a>.</p>
+<table>
+<caption>Drivers</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: center;">Version</th>
+<th style="text-align: center;">License</th>
+<th style="text-align: center;">Release note</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Cortex-M CMSIS</td>
+<td style="text-align: center;">V5.4_CM7</td>
+<td style="text-align: center;"><a href="Drivers/CMSIS/LICENSE.txt">Apache License 2.0</a></td>
+<td style="text-align: center;"><a href="Drivers/CMSIS/docs/General/html/index.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>STM32F7xx CMSIS</strong></td>
+<td style="text-align: center;"><strong>V1.2.6</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/Apache-2.0">Apache License 2.0</a></td>
+<td style="text-align: center;"><a href="Drivers/CMSIS/Device/ST/STM32F7xx/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>STM32F7xx HAL</strong></td>
+<td style="text-align: center;"><strong>V1.2.9</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/STM32F7xx_HAL_Driver/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BSP STM32F7308-DISCO</td>
+<td style="text-align: center;">V1.0.0</td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/STM32F7308-Discovery/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BSP STM32F7508-DISCO</td>
+<td style="text-align: center;">V1.0.0</td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/STM32F7508-Discovery/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BSP STM32F7xx-Nucleo 144</td>
+<td style="text-align: center;">V1.0.0</td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/STM32F7xx_Nucleo_144/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>BSP STM32746G-Discovery</strong></td>
+<td style="text-align: center;"><strong>V2.0.3</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/STM32746G-Discovery/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BSP STM32756G_EVAL</td>
+<td style="text-align: center;">V2.1.0</td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/STM32756G_EVAL/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BSP STM32F769I-Discovery</td>
+<td style="text-align: center;">V2.0.1</td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/STM32F769I-Discovery/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BSP STM32F769I_EVAL</td>
+<td style="text-align: center;">V2.1.0</td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/STM32F769I_EVAL/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BSP STM32F723E-Discovery</td>
+<td style="text-align: center;">V1.0.2</td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/STM32F723E-Discovery/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BSP Adafruit_Shield</td>
+<td style="text-align: center;">V3.0.3</td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/Adafruit_Shield/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BSP ampire480272</td>
+<td style="text-align: center;">V1.0.1</td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/Components/ampire480272/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BSP ampire640480</td>
+<td style="text-align: center;">V1.0.1</td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/Components/ampire640480/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BSP Common</td>
+<td style="text-align: center;">V4.0.1</td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/Components/Common/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BSP exc7200</td>
+<td style="text-align: center;">V1.0.2</td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/Components/exc7200/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BSP ft5336</td>
+<td style="text-align: center;">V1.0.1</td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/Components/ft5336/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BSP ft6x06</td>
+<td style="text-align: center;">V1.0.2</td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/Components/ft6x06/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BSP mfxstm32l152</td>
+<td style="text-align: center;">V2.0.1</td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/Components/mfxstm32l152/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BSP mx25l512</td>
+<td style="text-align: center;">V1.0.3</td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/Components/mx25l512/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BSP n25q128a</td>
+<td style="text-align: center;">V1.0.1</td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/Components/n25q128a/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BSP n25q512a</td>
+<td style="text-align: center;">V1.0.1</td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/Components/n25q512a/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>BSP otm8009a</strong></td>
+<td style="text-align: center;"><strong>V1.0.5</strong></td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/Components/otm8009a/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BSP ov5640</td>
+<td style="text-align: center;">V2.0.0</td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/Components/ov9655/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BSP ov9655</td>
+<td style="text-align: center;">V1.0.1</td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/Components/ov9655/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BSP rk043fn48h</td>
+<td style="text-align: center;">V1.0.1</td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/Components/rk043fn48h/Release_Notes.html">release notes</a> BSP s5k5cag V1.0.1 <a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a> <a href="Drivers/BSP/Components/s5k5cag/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BSP st7735</td>
+<td style="text-align: center;">V1.1.2</td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/Components/st7735/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BSP stmpe811</td>
+<td style="text-align: center;">V2.0.1</td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/Components/stmpe811/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BSP ts3510</td>
+<td style="text-align: center;">V1.0.2</td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/Components/ts3510/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BSP wm8994</td>
+<td style="text-align: center;">V2.2.1</td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/Components/wm8994/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BSP adv7533</td>
+<td style="text-align: center;">V1.0.2</td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/Components/adv7533/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BSP st7789h2</td>
+<td style="text-align: center;">V1.1.2</td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Drivers/BSP/Components/st7789h2/Release_Notes.html">release notes</a></td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Middlewares</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: center;">Version</th>
+<th style="text-align: center;">License</th>
+<th style="text-align: center;">Release note</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">STemWin</td>
+<td style="text-align: center;">V5.44</td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;"><a href="Middlewares/ST/STemWin/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32 PDM audio software decoding Library</td>
+<td style="text-align: center;">V3.2.0</td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;"><a href="Middlewares\ST\STM32_Audio\Addons\PDM\Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">STM32 USB Device Library</td>
+<td style="text-align: center;">V2.6.0</td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;"><a href="Middlewares/ST/STM32_USB_Host_Library/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">STM32 USB Host Library</td>
+<td style="text-align: center;">V3.3.4</td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;"><a href="Middlewares/ST/STM32_USB_Host_Library/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">FatFS</td>
+<td style="text-align: center;">R0.12c</td>
+<td style="text-align: center;"><a href="Middlewares/Third_Party/FatFs/doc/en/appnote.html#license">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Middlewares/Third_Party/FatFS/doc/updates.txt">release notes</a> <strong>ST modified 20190125</strong> <a href="Middlewares/Third_Party/FatFs/src/st_readme.txt">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">FreeRTOS</td>
+<td style="text-align: center;">V10.2.1</td>
+<td style="text-align: center;"><a href="Middlewares/Third_Party/FreeRTOS/License/license.txt">MIT</a></td>
+<td style="text-align: center;"><a href="Middlewares/Third_Party/FreeRTOS/Source/readme.txt">release notes</a> <strong>ST modified 20200117</strong> <a href="Middlewares/Third_Party/FreeRTOS/Source/st_readme.txt">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">LwIP</td>
+<td style="text-align: center;">V2.1.2</td>
+<td style="text-align: center;"><a href="Middlewares/Third_Party/LwIP/COPYING">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Middlewares\Third_Party\LwIP\CHANGELOG">release notes</a> <strong>ST modified V2.1.2_20190315</strong> <a href="Middlewares\Third_Party\LwIP\st_readme.txt">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">MbedTLS</td>
+<td style="text-align: center;">V2.16.2</td>
+<td style="text-align: center;"><a href="Middlewares/Third_Party/mbedTLS/apache-2.0.txt">Apache License 2.0</a></td>
+<td style="text-align: center;"><a href="Middlewares\Third_Party\mbedTLS\ChangeLog">release notes</a><strong>ST modified 20200117</strong> <a href="Middlewares\Third_Party\mbedTLS\ChangeLog">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">LibJPEG</td>
+<td style="text-align: center;">V8d</td>
+<td style="text-align: center;"><a href="Middlewares/Third_Party/LibJPEG/README">Independent JPEG Group License</a></td>
+<td style="text-align: center;"><a href="Middlewares\Third_Party\LibJPEG\st_readme.txt">release notes</a> <strong>ST modified 20190201</strong> <a href="Middlewares/Third_Party\LibJPEG\st_readme.txt">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">TouchGFX</td>
+<td style="text-align: center;">v4.10.0</td>
+<td style="text-align: center;"><a href="http://www.st.com/SLA0044">SLA0044</a></td>
+<td style="text-align: center;"><a href="Middlewares/ST/TouchGFX/changelog.txt">release notes</a></td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Utilities</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: center;">Version</th>
+<th style="text-align: center;">License</th>
+<th style="text-align: center;">Release note</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">CPU</td>
+<td style="text-align: center;">V1.1.0</td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Utilities/CPU/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Fonts</td>
+<td style="text-align: center;">V1.0.0</td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Utilities/Fonts/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Log</td>
+<td style="text-align: center;">V1.0.1</td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Utilities/Log/Release_Notes.html">release notes</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">JPEG</td>
+<td style="text-align: center;">V2.0.0</td>
+<td style="text-align: center;"><a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause</a></td>
+<td style="text-align: center;"><a href="Utilities/JPEG/Release_Notes.html">release notes</a></td>
+</tr>
+</tbody>
+</table></li>
+</ul>
+<h2 id="known-limitations">Known Limitations</h2>
+<ul>
+<li>STemWin demonstration for STM32F7308-DISCO
+<ul>
+<li>SW4STM32 demonstration project is not provided</li>
+</ul></li>
+<li>Only template projects migrated to Arm Compiler 6 with MDK-ARM 5.29 (“AC5-like Warnings” model).</li>
+</ul>
+<h2 id="development-toolchains-and-compilers">Development Toolchains and Compilers</h2>
+<ul>
+<li>IAR Embedded Workbench for ARM (EWARM) toolchain <strong>V8.50.6</strong> + ST-LINK</li>
+<li>RealView Microcontroller Development Kit (MDK-ARM) toolchain <strong>V5.31</strong> + STMicroelectronics.STM32F7xx_DFP.1.0.3.pack</li>
+<li>System Workbench for STM32 (SW4STM32) toolchain <strong>V2.9.0</strong></li>
+</ul>
+<h2 id="supported-devices-and-eval-boards">Supported Devices and EVAL boards</h2>
+<ul>
+<li>Devices: STM32F765xx, STM32F767xx, STM32F769xx, STM32F777xx, STM32F779xx, STM32F756/746/745, STM32F723/33/22/32, STM32F730xx, STM32F750xx</li>
+<li>Discovery boards: STM32F769I-DISCO RevB, STM32F746G-DISCO RevB, STM32F723E-Discovery RevC, STM32F7308-DISCO RevA, STM32F7508-DISCO RevA</li>
+<li>Nucleo boards: STM32F767ZI-Nucleo RevB, STM32F746ZG-Nucleo RevB, STM32F722ZE-Nucleo RevB</li>
+<li>Evaluation boards: STM32F769I-EVAL RevB, STM32756G-EVAL, STM32746G-EVAL RevB</li>
+</ul>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section1_16_0" aria-hidden="true"> <label for="collapse-section1_16_0" aria-hidden="true"><strong>V1.16.0 / 13-February-2020</strong></label>
+<div>
+<h2 id="main-changes-1">Main Changes</h2>
+<ul>
+<li><p>General updates to fix known defects and enhancements implementation</p></li>
+<li><p>Update HAL CRYP driver to support block by block decryption without reinitializes the IV and KEY for each call.</p></li>
+<li><p>Integration of three new USB class drivers, CDC-ECM, CDC-RNDIS for Ethernet communication and Billboard class driver for USB power delivery usage</p></li>
+<li><p>Update on USB MSC, CDC, DFU, AUDIO, CustomHID class drivers with bug fixes</p></li>
 <li><p>Improve code quality by fixing MisraC-2012 violations</p></li>
-<li><strong>HAL</strong>
+<li><p><strong>HAL</strong></p>
 <ul>
 <li><strong>HAL/LL GPIO</strong> update
 <ul>
@@ -117,7 +687,7 @@
 <li>Update HAL_RCC_OscConfig() API to don’t return HAL_ERROR if request repeats the current PLL configuration</li>
 </ul></li>
 </ul></li>
-<li><strong>Middlewares</strong>
+<li><p><strong>Middlewares</strong></p>
 <ul>
 <li>Upgrade to use new version of <strong>USB Device V2.6.0</strong>
 <ul>
@@ -150,13 +720,13 @@
 <li>Upgrade to use new version of PDM Library <strong>V3.2.0</strong></li>
 <li>Upgrade to use <strong>FatFs r0.12c</strong> ST modified <strong>r0.12c_20191011</strong></li>
 </ul></li>
-<li><strong>BSP</strong>
+<li><p><strong>BSP</strong></p>
 <ul>
 <li>General updates to fix known defects and enhancements implementation</li>
 <li>Upgrade to use Adafruit Shield <strong>V3.0.3</strong></li>
 <li>Update to support new camera sensor ov5640 <strong>V2.0.0</strong> on STM32769I-EVAL and STM32756G-EVAL boards.</li>
 </ul></li>
-<li><strong>Projects</strong>
+<li><p><strong>Projects</strong></p>
 <ul>
 <li>USB Applications Impact:
 <ul>
@@ -187,7 +757,7 @@
 </ul></li>
 <li><p>For the complete list of changes, please refer to the release notes of each firmware component</p></li>
 </ul>
-<h2 id="contents">Contents</h2>
+<h2 id="contents-1">Contents</h2>
 <ul>
 <li><p>The STM32CubeF7 Firmware package comes with a rich set of examples running on STMicroelectronics boards, organized by board and provided with pre-configured projects for the main supported toolchains. The exhaustive list of projects is provided in this table <a href="Projects/STM32CubeProjectsList.html">STM32CubeProjectsList.html</a>.</p>
 <table>
@@ -196,7 +766,7 @@
 <tr class="header">
 <th style="text-align: left;">Name</th>
 <th style="text-align: center;">Version</th>
-<th style="text-align: center;">Licence</th>
+<th style="text-align: center;">License</th>
 <th style="text-align: center;">Release note</th>
 </tr>
 </thead>
@@ -407,7 +977,7 @@
 <tr class="header">
 <th style="text-align: left;">Name</th>
 <th style="text-align: center;">Version</th>
-<th style="text-align: center;">Licence</th>
+<th style="text-align: center;">License</th>
 <th style="text-align: center;">Release note</th>
 </tr>
 </thead>
@@ -512,14 +1082,14 @@
 </tbody>
 </table></li>
 </ul>
-<h2 id="known-limitations">Known Limitations</h2>
+<h2 id="known-limitations-1">Known Limitations</h2>
 <ul>
 <li>STemWin demonstration for STM32F7308-DISCO
 <ul>
 <li>SW4STM32 project is not provided</li>
 </ul></li>
 </ul>
-<h2 id="development-toolchains-and-compilers">Development Toolchains and Compilers</h2>
+<h2 id="development-toolchains-and-compilers-1">Development Toolchains and Compilers</h2>
 <ul>
 <li>IAR Embedded Workbench for ARM (EWARM) toolchain V8.20.2 + ST-LINK
 <ul>
@@ -533,7 +1103,7 @@
 <li>RealView Microcontroller Development Kit (MDK-ARM) toolchain <strong>V5.27.1</strong> + STMicroelectronics.STM32F7xx_DFP.1.0.3.pack</li>
 <li>System Workbench for STM32 (SW4STM32) toolchain <strong>V2.9.0</strong></li>
 </ul>
-<h2 id="supported-devices-and-eval-boards">Supported Devices and EVAL boards</h2>
+<h2 id="supported-devices-and-eval-boards-1">Supported Devices and EVAL boards</h2>
 <ul>
 <li>Devices: STM32F765xx, STM32F767xx, STM32F769xx, STM32F777xx, STM32F779xx, STM32F756/746/745, STM32F723/33/22/32, STM32F730xx, STM32F750xx</li>
 <li>Discovery boards: STM32F769I-DISCO RevB, STM32F746G-DISCO RevB, STM32F723E-Discovery RevC, STM32F7308-DISCO RevA, STM32F7508-DISCO RevA</li>
@@ -545,7 +1115,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section1_15_0" aria-hidden="true"> <label for="collapse-section1_15_0" aria-hidden="true"><strong>V1.15.0 / 08-February-2019</strong></label>
 <div>
-<h2 id="main-changes-1">Main Changes</h2>
+<h2 id="main-changes-2">Main Changes</h2>
 <ul>
 <li>General updates to fix known defects and enhancements implementation</li>
 <li>Add support of HAL callback registration feature</li>
@@ -617,7 +1187,7 @@
 </ul></li>
 <li>For the complete list of changes, please refer to the release notes of each firmware component</li>
 </ul>
-<h2 id="contents-1">Contents</h2>
+<h2 id="contents-2">Contents</h2>
 <ul>
 <li><p>The STM32CubeF7 Firmware package comes with a rich set of examples running on STMicroelectronics boards, organized by board and provided with pre-configured projects for the main supported toolchains. The exhaustive list of projects is provided in this table <a href="Projects/STM32CubeProjectsList.html">STM32CubeProjectsList.html</a>.</p>
 <table>
@@ -626,7 +1196,7 @@
 <tr class="header">
 <th style="text-align: left;">Name</th>
 <th style="text-align: center;">Version</th>
-<th style="text-align: center;">Licence</th>
+<th style="text-align: center;">License</th>
 <th style="text-align: center;">Release note</th>
 </tr>
 </thead>
@@ -936,14 +1506,14 @@
 </tbody>
 </table></li>
 </ul>
-<h2 id="known-limitations-1">Known Limitations</h2>
+<h2 id="known-limitations-2">Known Limitations</h2>
 <ul>
 <li>STemWin demonstration for STM32F7308-DISCO
 <ul>
 <li>SW4STM32 project is not provided</li>
 </ul></li>
 </ul>
-<h2 id="development-toolchains-and-compilers-1">Development Toolchains and Compilers</h2>
+<h2 id="development-toolchains-and-compilers-2">Development Toolchains and Compilers</h2>
 <ul>
 <li>IAR Embedded Workbench for ARM (EWARM) toolchain V8.20.2 + ST-LINK
 <ul>
@@ -957,7 +1527,7 @@
 <li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.25 + STMicroelectronics.STM32F7xx_DFP.1.0.3.pack</li>
 <li>System Workbench for STM32 (SW4STM32) toolchain V2.7.0</li>
 </ul>
-<h2 id="supported-devices-and-eval-boards-1">Supported Devices and EVAL boards</h2>
+<h2 id="supported-devices-and-eval-boards-2">Supported Devices and EVAL boards</h2>
 <ul>
 <li>Devices: STM32F765xx, STM32F767xx, STM32F769xx, STM32F777xx, STM32F779xx, STM32F756/746/745, STM32F723/33/22/32, STM32F730xx, STM32F750xx</li>
 <li>Discovery boards: STM32F769I-DISCO RevB, STM32F746G-DISCO RevB, STM32F723E-Discovery RevC, STM32F7308-DISCO RevA, STM32F7508-DISCO RevA</li>
@@ -968,8 +1538,7 @@
 </div>
 <div class="collapse">
 <input type="checkbox" id="collapse-section1_14_0" aria-hidden="true"> <label for="collapse-section1_14_0" aria-hidden="true"><strong>V1.14.0 / 23-November-2018</strong></label>
-<div>
-<h2 id="main-changes-2">Main Changes</h2>
+<h2 id="main-changes-3">Main Changes</h2>
 <ul>
 <li><strong>Maintenance release</strong>
 <ul>
@@ -977,11 +1546,10 @@
 </ul></li>
 </ul>
 </div>
-</div>
 <div class="collapse">
 <input type="checkbox" id="collapse-section1_13_0" aria-hidden="true"> <label for="collapse-section1_13_0" aria-hidden="true"><strong>V1.13.0 / 05-November-2018</strong></label>
 <div>
-<h2 id="main-changes-3">Main Changes</h2>
+<h2 id="main-changes-4">Main Changes</h2>
 <ul>
 <li>Thanks to the acquisition of <strong>Draupner Graphics A/S</strong>, ST is extending the STM32 ecosystem with advanced and easy to use graphic software solution enabling stunning GUI additions to embedded devices. <strong>TouchGFX</strong> solution is now fully part of STM32CubeF7.
 <ul>
@@ -1084,14 +1652,14 @@
 </ul></li>
 <li>For the complete list of changes, please refer to the release notes of each firmware component</li>
 </ul>
-<h2 id="contents-2">Contents</h2>
+<h2 id="contents-3">Contents</h2>
 <table>
 <caption>Drivers</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Name</th>
 <th style="text-align: center;">Version</th>
-<th style="text-align: center;">Licence</th>
+<th style="text-align: center;">License</th>
 <th style="text-align: center;">Release note</th>
 </tr>
 </thead>
@@ -1400,14 +1968,14 @@
 </tr>
 </tbody>
 </table>
-<h2 id="known-limitations-2">Known Limitations</h2>
+<h2 id="known-limitations-3">Known Limitations</h2>
 <ul>
 <li>STemWin demonstration for STM32F7308-DISCO
 <ul>
 <li>SW4STM32 project is not provided</li>
 </ul></li>
 </ul>
-<h2 id="development-toolchains-and-compilers-2">Development Toolchains and Compilers</h2>
+<h2 id="development-toolchains-and-compilers-3">Development Toolchains and Compilers</h2>
 <ul>
 <li>IAR Embedded Workbench for ARM (EWARM) toolchain <strong>V8.20.2</strong> + ST-LINK
 <ul>
@@ -1421,7 +1989,7 @@
 <li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.25 + STMicroelectronics.STM32F7xx_DFP.1.0.3.pack</li>
 <li>System Workbench for STM32 (SW4STM32) toolchain <strong>V2.7.0</strong></li>
 </ul>
-<h2 id="supported-devices-and-eval-boards-2">Supported Devices and EVAL boards</h2>
+<h2 id="supported-devices-and-eval-boards-3">Supported Devices and EVAL boards</h2>
 <ul>
 <li>Devices: STM32F765xx, STM32F767xx, STM32F769xx, STM32F777xx, STM32F779xx, STM32F756/746/745, STM32F723/33/22/32, STM32F730xx, STM32F750xx</li>
 <li>Discovery boards: STM32F769I-DISCO RevB, STM32F746G-DISCO RevB, STM32F723E-Discovery RevC, <strong>STM32F7308-DISCO RevA</strong>, <strong>STM32F7508-DISCO RevA</strong></li>
@@ -1433,7 +2001,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section1_12_0" aria-hidden="true"> <label for="collapse-section1_12_0" aria-hidden="true"><strong>V1.12.0 / 29-June-2018</strong></label>
 <div>
-<h2 id="main-changes-4">Main Changes</h2>
+<h2 id="main-changes-5">Main Changes</h2>
 <ul>
 <li><strong>Add support for STM32F730xx and STM32F750xx value line</strong>
 <ul>
@@ -1498,14 +2066,14 @@
 </ul></li>
 <li>For the complete list of changes, please refer to the release notes of each firmware component</li>
 </ul>
-<h2 id="contents-3">Contents</h2>
+<h2 id="contents-4">Contents</h2>
 <table>
 <caption>Drivers</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Name</th>
 <th style="text-align: center;">Version</th>
-<th style="text-align: center;">Licence</th>
+<th style="text-align: center;">License</th>
 <th style="text-align: center;">Release note</th>
 </tr>
 </thead>
@@ -1796,11 +2364,11 @@
 </tr>
 </tbody>
 </table>
-<h2 id="known-limitations-3">Known Limitations</h2>
+<h2 id="known-limitations-4">Known Limitations</h2>
 <ul>
 <li>NONE</li>
 </ul>
-<h2 id="development-toolchains-and-compilers-3">Development Toolchains and Compilers</h2>
+<h2 id="development-toolchains-and-compilers-4">Development Toolchains and Compilers</h2>
 <ul>
 <li>IAR Embedded Workbench for ARM (EWARM) toolchain V7.80.4 + ST-LINK
 <ul>
@@ -1822,7 +2390,7 @@
 <li>Note : rely on the STM32CubeProgarmmer to load the external flash application (QSPI flash and FMC-NOR flash)</li>
 </ul></li>
 </ul>
-<h2 id="supported-devices-and-eval-boards-3">Supported Devices and EVAL boards</h2>
+<h2 id="supported-devices-and-eval-boards-4">Supported Devices and EVAL boards</h2>
 <ul>
 <li>Devices: STM32F765xx, STM32F767xx, STM32F769xx, STM32F777xx, STM32F779xx, STM32F756/746/745, STM32F723/33/22/32, <strong>STM32F730xx</strong>, <strong>STM32F750xx</strong></li>
 <li>Discovery boards: STM32F769I-DISCO RevB, STM32F746G-DISCO RevB, STM32F723E-Discovery RevB</li>
@@ -1834,7 +2402,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section1_11_0" aria-hidden="true"> <label for="collapse-section1_11_0" aria-hidden="true"><strong>V1.11.0 / 23-February-2018</strong></label>
 <div>
-<h2 id="main-changes-5">Main Changes</h2>
+<h2 id="main-changes-6">Main Changes</h2>
 <ul>
 <li><strong>General updates to fix known defects and enhancements implementation</strong></li>
 <li><strong>HAL</strong>
@@ -1872,14 +2440,14 @@
 </ul></li>
 <li>For the complete list of changes, please refer to the release notes of each firmware component</li>
 </ul>
-<h2 id="contents-4">Contents</h2>
+<h2 id="contents-5">Contents</h2>
 <table>
 <caption>Drivers</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Name</th>
 <th style="text-align: center;">Version</th>
-<th style="text-align: center;">Licence</th>
+<th style="text-align: center;">License</th>
 <th style="text-align: center;">Release note</th>
 </tr>
 </thead>
@@ -2170,17 +2738,17 @@
 </tr>
 </tbody>
 </table>
-<h2 id="known-limitations-4">Known Limitations</h2>
+<h2 id="known-limitations-5">Known Limitations</h2>
 <ul>
 <li>NONE</li>
 </ul>
-<h2 id="development-toolchains-and-compilers-4">Development Toolchains and Compilers</h2>
+<h2 id="development-toolchains-and-compilers-5">Development Toolchains and Compilers</h2>
 <ul>
 <li>IAR Embedded Workbench for ARM (EWARM) toolchain V7.80.4 + ST-LINK</li>
 <li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.23 + Keil.STM32F7xx_DFP.2.9.0.pack</li>
 <li>System Workbench for STM32 (SW4STM32) toolchain V2.3.0 + ST-Link.</li>
 </ul>
-<h2 id="supported-devices-and-eval-boards-4">Supported Devices and EVAL boards</h2>
+<h2 id="supported-devices-and-eval-boards-5">Supported Devices and EVAL boards</h2>
 <ul>
 <li>Devices: STM32F765xx, STM32F767xx, STM32F769xx, STM32F777xx, STM32F779xx, STM32F756/746/745, STM32F723/33/22/32</li>
 <li>Discovery boards: STM32F769I-DISCO RevB, STM32F746G-DISCO RevB, STM32F723E-Discovery RevB</li>
@@ -2192,7 +2760,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section1_9_0" aria-hidden="true"> <label for="collapse-section1_9_0" aria-hidden="true"><strong>V1.9.0 / 29-December-2017</strong></label>
 <div>
-<h2 id="main-changes-6">Main Changes</h2>
+<h2 id="main-changes-7">Main Changes</h2>
 <ul>
 <li><strong>Maintenance release:</strong>
 <ul>
@@ -2240,14 +2808,14 @@
 <li>Updtae FreeRTOS MPU application to support MDK-ARM and SW4STM32</li>
 </ul></li>
 </ul>
-<h2 id="contents-5">Contents</h2>
+<h2 id="contents-6">Contents</h2>
 <table>
 <caption>Drivers</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Name</th>
 <th style="text-align: center;">Version</th>
-<th style="text-align: center;">Licence</th>
+<th style="text-align: center;">License</th>
 <th style="text-align: center;">Release note</th>
 </tr>
 </thead>
@@ -2538,17 +3106,17 @@
 </tr>
 </tbody>
 </table>
-<h2 id="known-limitations-5">Known Limitations</h2>
+<h2 id="known-limitations-6">Known Limitations</h2>
 <ul>
 <li>NONE</li>
 </ul>
-<h2 id="development-toolchains-and-compilers-5">Development Toolchains and Compilers</h2>
+<h2 id="development-toolchains-and-compilers-6">Development Toolchains and Compilers</h2>
 <ul>
 <li>IAR Embedded Workbench for ARM (EWARM) toolchain V7.80.4 + ST-LINK</li>
 <li>RealView Microcontroller Development Kit (MDK-ARM) toolchain <strong>V5.23</strong> + Keil.STM32F7xx_DFP.2.9.0.pack</li>
 <li>System Workbench for STM32 (SW4STM32) toolchain <strong>V2.3.0</strong> + ST-Link.</li>
 </ul>
-<h2 id="supported-devices-and-eval-boards-5">Supported Devices and EVAL boards</h2>
+<h2 id="supported-devices-and-eval-boards-6">Supported Devices and EVAL boards</h2>
 <ul>
 <li>Devices: STM32F765xx, STM32F767xx, STM32F769xx, STM32F777xx, STM32F779xx, STM32F756/746/745, STM32F723/33/22/32</li>
 <li>Discovery boards: STM32F769I-DISCO RevB, STM32F746G-DISCO RevB, STM32F723E-Discovery RevB</li>
@@ -2560,7 +3128,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section1_8_0" aria-hidden="true"> <label for="collapse-section1_8_0" aria-hidden="true"><strong>V1.8.0 / 25-August-2017</strong></label>
 <div>
-<h2 id="main-changes-7">Main Changes</h2>
+<h2 id="main-changes-8">Main Changes</h2>
 <ul>
 <li><strong>Maintenance release</strong>
 <ul>
@@ -2597,14 +3165,14 @@
 <li>Add new FreeRTOS MPU application running on STM32756G_EVAL, only EWARM Toolchain is supported</li>
 </ul></li>
 </ul>
-<h2 id="contents-6">Contents</h2>
+<h2 id="contents-7">Contents</h2>
 <table>
 <caption>Drivers</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Name</th>
 <th style="text-align: center;">Version</th>
-<th style="text-align: center;">Licence</th>
+<th style="text-align: center;">License</th>
 <th style="text-align: center;">Release note</th>
 </tr>
 </thead>
@@ -2895,17 +3463,17 @@
 </tr>
 </tbody>
 </table>
-<h2 id="known-limitations-6">Known Limitations</h2>
+<h2 id="known-limitations-7">Known Limitations</h2>
 <ul>
 <li>The USB Host CDC_Standalone application running on STM32F769I_EVAL board and USB Host MSC_RTOS application running on STM32F723E-Discovery are removed from V1.8.0 package due to wrong behavior detected that they will be fixed in next release.</li>
 </ul>
-<h2 id="development-toolchains-and-compilers-6">Development Toolchains and Compilers</h2>
+<h2 id="development-toolchains-and-compilers-7">Development Toolchains and Compilers</h2>
 <ul>
 <li>IAR Embedded Workbench for ARM (EWARM) toolchain V7.80.4 + ST-LINK</li>
 <li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.21 + ST-LINK</li>
 <li>System Workbench for STM32 (SW4STM32) toolchain V1.14 + ST-Link.</li>
 </ul>
-<h2 id="supported-devices-and-eval-boards-6">Supported Devices and EVAL boards</h2>
+<h2 id="supported-devices-and-eval-boards-7">Supported Devices and EVAL boards</h2>
 <ul>
 <li>Devices: STM32F765xx, STM32F767xx, STM32F769xx, STM32F777xx, STM32F779xx, STM32F756/746/745, STM32F723/33/22/32</li>
 <li>Discovery boards: STM32F769I-DISCO RevB, STM32F746G-DISCO RevB, STM32F723E-Discovery RevB</li>
@@ -2917,7 +3485,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section1_7_0" aria-hidden="true"> <label for="collapse-section1_7_0" aria-hidden="true"><strong>V1.7.0 / 14-April-2017</strong></label>
 <div>
-<h2 id="main-changes-8">Main Changes</h2>
+<h2 id="main-changes-9">Main Changes</h2>
 <ul>
 <li><strong>Maintenance release</strong></li>
 <li><strong>Middleware</strong>
@@ -2928,14 +3496,14 @@
 </ul></li>
 </ul></li>
 </ul>
-<h2 id="contents-7">Contents</h2>
+<h2 id="contents-8">Contents</h2>
 <table>
 <caption>Drivers</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Name</th>
 <th style="text-align: center;">Version</th>
-<th style="text-align: center;">Licence</th>
+<th style="text-align: center;">License</th>
 <th style="text-align: center;">Release note</th>
 </tr>
 </thead>
@@ -3226,17 +3794,17 @@
 </tr>
 </tbody>
 </table>
-<h2 id="known-limitations-7">Known Limitations</h2>
+<h2 id="known-limitations-8">Known Limitations</h2>
 <ul>
 <li>NONE</li>
 </ul>
-<h2 id="development-toolchains-and-compilers-7">Development Toolchains and Compilers</h2>
+<h2 id="development-toolchains-and-compilers-8">Development Toolchains and Compilers</h2>
 <ul>
 <li>IAR Embedded Workbench for ARM (EWARM) toolchain <strong>V7.80.4</strong> + ST-LINK</li>
 <li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.21 + ST-LINK</li>
 <li>System Workbench for STM32 (SW4STM32) toolchain <strong>V2.1</strong> + ST-Link.</li>
 </ul>
-<h2 id="supported-devices-and-eval-boards-7">Supported Devices and EVAL boards</h2>
+<h2 id="supported-devices-and-eval-boards-8">Supported Devices and EVAL boards</h2>
 <ul>
 <li>Devices: STM32F765xx, STM32F767xx, STM32F769xx, STM32F777xx, STM32F779xx, STM32F756/746/745, STM32F723/33/22/32</li>
 <li>Discovery boards: STM32F769I-DISCO RevB, STM32F746G-DISCO RevB, STM32F723E-Discovery RevB</li>
@@ -3248,7 +3816,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section1_6_1" aria-hidden="true"> <label for="collapse-section1_6_1" aria-hidden="true"><strong>V1.6.1 / 24-March-2017</strong></label>
 <div>
-<h2 id="main-changes-9">Main Changes</h2>
+<h2 id="main-changes-10">Main Changes</h2>
 <ul>
 <li>Patch release to fix issues in
 <ul>
@@ -3256,14 +3824,14 @@
 <li>ADC and RTC LL drivers</li>
 </ul></li>
 </ul>
-<h2 id="contents-8">Contents</h2>
+<h2 id="contents-9">Contents</h2>
 <table>
 <caption>Drivers</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;">ame</th>
 <th style="text-align: left;">Version</th>
-<th style="text-align: center;">Licence</th>
+<th style="text-align: center;">License</th>
 <th style="text-align: center;">Release note</th>
 </tr>
 </thead>
@@ -3281,7 +3849,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section1_6_0" aria-hidden="true"> <label for="collapse-section1_6_0" aria-hidden="true"><strong>V1.6.0 / 30-December-2016</strong></label>
 <div>
-<h2 id="main-changes-10">Main Changes</h2>
+<h2 id="main-changes-11">Main Changes</h2>
 <ul>
 <li>Official release to add the support of <strong>STM32F722xx, STM32F723xx, STM32F732xx</strong> and <strong>STM32F733xx</strong> devices</li>
 <li>Add Low Layer drivers under Drivers32F7xx_HAL_Driver
@@ -3358,14 +3926,14 @@
 </ul></li>
 </ul></li>
 </ul>
-<h2 id="contents-9">Contents</h2>
+<h2 id="contents-10">Contents</h2>
 <table>
 <caption>Drivers</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Name</th>
 <th style="text-align: center;">Version</th>
-<th style="text-align: center;">Licence</th>
+<th style="text-align: center;">License</th>
 <th style="text-align: center;">Release note</th>
 </tr>
 </thead>
@@ -3656,17 +4224,17 @@
 </tr>
 </tbody>
 </table>
-<h2 id="known-limitations-8">Known Limitations</h2>
+<h2 id="known-limitations-9">Known Limitations</h2>
 <ul>
 <li>NONE</li>
 </ul>
-<h2 id="development-toolchains-and-compilers-8">Development Toolchains and Compilers</h2>
+<h2 id="development-toolchains-and-compilers-9">Development Toolchains and Compilers</h2>
 <ul>
 <li>IAR Embedded Workbench for ARM (EWARM) toolchain V7.70 + ST-LINK</li>
 <li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.21 + ST-LINK</li>
 <li>System Workbench for STM32 (SW4STM32) toolchain <strong>V1.13</strong> + ST-Link.</li>
 </ul>
-<h2 id="supported-devices-and-eval-boards-8">Supported Devices and EVAL boards</h2>
+<h2 id="supported-devices-and-eval-boards-9">Supported Devices and EVAL boards</h2>
 <ul>
 <li>Devices: STM32F765xx, STM32F767xx, STM32F769xx, STM32F777xx, STM32F779xx, STM32F756/746/745, STM32F723/33/22/32</li>
 <li>Discovery boards: STM32F769I-DISCO RevB, STM32F746G-DISCO RevB, STM32F723E-Discovery RevB</li>
@@ -3678,11 +4246,11 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section1_5_1" aria-hidden="true"> <label for="collapse-section1_5_1" aria-hidden="true"><strong>V1.5.1 / 07-October-2016</strong></label>
 <div>
-<h2 id="main-changes-11">Main Changes</h2>
+<h2 id="main-changes-12">Main Changes</h2>
 <ul>
 <li>Patch release to add new application for <strong>Esp8266 IAP over WiFi on STM32F769I-Discovery board</strong></li>
 </ul>
-<h2 id="contents-10">Contents</h2>
+<h2 id="contents-11">Contents</h2>
 <ul>
 <li>Projects
 <ul>
@@ -3694,7 +4262,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section1_5_0" aria-hidden="true"> <label for="collapse-section1_5_0" aria-hidden="true"><strong>V1.5.0 / 23-September-2016</strong></label>
 <div>
-<h2 id="main-changes-12">Main Changes</h2>
+<h2 id="main-changes-13">Main Changes</h2>
 <ul>
 <li>Fix known defects and several implementations enhancement</li>
 <li>Add the support of DSI-HDMI adapter for STM32F769I_EVAL and STM32F769I-Discovery BSP drivers and Display projects</li>
@@ -3731,14 +4299,14 @@
 </ul></li>
 </ul></li>
 </ul>
-<h2 id="contents-11">Contents</h2>
+<h2 id="contents-12">Contents</h2>
 <table>
 <caption>Drivers</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Name</th>
 <th style="text-align: center;">Version</th>
-<th style="text-align: center;">Licence</th>
+<th style="text-align: center;">License</th>
 <th style="text-align: center;">Release note</th>
 </tr>
 </thead>
@@ -4017,17 +4585,17 @@
 </tr>
 </tbody>
 </table>
-<h2 id="known-limitations-9">Known Limitations</h2>
+<h2 id="known-limitations-10">Known Limitations</h2>
 <ul>
 <li>NONE</li>
 </ul>
-<h2 id="development-toolchains-and-compilers-9">Development Toolchains and Compilers</h2>
+<h2 id="development-toolchains-and-compilers-10">Development Toolchains and Compilers</h2>
 <ul>
 <li>IAR Embedded Workbench for ARM (EWARM) toolchain <strong>V7.70</strong> + ST-LINK</li>
 <li>RealView Microcontroller Development Kit (MDK-ARM) toolchain <strong>V5.21</strong> + ST-LINK</li>
 <li>System Workbench for STM32 (SW4STM32) toolchain <strong>V1.10</strong> + ST-Link.</li>
 </ul>
-<h2 id="supported-devices-and-eval-boards-9">Supported Devices and EVAL boards</h2>
+<h2 id="supported-devices-and-eval-boards-10">Supported Devices and EVAL boards</h2>
 <ul>
 <li>Devices: STM32F765xx, STM32F767xx, STM32F769xx, STM32F777xx, STM32F779xx, STM32F723/33/22/32, STM32F756/746/745 devices RevZ</li>
 <li>Discovery boards: STM32F769I-DISCO RevB, STM32F746G-DISCO RevB</li>
@@ -4039,7 +4607,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section1_4_1" aria-hidden="true"> <label for="collapse-section1_4_1" aria-hidden="true"><strong>V1.4.1 / 01-July-2016</strong></label>
 <div>
-<h2 id="main-changes-13">Main Changes</h2>
+<h2 id="main-changes-14">Main Changes</h2>
 <ul>
 <li>Patch release to :
 <ul>
@@ -4052,14 +4620,14 @@
 <li>Add one Encoding project example running on STM32F769I_EVAL board</li>
 </ul></li>
 </ul>
-<h2 id="contents-12">Contents</h2>
+<h2 id="contents-13">Contents</h2>
 <table>
 <caption>Drivers</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Name</th>
 <th style="text-align: center;">Version</th>
-<th style="text-align: center;">Licence</th>
+<th style="text-align: center;">License</th>
 <th style="text-align: center;">Release note</th>
 </tr>
 </thead>
@@ -4126,7 +4694,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section1_4_0" aria-hidden="true"> <label for="collapse-section1_4_0" aria-hidden="true"><strong>V1.4.0 / 22-April-2016</strong></label>
 <div>
-<h2 id="main-changes-14">Main Changes</h2>
+<h2 id="main-changes-15">Main Changes</h2>
 <ul>
 <li>Official release to add the support of <strong>STM32F765xx, STM32F767xx, STM32F768xx, STM32F769xx, STM32F777xx, STM32F778xx</strong> and <strong>STM32F779xx</strong> devices</li>
 <li>Fix known defects and several implementation enhancement</li>
@@ -4171,14 +4739,14 @@
 <li><strong>Note:</strong> - <strong>Demonstrations Firmware for STM32F7x9I_EVAL and STM32F769I-Discovery, provided within this package, don’t embed:</strong> - <strong>TouchGFX demonstration module. Free evaluation version of the TouchGFX demonstration, based on Draupner Graphics’ commercial graphic library, is available at <a href="http://www.touchgfx.com/stmicroelectronics">www.touchgfx.com/stmicroelectronics</a></strong> - <strong>Embedded Wizard demonstration module. Free evaluation version of the TARA Systems demonstration, is available at <a href="http://www.embedded-wizard.de/stm32">www.embedded-wizard.de/stm32</a></strong></li>
 </ul></li>
 </ul>
-<h2 id="contents-13">Contents</h2>
+<h2 id="contents-14">Contents</h2>
 <table>
 <caption>Drivers</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Name</th>
 <th style="text-align: center;">Version</th>
-<th style="text-align: center;">Licence</th>
+<th style="text-align: center;">License</th>
 <th style="text-align: center;">Release note</th>
 </tr>
 </thead>
@@ -4451,17 +5019,17 @@
 </tr>
 </tbody>
 </table>
-<h2 id="known-limitations-10">Known Limitations</h2>
+<h2 id="known-limitations-11">Known Limitations</h2>
 <ul>
 <li>This version of the STM32Cube_FW_F7 package provides APIs for HW JPEG encoding through the STM32F7xx HAL JPEG driver. HW JPEG encoder requires input data organized in YCbCr blocks thus a pre-processing should applied on the RGB data to be encoded (transform from RGB pixels to YCbCr blocks). Neither encoding pre-processing utility software nor applicative examples are part of this firmware package version. They will be provided in a coming patch release.</li>
 </ul>
-<h2 id="development-toolchains-and-compilers-10">Development Toolchains and Compilers</h2>
+<h2 id="development-toolchains-and-compilers-11">Development Toolchains and Compilers</h2>
 <ul>
 <li>IAR Embedded Workbench for ARM (EWARM) toolchain <strong>V7.50</strong> + ST-LINK</li>
 <li>RealView Microcontroller Development Kit (MDK-ARM) toolchain <strong>V5.17</strong> + ST-LINK</li>
 <li>System Workbench for STM32 (SW4STM32) toolchain <strong>V1.9</strong> + ST-Link.</li>
 </ul>
-<h2 id="supported-devices-and-eval-boards-10">Supported Devices and EVAL boards</h2>
+<h2 id="supported-devices-and-eval-boards-11">Supported Devices and EVAL boards</h2>
 <ul>
 <li>Devices: STM32F765xx, STM32F767xx, STM32F769xx, STM32F777xx, STM32F779xx, STM32F723/33/22/32, STM32F756/746/745 devices RevZ</li>
 <li>Discovery boards: STM32F769I-DISCO RevB, STM32F746G-DISCO RevB</li>
@@ -4473,18 +5041,18 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section1_3_1" aria-hidden="true"> <label for="collapse-section1_3_1" aria-hidden="true"><strong>V1.3.1 / 09-December-2015</strong></label>
 <div>
-<h2 id="main-changes-15">Main Changes</h2>
+<h2 id="main-changes-16">Main Changes</h2>
 <ul>
 <li><strong>Patch release to fix issue in Ethernet HAL driver</strong></li>
 </ul>
-<h2 id="contents-14">Contents</h2>
+<h2 id="contents-15">Contents</h2>
 <table>
 <caption>Drivers</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Name</th>
 <th style="text-align: center;">Version</th>
-<th style="text-align: center;">Licence</th>
+<th style="text-align: center;">License</th>
 <th style="text-align: center;">Release note</th>
 </tr>
 </thead>
@@ -4502,7 +5070,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section1_3_0" aria-hidden="true"> <label for="collapse-section1_3_0" aria-hidden="true"><strong>V1.3.0 / 18-November-2015</strong></label>
 <div>
-<h2 id="main-changes-16">Main Changes</h2>
+<h2 id="main-changes-17">Main Changes</h2>
 <ul>
 <li><strong>Add the support of the STM32F746ZG NUCLEO144 Board </strong></li>
 <li><strong>Fix known defects and several enhancement implementation</strong></li>
@@ -4536,14 +5104,14 @@
 <li>Add 35 projects STM32F746ZG NUCLEO144 board</li>
 </ul></li>
 </ul>
-<h2 id="contents-15">Contents</h2>
+<h2 id="contents-16">Contents</h2>
 <table>
 <caption>Drivers</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Name</th>
 <th style="text-align: center;">Version</th>
-<th style="text-align: center;">Licence</th>
+<th style="text-align: center;">License</th>
 <th style="text-align: center;">Release note</th>
 </tr>
 </thead>
@@ -4780,17 +5348,17 @@
 </tr>
 </tbody>
 </table>
-<h2 id="known-limitations-11">Known Limitations</h2>
+<h2 id="known-limitations-12">Known Limitations</h2>
 <ul>
 <li>EWARM projects for PWR_STOP and FMC_SDRAM_LowPower examples are provided with medium size optimization due to a compiler limitation observed with V7.40</li>
 </ul>
-<h2 id="development-toolchains-and-compilers-11">Development Toolchains and Compilers</h2>
+<h2 id="development-toolchains-and-compilers-12">Development Toolchains and Compilers</h2>
 <ul>
 <li>IAR Embedded Workbench for ARM (EWARM) toolchain V7.40 + ST-LINK</li>
 <li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.14 + ST-LINK</li>
 <li>System Workbench for STM32 (SW4STM32) toolchain V1.4 + ST-Link.</li>
 </ul>
-<h2 id="supported-devices-and-eval-boards-11">Supported Devices and EVAL boards</h2>
+<h2 id="supported-devices-and-eval-boards-12">Supported Devices and EVAL boards</h2>
 <ul>
 <li>Devices: STM32F756/746/745 devices RevZ</li>
 <li>Discovery board: STM32F746G-DISCO RevB</li>
@@ -4802,7 +5370,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section1_2_0" aria-hidden="true"> <label for="collapse-section1_2_0" aria-hidden="true"><strong>V1.2.0 / 21-September-2015</strong></label>
 <div>
-<h2 id="main-changes-17">Main Changes</h2>
+<h2 id="main-changes-18">Main Changes</h2>
 <ul>
 <li><strong>Maintenance release to fix known defects and several enhancement implementation</strong></li>
 <li><strong>HAL</strong>
@@ -4839,14 +5407,14 @@
 </ul></li>
 </ul></li>
 </ul>
-<h2 id="contents-16">Contents</h2>
+<h2 id="contents-17">Contents</h2>
 <table>
 <caption>Drivers</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Name</th>
 <th style="text-align: center;">Version</th>
-<th style="text-align: center;">Licence</th>
+<th style="text-align: center;">License</th>
 <th style="text-align: center;">Release note</th>
 </tr>
 </thead>
@@ -5065,17 +5633,17 @@
 </tr>
 </tbody>
 </table>
-<h2 id="known-limitations-12">Known Limitations</h2>
+<h2 id="known-limitations-13">Known Limitations</h2>
 <ul>
 <li>EWARM projects for PWR_STOP and FMC_SDRAM_LowPower examples are provided with medium size optimization due to a compiler limitation observed with V7.40</li>
 </ul>
-<h2 id="development-toolchains-and-compilers-12">Development Toolchains and Compilers</h2>
+<h2 id="development-toolchains-and-compilers-13">Development Toolchains and Compilers</h2>
 <ul>
 <li>IAR Embedded Workbench for ARM (EWARM) toolchain V7.40 + ST-LINK</li>
 <li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.14 + ST-LINK</li>
 <li>System Workbench for STM32 (SW4STM32) toolchain <strong>V1.4</strong> + ST-Link.</li>
 </ul>
-<h2 id="supported-devices-and-eval-boards-12">Supported Devices and EVAL boards</h2>
+<h2 id="supported-devices-and-eval-boards-13">Supported Devices and EVAL boards</h2>
 <ul>
 <li>Devices: STM32F756/746/745 devices RevZ</li>
 <li>Discovery board: STM32F746G-DISCO RevB</li>
@@ -5086,7 +5654,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section1_1_0" aria-hidden="true"> <label for="collapse-section1_1_0" aria-hidden="true"><strong>V1.1.0 / 25-June-2015</strong></label>
 <div>
-<h2 id="main-changes-18">Main Changes</h2>
+<h2 id="main-changes-19">Main Changes</h2>
 <ul>
 <li><strong>Official release of to support the STM32F746G-DISCO board</strong></li>
 <li><strong>HAL</strong>
@@ -5111,14 +5679,14 @@
 <li>Add support of SW4STM32 for the STM327x6G-EVAL demonstration firmware</li>
 </ul></li>
 </ul>
-<h2 id="contents-17">Contents</h2>
+<h2 id="contents-18">Contents</h2>
 <table>
 <caption>Drivers</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Name</th>
 <th style="text-align: center;">Version</th>
-<th style="text-align: center;">Licence</th>
+<th style="text-align: center;">License</th>
 <th style="text-align: center;">Release note</th>
 </tr>
 </thead>
@@ -5337,17 +5905,17 @@
 </tr>
 </tbody>
 </table>
-<h2 id="known-limitations-13">Known Limitations</h2>
+<h2 id="known-limitations-14">Known Limitations</h2>
 <ul>
 <li>EWARM projects for PWR_STOP and FMC_SDRAM_LowPower examples are provided with medium size optimization due to a compiler limitation observed with V7.40</li>
 </ul>
-<h2 id="development-toolchains-and-compilers-13">Development Toolchains and Compilers</h2>
+<h2 id="development-toolchains-and-compilers-14">Development Toolchains and Compilers</h2>
 <ul>
 <li>IAR Embedded Workbench for ARM (EWARM) toolchain 7.40 + ST-LINK</li>
 <li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.14 + ST-LINK</li>
 <li>System Workbench for STM32 (SW4STM32) toolchain V1.1.0 + ST-Link.</li>
 </ul>
-<h2 id="supported-devices-and-eval-boards-13">Supported Devices and EVAL boards</h2>
+<h2 id="supported-devices-and-eval-boards-14">Supported Devices and EVAL boards</h2>
 <ul>
 <li>Devices: STM32F756/746/745 devices RevZ</li>
 <li>Discovery board: STM32F746G-DISCO RevB</li>
@@ -5358,18 +5926,18 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section1_0_0" aria-hidden="true"> <label for="collapse-section1_0_0" aria-hidden="true"><strong>V1.0.0 / 22-May-2015</strong></label>
 <div>
-<h2 id="main-changes-19">Main Changes</h2>
+<h2 id="main-changes-20">Main Changes</h2>
 <ul>
 <li><strong>First official release of STM32CubeF7 (STM32Cube for STM32F7 Series)</strong></li>
 </ul>
-<h2 id="contents-18">Contents</h2>
+<h2 id="contents-19">Contents</h2>
 <table>
 <caption>Drivers</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Name</th>
 <th style="text-align: center;">Version</th>
-<th style="text-align: center;">Licence</th>
+<th style="text-align: center;">License</th>
 <th style="text-align: center;">Release note</th>
 </tr>
 </thead>
@@ -5558,18 +6126,18 @@
 </tr>
 </tbody>
 </table>
-<h2 id="known-limitations-14">Known Limitations</h2>
+<h2 id="known-limitations-15">Known Limitations</h2>
 <ul>
 <li>SW4STM32 project is not provided for the STM327x6G-EVAL demonstration</li>
 <li>EWARM projects for PWR_STOP and FMC_SDRAM_LowPower examples are provided with medium size optimization due to a compiler limitation observed with V7.40</li>
 </ul>
-<h2 id="development-toolchains-and-compilers-14">Development Toolchains and Compilers</h2>
+<h2 id="development-toolchains-and-compilers-15">Development Toolchains and Compilers</h2>
 <ul>
 <li>IAR Embedded Workbench for ARM (EWARM) toolchain V7.40 + ST-LINK</li>
 <li>RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.14 + ST-LINK</li>
 <li>System Workbench for STM32 (SW4STM32) toolchain V1.1.0 + ST-Link.</li>
 </ul>
-<h2 id="supported-devices-and-eval-boards-14">Supported Devices and EVAL boards</h2>
+<h2 id="supported-devices-and-eval-boards-15">Supported Devices and EVAL boards</h2>
 <ul>
 <li>Devices: STM32F756/746/745 devices RevZ</li>
 <li>Discovery board: STM32F746G-DISCO RevB</li>
@@ -5577,7 +6145,7 @@
 </ul>
 </div>
 </div>
-</div>
+</section>
 </div>
 <footer class="sticky">
 <p>For complete documentation on <mark>STM32 Microcontrollers</mark> , visit: <span style="font-color: blue;"><a href="http://www.st.com/STM32">www.st.com</a></span></p>

@@ -111,7 +111,7 @@ or buffers compared error. (communication is stopped if any, using infinite loop
 
 @par Keywords
 
-Connectivity, I2C, Communication, Trasmission, Reception, SCL, SDA, Interrupt
+Connectivity, I2C, Communication, Transmission, Reception, SCL, SDA, Interrupt
 
 @Note If the user code size exceeds the DTCM-RAM size or starts from internal cacheable memories (SRAM1 and SRAM2),that is shared between several processors,
       then it is highly recommended to enable the CPU cache and maintain its coherence at application level.

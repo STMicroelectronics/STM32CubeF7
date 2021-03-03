@@ -168,10 +168,10 @@ SECTIONS
   }
 
   .ARM.attributes 0 : { *(.ARM.attributes) }
-  .RxDecripSection : { *(.DMARxDscrTab_section) } >Memory_B1
-  .TxDescripSection : { *(.DMATxDscrTab_section) } >Memory_B2
-  .RxarraySection : { *(.Rx_Buff_section) } >Memory_B3
-  .TxarraySection : { *(.Tx_Buff_section) } >Memory_B4
+  .RxDecripSection (NOLOAD) : { *(.RxDescripSection) } >Memory_B1
+  .TxDescripSection (NOLOAD): { *(.DMATxDscrTab_section) } >Memory_B2
+  .RxarraySection (NOLOAD) : { *(.RxBUF) } >Memory_B3
+  .TxarraySection (NOLOAD) : { *(.TxBUF) } >Memory_B4 
 }
 
 

@@ -22,7 +22,7 @@
 
 How to configure the FMC controller to access the SDRAM memory.
 
-The SDRAM is MT48LC4M32B2B5-6A.
+The SDRAM is MT48LC4M32B2B5-6A or IS42S32400F-6BL.
  
 At the beginning of the main program the HAL_Init() function is called to reset 
 all the peripherals, initialize the Flash interface and the systick.

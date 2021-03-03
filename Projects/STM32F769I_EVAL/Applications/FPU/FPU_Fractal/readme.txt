@@ -3,7 +3,7 @@
   
   @verbatim
   ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
-  * @file    readme.txt 
+  * @file    FPU/FPU_Fractal/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the FPU Fractal application.
   ******************************************************************************

@@ -82,7 +82,7 @@ like rotations, shifts and zoom.
 
 @par Keywords
 
-Display, STemWin, Memory device, HelloWorld, LCD, GUI, Demonstration, Touch screen
+Display, Graphic, STemWin, Memory device, HelloWorld, LCD, GUI, Demonstration, Touch screen
 
 @par Directory contents 
 

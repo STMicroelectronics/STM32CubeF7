@@ -19,7 +19,7 @@
 						<toolChain id="fr.ac6.managedbuild.toolchain.gnu.cross.exe.debug.151753207" name="Ac6 STM32 MCU GCC" superClass="fr.ac6.managedbuild.toolchain.gnu.cross.exe.debug">
 							<option id="fr.ac6.managedbuild.option.gnu.cross.prefix.1847376850" name="Prefix" superClass="fr.ac6.managedbuild.option.gnu.cross.prefix" useByScannerDiscovery="false" value="arm-none-eabi-" valueType="string"/>
 							<option id="fr.ac6.managedbuild.option.gnu.cross.mcu.304671132" name="Mcu" superClass="fr.ac6.managedbuild.option.gnu.cross.mcu" useByScannerDiscovery="false" value="STM32F756NGHx" valueType="string"/>
-							<option id="fr.ac6.managedbuild.option.gnu.cross.board.637941073" name="Board" superClass="fr.ac6.managedbuild.option.gnu.cross.board" useByScannerDiscovery="false" value="STM32756G-EVAL2" valueType="string"/>
+							<option id="fr.ac6.managedbuild.option.gnu.cross.board.637941073" name="Board" superClass="fr.ac6.managedbuild.option.gnu.cross.board" useByScannerDiscovery="false" value="STM32756G-EVAL" valueType="string"/>
 							<option id="fr.ac6.managedbuild.option.gnu.cross.core.1083960614" name="Core" superClass="fr.ac6.managedbuild.option.gnu.cross.core" useByScannerDiscovery="false" valueType="stringList">
 								<listOptionValue builtIn="false" value="Cortex-M7"/>
 								<listOptionValue builtIn="false" value="M7"/>
@@ -38,12 +38,9 @@
 								<option id="gnu.c.compiler.option.debugging.level.1304578956" name="Debug Level" superClass="gnu.c.compiler.option.debugging.level" useByScannerDiscovery="false" value="gnu.c.debugging.level.max" valueType="enumerated"/>
 								<option id="gnu.c.compiler.option.include.paths.1187218462" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="../../../Gui/gui/include"/>
-									<listOptionValue builtIn="false" value="../../../Gui/target/include"/>
-									<listOptionValue builtIn="false" value="../../../Gui/platform/os"/>
 									<listOptionValue builtIn="false" value="../../../Gui/generated/fonts/include"/>
 									<listOptionValue builtIn="false" value="../../../Gui/generated/images/include"/>
 									<listOptionValue builtIn="false" value="../../../Gui/generated/texts/include"/>
-									<listOptionValue builtIn="false" value="../../../Gui/generated/gui_generated/include"/>
 									<listOptionValue builtIn="false" value="../../../../../../../Middlewares/ST/TouchGFX/touchgfx/framework/include"/>
 									<listOptionValue builtIn="false" value="../../../../../../../Middlewares/Third_Party/FreeRTOS/Source/include"/>
 									<listOptionValue builtIn="false" value="../../../../../../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS"/>
@@ -72,12 +69,9 @@
 								<option id="gnu.cpp.compiler.option.debugging.level.1195823659" name="Debug Level" superClass="gnu.cpp.compiler.option.debugging.level" useByScannerDiscovery="false" value="gnu.cpp.compiler.debugging.level.max" valueType="enumerated"/>
 								<option id="gnu.cpp.compiler.option.include.paths.329279476" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="../../../Gui/gui/include"/>
-									<listOptionValue builtIn="false" value="../../../Gui/target/include"/>
-									<listOptionValue builtIn="false" value="../../../Gui/platform/os"/>
 									<listOptionValue builtIn="false" value="../../../Gui/generated/fonts/include"/>
 									<listOptionValue builtIn="false" value="../../../Gui/generated/images/include"/>
 									<listOptionValue builtIn="false" value="../../../Gui/generated/texts/include"/>
-									<listOptionValue builtIn="false" value="../../../Gui/generated/gui_generated/include"/>
 									<listOptionValue builtIn="false" value="../../../../../../../Middlewares/ST/TouchGFX/touchgfx/framework/include"/>
 									<listOptionValue builtIn="false" value="../../../../../../../Middlewares/Third_Party/FreeRTOS/Source/include"/>
 									<listOptionValue builtIn="false" value="../../../../../../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS"/>
@@ -136,8 +130,6 @@
 							<tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.835097546" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler">
 								<option id="gnu.both.asm.option.include.paths.816152272" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="../../../Gui/gui/include"/>
-									<listOptionValue builtIn="false" value="../../../Gui/target/include"/>
-									<listOptionValue builtIn="false" value="../../../Gui/platform/os"/>
 									<listOptionValue builtIn="false" value="../../../Gui/generated/fonts/include"/>
 									<listOptionValue builtIn="false" value="../../../Gui/generated/images/include"/>
 									<listOptionValue builtIn="false" value="../../../Gui/generated/texts/include"/>
@@ -150,8 +142,7 @@
 									<listOptionValue builtIn="false" value="../../../../../../../Drivers/CMSIS/Device/ST/STM32F7xx/Include"/>
 									<listOptionValue builtIn="false" value="../../../Gui/target"/>
 									<listOptionValue builtIn="false" value="../../../Core/Inc"/>
-									<listOptionValue builtIn="false" value="../../../../../../../../../../../Drivers/CMSIS/Include"/>
-									<listOptionValue builtIn="false" value="../../../../../../../../../../../../../Drivers/CMSIS/Include"/>
+									<listOptionValue builtIn="false" value="../../../../../../../Drivers/CMSIS/Include"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.585714879" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
 								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.assembler.input.454816990" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.input"/>

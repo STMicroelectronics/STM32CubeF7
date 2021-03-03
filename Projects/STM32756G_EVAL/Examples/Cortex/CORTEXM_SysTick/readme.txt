@@ -56,6 +56,8 @@ How to use the default SysTick configuration with a 1 ms timebase to toggle LEDs
 
 System, Cortex, Time base, Systick, HCLK 
 
+@par Directory contents
+
   - CortexM/CORTEXM_SysTick/Inc/stm32f7xx_hal_conf.h    HAL configuration file
   - CortexM/CORTEXM_SysTick/Inc/stm32f7xx_it.h          Interrupt handlers header file
   - CortexM/CORTEXM_SysTick/Inc/main.h                  Header for main.c module  

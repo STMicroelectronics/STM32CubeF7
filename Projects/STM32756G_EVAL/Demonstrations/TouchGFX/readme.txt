@@ -1,9 +1,9 @@
 /**
-  @page Demo   STM32756G_EVAL TouchGFX Demonstration Firmware
+  @page TouchGFX  STM32756G_EVAL TouchGFX Demonstration Firmware
  
   @verbatim
   ******************************************************************************
-  * @file    Demonstrations/readme.txt 
+  * @file    TouchGFX/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of STM32756G_EVAL TouchGFX Demonstration
   ******************************************************************************

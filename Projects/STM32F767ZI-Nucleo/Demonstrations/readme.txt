@@ -1,5 +1,5 @@
 /**
-  @page Demo   Demo STM32F767ZI-Nucleo
+  @page Demonstrations   Demonstrations STM32F767ZI-Nucleo
  
   @verbatim
   ******************************************************************************

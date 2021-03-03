@@ -173,8 +173,7 @@
 									<listOptionValue builtIn="false" value="../../../../../../../Middlewares/Third_Party/LibJPEG/include"/>
 									<listOptionValue builtIn="false" value="../../../Config"/>
 									<listOptionValue builtIn="false" value="../../../Core/Inc"/>
-									<listOptionValue builtIn="false" value="../../../../../../../../../../../Drivers/CMSIS/Include"/>
-									<listOptionValue builtIn="false" value="../../../../../../../../../../../../../Drivers/CMSIS/Include"/>
+									<listOptionValue builtIn="false" value="../../../../../../../Drivers/CMSIS/Include"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.613628230" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
 								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.assembler.input.1981210757" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.input"/>

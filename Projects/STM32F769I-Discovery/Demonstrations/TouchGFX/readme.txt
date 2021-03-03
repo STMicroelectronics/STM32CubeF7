@@ -1,9 +1,9 @@
 /**
-  @page Demo   STM32F769I-DISCO TouchGFX Demonstration Firmware
+  @page TouchGFX   STM32F769I-DISCO TouchGFX Demonstration Firmware
  
   @verbatim
   ******************************************************************************
-  * @file    Demonstrations/readme.txt 
+  * @file    Demonstrations/TouchGFX/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of STM32F769I-DISCO TouchGFX Demonstration
   ******************************************************************************

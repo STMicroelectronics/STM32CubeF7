@@ -152,7 +152,7 @@ const uint8_t ShortRegData47[] = {0xC5, 0x66};
 const uint8_t ShortRegData48[] = {OTM8009A_CMD_NOP, 0xB6};
 const uint8_t ShortRegData49[] = {0xF5, 0x06};
 const uint8_t ShortRegData50[] = {OTM8009A_CMD_NOP, 0xB1};
-const uint8_t ShortRegData51[] = {0xC6, 0x06};
+const uint8_t ShortRegData51[] = {0xC6, 0x05};
 /**
   * @}
   */
@@ -353,7 +353,7 @@ uint8_t OTM8009A_Init(uint32_t ColorCoding, uint32_t orientation)
   DSI_IO_WriteCmd(0, (uint8_t *)ShortRegData49);
   /////////////////////////////////////////////////////////////////////////////
 
-  /* CABC LEDPWM frequency adjusted to 19,5kHz */
+  /* CABC LEDPWM frequency adjusted to 22,7kHz */
   DSI_IO_WriteCmd(0, (uint8_t *)ShortRegData50);
   DSI_IO_WriteCmd(0, (uint8_t *)ShortRegData51);
   

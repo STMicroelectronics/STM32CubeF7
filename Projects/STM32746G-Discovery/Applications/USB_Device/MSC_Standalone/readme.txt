@@ -91,7 +91,7 @@ compiler preprocessor (already done in the preconfigured projects provided with 
 
 @par Keywords
 
-Connectivity, USB Device, MSC, Mass Storage, Full Speed, High Speed, BOT, SCSI, SD Card, Removable drive,
+Connectivity, USB_Device, USB, MSC, Mass Storage, Full Speed, High Speed, BOT, SCSI, SD Card, Removable drive,
 Write, Read, Format
 
 @Note If the user code size exceeds the DTCM-RAM size or starts from internal cacheable memories (SRAM1 and SRAM2),that is shared between several processors,

@@ -87,7 +87,7 @@ internally a 48-MHz clock, which is generated from an integrated PLL.
 
 @par Keywords
 
-Connectivity, USB Device, HID, Full Speed, High Speed, Joystick, Mouse, Power Management
+Connectivity, USB_Device, USB, HID, Full Speed, High Speed, Joystick, Mouse, Power Management
 
 @Note If the user code size exceeds the DTCM-RAM size or starts from internal cacheable memories (SRAM1 and SRAM2),that is shared between several processors,
       then it is highly recommended to enable the CPU cache and maintain its coherence at application level.

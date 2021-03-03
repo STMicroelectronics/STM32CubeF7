@@ -82,7 +82,7 @@ acceleration of different draws (Bitmaps, Memdevs, ColorFill...).
 
 @par Keywords
 
-Display, STemWin, Acceleration, DMA2D, GUI, Demonstration
+Display, Graphic, STemWin, Acceleration, DMA2D, GUI, Demonstration
 
 @par Directory contents 
 

@@ -41,7 +41,7 @@
 									<listOptionValue builtIn="false" value="../../../../../../../../Drivers/BSP/STM32F7xx_Nucleo_144"/>
 									<listOptionValue builtIn="false" value="../../../../../../../../Drivers/BSP/Components/Common"/>
 									<listOptionValue builtIn="false" value="../../../../../../../../Drivers/BSP/Components"/>
-									<listOptionValue builtIn="false" value="../../../../../../../../Middlewares/Third_Party/LwIP/src/include/                                                        "/>
+									<listOptionValue builtIn="false" value="../../../../../../../../Middlewares/Third_Party/LwIP/src/include/"/>
 									<listOptionValue builtIn="false" value="../../../../../../../../Middlewares/Third_Party/LwIP/system"/>
 									<listOptionValue builtIn="false" value="../../../../../../../../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1"/>
 									<listOptionValue builtIn="false" value="../../../../../../../../Middlewares/Third_Party/FreeRTOS/Source"/>

@@ -161,10 +161,5 @@
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/BSP/Components/st7789h2/st7789h2.c</location>
 		</link>
-		<link>
-			<name />
-			<type />
-			<location />
-		</link>
 	</linkedResources>
 </projectDescription>

@@ -79,7 +79,7 @@ http://www.adafruit.com/blog/2012/04/26/new-product-adafruit-1-8-18-bit-color-tf
 
 @par Keywords
 
-Connectivity, USB Device, MSC, Mass Storage, Full Speed, High Speed, BOT, SCSI, SD Card, Removable drive,
+Connectivity, USB_Device, USB, MSC, Mass Storage, Full Speed, High Speed, BOT, SCSI, SD Card, Removable drive,
 Write, Read, Format
 
 @Note If the user code size exceeds the DTCM-RAM size or starts from internal cacheable memories (SRAM1 and SRAM2),that is shared between several processors,

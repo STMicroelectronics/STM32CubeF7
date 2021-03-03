@@ -72,7 +72,7 @@ LED5 and LED6 are toggling continuously as a background task to indicate that th
 
 @par Keywords
 
-Display, STemWin, HelloWorld, LCD, GUI
+Display, Graphic, STemWin, HelloWorld, LCD, GUI
 
 @Note If the user code size exceeds the DTCM-RAM size or starts from internal cacheable memories (SRAM1 and SRAM2),that is shared between several processors,
       then it is highly recommended to enable the CPU cache and maintain its coherence at application level.

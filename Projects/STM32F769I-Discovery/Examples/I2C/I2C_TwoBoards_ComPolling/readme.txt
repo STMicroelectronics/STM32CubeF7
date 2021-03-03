@@ -87,7 +87,7 @@ transmission/reception process
 @note I2Cx instance used and associated resources can be updated in "main.h"
 file depending hardware configuration used.
 
- @note Timeout is set to 10 Seconds which means that if no communication occurs 
+@note Timeout is set to 10 Seconds which means that if no communication occurs 
        during 10 Seconds, a Timeout Error will be generated.
 
 

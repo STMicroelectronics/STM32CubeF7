@@ -100,7 +100,6 @@ EEPROM, Emulation, Flash, Program, Erase, Sectors, OPCODE
 
 @par Directory contents 
 
-
  - EEPROM_Emulation/Inc/stm32f7xx_hal_conf.h          HAL Configuration file
  - EEPROM_Emulation/Inc/main.h                        Header for main.c module
  - EEPROM_Emulation/Inc/eeprom.h                      Header for eeprom.c module 

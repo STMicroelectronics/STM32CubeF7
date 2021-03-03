@@ -61,12 +61,12 @@
   * @{
   */
 
-#if defined ( __GNUC__ )
+#if defined ( __GNUC__ ) || (defined (__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)) /* GNU and ARM Compiler 6 compilers */
 #ifndef __weak
 #define __weak __attribute__((weak))
 #endif /* __weak */
-#endif /* __GNUC__ */
-      
+#endif /* __GNUC__ || (__ARMCC_VERSION && (__ARMCC_VERSION >= 6010050)) */
+
 /**
  *  @brief LCD_OrientationTypeDef
  *  Possible values of Display Orientation

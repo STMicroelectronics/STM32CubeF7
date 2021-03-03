@@ -100,7 +100,7 @@ the RTOS is enabled by setting, #define USBH_USE_OS      1
 
 @par Keywords
 
-Connectivity, FreeRTOS, USB Host, MSC, Mass Storage, Full Speed, High Speed, BOT, SCSI, Removable drive, FatFs,
+Connectivity, USB_Host, USB, FreeRTOS, MSC, Mass Storage, Full Speed, High Speed, BOT, SCSI, Removable drive, FatFs,
 File system, Write, Read, Format
 
 @Note If the user code size exceeds the DTCM-RAM size or starts from internal cacheable memories (SRAM1 and SRAM2),that is shared between several processors,

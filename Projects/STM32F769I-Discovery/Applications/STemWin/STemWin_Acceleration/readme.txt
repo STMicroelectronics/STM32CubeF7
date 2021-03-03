@@ -71,7 +71,7 @@ acceleration of different draws (Bitmaps, Memdevs, ColorFill...).
 
 @par Keywords
 
-Display, STemWin, Acceleration, DMA2D, GUI, Demonstration
+Display, Graphic, STemWin, Acceleration, LCD, DMA2D, GUI, Demonstration
 
 @Note If the user code size exceeds the DTCM-RAM size or starts from internal cacheable memories (SRAM1 and SRAM2),that is shared between several processors,
       then it is highly recommended to enable the CPU cache and maintain its coherence at application level.

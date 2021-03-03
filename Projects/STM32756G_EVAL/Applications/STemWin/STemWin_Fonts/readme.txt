@@ -115,7 +115,7 @@ Font generation
 
 @par Keywords
 
-Display, STemWin, Animation, HelloWorld, LCD, GUI, Demonstration, Touch screen
+Display, Graphic, STemWin, Animation, HelloWorld, LCD, GUI, Demonstration, Touch screen
 
 @par Directory contents 
 

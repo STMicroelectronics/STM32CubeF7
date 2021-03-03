@@ -181,10 +181,5 @@
 			<type>1</type>
 			<location>PARENT-2-PROJECT_LOC/Src/button.c</location>
 		</link>
-		<link>
-			<name />
-			<type />
-			<location />
-		</link>
 	</linkedResources>
 </projectDescription>

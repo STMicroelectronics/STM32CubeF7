@@ -1,5 +1,5 @@
 /**
-  @page Menu Launcher Firmware  Readme file
+  @page Menu_Launcher Firmware  Readme file
 
   @verbatim
   ******************************************************************************

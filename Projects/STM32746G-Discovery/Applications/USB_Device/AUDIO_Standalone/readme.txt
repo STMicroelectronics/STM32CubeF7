@@ -108,7 +108,7 @@ requirements, such as:
          
 @par Keywords
 
-USB Device, Audio, Streaming, SAI, Full speed, PCM
+Connectivity, USB_Device, USB, Audio, Streaming, SAI, Full speed, PCM
          
 @Note If the user code size exceeds the DTCM-RAM size or starts from internal cacheable memories (SRAM1 and SRAM2),that is shared between several processors,
       then it is highly recommended to enable the CPU cache and maintain its coherence at application level.

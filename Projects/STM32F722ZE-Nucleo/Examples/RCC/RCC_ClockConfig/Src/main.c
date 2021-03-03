@@ -206,8 +206,8 @@ static void SystemClock_Config(void)
   *            AHB Prescaler                  = 1
   *            APB1 Prescaler                 = 4
   *            APB2 Prescaler                 = 2
-  *            HSE Frequency(Hz)              = 25000000
-  *            PLL_M                          = 25
+  *            HSE Frequency(Hz)              = 8000000
+  *            PLL_M                          = 8
   *            PLL_N                          = 432
   *            PLL_P                          = 2
   *            PLL_Q                          = 9

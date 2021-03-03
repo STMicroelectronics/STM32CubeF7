@@ -81,7 +81,7 @@ For more details about the STM32Cube USB Device library, please refer to UM1734
 
 @par Keywords
 
-Connectivity, USB Device, HID, Full Speed, High Speed, CDC, HID, OTG, enumeration, jostick, mouse
+Connectivity, USB_Device, USB, HID, Full Speed, High Speed, CDC, HID, OTG, enumeration, Joystick, mouse
 
 @Note If the user code size exceeds the DTCM-RAM size or starts from internal cacheable memories (SRAM1 and SRAM2),that is shared between several processors,
       then it is highly recommended to enable the CPU cache and maintain its coherence at application level.

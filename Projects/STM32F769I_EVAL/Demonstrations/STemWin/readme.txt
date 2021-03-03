@@ -1,9 +1,9 @@
 /**
-  @page Demo   STM32F769I-EVAL Demonstration Firmware
+  @page STemWin   STM32F769I-EVAL STemWin Demonstration Firmware
  
   @verbatim
   ******************************************************************************
-  * @file    Demonstrations/readme.txt 
+  * @file    Demonstrations/STemWin/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of STM32F769I-EVAL Demonstration
   ******************************************************************************

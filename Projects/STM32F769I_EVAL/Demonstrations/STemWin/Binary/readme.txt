@@ -6,7 +6,7 @@
   ******************************************************************************
   */
 
-The binary demonstration files are available from the STM32469I-EVAL or STM32479I-EVAL pages in the Binary Resources section.
+The binary demonstration files are available from the STM32469I-EVAL or STM32479I-EVAL pages in the Documentation/Compiled demos section.
 
 Please refer to: https://www.st.com/en/evaluation-tools/stm32469i-eval.html
                  https://www.st.com/en/evaluation-tools/stm32479i-eval.html

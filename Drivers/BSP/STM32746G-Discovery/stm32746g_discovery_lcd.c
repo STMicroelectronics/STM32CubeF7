@@ -1325,7 +1325,7 @@ __weak void BSP_LCD_MspInit(LTDC_HandleTypeDef *hltdc, void *Params)
 
   /* GPIOI LTDC alternate configuration */
   gpio_init_structure.Pin       = GPIO_PIN_9 | GPIO_PIN_10 | \
-                                  GPIO_PIN_13 | GPIO_PIN_14 | GPIO_PIN_15;
+                                  GPIO_PIN_14 | GPIO_PIN_15;
   gpio_init_structure.Mode      = GPIO_MODE_AF_PP;
   gpio_init_structure.Alternate = GPIO_AF14_LTDC;
   HAL_GPIO_Init(GPIOI, &gpio_init_structure);

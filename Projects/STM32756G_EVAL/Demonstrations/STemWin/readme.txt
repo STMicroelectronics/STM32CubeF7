@@ -1,9 +1,9 @@
 /**
-  @page Demo   STM327x6G-EVAL Demonstration Firmware
+  @page STemWin   STM327x6G-EVAL STemWin Demonstration Firmware
  
   @verbatim
   ******************************************************************************
-  * @file    Demonstrations/readme.txt 
+  * @file    Demonstrations/STemWin/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of STM327x6G-EVAL Demonstration
   ******************************************************************************
@@ -58,7 +58,7 @@ STemWin and the FreeRTOS real time operating system and uses almost the whole ST
 capability to offer a large scope of usage based on the STM32Cube HAL BSP and several
 middleware components.
 
-@par Demonstration Overview
+@par Demo Overview
 
 The STM32 F7 demonstration is running on STM32756G/STM32746 evaluation boards 
   
