@@ -656,6 +656,7 @@ HAL_StatusTypeDef HAL_SD_ReadBlocks(SD_HandleTypeDef *hsd, uint8_t *pData, uint3
           tempbuff++;
           dataremaining--;
         }
+        continue;
       }
 
       if(((HAL_GetTick()-tickstart) >=  Timeout) || (Timeout == 0U))
