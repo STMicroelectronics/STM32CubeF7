@@ -7,13 +7,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2016 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2016 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -55,14 +54,14 @@ int32_t Scratch[SCRATCH_BUFF_SIZE];
 uint32_t  audio_rec_buffer_state;
 uint8_t ChannelNumber = 0;
 /* Buffer containing the PCM samples coming from the microphone */
-int16_t RecordBuffer[RECORD_BUFFER_SIZE];
+uint16_t RecordBuffer[RECORD_BUFFER_SIZE];
 
 /* Buffer used to stream the recorded PCM samples towards the audio codec. */
-int16_t PlaybackBuffer[RECORD_BUFFER_SIZE];
+uint16_t PlaybackBuffer[RECORD_BUFFER_SIZE];
 
 /* Private function prototypes -----------------------------------------------*/
 static void AudioLoopback_SetHint(void);
-static void CopyBuffer(int16_t *pbuffer1, int16_t *pbuffer2, uint16_t BufferSize);
+static void CopyBuffer(uint16_t *pbuffer1, uint16_t *pbuffer2, uint16_t BufferSize);
 /* Private functions ---------------------------------------------------------*/
 
 /**
@@ -174,7 +173,7 @@ void AudioLoopback_demo (void)
   * @param  None
   * @retval None
   */
-static void CopyBuffer(int16_t *pbuffer1, int16_t *pbuffer2, uint16_t BufferSize)
+static void CopyBuffer(uint16_t *pbuffer1, uint16_t *pbuffer2, uint16_t BufferSize)
 {
   uint32_t i = 0;
   for(i = 0; i < BufferSize; i++)
@@ -260,4 +259,3 @@ void BSP_AUDIO_IN_Error_CallBack(void)
   * @}
   */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

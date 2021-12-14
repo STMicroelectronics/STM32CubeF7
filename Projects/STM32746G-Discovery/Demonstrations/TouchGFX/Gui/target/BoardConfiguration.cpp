@@ -2,17 +2,18 @@
   ******************************************************************************
   * This file is part of the TouchGFX 4.10.0 distribution.
   *
-  * <h2><center>&copy; Copyright (c) 2018 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * @attention
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
+  * Copyright (c) 2018 STMicroelectronics.
+  * All rights reserved.
+  *
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
-  
+
 
 
 #include <common/TouchGFXInit.hpp>
@@ -114,7 +115,7 @@ static void LCD_MspInit()
     gpio_init_structure.Mode      = GPIO_MODE_AF_PP;
     gpio_init_structure.Pull      = GPIO_NOPULL;
     gpio_init_structure.Speed     = GPIO_SPEED_FAST;
-    gpio_init_structure.Alternate = GPIO_AF14_LTDC;  
+    gpio_init_structure.Alternate = GPIO_AF14_LTDC;
     HAL_GPIO_Init(GPIOE, &gpio_init_structure);
 
     /* GPIOG configuration */
@@ -130,16 +131,16 @@ static void LCD_MspInit()
     gpio_init_structure.Alternate = GPIO_AF14_LTDC;
     HAL_GPIO_Init(GPIOI, &gpio_init_structure);
 
-    /* GPIOJ configuration */  
+    /* GPIOJ configuration */
     gpio_init_structure.Pin       = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 |
                                     GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_7 |
                                     GPIO_PIN_8 | GPIO_PIN_9 | GPIO_PIN_10 | GPIO_PIN_11 |
                                     GPIO_PIN_13 | GPIO_PIN_14 | GPIO_PIN_15;
     gpio_init_structure.Mode      = GPIO_MODE_AF_PP;
     gpio_init_structure.Alternate = GPIO_AF14_LTDC;
-    HAL_GPIO_Init(GPIOJ, &gpio_init_structure);  
+    HAL_GPIO_Init(GPIOJ, &gpio_init_structure);
 
-    /* GPIOK configuration */  
+    /* GPIOK configuration */
     gpio_init_structure.Pin       = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_4 |
                                     GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_7;
     gpio_init_structure.Mode      = GPIO_MODE_AF_PP;
@@ -171,11 +172,11 @@ uint32_t LCD_GetYSize(void)
 
 /**
   * @brief  Initializes the LCD layers.
-  * @param  LayerIndex: the layer foreground or background. 
+  * @param  LayerIndex: the layer foreground or background.
   * @param  FB_Address: the layer frame buffer.
   */
 static void LCD_LayerDefaultInit(uint16_t LayerIndex, uint32_t FB_Address)
-{     
+{
     LTDC_LayerCfgTypeDef Layercfg;
 
     /* Layer Init */
@@ -243,8 +244,8 @@ static uint8_t LCD_Init(void)
 
     /* Polarity */
     hltdc.Init.HSPolarity = LTDC_HSPOLARITY_AL;
-    hltdc.Init.VSPolarity = LTDC_VSPOLARITY_AL; 
-    hltdc.Init.DEPolarity = LTDC_DEPOLARITY_AL;  
+    hltdc.Init.VSPolarity = LTDC_VSPOLARITY_AL;
+    hltdc.Init.DEPolarity = LTDC_DEPOLARITY_AL;
     hltdc.Init.PCPolarity = LTDC_PCPOLARITY_IPC;
     hltdc.Instance = LTDC;
 
@@ -290,11 +291,24 @@ void hw_init()
 
     HAL_MPU_Disable();
 
+    MPU_Region_InitTypeDef MPU_InitStruct;
+    MPU_InitStruct.Enable = MPU_REGION_ENABLE;
+    MPU_InitStruct.BaseAddress = 0x00;
+    MPU_InitStruct.Size = MPU_REGION_SIZE_4GB;
+    MPU_InitStruct.AccessPermission = MPU_REGION_NO_ACCESS;
+    MPU_InitStruct.IsBufferable = MPU_ACCESS_NOT_BUFFERABLE;
+    MPU_InitStruct.IsCacheable = MPU_ACCESS_NOT_CACHEABLE;
+    MPU_InitStruct.IsShareable = MPU_ACCESS_SHAREABLE;
+    MPU_InitStruct.Number = MPU_REGION_NUMBER0;
+    MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL0;
+    MPU_InitStruct.SubRegionDisable = 0x87;
+    MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_DISABLE;
+    HAL_MPU_ConfigRegion(&MPU_InitStruct);
+
     /* Configure unused area of QSPI region as strongly ordered.
      * This is *important* to avoid unintentional fetches from illegal
      * addresses due to cache/speculation which would halt the MCU.
      */
-    MPU_Region_InitTypeDef MPU_InitStruct;
     MPU_InitStruct.Enable = MPU_REGION_ENABLE;
     MPU_InitStruct.BaseAddress = 0x90000000;
     MPU_InitStruct.Size = MPU_REGION_SIZE_256MB;
@@ -302,7 +316,7 @@ void hw_init()
     MPU_InitStruct.IsBufferable = MPU_ACCESS_NOT_BUFFERABLE;
     MPU_InitStruct.IsCacheable = MPU_ACCESS_NOT_CACHEABLE;
     MPU_InitStruct.IsShareable = MPU_ACCESS_NOT_SHAREABLE;
-    MPU_InitStruct.Number = MPU_REGION_NUMBER2;
+    MPU_InitStruct.Number = MPU_REGION_NUMBER3;
     MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL0;
     MPU_InitStruct.SubRegionDisable = 0x00;
     MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_ENABLE;
@@ -316,7 +330,7 @@ void hw_init()
     MPU_InitStruct.IsBufferable = MPU_ACCESS_NOT_BUFFERABLE;
     MPU_InitStruct.IsCacheable = MPU_ACCESS_CACHEABLE;
     MPU_InitStruct.IsShareable = MPU_ACCESS_NOT_SHAREABLE;
-    MPU_InitStruct.Number = MPU_REGION_NUMBER3;
+    MPU_InitStruct.Number = MPU_REGION_NUMBER4;
     MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL0;
     MPU_InitStruct.SubRegionDisable = 0x00;
     MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_ENABLE;
@@ -330,9 +344,23 @@ void hw_init()
     MPU_InitStruct.IsBufferable = MPU_ACCESS_NOT_BUFFERABLE;
     MPU_InitStruct.IsCacheable = MPU_ACCESS_CACHEABLE;
     MPU_InitStruct.IsShareable = MPU_ACCESS_SHAREABLE;
-    MPU_InitStruct.Number = MPU_REGION_NUMBER0;
+    MPU_InitStruct.Number = MPU_REGION_NUMBER1;
     MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL0;
     MPU_InitStruct.SubRegionDisable = 0x00;
+    MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_DISABLE;
+    HAL_MPU_ConfigRegion(&MPU_InitStruct);
+
+    /* Configure the MPU attributes FMC control registers */
+    MPU_InitStruct.Enable = MPU_REGION_ENABLE;
+    MPU_InitStruct.BaseAddress = 0xA0000000;
+    MPU_InitStruct.Size = MPU_REGION_SIZE_8KB;
+    MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
+    MPU_InitStruct.IsBufferable = MPU_ACCESS_BUFFERABLE;
+    MPU_InitStruct.IsCacheable = MPU_ACCESS_NOT_CACHEABLE;
+    MPU_InitStruct.IsShareable = MPU_ACCESS_SHAREABLE;
+    MPU_InitStruct.Number = MPU_REGION_NUMBER2;
+    MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL0;
+    MPU_InitStruct.SubRegionDisable = 0x0;
     MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_DISABLE;
     HAL_MPU_ConfigRegion(&MPU_InitStruct);
 

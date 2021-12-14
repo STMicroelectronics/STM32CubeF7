@@ -9,16 +9,15 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2018 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2018 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
-   @endverbatim
+  @endverbatim
 
 @par Application Description
 
@@ -72,7 +71,7 @@ on STM32Cube with RTOS".
 
 @par Keywords
 
-RTOS, FreeRTOS, Thread, Delay
+RTOS, FreeRTOS, Threading, Delay
 
 @Note If the user code size exceeds the DTCM-RAM size or starts from internal cacheable memories (SRAM1 and SRAM2),that is shared between several processors,
       then it is highly recommended to enable the CPU cache and maintain its coherence at application level.
@@ -141,5 +140,5 @@ In order to load the application to the external memory:
         - If BINARY_AREA is USE_SDCARD then copy the Project.bin to a micro-SD to be plugged on CN3 and reset the board.
         - In order to debug the  external memory application, user shall attach the debugger, and perform a reset
   
- * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+
  */

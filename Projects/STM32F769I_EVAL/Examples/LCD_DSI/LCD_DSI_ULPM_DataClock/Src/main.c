@@ -8,13 +8,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2016 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2016 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -42,9 +41,11 @@ extern LTDC_HandleTypeDef  hltdc_eval;
 static DMA2D_HandleTypeDef   hdma2d;
 
 uint32_t frameCnt = 0;
+__IO uint8_t ltdc_lowpower_request = 0;
 char str_display[60] = "";
 
 /* Private function prototypes -----------------------------------------------*/
+static void MPU_Config(void);
 static void SystemClock_Config(void);
 static void OnError_Handler(uint32_t condition);
 static uint8_t CheckForUserInput(void);
@@ -75,6 +76,9 @@ static void OnError_Handler(uint32_t condition)
 int main(void)
 {
   uint8_t  lcd_status = LCD_OK;
+
+  /* Configure the MPU attributes */
+  MPU_Config();
 
   /* Enable the CPU Cache */
   CPU_CACHE_Enable();
@@ -135,50 +139,43 @@ int main(void)
   /* Infinite loop */
   while (1)
   {
-    /* Clear previous line */
-    BSP_LCD_ClearStringLine(460);
-    
     /* New text to display */
     sprintf(str_display, ">> Frame Nb : %lu", frameCnt);
-    
+
     /* Print updated frame number */
     BSP_LCD_DisplayStringAt(0, 460, (uint8_t *)str_display, CENTER_MODE);
-    
+
     if (CheckForUserInput() > 0)
     {
+      BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
       /* Clear previous line */
+      BSP_LCD_FillRect(0, 440, BSP_LCD_GetXSize(), ((sFONT *)BSP_LCD_GetFont())->Height);
       BSP_LCD_SetTextColor(LCD_COLOR_GREEN);
-      BSP_LCD_ClearStringLine(440);
       BSP_LCD_DisplayStringAt(0, 440, (uint8_t *) "Enter ULPM - switch Off LCD 6 seconds", CENTER_MODE);
       BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-      
-      /* Display Off with ULPM management Data and clock lane integrated */
+      HAL_Delay(1000);
+
+      /* Indicate that the LTDC is Data and clock lane integrated */
       BSP_LCD_DisplayOff();
-      
-      HAL_Delay(1000); 
-      
-      /* Switch Off bit LTDCEN */
-      __HAL_LTDC_DISABLE(&hltdc_eval); 
-      /* Switch Off LTDC clock */
-      __HAL_RCC_LTDC_CLK_DISABLE();  
-      
-      
+
+      ltdc_lowpower_request = 1;
+      /* wait for vertical blanking period to proceed with disabling the LTDC clock and entering DSI to Ultra Low Power Mode */
+      /* Note that the flag ltdc_lowpower_request is reset and the LTDC is disabled within the HAL_LTDC_LineEventCallback */
+      while(ltdc_lowpower_request != 0)
+      {
+      }
+
       /* Enter ultra low power mode (data and clock lanes) */
       /* This means : laneByteClock is derived from PLL.PLLR : ie ck_plldsi @ 60 MHz = 360 MHz / PLLR=6 */
       /* DSI State machine start and wait until ULPM state for Data and Clock lanes, then when reached, switch off PLL DPHY */
       HAL_DSI_EnterULPM(&hdsi_eval);
       BSP_LED_On(LED1);
-      
+
       HAL_Delay(6000);
-      
+
       BSP_LCD_ClearStringLine(440);
       BSP_LCD_DisplayStringAt(0, 440, (uint8_t *) " Exited ULPM with success - Press To enter Again ULPM. ", CENTER_MODE);
-      
-      /* Switch back On LTDC clock  */
-      __HAL_RCC_LTDC_CLK_ENABLE(); 
-      /* Switch On bit LTDCEN */
-      __HAL_LTDC_ENABLE(&hltdc_eval);
-      
+
       /* Exit ultra low power mode (data and clock lanes)
       * This means : PLL DPHY is first restarted and wait until locked with its initial settings
       * DSI State machine ULPM Out start and wait until ULPM state is Out for Data and Clock lanes
@@ -186,7 +183,11 @@ int main(void)
       */
       HAL_DSI_ExitULPM(&hdsi_eval);
       BSP_LED_Off(LED1);
-      
+      /* Switch back On LTDC clock  */
+      __HAL_RCC_LTDC_CLK_ENABLE(); 
+      /* Switch On bit LTDCEN */
+      __HAL_LTDC_ENABLE(&hltdc_eval);
+
       /* Display On with ULPM exit Data and clock lane integrated */
       BSP_LCD_DisplayOn();
     }
@@ -201,10 +202,22 @@ int main(void)
   */
 void HAL_LTDC_LineEventCallback(LTDC_HandleTypeDef *hltdc)
 {
-    /* Increment frame count */
-    frameCnt++;
-    
-    HAL_LTDC_ProgramLineEvent(hltdc, 0);
+  HAL_LTDC_ProgramLineEvent(hltdc, 0);
+
+  if(ltdc_lowpower_request == 0)
+  {
+  /* Increment frame count */
+  frameCnt++;
+  }
+  else
+  {
+    /* Switch Off bit LTDCEN */
+    __HAL_LTDC_DISABLE(&hltdc_eval);
+    /* Switch Off LTDC clock */
+    __HAL_RCC_LTDC_CLK_DISABLE();
+    /* Reset the ltdc_lowpower_request*/
+    ltdc_lowpower_request = 0;
+  }
 }
 
 
@@ -361,6 +374,68 @@ static void CPU_CACHE_Enable(void)
   /* Enable D-Cache */
   SCB_EnableDCache();
 }
+
+/**
+  * @brief  Configure the MPU attributes
+  * @param  None
+  * @retval None
+  */
+static void MPU_Config(void)
+{
+  MPU_Region_InitTypeDef MPU_InitStruct;
+
+  /* Disable the MPU */
+  HAL_MPU_Disable();
+
+  /* Configure the MPU as Strongly ordered for not defined regions */
+  MPU_InitStruct.Enable = MPU_REGION_ENABLE;
+  MPU_InitStruct.BaseAddress = 0x00;
+  MPU_InitStruct.Size = MPU_REGION_SIZE_4GB;
+  MPU_InitStruct.AccessPermission = MPU_REGION_NO_ACCESS;
+  MPU_InitStruct.IsBufferable = MPU_ACCESS_NOT_BUFFERABLE;
+  MPU_InitStruct.IsCacheable = MPU_ACCESS_NOT_CACHEABLE;
+  MPU_InitStruct.IsShareable = MPU_ACCESS_SHAREABLE;
+  MPU_InitStruct.Number = MPU_REGION_NUMBER0;
+  MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL0;
+  MPU_InitStruct.SubRegionDisable = 0x87;
+  MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_DISABLE;
+
+  HAL_MPU_ConfigRegion(&MPU_InitStruct);
+
+  /* Configure the MPU attributes as WT for SDRAM */
+  MPU_InitStruct.Enable = MPU_REGION_ENABLE;
+  MPU_InitStruct.BaseAddress = 0xC0000000;
+  MPU_InitStruct.Size = MPU_REGION_SIZE_32MB;
+  MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
+  MPU_InitStruct.IsBufferable = MPU_ACCESS_NOT_BUFFERABLE;
+  MPU_InitStruct.IsCacheable = MPU_ACCESS_CACHEABLE;
+  MPU_InitStruct.IsShareable = MPU_ACCESS_NOT_SHAREABLE;
+  MPU_InitStruct.Number = MPU_REGION_NUMBER1;
+  MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL0;
+  MPU_InitStruct.SubRegionDisable = 0x00;
+  MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_ENABLE;
+
+  HAL_MPU_ConfigRegion(&MPU_InitStruct);
+
+  /* Configure the MPU attributes FMC control registers */
+  MPU_InitStruct.Enable = MPU_REGION_ENABLE;
+  MPU_InitStruct.BaseAddress = 0xA0000000;
+  MPU_InitStruct.Size = MPU_REGION_SIZE_8KB;
+  MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
+  MPU_InitStruct.IsBufferable = MPU_ACCESS_BUFFERABLE;
+  MPU_InitStruct.IsCacheable = MPU_ACCESS_NOT_CACHEABLE;
+  MPU_InitStruct.IsShareable = MPU_ACCESS_SHAREABLE;
+  MPU_InitStruct.Number = MPU_REGION_NUMBER2;
+  MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL0;
+  MPU_InitStruct.SubRegionDisable = 0x0;
+  MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_DISABLE;
+  
+  HAL_MPU_ConfigRegion(&MPU_InitStruct);
+
+  /* Enable the MPU */
+  HAL_MPU_Enable(MPU_PRIVILEGED_DEFAULT);
+}
+
 #ifdef  USE_FULL_ASSERT
 
 /**
@@ -390,4 +465,3 @@ void assert_failed(uint8_t *file, uint32_t line)
   * @}
   */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

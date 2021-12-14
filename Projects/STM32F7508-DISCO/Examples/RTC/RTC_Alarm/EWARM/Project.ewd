@@ -113,7 +113,7 @@
         </option>
         <option>
           <name>FlashLoadersV3</name>
-          <state>$TOOLKIT_DIR$\config\flashloader\ST\FlashSTM32F7xx_STM32F7508-DISCO.board</state>
+          <state>$TOOLKIT_DIR$\config\flashloader\ST\FlashSTM32F750x8.board</state>
         </option>
         <option>
           <name>OCImagesSuppressCheck1</name>

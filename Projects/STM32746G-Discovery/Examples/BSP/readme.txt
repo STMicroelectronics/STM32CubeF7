@@ -7,13 +7,14 @@
   * @author  MCD Application Team
   * @brief   Description of the BSP example.
   ******************************************************************************
+  * @attention
   *
-  * Copyright (c) 2016 STMicroelectronics. All rights reserved.
+  * Copyright (c) 2016 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                       opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   @endverbatim
@@ -88,7 +89,7 @@ for external flash memory using QSPI communication.
       
 @par Keywords
 
-BSP, LCD, Touchscreen, PSRAM, DMA, QSPI, Erase, Read, Write, Audio play, Record, MEMS, Audio Codec, DFSDM,
+BSP, LCD, Touchscreen, PSRAM, DMA, QUADSPI, Erase, Read, Write, Audio play, Record, MEMS, Audio Codec, DFSDM,
 I2S, Microphone, Headphones
 
 @Note If the user code size exceeds the DTCM-RAM size or starts from internal cacheable memories (SRAM1 and SRAM2),that is shared between several processors,
@@ -146,5 +147,5 @@ In order to make the program work, you must do the following :
         end address to 0x0807FFFF. This is already done for the example project
  - Connect a headphone and a speaker to the audio jack connectors (CN10).
 
- * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+
  */

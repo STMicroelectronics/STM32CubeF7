@@ -7,13 +7,14 @@
   * @author  MCD Application Team
   * @brief   Description of the code execution from FMC memory example.
   ******************************************************************************
+  * @attention
   *
-  * Copyright (c) 2016 STMicroelectronics. All rights reserved.
+  * Copyright (c) 2016 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                       opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   @endverbatim
@@ -95,10 +96,11 @@ The SRAM external flash loader is not integrated with supported toolchains, it’s
 ST-Link Utility V3.9.0
 To load the example, use STM32 ST-Link Utility to program both internal Flash and external SRAM memory:
 1- Open STM32 ST-Link Utility V3.9.0, click on "External Loader" from the bar menu then check 
-   "IS61WV10124BLL_STM32F769I-EVAL" box 
+   "IS61WV102416BLL_STM32769I-EVAL" box
 2- Connect the STM32F769I-EVAL board to PC with USB cable through CN22
 3- Use "STM32F769I_EVAL.hex" file provided under “Binary” with STM32 ST-Link Utility
-   to program both internal Flash and external SRAM memory
+   to program both internal Flash and external SRAM memory.
+   Ensure the "Skip Flash Erase" box is checked.
 
 @par How to use it ? 
 
@@ -107,5 +109,5 @@ In order to make the program work, you must do the following :
  - Rebuild all files and load your image into target memory
  - Run the example
 
- * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+
  */

@@ -6,13 +6,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                      www.st.com/SLA0044
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -378,9 +377,9 @@ USBD_StatusTypeDef USBD_LL_Init(USBD_HandleTypeDef *pdev)
   (void)HAL_PCD_Init(&hpcd_USB_HS);
 
   (void)HAL_PCDEx_SetRxFiFo(&hpcd_USB_HS, 0x200);
-  (void)HAL_PCDEx_SetTxFiFo(&hpcd_USB_HS, 0, 0x10);
-  (void)HAL_PCDEx_SetTxFiFo(&hpcd_USB_HS, 1, 0x140);
-  (void)HAL_PCDEx_SetTxFiFo(&hpcd_USB_HS, 2, 0x10);
+  (void)HAL_PCDEx_SetTxFiFo(&hpcd_USB_HS, 0, 0x40);
+  (void)HAL_PCDEx_SetTxFiFo(&hpcd_USB_HS, 1, 0x100);
+  (void)HAL_PCDEx_SetTxFiFo(&hpcd_USB_HS, 2, 0x40);
 #endif
 
   return USBD_OK;
@@ -573,4 +572,3 @@ void USBD_LL_Delay(uint32_t Delay)
   HAL_Delay(Delay);
 }
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

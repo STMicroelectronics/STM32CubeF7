@@ -684,4 +684,3 @@ static void IAP_HTTP_writedata(char * ptr, uint32_t len)
 }
 #endif
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

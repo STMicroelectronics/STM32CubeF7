@@ -9,13 +9,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2018 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2018 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   @endverbatim
@@ -101,17 +100,22 @@ In order to load this demonstration to the external memory :
    - copy the audio and video files provided under "Utilities/Media/" in the USB disk
    - Plug USB disk on CN19 connector 
 
-@Note If the user code size exceeds the DTCM-RAM size or starts from internal cacheable memories (SRAM1 and SRAM2),that is shared between several processors,
-      then it is highly recommended to enable the CPU cache and maintain its coherence at application level.
-      The address and the size of cacheable buffers (shared between CPU and other masters)  must be properly updated to be aligned to cache line size (32 bytes).
+@par Keywords
+
+Demonstration, STemWin, FreeRTOS, RTOS, Audio record, wav, Video Player, avi, MP3, Audio player, Graphic,
+Game, System, CPU, VNC, SAI, QUADSPI, USB, Microphone
+
+@NoteÂ If the user code size exceeds the DTCM-RAM size or starts from internal cacheable memories (SRAM1 and SRAM2),that is shared between several processors,
+ Â Â Â Â Â then it is highly recommended to enable the CPU cache and maintain its coherence at application level.
+Â Â Â Â Â Â The address and the size of cacheable buffers (shared between CPU and other masters)  must be properly updated to be aligned to cache line size (32 bytes).
 
 @Note It is recommended to enable the cache and maintain its coherence, but depending on the use case
-      It is also possible to configure the MPU as "Write through", to guarantee the write access coherence.
-      In that case, the MPU must be configured as Cacheable/Bufferable/Not Shareable.
-      Even though the user must manage the cache coherence for read accesses.
-      Please refer to the AN4838 “Managing memory protection unit (MPU) in STM32 MCUs”
-      Please refer to the AN4839 “Level 1 cache on STM32F7 Series”
+Â Â Â Â Â  It is also possible to configure the MPU as "Write through", to guarantee the write access coherence.
+Â Â Â Â Â Â In that case, the MPU must be configured as Cacheable/Bufferable/Not Shareable.
+Â Â Â Â Â Â Even though the user must manage the cache coherence for read accesses.
+Â Â Â Â Â Â Please refer to the AN4838 Â“Managing memory protection unit (MPU) in STM32 MCUsÂ”
+Â Â Â Â Â Â Please refer to the AN4839 Â“Level 1 cache on STM32F7 SeriesÂ”
 
- * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+
  */
  

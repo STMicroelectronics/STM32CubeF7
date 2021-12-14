@@ -6,13 +6,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2016 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2016 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -150,7 +149,7 @@ extern "C"
 #define  TICK_INT_PRIORITY            0U  /* !< tick interrupt priority */
 #define  USE_RTOS                     0U
 #define  PREFETCH_ENABLE              1U
-#define  ART_ACCLERATOR_ENABLE        1U  /* To enable instruction cache and
+#define  ART_ACCELERATOR_ENABLE       1U  /* To enable instruction cache and
                                            * prefetch */
 
 #define  USE_HAL_ADC_REGISTER_CALLBACKS         0U /* ADC register callback disabled       */
@@ -537,4 +536,3 @@ extern "C"
 #endif                          /* __STM32F7xx_HAL_CONF_H */
 
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

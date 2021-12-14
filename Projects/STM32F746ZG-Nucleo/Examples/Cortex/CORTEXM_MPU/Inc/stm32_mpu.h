@@ -6,13 +6,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2016 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2016 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -32,9 +31,9 @@
 #define EXAMPLE_PERIPH_SIZE                      MPU_REGION_SIZE_512MB
 #define EXAMPLE_FLASH_ADDRESS_START              (0x08000000)
 #define EXAMPLE_FLASH_SIZE                       MPU_REGION_SIZE_256KB
-#define EXAMPLE_RAM_REGION_NUMBER                MPU_REGION_NUMBER0
-#define EXAMPLE_FLASH_REGION_NUMBER              MPU_REGION_NUMBER1
-#define EXAMPLE_PERIPH_REGION_NUMBER             MPU_REGION_NUMBER2
+#define EXAMPLE_RAM_REGION_NUMBER                MPU_REGION_NUMBER1
+#define EXAMPLE_FLASH_REGION_NUMBER              MPU_REGION_NUMBER2
+#define EXAMPLE_PERIPH_REGION_NUMBER             MPU_REGION_NUMBER3
 #define portMPU_REGION_READ_WRITE                MPU_REGION_FULL_ACCESS
 #define portMPU_REGION_PRIVILEGED_READ_ONLY      MPU_REGION_PRIV_RO
 #define portMPU_REGION_READ_ONLY                 MPU_REGION_PRIV_RO_URO
@@ -47,4 +46,3 @@ void MPU_AccessPermConfig(void);
 
 #endif /* __STM32_MPU_H */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

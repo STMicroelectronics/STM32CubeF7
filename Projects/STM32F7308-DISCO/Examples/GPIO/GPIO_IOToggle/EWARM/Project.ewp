@@ -89,7 +89,7 @@
         </option>
         <option>
           <name>OGChipSelectEditMenu</name>
-          <state>STM32F7308-DISCO	ST STM32F7308-DISCO</state>
+          <state>STM32F730I8	ST STM32F730I8</state>
         </option>
         <option>
           <name>GenLowLevelInterface</name>
@@ -149,7 +149,7 @@
         </option>
         <option>
           <name>GFPUDeviceSlave</name>
-          <state>STM32F7308-DISCO	ST STM32F7308-DISCO</state>
+          <state>STM32F730I8	ST STM32F730I8</state>
         </option>
         <option>
           <name>FPU2</name>
@@ -1061,7 +1061,7 @@
         </option>
         <option>
           <name>OGChipSelectEditMenu</name>
-          <state>STM32F7308-DISCO	ST STM32F7308-DISCO</state>
+          <state>STM32F730I8	ST STM32F730I8</state>
         </option>
         <option>
           <name>GenLowLevelInterface</name>
@@ -1121,7 +1121,7 @@
         </option>
         <option>
           <name>GFPUDeviceSlave</name>
-          <state>STM32F7308-DISCO	ST STM32F7308-DISCO</state>
+          <state>STM32F730I8	ST STM32F730I8</state>
         </option>
         <option>
           <name>FPU2</name>

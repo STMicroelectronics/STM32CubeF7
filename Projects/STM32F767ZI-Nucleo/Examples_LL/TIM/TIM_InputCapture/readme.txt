@@ -7,13 +7,14 @@
   * @author  MCD Application Team
   * @brief   Description of the TIM_InputCapture example.
   ******************************************************************************
+  * @attention
   *
-  * Copyright (c) 2016 STMicroelectronics. All rights reserved.
+  * Copyright (c) 2016 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                       opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   @endverbatim
@@ -45,6 +46,10 @@ TIM2_CH1 is configured to generate a PWM signal.  User push-button can be used t
 change the frequency of this signal from 4 kHz up to 22 kHz by steps of 2 kHz.
 It is then possible to run this example without a signal generator by connecting
 TIM2_CH1 to TIM1_CH1.
+
+@par Keywords
+
+Timers, DMA, Frequency, Input, Capture, External Signal, Measurement
 
 @Note If the user code size exceeds the DTCM-RAM size or starts from internal cacheable memories (SRAM1 and SRAM2),that is shared between several processors,
       then it is highly recommended to enable the CPU cache and maintain its coherence at application level.
@@ -86,5 +91,5 @@ In order to make the program work, you must do the following :
  - Rebuild all files and load your image into target memory
  - Run the example
 
- * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+
  */

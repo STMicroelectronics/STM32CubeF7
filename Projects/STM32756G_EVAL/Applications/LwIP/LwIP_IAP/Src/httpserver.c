@@ -67,7 +67,8 @@ typedef enum
 }htmlpageState;
 
 htmlpageState htmlpage;
-
+char  *ptr , *data;
+uint32_t DataOffset;
 static const char http_crnl_2[4] =
 /* "\r\n--" */
 {0xd, 0xa,0x2d,0x2d};
@@ -205,8 +206,8 @@ static err_t http_sent(void *arg, struct tcp_pcb *pcb, u16_t len)
 static err_t http_recv(void *arg, struct tcp_pcb *pcb,  struct pbuf *p, err_t err)
 {
   int32_t i,len=0;
-  uint32_t DataOffset, FilenameOffset;
-  char *data, *ptr, filename[35], login[LOGIN_SIZE+1];
+  uint32_t FilenameOffset;
+  char filename[35], login[LOGIN_SIZE+1];
   struct fs_file file = {0, 0};
   struct http_state *hs;
 
@@ -680,4 +681,3 @@ static void IAP_HTTP_writedata(char * ptr, uint32_t len)
 }
 #endif
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

@@ -89,7 +89,7 @@
         </option>
         <option>
           <name>OGChipSelectEditMenu</name>
-          <state>STM32F7508-DISCO	ST STM32F7508-DISCO</state>
+          <state>STM32F750N8	ST STM32F750N8</state>
         </option>
         <option>
           <name>GenLowLevelInterface</name>
@@ -149,7 +149,7 @@
         </option>
         <option>
           <name>GFPUDeviceSlave</name>
-          <state>STM32F7508-DISCO	ST STM32F7508-DISCO</state>
+          <state>STM32F750N8	ST STM32F750N8</state>
         </option>
         <option>
           <name>FPU2</name>
@@ -1062,7 +1062,7 @@
         </option>
         <option>
           <name>OGChipSelectEditMenu</name>
-          <state>STM32F7508-DISCO	ST STM32F7508-DISCO</state>
+          <state>STM32F750N8	ST STM32F750N8</state>
         </option>
         <option>
           <name>GenLowLevelInterface</name>
@@ -1122,7 +1122,7 @@
         </option>
         <option>
           <name>GFPUDeviceSlave</name>
-          <state>STM32F7508-DISCO	ST STM32F7508-DISCO</state>
+          <state>STM32F750N8	ST STM32F750N8</state>
         </option>
         <option>
           <name>FPU2</name>
@@ -2035,7 +2035,7 @@
         </option>
         <option>
           <name>OGChipSelectEditMenu</name>
-          <state>STM32F7508-DISCO	ST STM32F7508-DISCO</state>
+          <state>STM32F750N8	ST STM32F750N8</state>
         </option>
         <option>
           <name>GenLowLevelInterface</name>
@@ -2095,7 +2095,7 @@
         </option>
         <option>
           <name>GFPUDeviceSlave</name>
-          <state>STM32F7508-DISCO	ST STM32F7508-DISCO</state>
+          <state>STM32F750N8	ST STM32F750N8</state>
         </option>
         <option>
           <name>FPU2</name>

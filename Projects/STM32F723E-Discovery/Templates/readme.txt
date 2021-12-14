@@ -7,13 +7,14 @@
   * @author  MCD Application Team
   * @brief   Description of the Templates example.
   ******************************************************************************
+  * @attention
   *
-  * Copyright (c) 2016 STMicroelectronics. All rights reserved.
+  * Copyright (c) 2016 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                       opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   @endverbatim
@@ -96,5 +97,5 @@ In order to load the Flash_ITCM configuration, you must follow the instructions 
 - Use the corresponding hex file with ST-Link Utility to program ITCM Flash :
 - SW4STM32: "STM32F723E_DISCOVERY_ITCM-FLAH.hex"
 
- * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+
  */

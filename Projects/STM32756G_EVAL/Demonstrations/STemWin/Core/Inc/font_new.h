@@ -18982,4 +18982,3 @@ GUI_FLASH const GUI_FONT GUI_FontAvantGarde32 = {
   ,(void GUI_FLASH *)&GUI_FontAvantGarde32_Prop1
 };
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

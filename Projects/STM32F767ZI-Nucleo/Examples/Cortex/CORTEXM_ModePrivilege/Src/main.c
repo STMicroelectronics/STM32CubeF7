@@ -6,13 +6,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2016 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2016 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -31,9 +30,6 @@
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 #define SP_PROCESS_SIZE             0x200  /* Process stack size */
-
-/* Private function prototypes -----------------------------------------------*/
-static __INLINE  void __SVC(void);
 
 /* Private macro -------------------------------------------------------------*/
 #if defined ( __CC_ARM   )
@@ -59,6 +55,7 @@ __IO uint8_t PSPMemAlloc[SP_PROCESS_SIZE];
 __IO uint32_t Index = 0, PSPValue = 0, CurrentStack = 0, ThreadMode = 0;
 
 /* Private function prototypes -----------------------------------------------*/
+static __INLINE  void __SVC(void);
 void SystemClock_Config(void);
 static void CPU_CACHE_Enable(void);
 /* Private functions ---------------------------------------------------------*/
@@ -283,4 +280,3 @@ void assert_failed(uint8_t *file, uint32_t line)
   * @}
   */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

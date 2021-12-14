@@ -76,4 +76,3 @@ Purpose     : Configures emWins abilities, fonts etc.
 
 #endif  /* Avoid multiple inclusion */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

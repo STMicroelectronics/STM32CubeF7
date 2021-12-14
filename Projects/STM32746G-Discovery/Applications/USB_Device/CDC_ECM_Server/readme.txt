@@ -7,18 +7,18 @@
   * @author  MCD Application Team
   * @brief   Description of the LwIP http server over USB.
   ******************************************************************************
+  *
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                      www.st.com/SLA0044
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
-   @endverbatim
+  @endverbatim
 
 @par Application Description
 
@@ -54,6 +54,9 @@ Then, through the internet browser, open the link address 192.168.0.10 and the h
 
 For more details about LwIP and HTTP, refer to UM1713 "STM32Cube interfacing with LwIP and applications"
 
+@par Keywords
+
+Connectivity, USB_Device, USB, ECM, HTTP server, CDC, LWIP, TCP/IP, GRUB
 
 @par Hardware and Software environment
 
@@ -84,5 +87,5 @@ In order to make the program work, you must do the following :
  - Check that DK board is connected to a remote PC before running the application
  - Run the application
 
- * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+
  */

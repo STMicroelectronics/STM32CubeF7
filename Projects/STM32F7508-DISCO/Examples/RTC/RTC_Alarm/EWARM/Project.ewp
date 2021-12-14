@@ -89,7 +89,7 @@
         </option>
         <option>
           <name>OGChipSelectEditMenu</name>
-          <state>STM32F7508-DISCO	ST STM32F7508-DISCO</state>
+          <state>STM32F750N8	ST STM32F750N8</state>
         </option>
         <option>
           <name>GenLowLevelInterface</name>
@@ -149,7 +149,7 @@
         </option>
         <option>
           <name>GFPUDeviceSlave</name>
-          <state>STM32F7508-DISCO	ST STM32F7508-DISCO</state>
+          <state>STM32F750N8	ST STM32F750N8</state>
         </option>
         <option>
           <name>FPU2</name>
@@ -319,12 +319,13 @@
         <option>
           <name>CCIncludePath2</name>
           <state>$PROJ_DIR$\..\Inc</state>
+          <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\CMSIS\Include</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32F7xx\Include</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32F7xx_HAL_Driver\Inc</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32F7508-Discovery</state>
+          <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\Components</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Utilities</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Utilities\Fonts</state>
-          <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\Components</state>
         </option>
         <option>
           <name>CCStdIncCheck</name>

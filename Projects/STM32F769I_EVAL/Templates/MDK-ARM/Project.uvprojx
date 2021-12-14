@@ -1742,14 +1742,8 @@
       </component>
     </components>
     <files>
-      <file attr="config" category="source" condition="STM32F756_ARMCC" name="Drivers\CMSIS\Device\ST\STM32F7xx\Source\Templates\arm\startup_stm32f756xx.s" version="1.0.1">
-        <instance index="0" removed="1">RTE\Device\STM32F756ZGTx\startup_stm32f756xx.s</instance>
-        <component Cclass="Device" Cgroup="Startup" Cvendor="Keil" Cversion="1.0.1" condition="STM32F7 CMSIS"/>
-        <package name="STM32F7xx_DFP" schemaVersion="1.3" url="http://www.keil.com/pack" vendor="Keil" version="2.3.3"/>
-        <targetInfos/>
-      </file>
-      <file attr="config" category="source" name="Drivers\CMSIS\Device\ST\STM32F7xx\Source\Templates\system_stm32f7xx.c" version="1.0.1">
-        <instance index="0" removed="1">RTE\Device\STM32F756ZGTx\system_stm32f7xx.c</instance>
+      <file attr="config" category="source" condition="STM32F769_ARMCC" name="Drivers\CMSIS\Device\ST\STM32F7xx\Source\Templates\arm\startup_stm32f769xx.s" version="1.0.1">
+        <instance index="0" removed="1">RTE\Device\STM32F769NIHx\startup_stm32f769xx.s</instance>
         <component Cclass="Device" Cgroup="Startup" Cvendor="Keil" Cversion="1.0.1" condition="STM32F7 CMSIS"/>
         <package name="STM32F7xx_DFP" schemaVersion="1.3" url="http://www.keil.com/pack" vendor="Keil" version="2.3.3"/>
         <targetInfos/>

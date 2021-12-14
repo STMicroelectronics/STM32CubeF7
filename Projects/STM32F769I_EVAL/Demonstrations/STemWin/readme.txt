@@ -7,39 +7,14 @@
   * @author  MCD Application Team
   * @brief   Description of STM32F769I-EVAL Demonstration
   ******************************************************************************
+  * @attention
   *
-  * Copyright (c) 2016 STMicroelectronics International N.V. All rights reserved.
+  * Copyright (c) 2016 STMicroelectronics.
+  * All rights reserved.
   *
-  * Redistribution and use in source and binary forms, with or without 
-  * modification, are permitted, provided that the following conditions are met:
-  *
-  * 1. Redistribution of source code must retain the above copyright notice, 
-  *    this list of conditions and the following disclaimer.
-  * 2. Redistributions in binary form must reproduce the above copyright notice,
-  *    this list of conditions and the following disclaimer in the documentation
-  *    and/or other materials provided with the distribution.
-  * 3. Neither the name of STMicroelectronics nor the names of other 
-  *    contributors to this software may be used to endorse or promote products 
-  *    derived from this software without specific written permission.
-  * 4. This software, including modifications and/or derivative works of this 
-  *    software, must execute solely and exclusively on microcontroller or
-  *    microprocessor devices manufactured by or for STMicroelectronics.
-  * 5. Redistribution and use of this software other than as permitted under 
-  *    this license is void and will automatically terminate your rights under 
-  *    this license. 
-  *
-  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS" 
-  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT 
-  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
-  * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
-  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT 
-  * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-  * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
-  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
-  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
-  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
-  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   @endverbatim
@@ -66,7 +41,7 @@ Tow flavours of the Demonstration binaries are available:
      is provided within the STM32Cube_FW_F7 package. Its modules are listed below.
   - 'STM32769I-EVAL_DEMO_V1.0.0_FULL.hex' : an out of the box Demo integrating the StemWin
     demo in addition to third parties graphical Demo modules: 
-	   - TouchGFX demonstration module based on Draupner Graphics’ commercial graphic library.
+	   - TouchGFX demonstration module based on Draupner GraphicsÂ’ commercial graphic library.
 	     Free evaluation version is available at www.touchgfx.com/stmicroelectronics.
 	   - Embedded Wizard demonstration module from TARA systems.
          Free evaluation version is available at www.embedded-wizard.de/stm32
@@ -111,7 +86,7 @@ Below you find an overview of the different offered modules in the StemWin demon
  + Game
  ------
  The game coming in the STM32Cube demonstration is based on the Reversi game. It is a
- strategy board game for two players, played on an 8×8 board. The goal of the game is to
+ strategy board game for two players, played on an 8Ã—8 board. The goal of the game is to
  have the majority of disks turned to display your colour when the last playable empty square
  is filled.
  
@@ -136,8 +111,8 @@ Below you find an overview of the different offered modules in the StemWin demon
       
 @par Keywords
 
-Demonstration, FreeRTOS, RTOS, Audio record, wav, Video Player, avi, MP3, Audio player, Graphic,
-Game, System, CPU, VNC, SAI, QSPI, USB, Microphone, 
+Demonstration, STemWin, FreeRTOS, RTOS, Audio record, wav, Video Player, avi, MP3, Audio player, Graphic,
+Game, System, CPU, VNC, SAI, QUADSPI, USB, Microphone 
 
 @par Hardware and Software environment
 
@@ -169,7 +144,7 @@ Game, System, CPU, VNC, SAI, QSPI, USB, Microphone,
   
 @par How to use it ? 
 
-The QSPI external flash loader is not integrated with supported toolchains, it’s only supported with STM32
+The QSPI external flash loader is not integrated with supported toolchains, itÂ’s only supported with STM32
 ST-Link Utility V3.9 or later
 To load the demonstration, use STM32 ST-Link Utility to program both internal Flash and external QSPI memory.
 To edit and debug the demonstration you need first to program the external QSPI memory using STLink utility
@@ -179,7 +154,7 @@ In order to program the demonstration you must do the following:
 1- Open STM32 ST-Link Utility, click on "External Loader" from the bar menu then check 
    "MT25QL512A_STM32769I-EVAL" box 
 2- Connect the STM32F769I-EVAL board to PC with USB cable through CN22
-3- Use "STM32CubeDemo_STM32769I-EVAL_VX.Y.Z.hex" file provided under “Binary” with STM32 ST-Link Utility
+3- Use "STM32CubeDemo_STM32769I-EVAL_VX.Y.Z.hex" file provided under Â“BinaryÂ” with STM32 ST-Link Utility
    to program both internal Flash and external QSPI memory.
    The "STM32769I-EVAL_DEMO_V1.0.0_FULL.hex" file provided under 'Binary', 
    can also be used to take benefit from Touch-GFX and EmbeddedWizard third parties 
@@ -196,17 +171,17 @@ In order to Edit and debug the program, you must do the following
 - Use the IDE to update and load the internal flash content, 
 - Run the demonstration.
 
-@Note If the user code size exceeds the DTCM-RAM size or starts from internal cacheable memories (SRAM1 and SRAM2),that is shared between several processors,
-      then it is highly recommended to enable the CPU cache and maintain its coherence at application level.
-      The address and the size of cacheable buffers (shared between CPU and other masters)  must be properly updated to be aligned to cache line size (32 bytes).
+@NoteÂ If the user code size exceeds the DTCM-RAM size or starts from internal cacheable memories (SRAM1 and SRAM2),that is shared between several processors,
+ Â Â Â Â Â then it is highly recommended to enable the CPU cache and maintain its coherence at application level.
+Â Â Â Â Â Â The address and the size of cacheable buffers (shared between CPU and other masters)  must be properly updated to be aligned to cache line size (32 bytes).
 
 @Note It is recommended to enable the cache and maintain its coherence, but depending on the use case
-      It is also possible to configure the MPU as "Write through", to guarantee the write access coherence.
-      In that case, the MPU must be configured as Cacheable/Bufferable/Not Shareable.
-      Even though the user must manage the cache coherence for read accesses.
-      Please refer to the AN4838 “Managing memory protection unit (MPU) in STM32 MCUs”
-      Please refer to the AN4839 “Level 1 cache on STM32F7 Series”
+Â Â Â Â Â  It is also possible to configure the MPU as "Write through", to guarantee the write access coherence.
+Â Â Â Â Â Â In that case, the MPU must be configured as Cacheable/Bufferable/Not Shareable.
+Â Â Â Â Â Â Even though the user must manage the cache coherence for read accesses.
+Â Â Â Â Â Â Please refer to the AN4838 Â“Managing memory protection unit (MPU) in STM32 MCUsÂ”
+Â Â Â Â Â Â Please refer to the AN4839 Â“Level 1 cache on STM32F7 SeriesÂ”
 
- * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+
  */
  

@@ -7,13 +7,14 @@
   * @author  MCD Application Team
   * @brief   Description of the FLASH Dual boot example.
   ******************************************************************************
+  * @attention
   *
-  * Copyright (c) 2016 STMicroelectronics. All rights reserved.
+  * Copyright (c) 2016 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                       opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   @endverbatim
@@ -108,5 +109,5 @@ In order to generate the .bin file with MDK-ARM, you must do the following:
  - A binary file "FLASH_DualBoot_Bank2.bin" will be generated under "FLASH_DualBoot_Bank2" folder.
 
 
- * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+
  */
