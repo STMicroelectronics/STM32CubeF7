@@ -152,6 +152,8 @@ typedef struct
 
   uint32_t  xfer_len;             /*!< Current transfer length                                                  */
 
+  uint32_t  xfer_size;            /*!< requested transfer size                                                  */
+
   uint32_t  xfer_count;           /*!< Partial transfer length in case of multi packet transfer                 */
 } USB_OTG_EPTypeDef;
 

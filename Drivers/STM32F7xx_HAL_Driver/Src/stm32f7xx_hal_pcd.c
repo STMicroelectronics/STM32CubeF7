@@ -2022,6 +2022,7 @@ static HAL_StatusTypeDef PCD_WriteEmptyTxFifo(PCD_HandleTypeDef *hpcd, uint32_t 
   */
 static HAL_StatusTypeDef PCD_EP_OutXfrComplete_int(PCD_HandleTypeDef *hpcd, uint32_t epnum)
 {
+  USB_OTG_EPTypeDef *ep;
   USB_OTG_GlobalTypeDef *USBx = hpcd->Instance;
   uint32_t USBx_BASE = (uint32_t)USBx;
   uint32_t gSNPSiD = *(__IO uint32_t *)(&USBx->CID + 0x1U);
@@ -2052,18 +2053,24 @@ static HAL_StatusTypeDef PCD_EP_OutXfrComplete_int(PCD_HandleTypeDef *hpcd, uint
       }
       else
       {
-        /* out data packet received over EP0 */
-        hpcd->OUT_ep[epnum].xfer_count =
-          hpcd->OUT_ep[epnum].maxpacket -
-          (USBx_OUTEP(epnum)->DOEPTSIZ & USB_OTG_DOEPTSIZ_XFRSIZ);
+        ep = &hpcd->OUT_ep[epnum];
 
-        hpcd->OUT_ep[epnum].xfer_buff += hpcd->OUT_ep[epnum].maxpacket;
+        /* out data packet received over EP */
+        ep->xfer_count = ep->xfer_size - (USBx_OUTEP(epnum)->DOEPTSIZ & USB_OTG_DOEPTSIZ_XFRSIZ);
 
-        if ((epnum == 0U) && (hpcd->OUT_ep[epnum].xfer_len == 0U))
+        if (epnum == 0U)
         {
-          /* this is ZLP, so prepare EP0 for next setup */
-          (void)USB_EP0_OutStart(hpcd->Instance, 1U, (uint8_t *)hpcd->Setup);
+          if (ep->xfer_len == 0U)
+          {
+            /* this is ZLP, so prepare EP0 for next setup */
+            (void)USB_EP0_OutStart(hpcd->Instance, 1U, (uint8_t *)hpcd->Setup);
+          }
+          else
+          {
+            ep->xfer_buff += ep->xfer_count;
+          }
         }
+
 #if (USE_HAL_PCD_REGISTER_CALLBACKS == 1U)
         hpcd->DataOutStageCallback(hpcd, (uint8_t)epnum);
 #else
