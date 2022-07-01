@@ -66,9 +66,9 @@ typedef enum
   ResetDonePage
 }htmlpageState;
 
+uint32_t alreadyLoggedIn = 0;
 htmlpageState htmlpage;
-char  *ptr , *data;
-uint32_t DataOffset;
+
 static const char http_crnl_2[4] =
 /* "\r\n--" */
 {0xd, 0xa,0x2d,0x2d};
@@ -206,13 +206,14 @@ static err_t http_sent(void *arg, struct tcp_pcb *pcb, u16_t len)
 static err_t http_recv(void *arg, struct tcp_pcb *pcb,  struct pbuf *p, err_t err)
 {
   int32_t i,len=0;
-  uint32_t FilenameOffset;
-  char filename[35], login[LOGIN_SIZE+1];
+  uint32_t DataOffset, FilenameOffset;
+  char *data, *ptr, filename[35], login[LOGIN_SIZE+1];
   struct fs_file file = {0, 0};
   struct http_state *hs;
+  struct pbuf *ptmp = p;
 
 #ifdef USE_LCD
-  char message[20];
+  char message[46];
 #endif
 
   hs = arg;
@@ -248,19 +249,22 @@ static err_t http_recv(void *arg, struct tcp_pcb *pcb,  struct pbuf *p, err_t er
         }
         else
         {
-          /*send the login page (which is the index page) */
-          htmlpage = LoginPage;
-          fs_open("/index.html", &file);
-          hs->file = file.data;
-          hs->left = file.len;
-          pbuf_free(p);
+          if (alreadyLoggedIn == 0)
+          {
+            /*send the login page (which is the index page) */
+            htmlpage = LoginPage;
+            fs_open("/index.html", &file);
+            hs->file = file.data;
+            hs->left = file.len;
+            pbuf_free(p);
 
-          /* send index.html page */
-          send_data(pcb, hs);
+            /* send index.html page */
+            send_data(pcb, hs);
 
-          /* Tell TCP that we wish be to informed of data that has been
-          successfully sent by a call to the http_sent() function. */
-          tcp_sent(pcb, http_sent);
+            /* Tell TCP that we wish be to informed of data that has been
+            successfully sent by a call to the http_sent() function. */
+            tcp_sent(pcb, http_sent);
+          }
         }
       }
 
@@ -276,8 +280,8 @@ static err_t http_recv(void *arg, struct tcp_pcb *pcb,  struct pbuf *p, err_t er
                if (strncmp((char*)(data+i), (char *)login ,LOGIN_SIZE)==0)
                {
                  htmlpage = FileUploadPage;
+                 alreadyLoggedIn = 1;
                  fs_open("/upload.html", &file);
-
                }
                else
                {
@@ -472,8 +476,23 @@ static err_t http_recv(void *arg, struct tcp_pcb *pcb,  struct pbuf *p, err_t er
         else
         {
           /* write data in flash */
-          if(len)
-          IAP_HTTP_writedata(ptr,len);
+          len = ptmp->len;
+          len-= DataOffset;
+          /* write data in flash */
+          while(len > 0)
+          {
+            IAP_HTTP_writedata(ptr,len);
+            ptmp = ptmp->next;
+            if(ptmp == NULL)
+            {
+              break;
+            }
+            else
+            {
+              len = ptmp->len;
+              ptr = ptmp->payload;
+            }
+          }
         }
         pbuf_free(p);
       }

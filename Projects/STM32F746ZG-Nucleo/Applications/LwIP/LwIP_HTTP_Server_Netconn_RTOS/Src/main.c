@@ -103,15 +103,6 @@ static void StartThread(void const * argument)
   
   /* Initialize webserver demo */
   http_server_netconn_init();
-  
-  /* Notify user about the network interface config */
-  User_notification(&gnetif);
-  
-#ifdef USE_DHCP
-  /* Start DHCPClient */
-  osThreadDef(DHCP, DHCP_thread, osPriorityBelowNormal, 0, configMINIMAL_STACK_SIZE * 2);
-  osThreadCreate (osThread(DHCP), &gnetif);
-#endif
 
   for( ;; )
   {
@@ -130,8 +121,8 @@ static void Netif_Config(void)
   ip_addr_t ipaddr;
   ip_addr_t netmask;
   ip_addr_t gw;
- 
-#ifdef USE_DHCP
+
+#if LWIP_DHCP
   ip_addr_set_zero_ip4(&ipaddr);
   ip_addr_set_zero_ip4(&netmask);
   ip_addr_set_zero_ip4(&gw);
@@ -139,25 +130,30 @@ static void Netif_Config(void)
   IP_ADDR4(&ipaddr,IP_ADDR0,IP_ADDR1,IP_ADDR2,IP_ADDR3);
   IP_ADDR4(&netmask,NETMASK_ADDR0,NETMASK_ADDR1,NETMASK_ADDR2,NETMASK_ADDR3);
   IP_ADDR4(&gw,GW_ADDR0,GW_ADDR1,GW_ADDR2,GW_ADDR3);
-#endif /* USE_DHCP */
-  
-  /* add the network interface */    
+#endif /* LWIP_DHCP */
+
+  /* add the network interface */
   netif_add(&gnetif, &ipaddr, &netmask, &gw, NULL, &ethernetif_init, &tcpip_input);
   
   /*  Registers the default network interface. */
   netif_set_default(&gnetif);
-  
-  if (netif_is_link_up(&gnetif))
-  {
-    /* When the netif is fully configured this function must be called.*/
-    netif_set_up(&gnetif);
-  }
-  else
-  {
-    /* When the netif link is down this function must be called */
-    netif_set_down(&gnetif);
-  }
+
+  ethernet_link_status_updated(&gnetif);
+
+#if LWIP_NETIF_LINK_CALLBACK
+  netif_set_link_callback(&gnetif, ethernet_link_status_updated);
+
+  osThreadDef(EthLink, ethernet_link_thread, osPriorityNormal, 0, configMINIMAL_STACK_SIZE *2);
+  osThreadCreate (osThread(EthLink), &gnetif);
+#endif
+
+#if LWIP_DHCP
+  /* Start DHCPClient */
+  osThreadDef(DHCP, DHCP_Thread, osPriorityBelowNormal, 0, configMINIMAL_STACK_SIZE * 2);
+  osThreadCreate (osThread(DHCP), &gnetif);
+#endif
 }
+
 
 /**
   * @brief  System Clock Configuration
@@ -260,12 +256,12 @@ static void MPU_Config(void)
   
   /* Configure the MPU as Normal Non Cacheable for Ethernet Buffers in the SRAM2 */
   MPU_InitStruct.Enable = MPU_REGION_ENABLE;
-  MPU_InitStruct.BaseAddress = 0x2004C000;
+  MPU_InitStruct.BaseAddress = 0x20048000;
   MPU_InitStruct.Size = MPU_REGION_SIZE_16KB;
   MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
   MPU_InitStruct.IsBufferable = MPU_ACCESS_NOT_BUFFERABLE;
   MPU_InitStruct.IsCacheable = MPU_ACCESS_NOT_CACHEABLE;
-  MPU_InitStruct.IsShareable = MPU_ACCESS_SHAREABLE;
+  MPU_InitStruct.IsShareable = MPU_ACCESS_NOT_SHAREABLE;
   MPU_InitStruct.Number = MPU_REGION_NUMBER1;
   MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL1;
   MPU_InitStruct.SubRegionDisable = 0x00;
@@ -276,7 +272,7 @@ static void MPU_Config(void)
   /* Configure the MPU as Device for Ethernet Descriptors in the SRAM2 */
   MPU_InitStruct.Enable = MPU_REGION_ENABLE;
   MPU_InitStruct.BaseAddress = 0x2004C000;
-  MPU_InitStruct.Size = MPU_REGION_SIZE_256B;
+  MPU_InitStruct.Size = MPU_REGION_SIZE_1KB;
   MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
   MPU_InitStruct.IsBufferable = MPU_ACCESS_BUFFERABLE;
   MPU_InitStruct.IsCacheable = MPU_ACCESS_NOT_CACHEABLE;

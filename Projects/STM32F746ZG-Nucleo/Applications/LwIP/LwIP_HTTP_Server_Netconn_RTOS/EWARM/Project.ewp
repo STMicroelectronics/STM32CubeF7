@@ -1011,6 +1011,12 @@
     <group>
       <name>BSP</name>
       <group>
+        <name>Component</name>
+        <file>
+            <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\Components\lan8742\lan8742.c</name>
+        </file>
+      </group>
+      <group>
         <name>STM32F7xx_Nucleo_144</name>
         <file>
           <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32F7xx_Nucleo_144\stm32f7xx_nucleo_144.c</name>

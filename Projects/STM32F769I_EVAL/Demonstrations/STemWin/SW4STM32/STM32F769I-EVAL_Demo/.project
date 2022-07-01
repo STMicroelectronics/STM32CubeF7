@@ -587,7 +587,7 @@
 		</link><link>
 			<name>Drivers/STM32F7xx_HAL_Drivers/stm32f7xx_hal_eth.c</name>
 			<type>1</type>
-			<location>PARENT-6-PROJECT_LOC/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_eth.c</location>
+			<location>PARENT-6-PROJECT_LOC/Drivers/STM32F7xx_HAL_Driver/Src/Legacy/stm32f7xx_hal_eth.c</location>
 		</link><link>
 			<name>Application/User/Utilities/jpeg_utils.c</name>
 			<type>1</type>

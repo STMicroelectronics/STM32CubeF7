@@ -19,7 +19,7 @@
   * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
-  @endverbatim
+   @endverbatim
 
 @par Description
 
@@ -46,8 +46,10 @@ will be ensured by LEDs:
   + LED2: ethernet cable is not connected.
 
 If a DHCP server is available, a dynamic IP address can be allocated by enabling 
-the DHCP process (#define USE_DHCP in main.h)
+the DHCP process (#define LWIP_DHCP in lwipopts.h).
 
+If a DHCP server is not available, after timeout connection, the device only gets a static 
+IP address(the switch from static to dynamic IP adress is not available in this application).
 
 The required userID and password are set, and can be modified, in the main.h file
 
@@ -155,4 +157,3 @@ In order to make the program work, you must do the following :
  - Run the application
  
 
- */

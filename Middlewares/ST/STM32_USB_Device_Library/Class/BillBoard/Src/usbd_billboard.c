@@ -7,7 +7,18 @@
   *           - Initialization and Configuration of high and low layer
   *           - Enumeration as BillBoard Device
   *           - Error management
- * @verbatim
+  ******************************************************************************
+  * @attention
+  *
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
+  *
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
+  *
+  ******************************************************************************
+  * @verbatim
   *
   *          ===================================================================
   *                                BillBoard Class Description
@@ -21,17 +32,6 @@
   *             - Enumeration & management of BillBoard device supported alternate modes
   *
   *  @endverbatim
-  *
-  ******************************************************************************
-  * @attention
-  *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
-  *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
   *
   ******************************************************************************
   */
@@ -93,7 +93,7 @@ static uint8_t *USBD_BB_GetOtherSpeedCfgDesc(uint16_t *length);
 
 #if (USBD_CLASS_BOS_ENABLED == 1)
 USBD_BB_DescHeader_t *USBD_BB_GetNextDesc(uint8_t *pbuf, uint16_t *ptr);
-#endif
+#endif /* USBD_CLASS_BOS_ENABLED */
 
 
 
@@ -122,7 +122,7 @@ USBD_ClassTypeDef  USBD_BB =
   USBD_BB_GetDeviceQualifierDesc,
 #if (USBD_SUPPORT_USER_STRING_DESC == 1U)
   NULL,
-#endif
+#endif /* USBD_SUPPORT_USER_STRING_DESC */
 };
 
 /* USB Standard Device Qualifier Descriptor */
@@ -150,8 +150,12 @@ __ALIGN_BEGIN static uint8_t USBD_BB_CfgDesc[USB_BB_CONFIG_DESC_SIZ]  __ALIGN_EN
   0x01,                        /* bNumInterfaces: 1 interface */
   0x01,                        /* bConfigurationValue: Configuration value */
   USBD_IDX_CONFIG_STR,         /* iConfiguration: Index of string descriptor describing the configuration */
-  0xC0,                        /* bmAttributes: bus powered and Support Remote Wake-up */
-  0x00,                        /* MaxPower 100 mA: this current is used for detecting Vbus */
+#if (USBD_SELF_POWERED == 1U)
+  0xC0,                        /* bmAttributes: Bus Powered according to user configuration */
+#else
+  0x80,                        /* bmAttributes: Bus Powered according to user configuration */
+#endif /* USBD_SELF_POWERED */
+  USBD_MAX_POWER,              /* MaxPower (mA) */
   /* 09 */
 
   /************** Descriptor of BillBoard interface ****************/
@@ -170,15 +174,19 @@ __ALIGN_BEGIN static uint8_t USBD_BB_CfgDesc[USB_BB_CONFIG_DESC_SIZ]  __ALIGN_EN
 /* USB device Other Speed Configuration Descriptor */
 __ALIGN_BEGIN static uint8_t USBD_BB_OtherSpeedCfgDesc[USB_BB_CONFIG_DESC_SIZ]   __ALIGN_END  =
 {
-  0x09,                        /* bLength: Configuation Descriptor size */
+  0x09,                        /* bLength: Configuration Descriptor size */
   USB_DESC_TYPE_OTHER_SPEED_CONFIGURATION,
   USB_BB_CONFIG_DESC_SIZ,
   0x00,
   0x01,                        /* bNumInterfaces: 1 interface */
-  0x01,                        /* bConfigurationValue: */
-  USBD_IDX_CONFIG_STR,         /* iConfiguration: */
-  0xC0,                        /* bmAttributes: */
-  0x00,                        /* MaxPower 100 mA */
+  0x01,                        /* bConfigurationValue */
+  USBD_IDX_CONFIG_STR,         /* iConfiguration */
+#if (USBD_SELF_POWERED == 1U)
+  0xC0,                        /* bmAttributes: Bus Powered according to user configuration */
+#else
+  0x80,                        /* bmAttributes: Bus Powered according to user configuration */
+#endif /* USBD_SELF_POWERED */
+  USBD_MAX_POWER,              /* MaxPower (mA) */
 
   /************** Descriptor of BillBoard interface ****************/
   /* 09 */
@@ -248,50 +256,50 @@ static uint8_t USBD_BB_Setup(USBD_HandleTypeDef *pdev, USBD_SetupReqTypedef *req
 
   switch (req->bmRequest & USB_REQ_TYPE_MASK)
   {
-  case USB_REQ_TYPE_CLASS:
-    break;
-  case USB_REQ_TYPE_STANDARD:
-    switch (req->bRequest)
-    {
-    case USB_REQ_GET_STATUS:
-      if (pdev->dev_state == USBD_STATE_CONFIGURED)
-      {
-        (void)USBD_CtlSendData(pdev, (uint8_t *)&status_info, 2U);
-      }
-      else
-      {
-        USBD_CtlError(pdev, req);
-        ret = USBD_FAIL;
-      }
+    case USB_REQ_TYPE_CLASS:
       break;
-
-    case USB_REQ_GET_INTERFACE:
-      if (pdev->dev_state == USBD_STATE_CONFIGURED)
+    case USB_REQ_TYPE_STANDARD:
+      switch (req->bRequest)
       {
-        (void)USBD_CtlSendData(pdev, (uint8_t *)&AltSetting, 1U);
-      }
-      else
-      {
-        USBD_CtlError(pdev, req);
-        ret = USBD_FAIL;
-      }
-      break;
+        case USB_REQ_GET_STATUS:
+          if (pdev->dev_state == USBD_STATE_CONFIGURED)
+          {
+            (void)USBD_CtlSendData(pdev, (uint8_t *)&status_info, 2U);
+          }
+          else
+          {
+            USBD_CtlError(pdev, req);
+            ret = USBD_FAIL;
+          }
+          break;
 
-    case USB_REQ_SET_INTERFACE:
-    case USB_REQ_CLEAR_FEATURE:
+        case USB_REQ_GET_INTERFACE:
+          if (pdev->dev_state == USBD_STATE_CONFIGURED)
+          {
+            (void)USBD_CtlSendData(pdev, (uint8_t *)&AltSetting, 1U);
+          }
+          else
+          {
+            USBD_CtlError(pdev, req);
+            ret = USBD_FAIL;
+          }
+          break;
+
+        case USB_REQ_SET_INTERFACE:
+        case USB_REQ_CLEAR_FEATURE:
+          break;
+
+        default:
+          USBD_CtlError(pdev, req);
+          ret = USBD_FAIL;
+          break;
+      }
       break;
 
     default:
       USBD_CtlError(pdev, req);
       ret = USBD_FAIL;
       break;
-    }
-    break;
-
-  default:
-    USBD_CtlError(pdev, req);
-    ret = USBD_FAIL;
-    break;
   }
 
   return (uint8_t)ret;
@@ -391,10 +399,10 @@ static uint8_t *USBD_BB_GetDeviceQualifierDesc(uint16_t *length)
   */
 USBD_BB_DescHeader_t *USBD_BB_GetNextDesc(uint8_t *pbuf, uint16_t *ptr)
 {
-  USBD_BB_DescHeader_t *pnext = (USBD_BB_DescHeader_t *)pbuf;
+  USBD_BB_DescHeader_t *pnext = (USBD_BB_DescHeader_t *)(void *)pbuf;
 
   *ptr += pnext->bLength;
-  pnext = (USBD_BB_DescHeader_t *)(pbuf + pnext->bLength);
+  pnext = (USBD_BB_DescHeader_t *)(void *)(pbuf + pnext->bLength);
 
   return (pnext);
 }
@@ -411,8 +419,8 @@ void *USBD_BB_GetCapDesc(USBD_HandleTypeDef *pdev, uint8_t *pBosDesc)
 {
   UNUSED(pdev);
 
-  USBD_BB_DescHeader_t *pdesc = (USBD_BB_DescHeader_t *)pBosDesc;
-  USBD_BosDescTypedef *desc = (USBD_BosDescTypedef *)pBosDesc;
+  USBD_BB_DescHeader_t *pdesc = (USBD_BB_DescHeader_t *)(void *)pBosDesc;
+  USBD_BosDescTypeDef *desc = (USBD_BosDescTypeDef *)(void *)pBosDesc;
   USBD_BosBBCapDescTypedef *pCapDesc = NULL;
   uint16_t ptr;
 
@@ -426,7 +434,7 @@ void *USBD_BB_GetCapDesc(USBD_HandleTypeDef *pdev, uint8_t *pBosDesc)
 
       if (pdesc->bDevCapabilityType == USBD_BILLBOARD_CAPABILITY)
       {
-        pCapDesc = (USBD_BosBBCapDescTypedef *)pdesc;
+        pCapDesc = (USBD_BosBBCapDescTypedef *)(void *)pdesc;
         break;
       }
     }
@@ -447,8 +455,8 @@ void *USBD_BB_GetAltModeDesc(USBD_HandleTypeDef *pdev, uint8_t *pBosDesc, uint8_
 {
   UNUSED(pdev);
 
-  USBD_BB_DescHeader_t *pdesc = (USBD_BB_DescHeader_t *)pBosDesc;
-  USBD_BosDescTypedef *desc = (USBD_BosDescTypedef *)pBosDesc;
+  USBD_BB_DescHeader_t *pdesc = (USBD_BB_DescHeader_t *)(void *)pBosDesc;
+  USBD_BosDescTypeDef *desc = (USBD_BosDescTypeDef *)(void *)pBosDesc;
   USBD_BB_AltModeCapDescTypeDef *pAltModDesc = NULL;
   uint8_t cnt = 0U;
   uint16_t ptr;
@@ -465,7 +473,7 @@ void *USBD_BB_GetAltModeDesc(USBD_HandleTypeDef *pdev, uint8_t *pBosDesc, uint8_
       {
         if (cnt == idx)
         {
-          pAltModDesc = (USBD_BB_AltModeCapDescTypeDef *)pdesc;
+          pAltModDesc = (USBD_BB_AltModeCapDescTypeDef *)(void *)pdesc;
           break;
         }
         else
@@ -477,7 +485,7 @@ void *USBD_BB_GetAltModeDesc(USBD_HandleTypeDef *pdev, uint8_t *pBosDesc, uint8_
   }
   return (void *)pAltModDesc;
 }
-#endif
+#endif /* USBD_CLASS_BOS_ENABLED */
 
 /**
   * @}
@@ -492,5 +500,3 @@ void *USBD_BB_GetAltModeDesc(USBD_HandleTypeDef *pdev, uint8_t *pBosDesc, uint8_
 /**
   * @}
   */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

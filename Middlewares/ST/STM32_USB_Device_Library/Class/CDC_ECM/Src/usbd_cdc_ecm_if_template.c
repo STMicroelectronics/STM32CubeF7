@@ -6,20 +6,19 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
 
 /* Includes ------------------------------------------------------------------*/
 
-#include "main.h"
+#include "usbd_cdc_ecm_if_template.h"
 /*
 
   Include here  LwIP files if used
@@ -30,16 +29,17 @@
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-
+/* Received Data over USB are stored in this buffer */
 #if defined ( __ICCARM__ ) /*!< IAR Compiler */
-  #pragma data_alignment=4
-#endif
-__ALIGN_BEGIN static uint8_t UserRxBuffer[CDC_ECM_ETH_MAX_SEGSZE + 100]__ALIGN_END; /* Received Data over USB are stored in this buffer */
+#pragma data_alignment=4
+#endif /* ( __ICCARM__ ) */
+__ALIGN_BEGIN static uint8_t UserRxBuffer[CDC_ECM_ETH_MAX_SEGSZE + 100]__ALIGN_END;
 
+/* Transmitted Data over CDC_ECM (CDC_ECM interface) are stored in this buffer */
 #if defined ( __ICCARM__ ) /*!< IAR Compiler */
-  #pragma data_alignment=4
-#endif
-__ALIGN_BEGIN  static uint8_t UserTxBuffer[CDC_ECM_ETH_MAX_SEGSZE + 100]__ALIGN_END; /* Received Data over CDC_ECM (CDC_ECM interface) are stored in this buffer */
+#pragma data_alignment=4
+#endif /* ( __ICCARM__ ) */
+__ALIGN_BEGIN  static uint8_t UserTxBuffer[CDC_ECM_ETH_MAX_SEGSZE + 100]__ALIGN_END;
 
 static uint8_t CDC_ECMInitialized = 0U;
 
@@ -85,7 +85,11 @@ static int8_t CDC_ECM_Itf_Init(void)
   }
 
   /* Set Application Buffers */
+#ifdef USE_USBD_COMPOSITE
+  (void)USBD_CDC_ECM_SetTxBuffer(&USBD_Device, UserTxBuffer, 0U, 0U);
+#else
   (void)USBD_CDC_ECM_SetTxBuffer(&USBD_Device, UserTxBuffer, 0U);
+#endif
   (void)USBD_CDC_ECM_SetRxBuffer(&USBD_Device, UserRxBuffer);
 
   return (0);
@@ -99,7 +103,11 @@ static int8_t CDC_ECM_Itf_Init(void)
   */
 static int8_t CDC_ECM_Itf_DeInit(void)
 {
+#ifdef USE_USBD_COMPOSITE
+  USBD_CDC_ECM_HandleTypeDef *hcdc_cdc_ecm = (USBD_CDC_ECM_HandleTypeDef *)(USBD_Device.pClassDataCmsit[USBD_Device.classId]);
+#else
   USBD_CDC_ECM_HandleTypeDef *hcdc_cdc_ecm = (USBD_CDC_ECM_HandleTypeDef *)(USBD_Device.pClassData);
+#endif /* USE_USBD_COMPOSITE */
 
   /* Notify application layer that link is down */
   hcdc_cdc_ecm->LinkStatus = 0U;
@@ -117,7 +125,11 @@ static int8_t CDC_ECM_Itf_DeInit(void)
   */
 static int8_t CDC_ECM_Itf_Control(uint8_t cmd, uint8_t *pbuf, uint16_t length)
 {
+#ifdef USE_USBD_COMPOSITE
+  USBD_CDC_ECM_HandleTypeDef *hcdc_cdc_ecm = (USBD_CDC_ECM_HandleTypeDef *)(USBD_Device.pClassDataCmsit[USBD_Device.classId]);
+#else
   USBD_CDC_ECM_HandleTypeDef *hcdc_cdc_ecm = (USBD_CDC_ECM_HandleTypeDef *)(USBD_Device.pClassData);
+#endif /* USE_USBD_COMPOSITE */
 
   switch (cmd)
   {
@@ -133,15 +145,15 @@ static int8_t CDC_ECM_Itf_Control(uint8_t cmd, uint8_t *pbuf, uint16_t length)
       /* Add your code here */
       break;
 
-  case CDC_ECM_SET_ETH_PWRM_PATTERN_FILTER:
+    case CDC_ECM_SET_ETH_PWRM_PATTERN_FILTER:
       /* Add your code here */
       break;
 
-  case CDC_ECM_GET_ETH_PWRM_PATTERN_FILTER:
+    case CDC_ECM_GET_ETH_PWRM_PATTERN_FILTER:
       /* Add your code here */
       break;
 
-  case CDC_ECM_SET_ETH_PACKET_FILTER:
+    case CDC_ECM_SET_ETH_PACKET_FILTER:
       /* Check if this is the first time we enter */
       if (hcdc_cdc_ecm->LinkStatus == 0U)
       {
@@ -164,7 +176,7 @@ static int8_t CDC_ECM_Itf_Control(uint8_t cmd, uint8_t *pbuf, uint16_t length)
       /* Add your code here */
       break;
 
-  case CDC_ECM_GET_ETH_STATISTIC:
+    case CDC_ECM_GET_ETH_STATISTIC:
       /* Add your code here */
       break;
 
@@ -188,7 +200,11 @@ static int8_t CDC_ECM_Itf_Control(uint8_t cmd, uint8_t *pbuf, uint16_t length)
 static int8_t CDC_ECM_Itf_Receive(uint8_t *Buf, uint32_t *Len)
 {
   /* Get the CDC_ECM handler pointer */
+#ifdef USE_USBD_COMPOSITE
+  USBD_CDC_ECM_HandleTypeDef *hcdc_cdc_ecm = (USBD_CDC_ECM_HandleTypeDef *)(USBD_Device.pClassDataCmsit[USBD_Device.classId]);
+#else
   USBD_CDC_ECM_HandleTypeDef *hcdc_cdc_ecm = (USBD_CDC_ECM_HandleTypeDef *)(USBD_Device.pClassData);
+#endif /* USE_USBD_COMPOSITE */
 
   /* Call Eth buffer processing */
   hcdc_cdc_ecm->RxState = 1U;
@@ -201,7 +217,7 @@ static int8_t CDC_ECM_Itf_Receive(uint8_t *Buf, uint32_t *Len)
 
 /**
   * @brief  CDC_ECM_Itf_TransmitCplt
-  *         Data transmited callback
+  *         Data transmitted callback
   *
   *         @note
   *         This function is IN transfer complete callback used to inform user that
@@ -230,9 +246,18 @@ static int8_t CDC_ECM_Itf_TransmitCplt(uint8_t *Buf, uint32_t *Len, uint8_t epnu
 static int8_t CDC_ECM_Itf_Process(USBD_HandleTypeDef *pdev)
 {
   /* Get the CDC_ECM handler pointer */
+#ifdef USE_USBD_COMPOSITE
+  USBD_CDC_ECM_HandleTypeDef *hcdc_cdc_ecm = (USBD_CDC_ECM_HandleTypeDef *)(pdev->pClassDataCmsit[pdev->classId]);
+#else
   USBD_CDC_ECM_HandleTypeDef *hcdc_cdc_ecm = (USBD_CDC_ECM_HandleTypeDef *)(pdev->pClassData);
+#endif /* USE_USBD_COMPOSITE */
 
-  if ((hcdc_cdc_ecm != NULL) && (hcdc_cdc_ecm->LinkStatus != 0U))
+  if (hcdc_cdc_ecm == NULL)
+  {
+    return (-1);
+  }
+
+  if (hcdc_cdc_ecm->LinkStatus != 0U)
   {
     /*
       Read a received packet from the Ethernet buffers and send it
@@ -244,4 +269,3 @@ static int8_t CDC_ECM_Itf_Process(USBD_HandleTypeDef *pdev)
   return (0);
 }
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

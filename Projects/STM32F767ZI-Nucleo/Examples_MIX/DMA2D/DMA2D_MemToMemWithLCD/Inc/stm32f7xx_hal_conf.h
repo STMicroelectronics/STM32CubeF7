@@ -189,7 +189,7 @@
   * @brief Uncomment the line below to expanse the "assert_param" macro in the 
   *        HAL drivers code
   */
-/* #define USE_FULL_ASSERT    1 */
+/* #define USE_FULL_ASSERT    1U */
 
 /* ################## Ethernet peripheral configuration for NUCLEO 144 board ##################### */
 
@@ -204,8 +204,8 @@
 #define MAC_ADDR5   0U
 
 /* Definition of the Ethernet driver buffers size and count */   
-#define ETH_RX_BUF_SIZE                ETH_MAX_PACKET_SIZE /* buffer size for receive               */
-#define ETH_TX_BUF_SIZE                ETH_MAX_PACKET_SIZE /* buffer size for transmit              */
+#define ETH_RX_BUF_SIZE                1528U    /* ETH Max buffer size for receive               */
+#define ETH_TX_BUF_SIZE                1528U    /* ETH Max buffer size for transmit              */
 #define ETH_RXBUFNB                    5U       /* 5 Rx buffers of size ETH_RX_BUF_SIZE  */
 #define ETH_TXBUFNB                    5U       /* 5 Tx buffers of size ETH_TX_BUF_SIZE  */
 
@@ -222,8 +222,8 @@
 
 /* Section 3: Common PHY Registers */
 
-#define PHY_BCR                         ((uint16_t)0x00U)    /*!< Transceiver Basic Control Register   */
-#define PHY_BSR                         ((uint16_t)0x01U)    /*!< Transceiver Basic Status Register    */
+#define PHY_BCR                         ((uint16_t)0x0000U)    /*!< Transceiver Basic Control Register   */
+#define PHY_BSR                         ((uint16_t)0x0001U)    /*!< Transceiver Basic Status Register    */
  
 #define PHY_RESET                       ((uint16_t)0x8000U)  /*!< PHY Reset */
 #define PHY_LOOPBACK                    ((uint16_t)0x4000U)  /*!< Select loop-back mode */
@@ -242,7 +242,7 @@
   
 /* Section 4: Extended PHY Registers */
 
-#define PHY_SR                          ((uint16_t)0x1FU)    /*!< PHY special control/ status register Offset     */
+#define PHY_SR                          ((uint16_t)0x001FU)    /*!< PHY special control/ status register Offset     */
 
 #define PHY_SPEED_STATUS                ((uint16_t)0x0004U)  /*!< PHY Speed mask                                  */
 #define PHY_DUPLEX_STATUS               ((uint16_t)0x0010U)  /*!< PHY Duplex mask                                 */

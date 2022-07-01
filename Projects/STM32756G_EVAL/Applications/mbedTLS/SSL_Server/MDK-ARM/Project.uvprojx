@@ -335,7 +335,7 @@
               <MiscControls>--C99</MiscControls>
               <Define>USE_HAL_DRIVER,USE_STM32756G_EVAL,STM32F756xx,MBEDTLS_CONFIG_FILE="&lt;mbedtls_config.h&gt;",USE_LCD,USE_IOEXPANDER</Define>
               <Undefine></Undefine>
-              <IncludePath>../Inc;../../../../../../Drivers/CMSIS/Device/ST/STM32F7xx/Include;../../../../../../Drivers/STM32F7xx_HAL_Driver/Inc;../../../../../../Drivers/BSP/STM32756G_EVAL;../../../../../../Drivers/BSP/Components;../../../../../../Middlewares/Third_Party/LwIP/src/include;../../../../../../Middlewares/Third_Party/LwIP/system;../../../../../../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1;../../../../../../Middlewares/Third_Party/FreeRTOS/Source;../../../../../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;../../../../../../Middlewares/Third_Party/FreeRTOS/Source/include;../../../../../../Middlewares/Third_Party/mbedTLS/include;../../../../../../Utilities;../../../../../../Utilities/Fonts;../../../../../../Middlewares/Third_Party/LwIP/src/include;../../../../../../Utilities/Log</IncludePath>
+              <IncludePath>../Inc;../../../../../../Drivers/CMSIS/Device/ST/STM32F7xx/Include;../../../../../../Drivers/STM32F7xx_HAL_Driver/Inc;../../../../../../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy;../../../../../../Drivers/BSP/STM32756G_EVAL;../../../../../../Drivers/BSP/Components;../../../../../../Middlewares/Third_Party/LwIP/src/include;../../../../../../Middlewares/Third_Party/LwIP/system;../../../../../../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1;../../../../../../Middlewares/Third_Party/FreeRTOS/Source;../../../../../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;../../../../../../Middlewares/Third_Party/FreeRTOS/Source/include;../../../../../../Middlewares/Third_Party/mbedTLS/include;../../../../../../Utilities;../../../../../../Utilities/Fonts;../../../../../../Middlewares/Third_Party/LwIP/src/include;../../../../../../Utilities/Log</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -1222,7 +1222,7 @@
             <File>
               <FileName>stm32f7xx_hal_eth.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_eth.c</FilePath>
+              <FilePath>../../../../../../Drivers/STM32F7xx_HAL_Driver/Src/Legacy/stm32f7xx_hal_eth.c</FilePath>
             </File>
             <File>
               <FileName>stm32f7xx_hal_rcc.c</FileName>

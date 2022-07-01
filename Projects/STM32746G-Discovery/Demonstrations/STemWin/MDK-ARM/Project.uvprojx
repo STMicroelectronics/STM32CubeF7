@@ -337,7 +337,7 @@
               <MiscControls>--C99</MiscControls>
               <Define>STM32F746xx,USE_HAL_DRIVER,USE_STM32746G_DISCOVERY</Define>
               <Undefine></Undefine>
-              <IncludePath>../Gui/STemWin_Addons;../Gui/Target;../Config;../Core/inc;../../../../../Utilities/CPU;../../../../../Drivers/CMSIS/Device/ST/STM32F7xx/Include;../../../../../Drivers/STM32F7xx_HAL_Driver/Inc;../../../../../Drivers/BSP/STM32746G-Discovery;../../../../../Drivers/BSP/Components;../../../../../Drivers/BSP/Components/Common;../../../../../Middlewares/ST/STM32_USB_Host_Library/Core/Inc;../../../../../Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Inc;../../../../../Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Inc;../../../../../Middlewares/Third_Party/LwIP/src/include/;../../../../../Middlewares/Third_Party/LwIP/system;../../../../../Middlewares/Third_Party/LwIP/system/OS;../../../../../Middlewares/ST/STemWin/inc;../../../../../Middlewares/Third_Party/FatFs/src;../../../../../Middlewares/Third_Party/FatFs/src/drivers;../../../../../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1;../../../../../Middlewares/Third_Party/FreeRTOS/Source/include;../../../../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;../Modules/Common;../Modules/audio_player;../Modules/audio_recorder;../Modules/videoplayer;../Modules/vnc_server</IncludePath>
+              <IncludePath>../Gui/STemWin_Addons;../Gui/Target;../Config;../Core/inc;../../../../../Utilities/CPU;../../../../../Drivers/CMSIS/Device/ST/STM32F7xx/Include;../../../../../Drivers/STM32F7xx_HAL_Driver/Inc;../../../../../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy;../../../../../Drivers/BSP/STM32746G-Discovery;../../../../../Drivers/BSP/Components;../../../../../Drivers/BSP/Components/Common;../../../../../Middlewares/ST/STM32_USB_Host_Library/Core/Inc;../../../../../Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Inc;../../../../../Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Inc;../../../../../Middlewares/Third_Party/LwIP/src/include/;../../../../../Middlewares/Third_Party/LwIP/system;../../../../../Middlewares/Third_Party/LwIP/system/OS;../../../../../Middlewares/ST/STemWin/inc;../../../../../Middlewares/Third_Party/FatFs/src;../../../../../Middlewares/Third_Party/FatFs/src/drivers;../../../../../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1;../../../../../Middlewares/Third_Party/FreeRTOS/Source/include;../../../../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;../Modules/Common;../Modules/audio_player;../Modules/audio_recorder;../Modules/videoplayer;../Modules/vnc_server</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -1265,7 +1265,7 @@
             <File>
               <FileName>stm32f7xx_hal_eth.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_eth.c</FilePath>
+              <FilePath>../../../../../Drivers/STM32F7xx_HAL_Driver/Src/Legacy/stm32f7xx_hal_eth.c</FilePath>
             </File>
             <File>
               <FileName>stm32f7xx_hal_can.c</FileName>

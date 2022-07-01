@@ -18,7 +18,7 @@
   * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
-  @endverbatim
+   @endverbatim
 
 @par Description
 
@@ -35,7 +35,10 @@ will be ensured by LEDs:
   + LED2: ethernet cable is not connected.
 
 If a DHCP server is available, a dynamic IP address can be allocated by enabling 
-the DHCP process (#define USE_DHCP in main.h) 
+the DHCP process (#define LWIP_DHCP to 1 in lwipopts.h). 
+
+If a DHCP server is not available, after timeout connection, the device only gets a static 
+IP address(the switch from static to dynamic IP adress is not available in this application).
 
 The maximum length of filename used to send or to recieve to/from uSD is set to 12 bytes
 
@@ -143,4 +146,3 @@ In order to make the program work, you must do the following :
  - Use PC utility TFTPD32 to perform file transfers, refer to UM1713 for details about this tool usage
 
 
- */

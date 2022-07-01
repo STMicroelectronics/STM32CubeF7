@@ -114,16 +114,6 @@ void SysTick_Handler(void)
   HAL_IncTick();
 }
 
-/**
-  * @brief  This function handles External line 8 interrupt request.
-  * @param  None
-  * @retval None
-  */
-void EXTI9_5_IRQHandler(void)
-{
-  HAL_GPIO_EXTI_IRQHandler(MFX_IRQOUT_PIN);
-}
-
 /******************************************************************************/
 /*                 STM32F7xx Peripherals Interrupt Handlers                   */
 /*  Add here the Interrupt Handler for the used peripheral(s) (PPP), for the  */

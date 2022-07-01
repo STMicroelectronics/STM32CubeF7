@@ -32,7 +32,8 @@
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/ 
 #define USE_DHCP       /* enable DHCP, if disabled static address is used*/
- 
+#define USE_LCD
+
 /*Static IP ADDRESS*/
 #define IP_ADDR0   192
 #define IP_ADDR1   168

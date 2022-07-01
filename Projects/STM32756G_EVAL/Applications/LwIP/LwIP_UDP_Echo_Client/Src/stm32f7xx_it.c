@@ -116,16 +116,6 @@ void SysTick_Handler(void)
 }
 
 /**
-  * @brief  This function handles External line 8 interrupt request.
-  * @param  None
-  * @retval None
-  */
-void EXTI9_5_IRQHandler(void)
-{
-  HAL_GPIO_EXTI_IRQHandler(MFX_IRQOUT_PIN);
-}
-
-/**
   * @brief  This function handles EXTI15_10
   * @param  None
   * @retval None

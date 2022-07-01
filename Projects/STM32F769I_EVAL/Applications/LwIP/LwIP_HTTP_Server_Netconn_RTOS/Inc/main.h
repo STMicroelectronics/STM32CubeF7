@@ -30,11 +30,13 @@
 #include "stm32f769i_eval_lcd.h"
 #include "stm32f769i_eval_io.h"
 
+#define USE_LCD
+   
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
-#define USE_LCD        /* enable LCD  */  
-#define USE_DHCP       /* enable DHCP, if disabled static address is used*/
- 
+#define USE_LCD        /* enable LCD  */
+
+
 /*Static IP ADDRESS*/
 #define IP_ADDR0   192
 #define IP_ADDR1   168

@@ -361,7 +361,7 @@
               <MiscControls>--C99</MiscControls>
               <Define>USE_HAL_DRIVER,STM32F756xx,USE_STM32746G_DISCOVERY</Define>
               <Undefine />
-              <IncludePath>../Inc;../../../../../../Drivers/CMSIS/Device/ST/STM32F7xx/Include;../../../../../../Drivers/STM32F7xx_HAL_Driver/Inc;../../../../../../Drivers/BSP/STM32746G-Discovery</IncludePath>
+              <IncludePath>../Inc;../../../../../../Drivers/CMSIS/Device/ST/STM32F7xx/Include;../../../../../../Drivers/STM32F7xx_HAL_Driver/Inc;../../../../../../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy;../../../../../../Drivers/BSP/STM32746G-Discovery</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -489,7 +489,7 @@
             </File><File>
               <FileName>stm32f7xx_hal_eth.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_eth.c</FilePath>
+              <FilePath>../../../../../../Drivers/STM32F7xx_HAL_Driver/Src/Legacy/stm32f7xx_hal_eth.c</FilePath>
               
             </File><File>
               <FileName>stm32f7xx_hal_pwr_ex.c</FileName>

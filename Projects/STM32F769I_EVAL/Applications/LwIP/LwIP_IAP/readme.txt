@@ -18,7 +18,7 @@
   * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
-  @endverbatim
+   @endverbatim
 
 @par Description
 
@@ -46,7 +46,10 @@ will be ensured by LEDs:
 In case of Invalid stack adress, LED3 turns ON.
 
 If a DHCP server is available, a dynamic IP address can be allocated by enabling 
-the DHCP process (#define USE_DHCP in main.h)
+the DHCP process (#define LWIP_DHCP in lwipopts.h).
+
+If a DHCP server is not available, after timeout connection, the device only gets a static 
+IP address(the switch from static to dynamic IP adress is not available in this application).
 
 Note: In this application the Ethernet Link ISR need the System tick interrupt 
 to configure the Ethernet MAC, so the Ethernet Link interrupt priority must be 
@@ -151,4 +154,3 @@ In order to make the program work, you must do the following :
  - Run the application
  
 
- */

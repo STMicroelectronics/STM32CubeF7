@@ -38,7 +38,6 @@
 #define USE_IAP_TFTP   /* enable IAP using TFTP */
 #define USE_IAP_HTTP   /* enable IAP using HTTP */
 #define USE_LCD        /* enable LCD  */
-#define USE_DHCP       /* enable DHCP, if disabled static address is used */
 
 /* Flash user area definition *************************************************/
 /*

@@ -111,7 +111,7 @@ extern "C"
   * @brief Internal Low Speed oscillator (LSI) value.
   */
 #if !defined  (LSI_VALUE)
-#define LSI_VALUE  ((uint32_t)32000)  /* !< LSI Typical Value in Hz */
+#define LSI_VALUE  32000U  /* !< LSI Typical Value in Hz */
 #endif  /* LSI_VALUE */                        /* !< Value of the Internal Low Speed
                                  * oscillator in Hz The real value may vary
                                  * depending on the variations in voltage and
@@ -226,7 +226,7 @@ extern "C"
   /* DP83848 PHY Address */
 #define DP83848_PHY_ADDRESS             0x01U
   /* PHY Reset delay these values are based on a 1 ms Systick interrupt */
-#define PHY_RESET_DELAY                 0x000000FFU
+#define PHY_RESET_DELAY                 (0x000000FFU)
   /* PHY Configuration delay */
 #define PHY_CONFIG_DELAY                0x00000FFFU
 
@@ -235,10 +235,10 @@ extern "C"
 
   /* Section 3: Common PHY Registers */
 
-#define PHY_BCR                         ((uint16_t)0x00U) /* !< Transceiver
+#define PHY_BCR                         ((uint16_t)0x0000U) /* !< Transceiver
                                                            * Basic Control
                                                            * Register */
-#define PHY_BSR                         ((uint16_t)0x01U) /* !< Transceiver
+#define PHY_BSR                         ((uint16_t)0x0001U) /* !< Transceiver
                                                            * Basic Status
                                                            * Register */
 
@@ -280,11 +280,11 @@ extern "C"
 
   /* Section 4: Extended PHY Registers */
 
-#define PHY_SR                          ((uint16_t)0x10U) /* !< PHY status
+#define PHY_SR                          ((uint16_t)0x0010U) /* !< PHY status
                                                            * register Offset */
-#define PHY_MICR                        ((uint16_t)0x11U) /* !< MII Interrupt
+#define PHY_MICR                        ((uint16_t)0x0011U) /* !< MII Interrupt
                                                            * Control Register */
-#define PHY_MISR                        ((uint16_t)0x12U) /* !< MII Interrupt
+#define PHY_MISR                        ((uint16_t)0x0012U) /* !< MII Interrupt
                                                            * Status and Misc.
                                                            * Control Register */
 

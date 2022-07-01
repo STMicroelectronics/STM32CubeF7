@@ -151,6 +151,7 @@ int8_t STORAGE_IsWriteProtected(uint8_t lun)
 int8_t STORAGE_Read(uint8_t lun, uint8_t *buf, uint32_t blk_addr, uint16_t blk_len)
 {
   int8_t ret = -1;
+  uint32_t timeout = 100000;
 
   if(BSP_SD_IsDetected() != SD_NOT_PRESENT)
   {
@@ -159,6 +160,10 @@ int8_t STORAGE_Read(uint8_t lun, uint8_t *buf, uint32_t blk_addr, uint16_t blk_l
     /* Wait until SD card is ready to use for new operation */
     while(BSP_SD_GetCardState() != SD_TRANSFER_OK)
     {
+      if (timeout-- == 0)
+      {
+        return ret;
+      }
     }
 
     ret = 0;
@@ -176,6 +181,7 @@ int8_t STORAGE_Read(uint8_t lun, uint8_t *buf, uint32_t blk_addr, uint16_t blk_l
 int8_t STORAGE_Write(uint8_t lun, uint8_t *buf, uint32_t blk_addr, uint16_t blk_len)
 {
   int8_t ret = -1;
+  uint32_t timeout = 100000;
 
   if(BSP_SD_IsDetected() != SD_NOT_PRESENT)
   {
@@ -184,6 +190,10 @@ int8_t STORAGE_Write(uint8_t lun, uint8_t *buf, uint32_t blk_addr, uint16_t blk_
     /* Wait until SD card is ready to use for new operation */
     while(BSP_SD_GetCardState() != SD_TRANSFER_OK)
     {
+      if (timeout-- == 0)
+      {
+        return ret;
+      }
     }
 
     ret = 0;

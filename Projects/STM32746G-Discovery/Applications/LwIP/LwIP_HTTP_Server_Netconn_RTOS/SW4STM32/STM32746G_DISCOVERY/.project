@@ -206,6 +206,11 @@
 			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/FreeRTOS/Source/timers.c</locationURI>
 		</link>
 		<link>
+			<name>Drivers/BSP/Components/lan8742.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Drivers/BSP/Components/lan8742/lan8742.c</locationURI>
+		</link>
+		<link>
 			<name>Drivers/BSP/STM32746G_Discovery/stm32746g_discovery.c</name>
 			<type>1</type>
 			<locationURI>PARENT-7-PROJECT_LOC/Drivers/BSP/STM32746G-Discovery/stm32746g_discovery.c</locationURI>

@@ -201,6 +201,12 @@
 			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/FreeRTOS/Source/timers.c</locationURI>
 		</link>
 		<link>
+			<name>Drivers/BSP/Components/lan8742.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Drivers/BSP/Components/lan8742/lan8742.c</locationURI>
+		</link>
+
+		<link>
 			<name>Drivers/BSP/STM32F7xx_Nucleo_144/stm32f7xx_nucleo_144.c</name>
 			<type>1</type>
 			<locationURI>PARENT-7-PROJECT_LOC/Drivers/BSP/STM32F7xx_Nucleo_144/stm32f7xx_nucleo_144.c</locationURI>

@@ -43,11 +43,8 @@ MEMORY
 {
 FLASH (rx)       : ORIGIN = 0x08000000, LENGTH = 1024K
 RAM (xrw)        : ORIGIN = 0x20000000, LENGTH = 307K
-Memory_B1(xrw)   : ORIGIN = 0x2004C000, LENGTH = 0x80
-Memory_B2(xrw)   : ORIGIN = 0x2004C080, LENGTH = 0x80
-Memory_B3(xrw)   : ORIGIN = 0x2004C100, LENGTH = 0x17d0 
-Memory_B4(xrw)   : ORIGIN = 0x2004D8D0, LENGTH = 0x17d0
-
+Memory_B1(xrw)   : ORIGIN = 0x2004C000, LENGTH = 0xA0
+Memory_B2(xrw)   : ORIGIN = 0x2004C0A0, LENGTH = 0xA0
 }
 
 /* Define output sections */
@@ -170,9 +167,7 @@ SECTIONS
 
   .ARM.attributes 0 : { *(.ARM.attributes) }
   .RxDecripSection (NOLOAD) : { *(.RxDescripSection) } >Memory_B1
-  .TxDescripSection (NOLOAD) : { *(.DMATxDscrTab_section) } >Memory_B2
-  .RxarraySection (NOLOAD) : { *(.RxBUF) } >Memory_B3
-  .TxarraySection (NOLOAD) : { *(.TxBUF) } >Memory_B4 
+  .TxDescripSection (NOLOAD): { *(.DMATxDscrTab_section) } >Memory_B2
 }
 
 

@@ -35,6 +35,11 @@
 #define THREAD_MODE_PRIVILEGED      0x00   /* Thread mode has privileged access */
 #define THREAD_MODE_UNPRIVILEGED    0x01   /* Thread mode has unprivileged access */
 
+/* Private function prototypes -----------------------------------------------*/
+static __INLINE  void __SVC(void);
+void SystemClock_Config(void);
+static void CPU_CACHE_Enable(void);
+
 /* Private macro -------------------------------------------------------------*/
 #if defined ( __CC_ARM   )
 __ASM void __SVC(void)
@@ -58,10 +63,6 @@ static __INLINE void __SVC()
 __IO uint8_t PSPMemAlloc[SP_PROCESS_SIZE];
 __IO uint32_t Index = 0, PSPValue = 0, CurrentStack = 0, ThreadMode = 0;
 
-/* Private function prototypes -----------------------------------------------*/
-static __INLINE  void __SVC(void);
-void SystemClock_Config(void);
-static void CPU_CACHE_Enable(void);
 
 /* Private functions ---------------------------------------------------------*/
 

@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    stm32f7xx_nucleo_144.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-November-2015
   * @brief   This file provides set of firmware functions to manage:
   *          - LEDs and push-button available on STM32F7XX-Nucleo-144 Kit 
   *            from STMicroelectronics
@@ -12,33 +10,25 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+  * Copyright (c) 2015 STMicroelectronics.
+  * All rights reserved.
   *
-  * Redistribution and use in source and binary forms, with or without modification,
-  * are permitted provided that the following conditions are met:
-  *   1. Redistributions of source code must retain the above copyright notice,
-  *      this list of conditions and the following disclaimer.
-  *   2. Redistributions in binary form must reproduce the above copyright notice,
-  *      this list of conditions and the following disclaimer in the documentation
-  *      and/or other materials provided with the distribution.
-  *   3. Neither the name of STMicroelectronics nor the names of its contributors
-  *      may be used to endorse or promote products derived from this software
-  *      without specific prior written permission.
-  *
-  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-  * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-  * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-  * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-  * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-  * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
-  */ 
-  
+  */
+
+/* Dependencies
+- stm32_adafruit_lcd.c
+- stm32_adafruit_sd.c
+- stm32f7xx_hal_adc.c
+- stm32f7xx_hal_spi.c
+- stm32f7xx_hal_gpio.c
+- stm32f7xx_hal_rcc_ex.h
+EndDependencies */ 
+
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f7xx_nucleo_144.h"
 
@@ -57,7 +47,7 @@
   * @{
   */ 
 
-/** @defgroup STM32F7XX_NUCLEO_144_LOW_LEVEL_Private_TypesDefinitions
+/** @defgroup STM32F7XX_NUCLEO_144_LOW_LEVEL_Private_TypesDefinitions LOW_LEVEL Private TypesDefinitions
   * @{
   */ 
 /**
@@ -65,16 +55,16 @@
   */ 
 
 
-/** @defgroup STM32F7XX_NUCLEO_144_LOW_LEVEL_Private_Defines
+/** @defgroup STM32F7XX_NUCLEO_144_LOW_LEVEL_Private_Defines LOW_LEVEL Private Defines
   * @{
   */ 
 
 /**
-  * @brief STM32F7xx NUCLEO BSP Driver version number V1.0.0
+  * @brief STM32F7xx NUCLEO BSP Driver version number V1.0.1
   */
 #define __STM32F7xx_NUCLEO_BSP_VERSION_MAIN   (0x01) /*!< [31:24] main version */
 #define __STM32F7xx_NUCLEO_BSP_VERSION_SUB1   (0x00) /*!< [23:16] sub1 version */
-#define __STM32F7xx_NUCLEO_BSP_VERSION_SUB2   (0x00) /*!< [15:8]  sub2 version */
+#define __STM32F7xx_NUCLEO_BSP_VERSION_SUB2   (0x01) /*!< [15:8]  sub2 version */
 #define __STM32F7xx_NUCLEO_BSP_VERSION_RC     (0x00) /*!< [7:0]  release candidate */ 
 #define __STM32F7xx_NUCLEO_BSP_VERSION        ((__STM32F7xx_NUCLEO_BSP_VERSION_MAIN << 24)\
                                              |(__STM32F7xx_NUCLEO_BSP_VERSION_SUB1 << 16)\
@@ -91,14 +81,14 @@
   * @}
   */ 
 
-/** @defgroup STM32F7XX_NUCLEO_144_LOW_LEVEL_Private_Macros
+/** @defgroup STM32F7XX_NUCLEO_144_LOW_LEVEL_Private_Macros LOW_LEVEL Private Macros
   * @{
   */ 
 /**
   * @}
   */ 
 
-/** @defgroup STM32F7XX_NUCLEO_144_LOW_LEVEL_Private_Variables
+/** @defgroup STM32F7XX_NUCLEO_144_LOW_LEVEL_Private_Variables LOW_LEVEL Private Variables
   * @{
   */ 
 GPIO_TypeDef* GPIO_PORT[LEDn] = {LED1_GPIO_PORT, LED2_GPIO_PORT, LED3_GPIO_PORT};
@@ -130,7 +120,7 @@ static ADC_ChannelConfTypeDef sConfig;
   * @}
   */ 
 
-/** @defgroup STM32F7XX_NUCLEO_144_LOW_LEVEL_Private_FunctionPrototypes
+/** @defgroup STM32F7XX_NUCLEO_144_LOW_LEVEL_Private_FunctionPrototypes LOW_LEVEL Privat  FunctionPrototypes
   * @{
   */
 #ifdef ADAFRUIT_TFT_JOY_SD_ID802
@@ -168,13 +158,12 @@ static void ADCx_MspDeInit(ADC_HandleTypeDef *hadc);
   * @}
   */ 
 
-/** @defgroup STM32F7XX_NUCLEO_144_LOW_LEVEL_Private_Functions
+/** @defgroup STM32F7XX_NUCLEO_144_LOW_LEVEL_Private_Functions LOW_LEVEL Private Functions
   * @{
   */ 
 
 /**
   * @brief  This method returns the STM32F7xx NUCLEO BSP Driver revision
-  * @param  None
   * @retval version: 0xXYZR (8bits for each decimal, R for RC)
   */
 uint32_t BSP_GetVersion(void)
@@ -348,7 +337,8 @@ uint32_t BSP_PB_GetState(Button_TypeDef Button)
 
 /**
   * @brief  Initializes SPI MSP.
-  * @param  None
+  * @param  hspi pointer to a SPI_HandleTypeDef structure that contains
+  *         the configuration information for the specified SPI.
   * @retval None
   */
 static void SPIx_MspInit(SPI_HandleTypeDef *hspi)
@@ -386,7 +376,6 @@ static void SPIx_MspInit(SPI_HandleTypeDef *hspi)
 
 /**
   * @brief  Initializes SPI HAL.
-  * @param  None
   * @retval None
   */
 static void SPIx_Init(void)
@@ -422,7 +411,9 @@ static void SPIx_Init(void)
 
 /**
   * @brief  SPI Write a byte to device
-  * @param  Value: value to be written
+  * @param  DataIn: byte to be transmit
+  * @param  DataOut: byte to be receive
+  * @param  DataLegnth: Length of data
   * @retval None
   */
 static void SPIx_WriteReadData(const uint8_t *DataIn, uint8_t *DataOut, uint16_t DataLegnth)
@@ -461,7 +452,6 @@ static void SPIx_Write(uint8_t Value)
 
 /**
   * @brief  SPI error treatment function
-  * @param  None
   * @retval None
   */
 static void SPIx_Error (void)
@@ -481,7 +471,6 @@ static void SPIx_Error (void)
 /**
   * @brief  Initializes the SD Card and put it into StandBy State (Ready for 
   *         data transfer).
-  * @param  None
   * @retval None
   */
 void SD_IO_Init(void)
@@ -529,7 +518,7 @@ void SD_IO_Init(void)
 
 /**
   * @brief  Set the SD_CS pin.
-  * @param  pin value.
+  * @param  val: pin value.
   * @retval None
   */
 void SD_IO_CSState(uint8_t val)
@@ -546,7 +535,9 @@ void SD_IO_CSState(uint8_t val)
 
 /**
   * @brief  Write a byte on the SD.
-  * @param  Data: byte to send.
+  * @param  DataIn: byte to write.
+  * @param  DataOut: byte to read.
+  * @param  DataLength: Length of Data.
   * @retval None
   */
 void SD_IO_WriteReadData(const uint8_t *DataIn, uint8_t *DataOut, uint16_t DataLength)
@@ -571,7 +562,6 @@ uint8_t SD_IO_WriteByte(uint8_t Data)
 /********************************* LINK LCD ***********************************/
 /**
   * @brief  Initializes the LCD
-  * @param  None
   * @retval None
   */
 void LCD_IO_Init(void)
@@ -714,7 +704,8 @@ void LCD_Delay(uint32_t Delay)
 
 /**
   * @brief  Initializes ADC MSP.
-  * @param  None
+  * @param  hadc pointer to a ADC_HandleTypeDef structure that contains
+  *         the configuration information for the specified ADC.
   * @retval None
   */
 static void ADCx_MspInit(ADC_HandleTypeDef *hadc)
@@ -738,7 +729,8 @@ static void ADCx_MspInit(ADC_HandleTypeDef *hadc)
 
 /**
   * @brief  DeInitializes ADC MSP.
-  * @param  None
+  * @param  hadc pointer to a ADC_HandleTypeDef structure that contains
+  *         the configuration information for the specified ADC.  
   * @note ADC DeInit does not disable the GPIO clock
   * @retval None
   */
@@ -760,7 +752,6 @@ static void ADCx_MspDeInit(ADC_HandleTypeDef *hadc)
 
 /**
   * @brief  Initializes ADC HAL.
-  * @param  None
   * @retval None
   */
 static void ADCx_Init(void)
@@ -786,7 +777,6 @@ static void ADCx_Init(void)
 
 /**
   * @brief  Initializes ADC HAL.
-  * @param  None
   * @retval None
   */
 static void ADCx_DeInit(void)
@@ -802,7 +792,6 @@ static void ADCx_DeInit(void)
 /**
   * @brief  Configures joystick available on adafruit 1.8" TFT shield 
   *         managed through ADC to detect motion.
-  * @param  None
   * @retval Joystickstatus (0=> success, 1=> fail) 
   */
 uint8_t BSP_JOY_Init(void)
@@ -916,4 +905,3 @@ JOYState_TypeDef BSP_JOY_GetState(void)
   * @}
   */ 
     
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

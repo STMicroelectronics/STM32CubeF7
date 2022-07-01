@@ -303,7 +303,7 @@ static void IAP_tftp_recv_callback(void *arg, struct udp_pcb *upcb, struct pbuf 
 
 #ifdef USE_LCD
   uint32_t i;
-  char filename[40],message[40], *ptr;
+  char filename[40],message[46], *ptr;
 #endif
 
   /* create new UDP PCB structure */

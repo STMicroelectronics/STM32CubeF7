@@ -32,7 +32,7 @@ this HTTP server contains two html pages:
     statistics in runtime
 
 If a DHCP server is available, a dynamic IP address can be allocated by enabling 
-the DHCP process (#define USE_DHCP in main.h)
+the DHCP process (#define LWIP_DHCP in lwipopts.h). 
 
 Ethernet cable status is ensured by LEDs: 
   + LED1: ethernet cable is connected.

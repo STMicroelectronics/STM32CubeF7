@@ -7,29 +7,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * Copyright (c) 2016 STMicroelectronics.
+  * All rights reserved.
   *
-  * Redistribution and use in source and binary forms, with or without modification,
-  * are permitted provided that the following conditions are met:
-  *   1. Redistributions of source code must retain the above copyright notice,
-  *      this list of conditions and the following disclaimer.
-  *   2. Redistributions in binary form must reproduce the above copyright notice,
-  *      this list of conditions and the following disclaimer in the documentation
-  *      and/or other materials provided with the distribution.
-  *   3. Neither the name of STMicroelectronics nor the names of its contributors
-  *      may be used to endorse or promote products derived from this software
-  *      without specific prior written permission.
-  *
-  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-  * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-  * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-  * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-  * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-  * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -40,8 +23,8 @@
 --------------------------
    - This driver is used to drive the touch screen module of the STM32F723E-DISCOVERY
      evaluation board on the FRIDA LCD mounted on MB1260 discovery board. 
-     The touch screen driver IC is a FT6x36 type which share the same register naming
-     with FT6206 type.
+     The touch screen driver IC is a FT6x36 or FT3x67 type which share the same
+     register naming with FT6206 type.
 
 2. Driver description:
 ---------------------
@@ -65,6 +48,7 @@
 /* Dependencies
 - stm32f723e_discovery_lcd.c
 - ft6x06.c
+- ft3x67.c
 EndDependencies */
 
 /* Includes ------------------------------------------------------------------*/
@@ -175,23 +159,23 @@ uint8_t BSP_TS_InitEx(uint16_t ts_SizeX, uint16_t ts_SizeY, uint8_t  orientation
   /* Note : I2C_Address is un-initialized here, but is not used at all in init function */
   /* but the prototype of Init() is like that in template and should be respected       */
 
+  /* Scan TouchScreen IC controller ID register by I2C Read               */
+  /* Verify this is a FT6x36 or FT3x67, otherwise this is an error case   */
+  
+#if defined (USE_STM32F723E_DISCO_REVD)
   /* Initialize the communication channel to sensor (I2C) if necessary */
   /* that is initialization is done only once after a power up         */
-  ft6x06_ts_drv.Init(I2C_Address);
- 
-  /* Scan FT6x36 TouchScreen IC controller ID register by I2C Read */
-  /* Verify this is a FT6x36, otherwise this is an error case      */
-  if(ft6x06_ts_drv.ReadID(TS_I2C_ADDRESS) == FT6x36_ID_VALUE)
+  ft3x67_ts_drv.Init(I2C_Address);
+
+  if(ft3x67_ts_drv.ReadID(TS_I2C_ADDRESS) == FT3X67_ID_VALUE)
   {
-    /* Found FT6x36 : Initialize the TS driver structure */
-    tsDriver = &ft6x06_ts_drv;
-
-    I2C_Address    = TS_I2C_ADDRESS;
-
+    /* Found FT3x67 : Initialize the TS driver structure */
+    tsDriver = &ft3x67_ts_drv;
+    I2C_Address = TS_I2C_ADDRESS;
     /* Get LCD chosen orientation */
     if(orientation == TS_ORIENTATION_PORTRAIT)
     {
-      tsOrientation = TS_SWAP_X | TS_SWAP_Y;               
+      tsOrientation = TS_SWAP_Y;
     }
     else if(orientation == TS_ORIENTATION_LANDSCAPE_ROT180)
     {
@@ -199,19 +183,48 @@ uint8_t BSP_TS_InitEx(uint16_t ts_SizeX, uint16_t ts_SizeY, uint8_t  orientation
     }
     else
     {
-      tsOrientation = TS_SWAP_XY | TS_SWAP_Y;                 
+      tsOrientation = TS_SWAP_XY | TS_SWAP_Y;
     }
-
     if(ts_status == TS_OK)
     {
       /* Software reset the TouchScreen */
       tsDriver->Reset(I2C_Address);
-
       /* Calibrate, Configure and Start the TouchScreen driver */
       tsDriver->Start(I2C_Address);
-
     } /* of if(ts_status == TS_OK) */
   }
+#else /* USE_STM32F723E_DISCO */
+  /* Initialize the communication channel to sensor (I2C) if necessary */
+  /* that is initialization is done only once after a power up         */
+  ft6x06_ts_drv.Init(I2C_Address);
+ 
+  if(ft6x06_ts_drv.ReadID(TS_I2C_ADDRESS) == FT6x36_ID_VALUE)
+  {
+    /* Found FT6x36 : Initialize the TS driver structure */
+    tsDriver = &ft6x06_ts_drv;
+    I2C_Address = TS_I2C_ADDRESS;
+    /* Get LCD chosen orientation */
+    if(orientation == TS_ORIENTATION_PORTRAIT)
+    {
+      tsOrientation = TS_SWAP_X | TS_SWAP_Y;
+    }
+    else if(orientation == TS_ORIENTATION_LANDSCAPE_ROT180)
+    {
+      tsOrientation = TS_SWAP_XY;
+    }
+    else
+    {
+      tsOrientation = TS_SWAP_XY | TS_SWAP_Y;
+    }
+    if(ts_status == TS_OK)
+    {
+      /* Software reset the TouchScreen */
+      tsDriver->Reset(I2C_Address);
+      /* Calibrate, Configure and Start the TouchScreen driver */
+      tsDriver->Start(I2C_Address);
+    } /* of if(ts_status == TS_OK) */
+  }
+#endif /* USE_STM32F723E_DISCO_REVD */
   else
   {
     ts_status = TS_DEVICE_NOT_FOUND;
@@ -482,4 +495,3 @@ __weak void BSP_TS_INT_MspInit(void)
   * @}
   */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

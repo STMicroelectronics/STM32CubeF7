@@ -1024,6 +1024,12 @@
     <group>
       <name>BSP</name>
       <group>
+        <name>Component</name>
+        <file>
+            <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\Components\lan8742\lan8742.c</name>
+        </file>
+      </group>
+      <group>
         <name>STM32746G_Discovery</name>
         <file>
           <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32746G-Discovery\stm32746g_discovery.c</name>

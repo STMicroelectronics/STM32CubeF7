@@ -1021,6 +1021,12 @@
           <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32F7xx_Nucleo_144\stm32f7xx_nucleo_144.c</name>
         </file>
       </group>
+      <group>
+        <name>Components</name>
+        <file>
+          <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\Components\lan8742\lan8742.c</name>
+        </file>
+      </group>
     </group>
     <group>
       <name>CMSIS</name>

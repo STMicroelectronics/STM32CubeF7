@@ -19,7 +19,9 @@
 /* Includes ------------------------------------------------------------------*/
 #include "lwip/opt.h"
 #include "main.h"
+#if LWIP_DHCP
 #include "lwip/dhcp.h"
+#endif
 #include "app_ethernet.h"
 #include "ethernetif.h"
 
@@ -27,7 +29,7 @@
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-#ifdef USE_DHCP
+#if LWIP_DHCP
 #define MAX_DHCP_TRIES  4
 __IO uint8_t DHCP_state = DHCP_OFF;
 #endif
@@ -39,21 +41,21 @@ __IO uint8_t DHCP_state = DHCP_OFF;
   * @param  netif: the network interface
   * @retval None
   */
-void User_notification(struct netif *netif) 
+void ethernet_link_status_updated(struct netif *netif)
 {
   if (netif_is_up(netif))
-  {
-#ifdef USE_DHCP
+ {
+#if LWIP_DHCP
     /* Update DHCP state machine */
     DHCP_state = DHCP_START;
 #else
     /* Turn On LED 1 to indicate ETH and LwIP init success*/
     BSP_LED_On(LED1);
-#endif /* USE_DHCP */
+#endif /* LWIP_DHCP */
   }
   else
-  {  
-#ifdef USE_DHCP
+  {
+#if LWIP_DHCP
     /* Update DHCP state machine */
     DHCP_state = DHCP_LINK_DOWN;
 #endif  /* USE_DHCP */
@@ -62,13 +64,13 @@ void User_notification(struct netif *netif)
   } 
 }
 
-#ifdef USE_DHCP
+#if LWIP_DHCP
 /**
-* @brief  DHCP Process
-* @param  argument: network interface
-* @retval None
-*/
-void DHCP_thread(void const * argument)
+  * @brief  DHCP Process
+  * @param  argument: network interface
+  * @retval None
+  */
+void DHCP_Thread(void const * argument)
 {
   struct netif *netif = (struct netif *) argument;
   ip_addr_t ipaddr;
@@ -85,8 +87,8 @@ void DHCP_thread(void const * argument)
         ip_addr_set_zero_ip4(&netif->ip_addr);
         ip_addr_set_zero_ip4(&netif->netmask);
         ip_addr_set_zero_ip4(&netif->gw);       
-        dhcp_start(netif);
         DHCP_state = DHCP_WAIT_ADDRESS;
+        dhcp_start(netif);
       }
       break;
       
@@ -107,10 +109,7 @@ void DHCP_thread(void const * argument)
           if (dhcp->tries > MAX_DHCP_TRIES)
           {
             DHCP_state = DHCP_TIMEOUT;
-            
-            /* Stop DHCP */
-            dhcp_stop(netif);
-            
+
             /* Static address used */
             IP_ADDR4(&ipaddr, IP_ADDR0 ,IP_ADDR1 , IP_ADDR2 , IP_ADDR3 );
             IP_ADDR4(&netmask, NETMASK_ADDR0, NETMASK_ADDR1, NETMASK_ADDR2, NETMASK_ADDR3);
@@ -130,8 +129,6 @@ void DHCP_thread(void const * argument)
       break;
   case DHCP_LINK_DOWN:
     {
-      /* Stop DHCP */
-      dhcp_stop(netif);
       DHCP_state = DHCP_OFF; 
     }
     break;

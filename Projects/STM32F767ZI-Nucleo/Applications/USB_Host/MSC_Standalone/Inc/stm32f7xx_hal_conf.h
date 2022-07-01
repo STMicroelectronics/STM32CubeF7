@@ -87,12 +87,12 @@ extern "C"
   *        (when HSE is used as system clock source, directly or through the PLL).
   */
 #if !defined  (HSE_VALUE)
-#define HSE_VALUE    ((uint32_t)8000000U) /* !< Value of the External
+#define HSE_VALUE    (8000000U) /* !< Value of the External
                                            * oscillator in Hz */
 #endif                          /* HSE_VALUE */
 
 #if !defined  (HSE_STARTUP_TIMEOUT)
-#define HSE_STARTUP_TIMEOUT    ((uint32_t)100U) /* !< Time out for HSE start
+#define HSE_STARTUP_TIMEOUT    100U /* !< Time out for HSE start
                                                  * up, in ms */
 #endif                          /* HSE_STARTUP_TIMEOUT */
 
@@ -102,7 +102,7 @@ extern "C"
   *        (when HSI is used as system clock source, directly or through the PLL).
   */
 #if !defined  (HSI_VALUE)
-#define HSI_VALUE    ((uint32_t)16000000U)  /* !< Value of the Internal
+#define HSI_VALUE    16000000U  /* !< Value of the Internal
                                              * oscillator in Hz */
 #endif                          /* HSI_VALUE */
 
@@ -110,7 +110,7 @@ extern "C"
   * @brief Internal Low Speed oscillator (LSI) value.
   */
 #if !defined  (LSI_VALUE)
-#define LSI_VALUE  ((uint32_t)32000U) /* !< LSI Typical Value in Hz */
+#define LSI_VALUE  32000U /* !< LSI Typical Value in Hz */
 #endif  /* LSI_VALUE */                        /* !< Value of the Internal Low Speed
                                  * oscillator in Hz The real value may vary
                                  * depending on the variations in voltage and
@@ -119,12 +119,12 @@ extern "C"
   * @brief External Low Speed oscillator (LSE) value.
   */
 #if !defined  (LSE_VALUE)
-#define LSE_VALUE  ((uint32_t)32768U) /* !< Value of the External Low Speed
+#define LSE_VALUE  32768U /* !< Value of the External Low Speed
                                        * oscillator in Hz */
 #endif                          /* LSE_VALUE */
 
 #if !defined  (LSE_STARTUP_TIMEOUT)
-#define LSE_STARTUP_TIMEOUT    ((uint32_t)5000U)  /* !< Time out for LSE start
+#define LSE_STARTUP_TIMEOUT    5000U  /* !< Time out for LSE start
                                                    * up, in ms */
 #endif                          /* LSE_STARTUP_TIMEOUT */
 
@@ -134,7 +134,7 @@ extern "C"
   *        frequency, this source is inserted directly through I2S_CKIN pad.
   */
 #if !defined  (EXTERNAL_CLOCK_VALUE)
-#define EXTERNAL_CLOCK_VALUE    ((uint32_t)12288000U) /* !< Value of the
+#define EXTERNAL_CLOCK_VALUE    12288000U /* !< Value of the
                                                        * Internal oscillator in
                                                        * Hz */
 #endif                          /* EXTERNAL_CLOCK_VALUE */
@@ -146,9 +146,9 @@ extern "C"
 /**
   * @brief This is the HAL system configuration section
   */
-#define  VDD_VALUE                    ((uint32_t)3300U) /* !< Value of VDD in
+#define  VDD_VALUE                    3300U /* !< Value of VDD in
                                                          * mv */
-#define  TICK_INT_PRIORITY            ((uint32_t)0x0FU) /* !< tick interrupt
+#define  TICK_INT_PRIORITY            0x0FU /* !< tick interrupt
                                                          * priority */
 #define  USE_RTOS                     0U
 #define  PREFETCH_ENABLE              1U
@@ -218,76 +218,76 @@ extern "C"
                                                              * receive */
 #define ETH_TX_BUF_SIZE                ETH_MAX_PACKET_SIZE  /* buffer size for
                                                              * transmit */
-#define ETH_RXBUFNB                    ((uint32_t)5)  /* 5 Rx buffers of size
+#define ETH_RXBUFNB                    5U  /* 5 Rx buffers of size
                                                        * ETH_RX_BUF_SIZE */
-#define ETH_TXBUFNB                    ((uint32_t)5)  /* 5 Tx buffers of size
+#define ETH_TXBUFNB                    5U  /* 5 Tx buffers of size
                                                        * ETH_TX_BUF_SIZE */
 
   /* Section 2: PHY configuration section */
   /* LAN8742A PHY Address */
-#define LAN8742A_PHY_ADDRESS            0x00
+#define LAN8742A_PHY_ADDRESS            0x00U
   /* PHY Reset delay these values are based on a 1 ms Systick interrupt */
-#define PHY_RESET_DELAY                 ((uint32_t)0x00000FFF)
+#define PHY_RESET_DELAY                 0x00000FFFU
   /* PHY Configuration delay */
-#define PHY_CONFIG_DELAY                ((uint32_t)0x00000FFF)
+#define PHY_CONFIG_DELAY                0x00000FFFU
 
-#define PHY_READ_TO                     ((uint32_t)0x0000FFFF)
-#define PHY_WRITE_TO                    ((uint32_t)0x0000FFFF)
+#define PHY_READ_TO                     0x0000FFFFU
+#define PHY_WRITE_TO                    0x0000FFFFU
 
   /* Section 3: Common PHY Registers */
 
-#define PHY_BCR                         ((uint16_t)0x00)  /* !< Transceiver
+#define PHY_BCR                         ((uint16_t)0x0000U)  /* !< Transceiver
                                                            * Basic Control
                                                            * Register */
-#define PHY_BSR                         ((uint16_t)0x01)  /* !< Transceiver
+#define PHY_BSR                         ((uint16_t)0x0001U)  /* !< Transceiver
                                                            * Basic Status
                                                            * Register */
 
-#define PHY_RESET                       ((uint16_t)0x8000)  /* !< PHY Reset */
-#define PHY_LOOPBACK                    ((uint16_t)0x4000)  /* !< Select
+#define PHY_RESET                       ((uint16_t)0x8000U)  /* !< PHY Reset */
+#define PHY_LOOPBACK                    ((uint16_t)0x4000U)  /* !< Select
                                                              * loop-back mode */
-#define PHY_FULLDUPLEX_100M             ((uint16_t)0x2100)  /* !< Set the
+#define PHY_FULLDUPLEX_100M             ((uint16_t)0x2100U)  /* !< Set the
                                                              * full-duplex mode
                                                              * at 100 Mb/s */
-#define PHY_HALFDUPLEX_100M             ((uint16_t)0x2000)  /* !< Set the
+#define PHY_HALFDUPLEX_100M             ((uint16_t)0x2000U)  /* !< Set the
                                                              * half-duplex mode
                                                              * at 100 Mb/s */
-#define PHY_FULLDUPLEX_10M              ((uint16_t)0x0100)  /* !< Set the
+#define PHY_FULLDUPLEX_10M              ((uint16_t)0x0100U)  /* !< Set the
                                                              * full-duplex mode
                                                              * at 10 Mb/s */
-#define PHY_HALFDUPLEX_10M              ((uint16_t)0x0000)  /* !< Set the
+#define PHY_HALFDUPLEX_10M              ((uint16_t)0x0000U)  /* !< Set the
                                                              * half-duplex mode
                                                              * at 10 Mb/s */
-#define PHY_AUTONEGOTIATION             ((uint16_t)0x1000)  /* !< Enable
+#define PHY_AUTONEGOTIATION             ((uint16_t)0x1000U)  /* !< Enable
                                                              * auto-negotiation
                                                              * function */
-#define PHY_RESTART_AUTONEGOTIATION     ((uint16_t)0x0200)  /* !< Restart
+#define PHY_RESTART_AUTONEGOTIATION     ((uint16_t)0x0200U)  /* !< Restart
                                                              * auto-negotiation
                                                              * function */
-#define PHY_POWERDOWN                   ((uint16_t)0x0800)  /* !< Select the
+#define PHY_POWERDOWN                   ((uint16_t)0x0800U)  /* !< Select the
                                                              * power down mode */
-#define PHY_ISOLATE                     ((uint16_t)0x0400)  /* !< Isolate PHY
+#define PHY_ISOLATE                     ((uint16_t)0x0400U)  /* !< Isolate PHY
                                                              * from MII */
 
-#define PHY_AUTONEGO_COMPLETE           ((uint16_t)0x0020)  /* !<
+#define PHY_AUTONEGO_COMPLETE           ((uint16_t)0x0020U)  /* !<
                                                              * Auto-Negotiation
                                                              * process
                                                              * completed */
-#define PHY_LINKED_STATUS               ((uint16_t)0x0004)  /* !< Valid link
+#define PHY_LINKED_STATUS               ((uint16_t)0x0004U)  /* !< Valid link
                                                              * established */
-#define PHY_JABBER_DETECTION            ((uint16_t)0x0002)  /* !< Jabber
+#define PHY_JABBER_DETECTION            ((uint16_t)0x0002U)  /* !< Jabber
                                                              * condition
                                                              * detected */
 
   /* Section 4: Extended PHY Registers */
 
-#define PHY_SR                          ((uint16_t)0x1F)  /* !< PHY special
+#define PHY_SR                          ((uint16_t)0x001FU)  /* !< PHY special
                                                            * control/ status
                                                            * register Offset */
 
-#define PHY_SPEED_STATUS                ((uint16_t)0x0004)  /* !< PHY Speed
+#define PHY_SPEED_STATUS                ((uint16_t)0x0004U)  /* !< PHY Speed
                                                              * mask */
-#define PHY_DUPLEX_STATUS               ((uint16_t)0x0010)  /* !< PHY Duplex
+#define PHY_DUPLEX_STATUS               ((uint16_t)0x0010U)  /* !< PHY Duplex
                                                              * mask */
 
 

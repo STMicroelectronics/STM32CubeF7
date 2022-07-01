@@ -39,9 +39,9 @@
    
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
-void User_notification(struct netif *netif);
-#ifdef USE_DHCP
-void DHCP_thread(void const * argument);
+void ethernet_link_status_updated(struct netif *netif);
+#if LWIP_DHCP
+void DHCP_Thread(void const * argument);
 #endif
 
 #ifdef __cplusplus

@@ -72,11 +72,11 @@ int main(void)
   HAL_Init();  
   
   /* Configure the system clock to 200 MHz */
-  SystemClock_Config(); 
+  SystemClock_Config();
   
   /* Configure the BSP */
   BSP_Config();
-    
+
   /* Initialize the LwIP stack */
   lwip_init();
   
@@ -86,12 +86,9 @@ int main(void)
   /* Http webserver Init */
   http_server_init();
 
-  /* Notify user about the network interface config */
-  User_notification(&gnetif);
-
   /* Infinite loop */
   while (1)
-  { 
+  {
     /* Read a received packet from the Ethernet buffers and send it 
        to the lwIP for handling */
     ethernetif_input(&gnetif);
@@ -99,11 +96,14 @@ int main(void)
     /* Handle timeouts */
     sys_check_timeouts();
 
-#ifdef USE_DHCP
-    /* handle periodic timers for DHCP */
+#if LWIP_NETIF_LINK_CALLBACK
+    Ethernet_Link_Periodic_Handle(&gnetif);
+#endif
+
+#if LWIP_DHCP
     DHCP_Periodic_Handle(&gnetif);
-#endif 
-  } 
+#endif
+  }
 }
 
 /**
@@ -118,38 +118,30 @@ static void BSP_Config(void)
   BSP_LED_Init(LED2);
   BSP_LED_Init(LED3);
   BSP_LED_Init(LED4);
-  
-  /* Set Systick Interrupt to the highest priority */
-  HAL_NVIC_SetPriority(SysTick_IRQn, 0x0, 0x0);
-  
-  /* Init MFX */
-  BSP_IO_Init();
-  /* Enable MFX interrupt for ETH MII pin */
-  BSP_IO_ConfigPin(MII_INT_PIN, IO_MODE_IT_FALLING_EDGE);
 
 #ifdef USE_LCD
 
   /* Initialize the LCD */
   BSP_LCD_Init();
-  
+
   /* Initialize the LCD Layers */
   BSP_LCD_LayerDefaultInit(1, LCD_FB_START_ADDRESS);
-  
+
   /* Set LCD Foreground Layer  */
   BSP_LCD_SelectLayer(1);
-  
+
   BSP_LCD_SetFont(&LCD_DEFAULT_FONT);
-  
+
   /* Initialize LCD Log module */
   LCD_LOG_Init();
-  
+
   /* Show Header and Footer texts */
   LCD_LOG_SetHeader((uint8_t *)"Webserver Application Raw API");
   LCD_LOG_SetFooter((uint8_t *)"STM32756G-EVAL board");
   
   LCD_UsrLog ("  State: Ethernet Initialization ...\n");
 
-#endif
+#endif /* USE_LCD */
 }
 
 /**
@@ -162,51 +154,31 @@ static void Netif_Config(void)
   ip_addr_t ipaddr;
   ip_addr_t netmask;
   ip_addr_t gw;
- 
-#ifdef USE_DHCP
+
+#if LWIP_DHCP
   ip_addr_set_zero_ip4(&ipaddr);
   ip_addr_set_zero_ip4(&netmask);
   ip_addr_set_zero_ip4(&gw);
 #else
-  IP_ADDR4(&ipaddr,IP_ADDR0,IP_ADDR1,IP_ADDR2,IP_ADDR3);
-  IP_ADDR4(&netmask,NETMASK_ADDR0,NETMASK_ADDR1,NETMASK_ADDR2,NETMASK_ADDR3);
-  IP_ADDR4(&gw,GW_ADDR0,GW_ADDR1,GW_ADDR2,GW_ADDR3);
-#endif /* USE_DHCP */
-  
-  /* add the network interface */    
+
+  /* IP address default setting */
+  IP4_ADDR(&ipaddr, IP_ADDR0, IP_ADDR1, IP_ADDR2, IP_ADDR3);
+  IP4_ADDR(&netmask, NETMASK_ADDR0, NETMASK_ADDR1 , NETMASK_ADDR2, NETMASK_ADDR3);
+  IP4_ADDR(&gw, GW_ADDR0, GW_ADDR1, GW_ADDR2, GW_ADDR3);
+
+#endif
+
+  /* add the network interface */
   netif_add(&gnetif, &ipaddr, &netmask, &gw, NULL, &ethernetif_init, &ethernet_input);
-  
+
   /*  Registers the default network interface */
   netif_set_default(&gnetif);
-  
-  if (netif_is_link_up(&gnetif))
-  {
-    /* When the netif is fully configured this function must be called */
-    netif_set_up(&gnetif);
-  }
-  else
-  {
-    /* When the netif link is down this function must be called */
-    netif_set_down(&gnetif);
-  }
-  
-  /* Set the link callback function, this function is called on change of link status*/
-  netif_set_link_callback(&gnetif, ethernetif_update_config);
-}
 
-/**
-  * @brief  EXTI line detection callbacks
-  * @param  GPIO_Pin: Specifies the pins connected EXTI line
-  * @retval None
-  */
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
-{
-  /* Get the IT status register value */
-  if(BSP_IO_ITGetStatus(MII_INT_PIN))
-  {
-    ethernetif_set_link(&gnetif);
-  }
-  BSP_IO_ITClear();
+  ethernet_link_status_updated(&gnetif);
+
+#if LWIP_NETIF_LINK_CALLBACK
+  netif_set_link_callback(&gnetif, ethernet_link_status_updated);
+#endif
 }
 
 /**
@@ -307,26 +279,26 @@ static void MPU_Config(void)
   MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_DISABLE;
 
   HAL_MPU_ConfigRegion(&MPU_InitStruct);
-  
+
   /* Configure the MPU as Normal Non Cacheable for Ethernet Buffers in the SRAM2 */
   MPU_InitStruct.Enable = MPU_REGION_ENABLE;
-  MPU_InitStruct.BaseAddress = 0x2004C000;
+  MPU_InitStruct.BaseAddress = 0x20048000;
   MPU_InitStruct.Size = MPU_REGION_SIZE_16KB;
   MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
   MPU_InitStruct.IsBufferable = MPU_ACCESS_NOT_BUFFERABLE;
   MPU_InitStruct.IsCacheable = MPU_ACCESS_NOT_CACHEABLE;
-  MPU_InitStruct.IsShareable = MPU_ACCESS_SHAREABLE;
+  MPU_InitStruct.IsShareable = MPU_ACCESS_NOT_SHAREABLE;
   MPU_InitStruct.Number = MPU_REGION_NUMBER1;
   MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL1;
   MPU_InitStruct.SubRegionDisable = 0x00;
   MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_ENABLE;
 
   HAL_MPU_ConfigRegion(&MPU_InitStruct);
-  
+
   /* Configure the MPU as Device for Ethernet Descriptors in the SRAM2 */
   MPU_InitStruct.Enable = MPU_REGION_ENABLE;
   MPU_InitStruct.BaseAddress = 0x2004C000;
-  MPU_InitStruct.Size = MPU_REGION_SIZE_256B;
+  MPU_InitStruct.Size = MPU_REGION_SIZE_1KB;
   MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
   MPU_InitStruct.IsBufferable = MPU_ACCESS_BUFFERABLE;
   MPU_InitStruct.IsCacheable = MPU_ACCESS_NOT_CACHEABLE;
@@ -352,7 +324,7 @@ static void MPU_Config(void)
   MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_ENABLE;
 
   HAL_MPU_ConfigRegion(&MPU_InitStruct);
-  
+
   /* Configure the MPU attributes FMC control registers */
   MPU_InitStruct.Enable = MPU_REGION_ENABLE;
   MPU_InitStruct.BaseAddress = 0xA0000000;
@@ -396,7 +368,7 @@ static void CPU_CACHE_Enable(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 

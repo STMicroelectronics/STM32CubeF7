@@ -39,8 +39,9 @@
    
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
-void User_notification(struct netif *netif);
-#ifdef USE_DHCP
+void ethernet_link_status_updated(struct netif *netif);
+void Ethernet_Link_Periodic_Handle(struct netif *netif);
+#if LWIP_DHCP
 void DHCP_Process(struct netif *netif);
 void DHCP_Periodic_Handle(struct netif *netif);
 #endif  
@@ -50,5 +51,6 @@ void DHCP_Periodic_Handle(struct netif *netif);
 #endif
 
 #endif /* __APP_ETHERNET_H */
+
 
 

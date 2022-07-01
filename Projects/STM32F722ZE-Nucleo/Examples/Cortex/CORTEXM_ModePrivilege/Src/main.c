@@ -31,6 +31,11 @@
 /* Private define ------------------------------------------------------------*/
 #define SP_PROCESS_SIZE             0x200  /* Process stack size */
 
+/* Private function prototypes -----------------------------------------------*/
+static __INLINE  void __SVC(void);
+static void SystemClock_Config(void);
+static void CPU_CACHE_Enable(void);
+
 /* Private macro -------------------------------------------------------------*/
 #if defined ( __CC_ARM   )
 __ASM void __SVC(void)
@@ -54,10 +59,6 @@ static __INLINE void __SVC()
 __IO uint8_t PSPMemAlloc[SP_PROCESS_SIZE];
 __IO uint32_t Index = 0, PSPValue = 0, CurrentStack = 0, ThreadMode = 0;
 
-/* Private function prototypes -----------------------------------------------*/
-static __INLINE  void __SVC(void);
-static void SystemClock_Config(void);
-static void CPU_CACHE_Enable(void);
 /* Private functions ---------------------------------------------------------*/
 
 /**

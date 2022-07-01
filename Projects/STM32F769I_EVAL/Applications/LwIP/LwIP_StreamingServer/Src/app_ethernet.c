@@ -18,7 +18,9 @@
 /* Includes ------------------------------------------------------------------*/
 #include "lwip/opt.h"
 #include "main.h"
+#if LWIP_DHCP
 #include "lwip/dhcp.h"
+#endif
 #include "app_ethernet.h"
 #include "ethernetif.h"
 #ifdef USE_LCD
@@ -29,82 +31,145 @@
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
+#if LWIP_DHCP
+#define MAX_DHCP_TRIES  4
+__IO uint8_t DHCP_state = DHCP_OFF;
+#endif
+
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 /**
-  * @brief  Notify the User about the nework interface config status 
+  * @brief  Notify the User about the network interface config status
   * @param  netif: the network interface
   * @retval None
   */
-void User_notification(struct netif *netif) 
+void ethernet_link_status_updated(struct netif *netif)
 {
   if (netif_is_up(netif))
-  {
-#ifdef USE_LCD
+ {
+#if LWIP_DHCP
+    /* Update DHCP state machine */
+    DHCP_state = DHCP_START;
+#elif defined(USE_LCD)
     uint8_t iptxt[34];
     
     sprintf((char*)iptxt, "%s:%d.%d.%d.%d", (char*)"Static IP address", IP_ADDR0, IP_ADDR1, IP_ADDR2, IP_ADDR3);
     BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()/4 + 50, (uint8_t *)iptxt, LEFT_MODE);
-    
-#endif /* USE_LCD */
-    /* Turn On LED1 to indicate ETH and LwIP init success */
-    BSP_LED_On(LED_GREEN);
+#else
+    BSP_LED_On(LED1);
+    BSP_LED_Off(LED2);
+#endif /* LWIP_DHCP */
   }
   else
-  {  
-#ifdef USE_LCD
+  {
+#if LWIP_DHCP
+    /* Update DHCP state machine */
+    DHCP_state = DHCP_LINK_DOWN;
+#elif defined(USE_LCD)
     BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()/4 + 50, (uint8_t *)"The network cable is not connected", LEFT_MODE);
-#endif /* USE_LCD */
-    
-    /* Turn On LED 3 to indicate ETH and LwIP init error */
-    BSP_LED_On(LED_RED);
-  } 
+#else
+    BSP_LED_Off(LED1);
+    BSP_LED_On(LED2);
+#endif /* LWIP_DHCP */
+  }
 }
 
+#if LWIP_DHCP
 /**
-  * @brief  This function notify user about link status changement.
-  * @param  netif: the network interface
+  * @brief  DHCP Process
+  * @param  argument: network interface
   * @retval None
   */
-void ethernetif_notify_conn_changed(struct netif *netif)
+void DHCP_Thread(void const * argument)
 {
+  struct netif *netif = (struct netif *) argument;
   ip_addr_t ipaddr;
   ip_addr_t netmask;
   ip_addr_t gw;
-
-  if(netif_is_link_up(netif))
-  {
-    IP4_ADDR(&ipaddr, IP_ADDR0, IP_ADDR1, IP_ADDR2, IP_ADDR3);
-    IP4_ADDR(&netmask, NETMASK_ADDR0, NETMASK_ADDR1 , NETMASK_ADDR2, NETMASK_ADDR3);
-    IP4_ADDR(&gw, GW_ADDR0, GW_ADDR1, GW_ADDR2, GW_ADDR3);    
-
-#ifdef USE_LCD        
-    uint8_t lcd_log_txt[51];
-
-    sprintf((char*)lcd_log_txt, "%s:%d.%d.%d.%d", (char*)"The network cable is now connected", IP_ADDR0, IP_ADDR1, IP_ADDR2, IP_ADDR3);
-    BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()/4 + 70, (uint8_t *)lcd_log_txt, LEFT_MODE);
-#endif /* USE_LCD */
-    BSP_LED_Off(LED_RED);
-    BSP_LED_On(LED_GREEN);
-    
-    netif_set_addr(netif, &ipaddr , &netmask, &gw);
-    
-    /* When the netif is fully configured this function must be called. */
-    netif_set_up(netif);     
-  }
-  else
-  {
-    /*  When the netif link is down this function must be called.*/
-    netif_set_down(netif);
-    
+  struct dhcp *dhcp;
 #ifdef USE_LCD
-    BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()/4 + 70, (uint8_t *)"The network cable is not connected", LEFT_MODE);
+  uint8_t iptxt[51];
+#endif
+
+  for (;;)
+  {
+    switch (DHCP_state)
+    {
+    case DHCP_START:
+      {
+        ip_addr_set_zero_ip4(&netif->ip_addr);
+        ip_addr_set_zero_ip4(&netif->netmask);
+        ip_addr_set_zero_ip4(&netif->gw);
+        DHCP_state = DHCP_WAIT_ADDRESS;
+#ifdef USE_LCD
+        BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()/4 + 50, (uint8_t *)"State: Looking for DHCP server ...", LEFT_MODE);
 #else
-    BSP_LED_Off(LED_GREEN);
-    BSP_LED_On(LED_RED);
-#endif /* USE_LCD */    
+        BSP_LED_Off(LED1);
+        BSP_LED_Off(LED2);
+#endif
+        dhcp_start(netif);
+      }
+      break;
+
+    case DHCP_WAIT_ADDRESS:
+      {
+        if (dhcp_supplied_address(netif))
+        {
+          DHCP_state = DHCP_ADDRESS_ASSIGNED;
+
+#ifdef USE_LCD
+          sprintf((char*)iptxt, "%s:%s", (char*)"IP address assigned", ip4addr_ntoa(netif_ip4_addr(netif)));          
+          
+          BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()/4 + 70, (uint8_t *)iptxt, LEFT_MODE);          
+#else
+          BSP_LED_On(LED1);
+          BSP_LED_Off(LED2);
+#endif
+        }
+        else
+        {
+          dhcp = (struct dhcp *)netif_get_client_data(netif, LWIP_NETIF_CLIENT_DATA_INDEX_DHCP);
+
+          /* DHCP timeout */
+          if (dhcp->tries > MAX_DHCP_TRIES)
+          {
+            DHCP_state = DHCP_TIMEOUT;
+
+            /* Static address used */
+            IP_ADDR4(&ipaddr, IP_ADDR0 ,IP_ADDR1 , IP_ADDR2 , IP_ADDR3 );
+            IP_ADDR4(&netmask, NETMASK_ADDR0, NETMASK_ADDR1, NETMASK_ADDR2, NETMASK_ADDR3);
+            IP_ADDR4(&gw, GW_ADDR0, GW_ADDR1, GW_ADDR2, GW_ADDR3);
+            netif_set_addr(netif, ip_2_ip4(&ipaddr), ip_2_ip4(&netmask), ip_2_ip4(&gw));
+
+#ifdef USE_LCD
+            sprintf((char*)iptxt, "%s:%d.%d.%d.%d", (char*)"Static IP address", IP_ADDR0, IP_ADDR1, IP_ADDR2, IP_ADDR3);
+            BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()/4 + 50, (uint8_t *)iptxt, LEFT_MODE);
+#else
+            BSP_LED_On(LED1);
+            BSP_LED_Off(LED2);
+#endif
+          }
+        }
+      }
+      break;
+  case DHCP_LINK_DOWN:
+    {
+      DHCP_state = DHCP_OFF;
+#ifdef USE_LCD
+      BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()/4 + 50, (uint8_t *)"The network cable is not connected", LEFT_MODE);
+#else
+      BSP_LED_Off(LED1);
+      BSP_LED_On(LED2);
+#endif
+    }
+    break;
+    default: break;
+    }
+
+    /* wait 500 ms */
+    osDelay(500);
   }
-  /* Clear MFX Interrupt flag */
-  BSP_IO_ITClear();
 }
+#endif  /* LWIP_DHCP */
+
 

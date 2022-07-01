@@ -39,7 +39,6 @@
 /* Private variables ---------------------------------------------------------*/
 struct netif gnetif;                        /* network interface structure */
 osSemaphoreId Netif_LinkSemaphore = NULL;   /* Semaphore to signal Ethernet Link state update */
-struct link_str link_arg;                   /* Ethernet link thread Argument */
 osSemaphoreId Encoding_jpg_Semaphore;       /* Semaphore ID to signal transfer frame complete*/
 
 
@@ -111,20 +110,24 @@ int main(void)
 
 
   /* Init task */
-  osThreadDef(Start, StartThread, osPriorityNormal, 0, configMINIMAL_STACK_SIZE * 4);
- 
+#if defined(__GNUC__)
+  osThreadDef(Start, StartThread, osPriorityNormal, 0, configMINIMAL_STACK_SIZE * 5);
+#else
+  osThreadDef(Start, StartThread, osPriorityNormal, 0, configMINIMAL_STACK_SIZE * 2);
+#endif
+
   osThreadCreate (osThread(Start), NULL);
 
   /* Start scheduler */
   osKernelStart();
-  
+
   /* We should never get here as control is now taken by the scheduler */
   for( ;; );
 
 }
 
 /**
-  * @brief  Start Thread 
+  * @brief  Start Thread
   * @param  argument not used
   * @retval None
   */
@@ -151,13 +154,11 @@ static void StartThread(void const * argument)
 
   osThreadDef(img_Enc, Encode_jpg_Sem, osPriorityNormal, 0, configMINIMAL_STACK_SIZE*6);
   Thr_Encode_Sem = osThreadCreate (osThread(img_Enc), NULL);
- 
-  /* Notify user about the network interface config */
-  User_notification(&gnetif);
+
 
   for( ;; )
   {
-    /* Delete the Init Thread */ 
+    /* Delete the Init Thread */
     osThreadTerminate(NULL);
   }
 }
@@ -201,6 +202,47 @@ static void LCD_Config(void)
   BSP_LCD_SetFont(&Font24);
 }
 #endif /* USE_LCD */
+
+/**
+  * @brief  Initializes the lwIP stack
+  * @param  None
+  * @retval None
+  */
+static void Netif_Config(void)
+{
+  ip_addr_t ipaddr;
+  ip_addr_t netmask;
+  ip_addr_t gw;
+
+#if LWIP_DHCP
+  ip_addr_set_zero_ip4(&ipaddr);
+  ip_addr_set_zero_ip4(&netmask);
+  ip_addr_set_zero_ip4(&gw);
+#else
+  IP_ADDR4(&ipaddr,IP_ADDR0,IP_ADDR1,IP_ADDR2,IP_ADDR3);
+  IP_ADDR4(&netmask,NETMASK_ADDR0,NETMASK_ADDR1,NETMASK_ADDR2,NETMASK_ADDR3);
+  IP_ADDR4(&gw,GW_ADDR0,GW_ADDR1,GW_ADDR2,GW_ADDR3);
+#endif /* LWIP_DHCP */
+
+  /* add the network interface */
+  netif_add(&gnetif, &ipaddr, &netmask, &gw, NULL, &ethernetif_init, &tcpip_input);
+
+  /*  Registers the default network interface. */
+  netif_set_default(&gnetif);
+
+#if LWIP_NETIF_LINK_CALLBACK
+  netif_set_link_callback(&gnetif, ethernet_link_status_updated);
+
+  osThreadDef(EthLink, ethernet_link_thread, osPriorityNormal, 0, configMINIMAL_STACK_SIZE *2);
+  osThreadCreate (osThread(EthLink), &gnetif);
+#endif
+
+#if LWIP_DHCP
+  /* Start DHCPClient */
+  osThreadDef(DHCP, DHCP_Thread, osPriorityBelowNormal, 0, configMINIMAL_STACK_SIZE * 2);
+  osThreadCreate (osThread(DHCP), &gnetif);
+#endif
+}
 
 /**
   * @brief  Encoding thread
@@ -251,12 +293,12 @@ static void MPU_Config(void)
   
   /* Configure the MPU as Normal Non Cacheable for Ethernet Buffers in the SRAM2 */
   MPU_InitStruct.Enable = MPU_REGION_ENABLE;
-  MPU_InitStruct.BaseAddress = 0x2007C000;
+  MPU_InitStruct.BaseAddress = 0x20078000;
   MPU_InitStruct.Size = MPU_REGION_SIZE_16KB;
   MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
   MPU_InitStruct.IsBufferable = MPU_ACCESS_NOT_BUFFERABLE;
   MPU_InitStruct.IsCacheable = MPU_ACCESS_NOT_CACHEABLE;
-  MPU_InitStruct.IsShareable = MPU_ACCESS_SHAREABLE;
+  MPU_InitStruct.IsShareable = MPU_ACCESS_NOT_SHAREABLE;
   MPU_InitStruct.Number = MPU_REGION_NUMBER1;
   MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL1;
   MPU_InitStruct.SubRegionDisable = 0x00;
@@ -267,7 +309,7 @@ static void MPU_Config(void)
   /* Configure the MPU as Device for Ethernet Descriptors in the SRAM2 */
   MPU_InitStruct.Enable = MPU_REGION_ENABLE;
   MPU_InitStruct.BaseAddress = 0x2007C000;
-  MPU_InitStruct.Size = MPU_REGION_SIZE_256B;
+  MPU_InitStruct.Size = MPU_REGION_SIZE_1KB;
   MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
   MPU_InitStruct.IsBufferable = MPU_ACCESS_BUFFERABLE;
   MPU_InitStruct.IsCacheable = MPU_ACCESS_NOT_CACHEABLE;
@@ -410,85 +452,6 @@ void BSP_CAMERA_FrameEventCallback(void)
   /* Release the semaphore */
   osSemaphoreRelease(Encoding_jpg_Semaphore);
 
-}
-
-/**
-  * @brief  Initializes the lwIP stack
-  * @param  None
-  * @retval None
-  */
-static void Netif_Config(void)
-{
-  ip_addr_t ipaddr;
-  ip_addr_t netmask;
-  ip_addr_t gw;	
-  
-  /* IP address default setting */
-  IP4_ADDR(&ipaddr, IP_ADDR0, IP_ADDR1, IP_ADDR2, IP_ADDR3);
-  IP4_ADDR(&netmask, NETMASK_ADDR0, NETMASK_ADDR1 , NETMASK_ADDR2, NETMASK_ADDR3);
-  IP4_ADDR(&gw, GW_ADDR0, GW_ADDR1, GW_ADDR2, GW_ADDR3);
-  
-  /* - netif_add(struct netif *netif, ip_addr_t *ipaddr,
-  ip_addr_t *netmask, ip_addr_t *gw,
-  void *state, err_t (* init)(struct netif *netif),
-  err_t (* input)(struct pbuf *p, struct netif *netif))
-  
-  Adds your network interface to the netif_list. Allocate a struct
-  netif and pass a pointer to this structure as the first argument.
-  Give pointers to cleared ip_addr structures when using DHCP,
-  or fill them with sane numbers otherwise. The state pointer may be NULL.
-  
-  The init function pointer must point to a initialization function for
-  your ethernet netif interface. The following code illustrates it's use.*/
-  
-  netif_add(&gnetif, &ipaddr, &netmask, &gw, NULL, &ethernetif_init, &tcpip_input);
-  
-  /*  Registers the default network interface. */
-  netif_set_default(&gnetif);
-  
-  if (netif_is_link_up(&gnetif))
-  {
-    /* When the netif is fully configured this function must be called.*/
-    netif_set_up(&gnetif);
-  }
-  else
-  {
-    /* When the netif link is down this function must be called */
-    netif_set_down(&gnetif);
-  }
-
-  /* Set the link callback function, this function is called on change of link status*/
-  netif_set_link_callback(&gnetif, ethernetif_update_config);
-  
-  /* create a binary semaphore used for informing ethernetif of frame reception */
-  osSemaphoreDef(Netif_SEM);
-  Netif_LinkSemaphore = osSemaphoreCreate(osSemaphore(Netif_SEM) , 1 );
-  
-  link_arg.netif = &gnetif;
-  link_arg.semaphore = Netif_LinkSemaphore;
-  /* Create the Ethernet link handler thread */
-
-  osThreadDef(LinkThr, ethernetif_set_link, osPriorityNormal, 0, configMINIMAL_STACK_SIZE * 2);
-
-  osThreadCreate (osThread(LinkThr), &link_arg);
-}
-  
-/**
-  * @brief EXTI line detection callbacks
-  * @param GPIO_Pin: Specifies the pins connected EXTI line
-  * @retval None
-  */
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
-{
-  if (GPIO_Pin == MFX_IRQOUT_PIN)
-  {
-    /* Get the IT status register value */
-    if(BSP_IO_ITGetStatus(MII_INT_PIN))
-    {
-      osSemaphoreRelease(Netif_LinkSemaphore);
-    }
-    BSP_IO_ITClear();
-  }
 }
 
 /**

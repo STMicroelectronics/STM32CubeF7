@@ -28,7 +28,8 @@
 #include "stm32f7xx_hal.h"
 #include "stm32f769i_discovery.h"
 #include "stm32f769i_discovery_lcd.h"
-
+#define USE_LCD
+   
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/ 
 #define USE_DHCP       /* enable DHCP, if disabled static address is used*/
