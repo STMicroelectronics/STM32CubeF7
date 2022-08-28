@@ -103,7 +103,10 @@
 #define ARM_MPU_RASR_EX(DisableExec, AccessPermission, AccessAttributes, SubRegionDisable, Size)      \
   ((((DisableExec ) << MPU_RASR_XN_Pos) & MPU_RASR_XN_Msk)                                          | \
    (((AccessPermission) << MPU_RASR_AP_Pos) & MPU_RASR_AP_Msk)                                      | \
-   (((AccessAttributes) ) & (MPU_RASR_TEX_Msk | MPU_RASR_S_Msk | MPU_RASR_C_Msk | MPU_RASR_B_Msk)))
+   (((AccessAttributes) ) & (MPU_RASR_TEX_Msk | MPU_RASR_S_Msk | MPU_RASR_C_Msk | MPU_RASR_B_Msk))  | \
+   (((SubRegionDisable) << MPU_RASR_SRD_Pos) & MPU_RASR_SRD_Msk)                                    | \
+   (((Size) << MPU_RASR_SIZE_Pos) & MPU_RASR_SIZE_Msk)                                              | \
+   (MPU_RASR_ENABLE_Msk))
   
 /**
 * MPU Region Attribute and Size Register Value
@@ -218,7 +221,7 @@ __STATIC_INLINE void ARM_MPU_ClrRegion(uint32_t rnr)
 
 /** Configure an MPU region.
 * \param rbar Value for RBAR register.
-* \param rsar Value for RSAR register.
+* \param rasr Value for RASR register.
 */   
 __STATIC_INLINE void ARM_MPU_SetRegion(uint32_t rbar, uint32_t rasr)
 {
@@ -229,7 +232,7 @@ __STATIC_INLINE void ARM_MPU_SetRegion(uint32_t rbar, uint32_t rasr)
 /** Configure the given MPU region.
 * \param rnr Region number to be configured.
 * \param rbar Value for RBAR register.
-* \param rsar Value for RSAR register.
+* \param rasr Value for RASR register.
 */   
 __STATIC_INLINE void ARM_MPU_SetRegionEx(uint32_t rnr, uint32_t rbar, uint32_t rasr)
 {
