@@ -13,11 +13,14 @@
 
 The **STM32CubeF7 MCU Package** projects are directly running on the STM32F7 series boards. You can find in each Projects/*Board name* directories a set of software projects (Applications/Demonstration/Examples).
 
-In this FW Package, the modules listed below are not directly accessible as they are subject to some restrictive license terms requiring user's approval via a "click thu" procedure.
-They have to be downloaded from the [www.st.com](https://www.st.com/content/st_com/en.html) website. The respective URL to download each one of these modules are available in a readme.txt file at the root of each folder.
-* *Middlewares/ST/TouchGFX*
-* *Middlewares/ST/STemWin*
-* *Middlewares/ST/STM32_Audio*
+## Some middleware libraries are unavailable in this repository
+
+In this repository, the middleware libraries listed below **along with** the projects (demos, applications, and examples) using them, are **not available** as they (the middleware libraries) are subject to some restrictive license terms requiring the user's approval via a "click thu" procedure.
+* `./Middlewares/ST/STM32_Audio`
+* `./Middlewares/ST/STemWin`
+* `./Middlewares/ST/TouchGFX`
+
+If needed, they can be found inside the full firmware package available on our website `st.com` and downloadable from [here](https://www.st.com/content/st_com/en/products/embedded-software/mcu-mpu-embedded-software/stm32-embedded-software/stm32cube-mcu-mpu-packages/stm32cubef7.html#get-software). You will be prompted to login or to register in case you have no account.
 
 ## Release note
 
