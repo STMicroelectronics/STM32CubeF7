@@ -356,12 +356,21 @@ uint8_t BSP_LCD_InitEx(LCD_OrientationTypeDef orientation)
   VACT = lcd_y_size;
 
   /* The following values are same for portrait and landscape orientations */
-  VSA  = OTM8009A_480X800_VSYNC;        /* 12  */
-  VBP  = OTM8009A_480X800_VBP;          /* 12  */
-  VFP  = OTM8009A_480X800_VFP;          /* 12  */
-  HSA  = OTM8009A_480X800_HSYNC;        /* 63  */
-  HBP  = OTM8009A_480X800_HBP;          /* 120 */
-  HFP  = OTM8009A_480X800_HFP;          /* 120 */   
+#if defined (USE_STM32F769I_DISCO_REVB03)
+  VSA  = NT35510_480X800_VSYNC;
+  VBP  = NT35510_480X800_VBP;
+  VFP  = NT35510_480X800_VFP;
+  HSA  = NT35510_480X800_HSYNC;
+  HBP  = NT35510_480X800_HBP;
+  HFP  = NT35510_480X800_HFP;  
+#else
+  VSA  = OTM8009A_480X800_VSYNC;
+  VBP  = OTM8009A_480X800_VBP;
+  VFP  = OTM8009A_480X800_VFP;
+  HSA  = OTM8009A_480X800_HSYNC;
+  HBP  = OTM8009A_480X800_HBP;
+  HFP  = OTM8009A_480X800_HFP;
+#endif /* USE_STM32F769I_DISCO_REVB03 */
 
   hdsivideo_handle.VirtualChannelID = LCD_OTM8009A_ID;
   hdsivideo_handle.ColorCoding = LCD_DSI_PIXEL_DATA_FMT_RBG888;
@@ -459,6 +468,15 @@ uint8_t BSP_LCD_InitEx(LCD_OrientationTypeDef orientation)
 
 /************************End LTDC Initialization*******************************/
   
+#if defined(USE_STM32F769I_DISCO_REVB03)
+/***********************NT35510 Initialization********************************/  
+  
+  /* Initialize the NT35510 LCD Display IC Driver (TechShine LCD IC Driver)
+   * depending on configuration set in 'hdsivideo_handle'.
+   */
+  NT35510_Init(NT35510_FORMAT_RGB888, orientation);
+/***********************End NT35510 Initialization****************************/
+#else
   
 /***********************OTM8009A Initialization********************************/ 
 
@@ -468,6 +486,8 @@ uint8_t BSP_LCD_InitEx(LCD_OrientationTypeDef orientation)
   OTM8009A_Init(OTM8009A_FORMAT_RGB888, orientation);
 
 /***********************End OTM8009A Initialization****************************/ 
+#endif /* USE_STM32F769I_DISCO_REVB03 */
+
 
   return LCD_OK; 
 }

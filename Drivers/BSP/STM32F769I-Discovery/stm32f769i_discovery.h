@@ -17,6 +17,11 @@
   ******************************************************************************
   */
 
+/* IMPORTANT: One of the following flags must be defined in the preprocessor */
+/* options in order to select the target board revision: !!!!!!!!!! */
+/* USE_STM32F769I_DISCO */        /* Applicable for all boards execept STM32F769I DISCOVERY REVB03 */
+/* USE_STM32F769I_DISCO_REVB03 */ /* Applicable only for STM32F769I DISCOVERY w/ MB1166-A09 LCD daughter board connected on */
+
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __STM32F769I_DISCOVERY_H
 #define __STM32F769I_DISCOVERY_H
@@ -48,8 +53,9 @@
 /** 
   * @brief  Define for STM32F769I_DISCOVERY board
   */ 
-#if !defined (USE_STM32F769I_DISCO)
- #define USE_STM32F769I_DISCO
+#if !defined(USE_STM32F769I_DISCO) && \
+    !defined(USE_STM32F769I_DISCO_REVB03)
+#define USE_STM32F769I_DISCO
 #endif
 
 /** @brief Led_TypeDef

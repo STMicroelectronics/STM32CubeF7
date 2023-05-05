@@ -136,6 +136,7 @@ void     TS_IO_Delay(uint32_t Delay);
 
 /* LCD Display IO functions */
 void     OTM8009A_IO_Delay(uint32_t Delay);
+void     NT35510_IO_Delay(uint32_t Delay);
 /**
   * @}
   */
@@ -731,6 +732,16 @@ void TS_IO_Delay(uint32_t Delay)
   * @param  Delay: Delay in ms
   */
 void OTM8009A_IO_Delay(uint32_t Delay)
+{
+  HAL_Delay(Delay);
+}
+
+/**************************** LINK NT35510 (Display driver) ******************/
+/**
+  * @brief  NT35510 delay
+  * @param  Delay: Delay in ms
+  */
+void NT35510_IO_Delay(uint32_t Delay)
 {
   HAL_Delay(Delay);
 }
