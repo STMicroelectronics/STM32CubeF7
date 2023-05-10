@@ -289,6 +289,12 @@ uint32_t HAL_CRC_Accumulate(CRC_HandleTypeDef *hcrc, uint32_t pBuffer[], uint32_
   uint32_t index;      /* CRC input data buffer index */
   uint32_t temp = 0U;  /* CRC output (read from hcrc->Instance->DR register) */
 
+  /* Check the CRC peripheral state */
+  if (hcrc->State == HAL_CRC_STATE_BUSY)
+  {
+    return HAL_BUSY;
+  }
+
   /* Change CRC peripheral state */
   hcrc->State = HAL_CRC_STATE_BUSY;
 
@@ -341,6 +347,12 @@ uint32_t HAL_CRC_Calculate(CRC_HandleTypeDef *hcrc, uint32_t pBuffer[], uint32_t
   uint32_t index;      /* CRC input data buffer index */
   uint32_t temp = 0U;  /* CRC output (read from hcrc->Instance->DR register) */
 
+  /* Check the CRC peripheral state */
+  if (hcrc->State == HAL_CRC_STATE_BUSY)
+  {
+    return HAL_BUSY;
+  }
+  
   /* Change CRC peripheral state */
   hcrc->State = HAL_CRC_STATE_BUSY;
 
