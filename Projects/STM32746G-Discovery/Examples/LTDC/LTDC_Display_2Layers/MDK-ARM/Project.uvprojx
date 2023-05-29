@@ -437,7 +437,7 @@
               
             </File></Files>
         </Group><Group>
-          <GroupName>Drivers/BSP/STM327x6G_EVAL</GroupName>
+          <GroupName>Drivers/BSP/STM32746G-Discovery</GroupName>
           
           <Files>
           

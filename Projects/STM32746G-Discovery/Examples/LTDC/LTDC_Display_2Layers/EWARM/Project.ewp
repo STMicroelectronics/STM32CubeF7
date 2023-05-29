@@ -964,10 +964,7 @@
     <group>
       <name>BSP</name>
       <group>
-        <name>Components</name>
-      </group>
-      <group>
-        <name>STM327x6G_EVAL</name>
+        <name>STM32746G-Discovery</name>
         <file>
           <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32746G-Discovery\stm32746g_discovery.c</name>
         </file>
