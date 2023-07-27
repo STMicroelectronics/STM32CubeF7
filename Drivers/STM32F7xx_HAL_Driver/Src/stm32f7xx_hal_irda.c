@@ -461,6 +461,8 @@ __weak void HAL_IRDA_MspDeInit(IRDA_HandleTypeDef *hirda)
 /**
   * @brief  Register a User IRDA Callback
   *         To be used instead of the weak predefined callback
+  * @note   The HAL_IRDA_RegisterCallback() may be called before HAL_IRDA_Init() in HAL_IRDA_STATE_RESET
+  *         to register callbacks for HAL_IRDA_MSPINIT_CB_ID and HAL_IRDA_MSPDEINIT_CB_ID
   * @param  hirda irda handle
   * @param  CallbackID ID of the callback to be registered
   *         This parameter can be one of the following values:
@@ -489,8 +491,6 @@ HAL_StatusTypeDef HAL_IRDA_RegisterCallback(IRDA_HandleTypeDef *hirda, HAL_IRDA_
 
     return HAL_ERROR;
   }
-  /* Process locked */
-  __HAL_LOCK(hirda);
 
   if (hirda->gState == HAL_IRDA_STATE_READY)
   {
@@ -575,15 +575,14 @@ HAL_StatusTypeDef HAL_IRDA_RegisterCallback(IRDA_HandleTypeDef *hirda, HAL_IRDA_
     status =  HAL_ERROR;
   }
 
-  /* Release Lock */
-  __HAL_UNLOCK(hirda);
-
   return status;
 }
 
 /**
   * @brief  Unregister an IRDA callback
   *         IRDA callback is redirected to the weak predefined callback
+  * @note   The HAL_IRDA_UnRegisterCallback() may be called before HAL_IRDA_Init() in HAL_IRDA_STATE_RESET
+  *         to un-register callbacks for HAL_IRDA_MSPINIT_CB_ID and HAL_IRDA_MSPDEINIT_CB_ID
   * @param  hirda irda handle
   * @param  CallbackID ID of the callback to be unregistered
   *         This parameter can be one of the following values:
@@ -602,9 +601,6 @@ HAL_StatusTypeDef HAL_IRDA_RegisterCallback(IRDA_HandleTypeDef *hirda, HAL_IRDA_
 HAL_StatusTypeDef HAL_IRDA_UnRegisterCallback(IRDA_HandleTypeDef *hirda, HAL_IRDA_CallbackIDTypeDef CallbackID)
 {
   HAL_StatusTypeDef status = HAL_OK;
-
-  /* Process locked */
-  __HAL_LOCK(hirda);
 
   if (HAL_IRDA_STATE_READY == hirda->gState)
   {
@@ -690,9 +686,6 @@ HAL_StatusTypeDef HAL_IRDA_UnRegisterCallback(IRDA_HandleTypeDef *hirda, HAL_IRD
     /* Return error status */
     status =  HAL_ERROR;
   }
-
-  /* Release Lock */
-  __HAL_UNLOCK(hirda);
 
   return status;
 }
