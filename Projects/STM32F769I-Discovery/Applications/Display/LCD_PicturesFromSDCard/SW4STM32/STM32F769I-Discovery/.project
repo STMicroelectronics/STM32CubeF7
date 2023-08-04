@@ -53,6 +53,10 @@
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/BSP/Components/otm8009a/otm8009a.c</location>
 		</link><link>
+			<name>Drivers/BSP/Components/nt35510.c</name>
+			<type>1</type>
+			<location>PARENT-7-PROJECT_LOC/Drivers/BSP/Components/nt35510/nt35510.c</location>
+		</link><link>
 			<name>Drivers/STM32F7xx_HAL_Driver/stm32f7xx_hal_pwr_ex.c</name>
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_pwr_ex.c</location>

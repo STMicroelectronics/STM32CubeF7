@@ -642,7 +642,7 @@ uint8_t BSP_LCD_HDMIInitEx(uint8_t format)
 
   HAL_LTDC_DeInit(&(hltdc_discovery));
 
-  /* Timing Configuration */    
+  /* Timing Configuration */
   hltdc_discovery.Init.HorizontalSync = (HDMI_Format[format].HSYNC - 1);
   hltdc_discovery.Init.AccumulatedHBP = (HDMI_Format[format].HSYNC + HDMI_Format[format].HBP - 1);
   hltdc_discovery.Init.AccumulatedActiveW = (HDMI_Format[format].HACT + HDMI_Format[format].HSYNC + HDMI_Format[format].HBP - 1);
@@ -664,7 +664,7 @@ uint8_t BSP_LCD_HDMIInitEx(uint8_t format)
   hltdc_discovery.Init.PCPolarity = LTDC_PCPOLARITY_IPC;
 
   /* Initialize & Start the LTDC */  
-  HAL_LTDC_Init(&hltdc_discovery);     
+  HAL_LTDC_Init(&hltdc_discovery);
 
 #if !defined(DATA_IN_ExtSDRAM)
   /* Initialize the SDRAM */

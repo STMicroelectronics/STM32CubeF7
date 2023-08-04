@@ -651,6 +651,11 @@
 			<locationURI>PARENT-7-PROJECT_LOC/Drivers/BSP/Components/otm8009a/otm8009a.c</locationURI>
 		</link>
 		<link>
+			<name>Drivers/BSP/Components/nt35510.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Drivers/BSP/Components/nt35510/nt35510.c</locationURI>
+		</link>
+		<link>
 			<name>Drivers/BSP/Components/stmpe811.c</name>
 			<type>1</type>
 			<locationURI>PARENT-7-PROJECT_LOC/Drivers/BSP/Components/stmpe811/stmpe811.c</locationURI>

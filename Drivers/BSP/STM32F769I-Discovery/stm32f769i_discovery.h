@@ -19,7 +19,7 @@
 
 /* IMPORTANT: One of the following flags must be defined in the preprocessor */
 /* options in order to select the target board revision: !!!!!!!!!! */
-/* USE_STM32F769I_DISCO */        /* Applicable for all boards execept STM32F769I DISCOVERY REVB03 */
+/* USE_STM32F769I_DISCO */        /* Applicable for all boards except STM32F769I DISCOVERY REVB03 */
 /* USE_STM32F769I_DISCO_REVB03 */ /* Applicable only for STM32F769I DISCOVERY w/ MB1166-A09 LCD daughter board connected on */
 
 /* Define to prevent recursive inclusion -------------------------------------*/

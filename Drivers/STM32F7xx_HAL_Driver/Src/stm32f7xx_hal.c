@@ -346,8 +346,7 @@ HAL_StatusTypeDef HAL_SetTickFreq(HAL_TickFreqTypeDef Freq)
 
 /**
   * @brief Return tick frequency.
-  * @retval Tick frequency.
-  *         Value of @ref HAL_TickFreqTypeDef.
+  * @retval tick period in Hz
   */
 HAL_TickFreqTypeDef HAL_GetTickFreq(void)
 {

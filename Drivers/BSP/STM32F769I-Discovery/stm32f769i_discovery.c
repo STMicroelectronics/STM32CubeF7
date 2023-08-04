@@ -55,8 +55,8 @@ EndDependencies */
  * @brief STM32F769I Discovery BSP Driver version number V2.0.2
    */
 #define __STM32F769I_DISCOVERY_BSP_VERSION_MAIN   (0x02) /*!< [31:24] main version */
-#define __STM32F769I_DISCOVERY_BSP_VERSION_SUB1   (0x00) /*!< [23:16] sub1 version */
-#define __STM32F769I_DISCOVERY_BSP_VERSION_SUB2   (0x02) /*!< [15:8]  sub2 version */
+#define __STM32F769I_DISCOVERY_BSP_VERSION_SUB1   (0x01) /*!< [23:16] sub1 version */
+#define __STM32F769I_DISCOVERY_BSP_VERSION_SUB2   (0x00) /*!< [15:8]  sub2 version */
 #define __STM32F769I_DISCOVERY_BSP_VERSION_RC     (0x00) /*!< [7:0]  release candidate */
 #define __STM32F769I_DISCOVERY_BSP_VERSION        ((__STM32F769I_DISCOVERY_BSP_VERSION_MAIN << 24)\
                                                  |(__STM32F769I_DISCOVERY_BSP_VERSION_SUB1 << 16)\

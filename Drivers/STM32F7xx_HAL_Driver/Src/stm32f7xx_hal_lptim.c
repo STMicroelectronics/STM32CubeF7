@@ -2067,6 +2067,9 @@ HAL_StatusTypeDef HAL_LPTIM_RegisterCallback(LPTIM_HandleTypeDef        *hlptim,
     return HAL_ERROR;
   }
 
+  /* Process locked */
+  __HAL_LOCK(hlptim);
+
   if (hlptim->State == HAL_LPTIM_STATE_READY)
   {
     switch (CallbackID)
@@ -2137,6 +2140,9 @@ HAL_StatusTypeDef HAL_LPTIM_RegisterCallback(LPTIM_HandleTypeDef        *hlptim,
     status =  HAL_ERROR;
   }
 
+  /* Release Lock */
+  __HAL_UNLOCK(hlptim);
+
   return status;
 }
 
@@ -2161,6 +2167,9 @@ HAL_StatusTypeDef HAL_LPTIM_UnRegisterCallback(LPTIM_HandleTypeDef        *hlpti
                                                HAL_LPTIM_CallbackIDTypeDef CallbackID)
 {
   HAL_StatusTypeDef status = HAL_OK;
+
+  /* Process locked */
+  __HAL_LOCK(hlptim);
 
   if (hlptim->State == HAL_LPTIM_STATE_READY)
   {
@@ -2242,6 +2251,9 @@ HAL_StatusTypeDef HAL_LPTIM_UnRegisterCallback(LPTIM_HandleTypeDef        *hlpti
     /* Return error status */
     status =  HAL_ERROR;
   }
+
+  /* Release Lock */
+  __HAL_UNLOCK(hlptim);
 
   return status;
 }
