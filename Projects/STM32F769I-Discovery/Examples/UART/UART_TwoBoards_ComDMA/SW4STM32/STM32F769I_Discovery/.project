@@ -93,6 +93,10 @@
 			<type>1</type>
 			<location>PARENT-2-PROJECT_LOC/Src/main.c</location>
 		</link><link>
+			<name>Example/SW4STM32/syscalls.c</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/syscalls.c</locationURI>
+		</link><link>
 			<name>Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery.c</name>
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery.c</location>
