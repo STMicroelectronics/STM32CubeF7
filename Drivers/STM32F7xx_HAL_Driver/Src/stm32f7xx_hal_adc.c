@@ -1051,9 +1051,8 @@ HAL_StatusTypeDef HAL_ADC_Start_IT(ADC_HandleTypeDef* hadc)
   __IO uint32_t counter = 0;
   
   /* Check the parameters */
-  assert_param(IS_FUNCTIONAL_STATE(hadc->Init.ContinuousConvMode));
-  assert_param(IS_ADC_EXT_TRIG_EDGE(hadc->Init.ExternalTrigConvEdge)); 
-  
+  assert_param(IS_ADC_ALL_INSTANCE(hadc->Instance));
+
   /* Process locked */
   __HAL_LOCK(hadc);
   
@@ -1215,8 +1214,6 @@ void HAL_ADC_IRQHandler(ADC_HandleTypeDef* hadc)
 
   /* Check the parameters */
   assert_param(IS_FUNCTIONAL_STATE(hadc->Init.ContinuousConvMode));
-  assert_param(IS_ADC_REGULAR_LENGTH(hadc->Init.NbrOfConversion));
-  assert_param(IS_ADC_EOCSelection(hadc->Init.EOCSelection));
 
   tmp1 = tmp_sr & ADC_FLAG_EOC;
   tmp2 = tmp_cr1 & ADC_IT_EOC;
