@@ -40,7 +40,7 @@ uint8_t wtext[] = "Images display from USB Example";
   */
 void IMG_File_Operations(void)
 {
-  uint16_t bytesread;
+  uint32_t bytesread;
   
   LCD_UsrLog("INFO : FatFs Initialized \n");
   
