@@ -142,7 +142,7 @@ USBD_StatusTypeDef USBD_Init(USBD_HandleTypeDef *pdev,
 
 /**
   * @brief  USBD_DeInit
-  *         Re-Initialize the device library
+  *         De-Initialize the device library
   * @param  pdev: device instance
   * @retval status: status
   */
