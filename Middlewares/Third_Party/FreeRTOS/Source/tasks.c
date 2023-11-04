@@ -220,6 +220,17 @@ count overflows. */
 	taskRECORD_READY_PRIORITY( ( pxTCB )->uxPriority );												\
 	vListInsertEnd( &( pxReadyTasksLists[ ( pxTCB )->uxPriority ] ), &( ( pxTCB )->xStateListItem ) ); \
 	tracePOST_MOVED_TASK_TO_READY_STATE( pxTCB )
+
+/*
+ * Place the task represented by pxTCB which has been in a ready list before
+ * into the appropriate ready list for the task.
+ * It is inserted at the end of the list.
+ */
+#define prvReaddTaskToReadyList( pxTCB )															\
+	traceREADDED_TASK_TO_READY_STATE( pxTCB );														\
+	taskRECORD_READY_PRIORITY( ( pxTCB )->uxPriority );												\
+	vListInsertEnd( &( pxReadyTasksLists[ ( pxTCB )->uxPriority ] ), &( ( pxTCB )->xStateListItem ) ); \
+	tracePOST_MOVED_TASK_TO_READY_STATE( pxTCB )
 /*-----------------------------------------------------------*/
 
 /*
@@ -337,23 +348,23 @@ PRIVILEGED_DATA TCB_t * volatile pxCurrentTCB = NULL;
 xDelayedTaskList1 and xDelayedTaskList2 could be move to function scople but
 doing so breaks some kernel aware debuggers and debuggers that rely on removing
 the static qualifier. */
-PRIVILEGED_DATA static List_t pxReadyTasksLists[ configMAX_PRIORITIES ] = { 0 };/*< Prioritised ready tasks. */
-PRIVILEGED_DATA static List_t xDelayedTaskList1 = { 0 };						/*< Delayed tasks. */
-PRIVILEGED_DATA static List_t xDelayedTaskList2 = { 0 };						/*< Delayed tasks (two lists are used - one for delays that have overflowed the current tick count. */
-PRIVILEGED_DATA static List_t * volatile pxDelayedTaskList = NULL;				/*< Points to the delayed task list currently being used. */
-PRIVILEGED_DATA static List_t * volatile pxOverflowDelayedTaskList = NULL;		/*< Points to the delayed task list currently being used to hold tasks that have overflowed the current tick count. */
-PRIVILEGED_DATA static List_t xPendingReadyList = { 0 };						/*< Tasks that have been readied while the scheduler was suspended.  They will be moved to the ready list when the scheduler is resumed. */
+PRIVILEGED_DATA static List_t pxReadyTasksLists[ configMAX_PRIORITIES ];/*< Prioritised ready tasks. */
+PRIVILEGED_DATA static List_t xDelayedTaskList1;						/*< Delayed tasks. */
+PRIVILEGED_DATA static List_t xDelayedTaskList2;						/*< Delayed tasks (two lists are used - one for delays that have overflowed the current tick count. */
+PRIVILEGED_DATA static List_t * volatile pxDelayedTaskList;				/*< Points to the delayed task list currently being used. */
+PRIVILEGED_DATA static List_t * volatile pxOverflowDelayedTaskList;		/*< Points to the delayed task list currently being used to hold tasks that have overflowed the current tick count. */
+PRIVILEGED_DATA static List_t xPendingReadyList;						/*< Tasks that have been readied while the scheduler was suspended.  They will be moved to the ready list when the scheduler is resumed. */
 
 #if( INCLUDE_vTaskDelete == 1 )
 
-PRIVILEGED_DATA static List_t xTasksWaitingTermination = { 0 };				/*< Tasks that have been deleted - but their memory not yet freed. */
+	PRIVILEGED_DATA static List_t xTasksWaitingTermination;				/*< Tasks that have been deleted - but their memory not yet freed. */
 	PRIVILEGED_DATA static volatile UBaseType_t uxDeletedTasksWaitingCleanUp = ( UBaseType_t ) 0U;
 
 #endif
 
 #if ( INCLUDE_vTaskSuspend == 1 )
 
-	PRIVILEGED_DATA static List_t xSuspendedTaskList = { 0 };					/*< Tasks that are currently suspended. */
+	PRIVILEGED_DATA static List_t xSuspendedTaskList;					/*< Tasks that are currently suspended. */
 
 #endif
 
@@ -1664,7 +1675,7 @@ static void prvAddNewTaskToReadyList( TCB_t *pxNewTCB )
 					{
 						mtCOVERAGE_TEST_MARKER();
 					}
-					prvAddTaskToReadyList( pxTCB );
+					prvReaddTaskToReadyList( pxTCB );
 				}
 				else
 				{
@@ -1725,7 +1736,7 @@ static void prvAddNewTaskToReadyList( TCB_t *pxNewTCB )
 			{
 				mtCOVERAGE_TEST_MARKER();
 			}
-
+      traceMOVED_TASK_TO_SUSPENDED_LIST(pxTCB);
 			vListInsertEnd( &xSuspendedTaskList, &( pxTCB->xStateListItem ) );
 
 			#if( configUSE_TASK_NOTIFICATIONS == 1 )
@@ -3821,6 +3832,20 @@ static void prvCheckTasksWaitingTermination( void )
 #endif /* INCLUDE_uxTaskGetStackHighWaterMark */
 /*-----------------------------------------------------------*/
 
+#if (INCLUDE_pxTaskGetStackStart == 1)
+	uint8_t* pxTaskGetStackStart( TaskHandle_t xTask)
+	{
+	    TCB_t *pxTCB;
+	    UBaseType_t uxReturn;
+        (void)uxReturn;
+
+		pxTCB = prvGetTCBFromHandle( xTask );
+		return ( uint8_t * ) pxTCB->pxStack;
+	}
+
+#endif /* INCLUDE_pxTaskGetStackStart */
+/*-----------------------------------------------------------*/
+
 #if ( INCLUDE_vTaskDelete == 1 )
 
 	static void prvDeleteTCB( TCB_t *pxTCB )
@@ -3990,7 +4015,7 @@ TCB_t *pxTCB;
 
 					/* Inherit the priority before being moved into the new list. */
 					pxMutexHolderTCB->uxPriority = pxCurrentTCB->uxPriority;
-					prvAddTaskToReadyList( pxMutexHolderTCB );
+					prvReaddTaskToReadyList( pxMutexHolderTCB );
 				}
 				else
 				{
@@ -4080,7 +4105,7 @@ TCB_t *pxTCB;
 					any other purpose if this task is running, and it must be
 					running to give back the mutex. */
 					listSET_LIST_ITEM_VALUE( &( pxTCB->xEventListItem ), ( TickType_t ) configMAX_PRIORITIES - ( TickType_t ) pxTCB->uxPriority ); /*lint !e961 MISRA exception as the casts are only redundant for some ports. */
-					prvAddTaskToReadyList( pxTCB );
+					prvReaddTaskToReadyList( pxTCB );
 
 					/* Return true to indicate that a context switch is required.
 					This is only actually required in the corner case whereby
@@ -5112,6 +5137,7 @@ const TickType_t xConstTickCount = xTickCount;
 			/* Add the task to the suspended task list instead of a delayed task
 			list to ensure it is not woken by a timing event.  It will block
 			indefinitely. */
+      traceMOVED_TASK_TO_SUSPENDED_LIST(pxCurrentTCB);
 			vListInsertEnd( &xSuspendedTaskList, &( pxCurrentTCB->xStateListItem ) );
 		}
 		else
@@ -5128,12 +5154,14 @@ const TickType_t xConstTickCount = xTickCount;
 			{
 				/* Wake time has overflowed.  Place this item in the overflow
 				list. */
+        traceMOVED_TASK_TO_OVERFLOW_DELAYED_LIST();
 				vListInsert( pxOverflowDelayedTaskList, &( pxCurrentTCB->xStateListItem ) );
 			}
 			else
 			{
 				/* The wake time has not overflowed, so the current block list
 				is used. */
+        traceMOVED_TASK_TO_DELAYED_LIST();
 				vListInsert( pxDelayedTaskList, &( pxCurrentTCB->xStateListItem ) );
 
 				/* If the task entering the blocked state was placed at the
@@ -5163,11 +5191,13 @@ const TickType_t xConstTickCount = xTickCount;
 		if( xTimeToWake < xConstTickCount )
 		{
 			/* Wake time has overflowed.  Place this item in the overflow list. */
+      traceMOVED_TASK_TO_OVERFLOW_DELAYED_LIST();
 			vListInsert( pxOverflowDelayedTaskList, &( pxCurrentTCB->xStateListItem ) );
 		}
 		else
 		{
 			/* The wake time has not overflowed, so the current block list is used. */
+      traceMOVED_TASK_TO_DELAYED_LIST();
 			vListInsert( pxDelayedTaskList, &( pxCurrentTCB->xStateListItem ) );
 
 			/* If the task entering the blocked state was placed at the head of the

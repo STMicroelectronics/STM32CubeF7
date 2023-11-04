@@ -160,6 +160,10 @@ extern "C" {
 	#define INCLUDE_uxTaskGetStackHighWaterMark2 0
 #endif
 
+#ifndef INCLUDE_pxTaskGetStackStart
+	#define INCLUDE_pxTaskGetStackStart 0
+#endif
+
 #ifndef INCLUDE_eTaskGetState
 	#define INCLUDE_eTaskGetState 0
 #endif
@@ -399,6 +403,23 @@ extern "C" {
 #ifndef tracePOST_MOVED_TASK_TO_READY_STATE
 	#define tracePOST_MOVED_TASK_TO_READY_STATE( pxTCB )
 #endif
+
+#ifndef traceREADDED_TASK_TO_READY_STATE
+	#define traceREADDED_TASK_TO_READY_STATE( pxTCB )	traceMOVED_TASK_TO_READY_STATE( pxTCB )
+#endif
+
+#ifndef traceMOVED_TASK_TO_DELAYED_LIST
+	#define traceMOVED_TASK_TO_DELAYED_LIST()
+#endif
+
+#ifndef traceMOVED_TASK_TO_OVERFLOW_DELAYED_LIST
+	#define traceMOVED_TASK_TO_OVERFLOW_DELAYED_LIST()
+#endif
+
+#ifndef traceMOVED_TASK_TO_SUSPENDED_LIST
+	#define traceMOVED_TASK_TO_SUSPENDED_LIST( pxTCB )
+#endif
+
 
 #ifndef traceQUEUE_CREATE
 	#define traceQUEUE_CREATE( pxNewQueue )
@@ -642,6 +663,18 @@ extern "C" {
 
 #ifndef traceTASK_NOTIFY_GIVE_FROM_ISR
 	#define traceTASK_NOTIFY_GIVE_FROM_ISR()
+#endif
+
+#ifndef traceISR_EXIT_TO_SCHEDULER
+	#define traceISR_EXIT_TO_SCHEDULER()
+#endif
+
+#ifndef traceISR_EXIT
+	#define traceISR_EXIT()
+#endif
+
+#ifndef traceISR_ENTER
+	#define traceISR_ENTER()
 #endif
 
 #ifndef traceSTREAM_BUFFER_CREATE_FAILED

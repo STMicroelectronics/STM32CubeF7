@@ -132,10 +132,10 @@ timer service task is allowed to access these lists.
 xActiveTimerList1 and xActiveTimerList2 could be at function scope but that
 breaks some kernel aware debuggers, and debuggers that reply on removing the
 static qualifier. */
-PRIVILEGED_DATA static List_t xActiveTimerList1 = { 0 };
-PRIVILEGED_DATA static List_t xActiveTimerList2 = { 0 };
-PRIVILEGED_DATA static List_t *pxCurrentTimerList = NULL;
-PRIVILEGED_DATA static List_t *pxOverflowTimerList = NULL;
+PRIVILEGED_DATA static List_t xActiveTimerList1;
+PRIVILEGED_DATA static List_t xActiveTimerList2;
+PRIVILEGED_DATA static List_t *pxCurrentTimerList;
+PRIVILEGED_DATA static List_t *pxOverflowTimerList;
 
 /* A queue that is used to send commands to the timer service task. */
 PRIVILEGED_DATA static QueueHandle_t xTimerQueue = NULL;
