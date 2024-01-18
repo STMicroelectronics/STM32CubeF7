@@ -6,3 +6,35 @@
 	path = Drivers/CMSIS/Device/ST/STM32F7xx
 	url = https://github.com/STMicroelectronics/cmsis_device_f7.git
 	branch = master
+[submodule "Drivers/BSP/STM32F7xx_Nucleo_144"]
+	path = Drivers/BSP/STM32F7xx_Nucleo_144
+	url = https://github.com/STMicroelectronics/stm32f7xx-nucleo-144-bsp.git
+	branch = main
+[submodule "Drivers/BSP/STM32F723E-Discovery"]
+	path = Drivers/BSP/STM32F723E-Discovery
+	url = https://github.com/STMicroelectronics/32f723ediscovery-bsp.git
+	branch = main
+[submodule "Drivers/BSP/STM32F769I-Discovery"]
+	path = Drivers/BSP/STM32F769I-Discovery
+	url = https://github.com/STMicroelectronics/32f769idiscovery-bsp.git
+	branch = main
+[submodule "Drivers/BSP/STM32F7308-Discovery"]
+	path = Drivers/BSP/STM32F7308-Discovery
+	url = https://github.com/STMicroelectronics/stm32f7308-dk-bsp.git
+	branch = main
+[submodule "Drivers/BSP/STM32F7508-Discovery"]
+	path = Drivers/BSP/STM32F7508-Discovery
+	url = https://github.com/STMicroelectronics/stm32f7508-dk-bsp.git
+	branch = main
+[submodule "Drivers/BSP/STM32746G-Discovery"]
+	path = Drivers/BSP/STM32746G-Discovery
+	url = https://github.com/STMicroelectronics/32f746gdiscovery-bsp.git
+	branch = main
+[submodule "Drivers/BSP/STM32756G_EVAL"]
+	path = Drivers/BSP/STM32756G_EVAL
+	url = https://github.com/STMicroelectronics/stm32756g-eval-bsp.git
+	branch = main
+[submodule "Drivers/BSP/STM32F769I_EVAL"]
+	path = Drivers/BSP/STM32F769I_EVAL
+	url = https://github.com/STMicroelectronics/stm32f769i-eval-bsp.git
+	branch = main
