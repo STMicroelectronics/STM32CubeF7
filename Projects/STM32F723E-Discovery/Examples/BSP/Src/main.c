@@ -330,7 +330,7 @@ static void MPU_ConfigPSRAM(void)
 
   HAL_MPU_ConfigRegion(&MPU_InitStruct);
 
-  /* Configure the MPU attributes for PSRAM with recomended configurations:
+  /* Configure the MPU attributes for PSRAM with recommended configurations:
      Write-back, write and read allocate */
   MPU_InitStruct.Enable = MPU_REGION_ENABLE;
   MPU_InitStruct.BaseAddress = 0x60000000;
@@ -346,8 +346,8 @@ static void MPU_ConfigPSRAM(void)
 
   HAL_MPU_ConfigRegion(&MPU_InitStruct);
   
-  /* Configure the MPU attributes for TFT-LCD with recomended configurations:
-     Noramal, non cachable (Display purposes) */
+  /* Configure the MPU attributes for TFT-LCD with recommended configurations:
+     Normal, non cacheable (Display purposes) */
   MPU_InitStruct.Enable = MPU_REGION_ENABLE;
   MPU_InitStruct.BaseAddress = 0x64000000;
   MPU_InitStruct.Size = MPU_REGION_SIZE_512KB;

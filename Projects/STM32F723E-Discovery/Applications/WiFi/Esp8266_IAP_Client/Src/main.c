@@ -553,7 +553,7 @@ static void MPU_Config(void)
 
   HAL_MPU_ConfigRegion(&MPU_InitStruct);
 
-   /* Configure the MPU attributes for PSRAM with recomended configurations:
+   /* Configure the MPU attributes for PSRAM with recommended configurations:
      Normal memory, Shareable, write-back */
   MPU_InitStruct.Enable = MPU_REGION_ENABLE;
   MPU_InitStruct.BaseAddress = 0x64000000;
@@ -619,7 +619,7 @@ static void CPU_CACHE_Enable(void)
 
 #ifdef USE_LCD
 /**
-  * @brief  This function intializes the LCD Configuration.
+  * @brief  This function initializes the LCD Configuration.
   * @param  None
   * @retval None
   */

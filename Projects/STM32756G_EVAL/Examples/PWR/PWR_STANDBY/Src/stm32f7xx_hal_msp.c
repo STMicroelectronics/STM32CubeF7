@@ -55,7 +55,7 @@ void HAL_RTC_MspInit(RTC_HandleTypeDef *hrtc)
   RCC_OscInitTypeDef RCC_OscInitStruct;
   RCC_PeriphCLKInitTypeDef  PeriphClkInitStruct;
 
-  /*##-1- Configue LSE as RTC clock soucre ###################################*/ 
+  /*##-1- Configure LSE as RTC clock source ###################################*/ 
 #ifdef RTC_CLOCK_SOURCE_LSE
     
   RCC_OscInitStruct.OscillatorType =  RCC_OSCILLATORTYPE_LSI | RCC_OSCILLATORTYPE_LSE;

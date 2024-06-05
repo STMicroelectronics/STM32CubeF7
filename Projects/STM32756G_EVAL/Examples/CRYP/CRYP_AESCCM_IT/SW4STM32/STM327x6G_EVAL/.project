@@ -116,6 +116,11 @@
 			<locationURI>PARENT-1-PROJECT_LOC/startup_stm32f756xx.s</locationURI>
 		</link>
 		<link>
+			<name>Example/SW4STM32/syscalls.c</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/syscalls.c</locationURI>
+		</link>
+		<link>
 			<name>Example/User/main.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/Src/main.c</locationURI>

@@ -31,7 +31,7 @@ The SHA-1 message digest result is a 160 bit data, and the MD5 message digest
 result is a 128 bit data.
 The expected HASH digests (for SHA1 and MD5) are already computed using an online
 HASH tool. Those values are compared to those computed by the HASH peripheral.
-In case there is a missmatch the red LED is turned ON.
+In case there is a mismatch the red LED is turned ON.
 In case the SHA1 digest is computed correctly the green LED (LED1) is turned ON.
 In case the MD5 digest is computed correctly the blue LED (LED4) is turned ON.
 

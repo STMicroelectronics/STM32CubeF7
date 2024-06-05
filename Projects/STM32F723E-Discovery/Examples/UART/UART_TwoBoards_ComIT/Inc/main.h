@@ -49,7 +49,7 @@
 #define USARTx_IRQn                      USART2_IRQn
 #define USARTx_IRQHandler                USART2_IRQHandler
 
-/* Size of Trasmission buffer */
+/* Size of Transmission buffer */
 #define TXBUFFERSIZE                      (COUNTOF(aTxBuffer) - 1)
 /* Size of Reception buffer */
 #define RXBUFFERSIZE                      TXBUFFERSIZE

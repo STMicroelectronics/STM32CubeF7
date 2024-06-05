@@ -143,7 +143,7 @@ void QSPI_MspDeInit(void)
 
   /* Disable GPIO clocks */
   __HAL_RCC_GPIOB_CLK_DISABLE();
-  /* External mamory configuration requires GPIOF */
+  /* External memory configuration requires GPIOF */
   /* __HAL_RCC_GPIOF_CLK_DISABLE(); */
 }
 #endif
@@ -397,13 +397,13 @@ void SDCARD_MspDeInit(void)
   gpio_init_structure.Pin = GPIO_PIN_8 | GPIO_PIN_9;
   HAL_GPIO_Init(GPIOB, &gpio_init_structure);
 
-  /*** Disable all uneeded clocks ***/ 
+  /*** Disable all unneeded clocks ***/ 
   __HAL_RCC_SDMMC1_CLK_DISABLE();
   __HAL_RCC_GPIOC_CLK_DISABLE();
   __HAL_RCC_I2C1_CLK_DISABLE();
   __HAL_RCC_GPIOB_CLK_DISABLE();
 
-  /* External mamory configuration requires GPIOD */
+  /* External memory configuration requires GPIOD */
   /* __HAL_RCC_GPIOD_CLK_DISABLE(); */
 }
 #endif /* (BINARY_AREA == USE_SDCARD) */

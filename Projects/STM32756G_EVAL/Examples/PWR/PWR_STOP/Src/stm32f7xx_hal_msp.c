@@ -55,7 +55,7 @@ void HAL_RTC_MspInit(RTC_HandleTypeDef *hrtc)
   RCC_OscInitTypeDef RCC_OscInitStruct;
   RCC_PeriphCLKInitTypeDef  PeriphClkInitStruct;
 
-  /*##-1- Configue LSI as RTC clock soucre ###################################*/ 
+  /*##-1- Configure LSI as RTC clock source ###################################*/ 
   RCC_OscInitStruct.OscillatorType =  RCC_OSCILLATORTYPE_LSI | RCC_OSCILLATORTYPE_LSE;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
   RCC_OscInitStruct.LSIState = RCC_LSI_ON;

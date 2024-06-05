@@ -221,7 +221,7 @@ static int8_t CDC_RNDIS_Itf_Receive(uint8_t *Buf, uint32_t *Len)
 
 /**
   * @brief  CDC_RNDIS_Itf_TransmitCplt
-  *         Data transmited callback
+  *         Data transmitted callback
   *
   *         @note
   *         This function is IN transfer complete callback used to inform user that
@@ -266,7 +266,7 @@ static int8_t CDC_RNDIS_Itf_Process(USBD_HandleTypeDef *pdev)
 }
 
 /**
-  * @brief  Notify the User about the nework interface config status
+  * @brief  Notify the User about the network interface config status
   * @param  netif: the network interface
   * @retval None
   */

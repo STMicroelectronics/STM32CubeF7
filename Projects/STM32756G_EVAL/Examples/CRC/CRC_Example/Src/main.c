@@ -125,7 +125,7 @@ int main(void)
   /* The output data are not inverted */
   CrcHandle.Init.OutputDataInversionMode = CRC_OUTPUTDATA_INVERSION_DISABLE;
 
-  /* The input data are 32 bits lenght */
+  /* The input data are 32 bits length */
   CrcHandle.InputDataFormat              = CRC_INPUTDATA_FORMAT_WORDS;
 
   if (HAL_CRC_Init(&CrcHandle) != HAL_OK)

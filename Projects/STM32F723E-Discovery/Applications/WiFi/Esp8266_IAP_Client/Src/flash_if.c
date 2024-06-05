@@ -43,7 +43,7 @@ void FLASH_If_Init(void)
   * @brief  This function does an erase of all user flash area
   * @param  StartSector: start of user flash area
   * @retval 0: user flash area successfully erased
-  *         1: error occured 
+  *         1: error occurred 
   */
 int8_t FLASH_If_Erase(uint32_t StartSector)
 {

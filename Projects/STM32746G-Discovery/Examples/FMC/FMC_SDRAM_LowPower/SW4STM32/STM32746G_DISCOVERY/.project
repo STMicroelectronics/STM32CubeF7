@@ -69,6 +69,10 @@
 			<type>1</type>
 			<location>PARENT-2-PROJECT_LOC/Src/main.c</location>
 		</link><link>
+			<name>Example/SW4STM32/syscalls.c</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/syscalls.c</locationURI>
+		</link><link>
 			<name>Drivers/CMSIS/system_stm32f7xx.c</name>
 			<type>1</type>
 			<location>PARENT-2-PROJECT_LOC/Src/system_stm32f7xx.c</location>

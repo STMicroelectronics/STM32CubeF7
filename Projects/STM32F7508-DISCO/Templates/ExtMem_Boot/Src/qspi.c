@@ -21,12 +21,20 @@
   *
   ******************************************************************************
   */
+/* IMPORTANT: One of the following flags must be defined in the preprocessor */
+/* options in order to select the target board revision: !!!!!!!!!! */
+/* USE_STM32F7508_DISCO */          /* Applicable for all boards except STM32F7508 DISCO REVC03 and higher revision */
+/* USE_STM32F7508_DISCO_REVC03 */   /* Applicable only for STM32F7508 DISCO REVC03 and higher revision*/
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f7xx_hal.h"
 #include "memory.h"
 #include "memory_msp.h"
+#if defined (USE_STM32F7508_DISCO_REVC03)
+#include "../Components/w25q128j/w25q128j.h"
+#else /* USE_STM32F7508_DISCO */
 #include "../Components/n25q128a/n25q128a.h"
+#endif /* USE_STM32F7508_DISCO_REVC03 */
 #if (CODE_AREA == USE_QSPI) || (BINARY_AREA == USE_SPI_NOR)
 /** @addtogroup QSPI
   * @{
@@ -57,9 +65,11 @@ QSPI_AutoPollingTypeDef  sConfig;
   */
 static uint32_t QSPI_ResetMemory(QSPI_HandleTypeDef *hqspi);
 #if (CODE_AREA == USE_QSPI)
+#if !defined (USE_STM32F7508_DISCO_REVC03)
 static uint32_t QSPI_DummyCyclesCfg(QSPI_HandleTypeDef *hqspi);
 static uint32_t QSPI_EnterMemory_QPI(QSPI_HandleTypeDef *hqspi);
 static uint32_t QSPI_WriteEnable(QSPI_HandleTypeDef *hqspi);
+#endif /* USE_STM32F7508_DISCO_REVC03 */
 static uint32_t QSPI_EnableMemoryMappedMode(QSPI_HandleTypeDef *hqspi);
 #elif  (BINARY_AREA == USE_SPI_NOR)
 static uint32_t QSPI_Shutdown(void);
@@ -112,7 +122,11 @@ uint32_t QSPI_Startup(void)
   QSPIHandle.Init.ClockPrescaler     = 1;   /* QSPI freq = 216 MHz/(1+1) = 108 Mhz */
   QSPIHandle.Init.FifoThreshold      = 4;
   QSPIHandle.Init.SampleShifting     = QSPI_SAMPLE_SHIFTING_HALFCYCLE;
+#if defined (USE_STM32F7508_DISCO_REVC03)
+  QSPIHandle.Init.FlashSize          = POSITION_VAL(W25Q128J_FLASH_SIZE) - 1;
+#else /* USE_STM32F7508_DISCO */
   QSPIHandle.Init.FlashSize          = POSITION_VAL(N25Q128A_FLASH_SIZE) - 1;
+#endif /* USE_STM32F7508_DISCO_REVC03 */
   QSPIHandle.Init.ChipSelectHighTime = QSPI_CS_HIGH_TIME_6_CYCLE; /* Min 30ns for nonRead */
   QSPIHandle.Init.ClockMode          = QSPI_CLOCK_MODE_0;
   QSPIHandle.Init.FlashID            = QSPI_FLASH_ID_1;
@@ -130,6 +144,7 @@ uint32_t QSPI_Startup(void)
   }
 
 #if (CODE_AREA == USE_QSPI)
+#if !defined (USE_STM32F7508_DISCO_REVC03)
   /* Put QSPI memory in QPI mode */
   if( QSPI_EnterMemory_QPI( &QSPIHandle )!=MEMORY_OK )
   {
@@ -141,7 +156,7 @@ uint32_t QSPI_Startup(void)
   {
     return MEMORY_ERROR;
   }
-
+#endif /* USE_STM32F7508_DISCO_REVC03 */
   /* Enable MemoryMapped mode */
   if( QSPI_EnableMemoryMappedMode( &QSPIHandle ) != MEMORY_OK )
   {
@@ -282,12 +297,24 @@ static uint32_t QSPI_EnableMemoryMappedMode(QSPI_HandleTypeDef *hqspi)
   QSPI_MemoryMappedTypeDef s_mem_mapped_cfg;
 
   /* Configure the command for the read instruction */
+#if defined (USE_STM32F7508_DISCO_REVC03)
+  sCommand.InstructionMode   = QSPI_INSTRUCTION_1_LINE;
+  sCommand.Instruction       = FAST_READ_QUAD_INOUT_CMD;
+  sCommand.AddressMode       = QSPI_ADDRESS_4_LINES;
+  sCommand.AddressSize       = QSPI_ADDRESS_24_BITS;
+  sCommand.AlternateByteMode = QSPI_ALTERNATE_BYTES_NONE;
+  sCommand.DataMode          = QSPI_DATA_4_LINES;
+  sCommand.DummyCycles       = W25Q128J_DUMMY_CYCLES_READ_QUAD;
+  sCommand.DdrMode           = QSPI_DDR_MODE_DISABLE;
+  sCommand.DdrHoldHalfCycle  = QSPI_DDR_HHC_ANALOG_DELAY;
+  sCommand.SIOOMode          = QSPI_SIOO_INST_EVERY_CMD;
+#else /* USE_STM32F7508_DISCO */
   sCommand.InstructionMode   = QSPI_INSTRUCTION_4_LINES;
   sCommand.Instruction       = QUAD_INOUT_FAST_READ_CMD;
   sCommand.AddressMode       = QSPI_ADDRESS_4_LINES;
   sCommand.DataMode          = QSPI_DATA_4_LINES;
   sCommand.DummyCycles       = N25Q128A_DUMMY_CYCLES_READ_QUAD;
-
+#endif /* USE_STM32F7508_DISCO_REVC03 */
   /* Configure the memory mapped mode */
   s_mem_mapped_cfg.TimeOutActivation = QSPI_TIMEOUT_COUNTER_DISABLE;
   s_mem_mapped_cfg.TimeOutPeriod     = 0;
@@ -300,6 +327,7 @@ static uint32_t QSPI_EnableMemoryMappedMode(QSPI_HandleTypeDef *hqspi)
   return MEMORY_OK;
 }
 
+#if !defined (USE_STM32F7508_DISCO_REVC03)
 /**
   * @brief  This function configure the dummy cycles on memory side.
   * @param  hqspi: QSPI handle
@@ -469,6 +497,7 @@ static uint32_t QSPI_WriteEnable(QSPI_HandleTypeDef *hqspi)
 
   return MEMORY_OK;
 }
+#endif /* USE_STM32F7508_DISCO_REVC03 */
 #endif /* (CODE_AREA == USE_QSPI) */
 
 /**

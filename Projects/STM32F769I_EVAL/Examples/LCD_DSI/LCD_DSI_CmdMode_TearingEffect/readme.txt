@@ -31,8 +31,8 @@ refresh method. One buffer is used for display and for draw.
 Layer0 is initialized to display a brief description of the example. It will be
 used for images display also.
 
-In this example, the display area is splitted in tow part right and left. When the
-end of refresh event occured, left part of display area is refreshed/displayed while
+In this example, the display area is split in tow part right and left. When the
+end of refresh event occurred, left part of display area is refreshed/displayed while
 the other right part is prepared to be displayed when Line Event occurs.
 
 Partial Refresh with splitting method is based on the following steps:

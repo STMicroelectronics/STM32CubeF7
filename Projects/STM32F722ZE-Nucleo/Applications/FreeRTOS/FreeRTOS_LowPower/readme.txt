@@ -41,7 +41,7 @@ that allows the CPU registers and RAM to retain their state.
 In this example, non-used GPIO's are configured to analog, thus helping to reduce 
 the power consumption of the device.
 
-LED1 is used to moniter the application's behaviour.
+LED1 is used to monitor the application's behaviour.
 
 Observed behaviour:
 

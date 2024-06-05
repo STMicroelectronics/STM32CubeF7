@@ -37,7 +37,7 @@ Scenario 2:
 ===========
 In this second scenario, the the client (STM32F769I-Discovery):
 - connects to local network either through DHCP or static IP address.
-- establishes a secured connected to a second STM32F769I-Discovery borad running 
+- establishes a secured connected to a second STM32F769I-Discovery board running 
   the "SSL_Sever" application.
 - sends an encrypted message to the second board.
 - receives an answser from the server board.
@@ -106,7 +106,7 @@ AES 192, AES 256, Triple DES, MD5, SHA-1
 	 - Using a Windows PC as server, running Windows 7 operating system or later.
      - using two STM32F769I_Discovery boards the first as server, the second as client.
   
-  - Senario 1:
+  - Scenario 1:
       - Remote PC Set-up
 	  - Make sure that the PC is in the same local network as the baord.
 	  - Using a Linux Machine
@@ -117,7 +117,7 @@ AES 192, AES 256, Triple DES, MD5, SHA-1
 	    - Follow the instructions in the file "Firmware\Utilities\PC_Software\ssl_server\readme.txt" to run the ssl_server application.
 	  - the "ssl_server" will wait for remote connections.
 
-  - Senario 2:
+  - Scenario 2:
       - a second STM32F769I_Discovery running the "mdedTLS/SSL_Server" application
   
   - STM32F769I-Discovery Set-up 

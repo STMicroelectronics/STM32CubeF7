@@ -27,7 +27,6 @@
 RTP_HandleTypeDef RTP_struct;         /* RTP structure */
 osSemaphoreId Sending_Semaphore;      /* Semaphore ID to signal transfer frame complete */
 osThreadId Thr_Send_Sem;              /* Thread ID */
-volatile osThreadId thr_ID;           /* The thread ID */
 const char jpegRTP_header[] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x4B, 0x14, 0x0f};
 
 /* Exported variables---------------------------------------------------------*/
@@ -56,6 +55,12 @@ void RTP_Init(void)
   /* RTP state idle */
   RTP_struct.State = RTP_STATE_IDLE;
   
+  /* Initialize the camera module */
+  if(BSP_CAMERA_Init(CAMERA_R160x120) != CAMERA_OK)
+  {
+    Error_Handler();
+  }
+
   /* Create new socket */
   RTP_struct.sock_id = socket(AF_INET, SOCK_DGRAM, 0);
   if (RTP_struct.sock_id >= 0)
@@ -91,11 +96,10 @@ void RTP_Init(void)
     }
     else
     {
-      /* Binding local adress failed */
+      /* Binding local address failed */
       RTP_struct.State = RTP_STATE_ERROR;
     }
   }
-
 }
 
 /**
@@ -207,7 +211,7 @@ uint32_t RTP_Close_Connection(void)
 /**
   * @brief  Close RTP connection, Stop and reset Camera
   * @param  none
-  * @retval 0 sucess, 1 error
+  * @retval 0 success, 1 error
   */                          
 uint32_t RTP_Stop(void)
 {

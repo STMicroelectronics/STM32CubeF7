@@ -59,6 +59,7 @@ Memory, QUADSPI, Execute in place, Erase, section, sector, memory-mapped mode
       Please refer to the AN4838 “Managing memory protection unit (MPU) in STM32 MCUs”
       Please refer to the AN4839 “Level 1 cache on STM32F7 Series”
 
+
 @par Directory contents 
 
   - QSPI/QSPI_ExecuteInPlace/Inc/stm32f7xx_hal_conf.h HAL configuration file
@@ -74,11 +75,12 @@ Memory, QUADSPI, Execute in place, Erase, section, sector, memory-mapped mode
 
   - This example runs on STM32F7xx devices.
     
-  - This example has been tested on STM32746G-DISCOVERY board and can be
-    easily tailored to any other supported device and/or development board.
+  - This example has been tested on STM32746G-DISCOVERY rev B board containing the N25Q128A QSPI memory  
+    and can be easily tailored to any other supported device and/or development board .
+    However, it does not work  on the STM32746G-DISCOVERY Rev C03 board, as it contains the W25Q128J QSPI memory.
 
   - STM32746G-DISCOVERY Set-up :
-    - Board is configured by default to access QSPI memory
+    - Board is configured by default to access N25Q128A QSPI memory
     
 @par How to use it ? 
 

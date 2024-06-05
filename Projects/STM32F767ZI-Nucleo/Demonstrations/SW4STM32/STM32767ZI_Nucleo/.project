@@ -61,6 +61,10 @@
 			<type>1</type>
 			<location>PARENT-1-PROJECT_LOC/startup_stm32f767xx.s</location>
 		</link><link>
+			<name>Application/SW4STM32/syscalls.c</name>
+			<type>1</type>
+			<location>PARENT-1-PROJECT_LOC/syscalls.c</location>
+		</link><link>
 			<name>Drivers/STM32F7xx_HAL_Driver/stm32f7xx_hal.c</name>
 			<type>1</type>
 			<location>PARENT-5-PROJECT_LOC/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c</location>

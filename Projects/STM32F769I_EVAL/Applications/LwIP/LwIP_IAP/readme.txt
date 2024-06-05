@@ -33,7 +33,7 @@ User has select through compile options (in main.h file) to include one or both
 options.
 
 LwIP/LwIP_IAP/Binary directory contains an application binary example (STM32F769I_EVAL_GPIO_Toggle.bin) 
-which can be used to be transfered and executed. It toggles the 4 LEDs.
+which can be used to be transferred and executed. It toggles the 4 LEDs.
 
 User has to reset the device while Pushing TAMPER button to enter IAP mode.
 
@@ -43,13 +43,13 @@ will be ensured by LEDs:
   + LED1: ethernet cable is connected.
   + LED2: ethernet cable is not connected.
 
-In case of Invalid stack adress, LED3 turns ON.
+In case of Invalid stack address, LED3 turns ON.
 
 If a DHCP server is available, a dynamic IP address can be allocated by enabling 
 the DHCP process (#define LWIP_DHCP in lwipopts.h).
 
 If a DHCP server is not available, after timeout connection, the device only gets a static 
-IP address(the switch from static to dynamic IP adress is not available in this application).
+IP address(the switch from static to dynamic IP address is not available in this application).
 
 Note: In this application the Ethernet Link ISR need the System tick interrupt 
 to configure the Ethernet MAC, so the Ethernet Link interrupt priority must be 

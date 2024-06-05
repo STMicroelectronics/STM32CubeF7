@@ -31,6 +31,11 @@
 			<locationURI>PARENT-8-PROJECT_LOC/Drivers/BSP/Components/ft6x06/ft6x06.c</locationURI>
 		</link>
 		<link>
+			<name>Components/ft3x67.c</name>
+			<type>1</type>
+			<locationURI>PARENT-8-PROJECT_LOC/Drivers/BSP/Components/ft3x67/ft3x67.c</locationURI>
+		</link>
+		<link>
 			<name>Components/st7789h2.c</name>
 			<type>1</type>
 			<locationURI>PARENT-8-PROJECT_LOC/Drivers/BSP/Components/st7789h2/st7789h2.c</locationURI>
@@ -74,6 +79,11 @@
 			<name>Application/SW4STM32/startup_stm32f730xx.s</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/startup_stm32f730xx.s</locationURI>
+		</link>
+		<link>
+			<name>Application/SW4STM32/syscalls.c</name>
+			<type>1</type>
+			<location>PARENT-1-PROJECT_LOC/syscalls.c</location>
 		</link>
 		<link>
 			<name>Drivers/CMSIS/system_stm32f7xx.c</name>

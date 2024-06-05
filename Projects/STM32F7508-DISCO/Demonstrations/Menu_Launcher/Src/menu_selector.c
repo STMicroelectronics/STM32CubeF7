@@ -358,13 +358,13 @@ uint8_t Run_MenuSelector(void)
     
 }
 /**
-  * @brief  Reset all used ressource by the MenuSelector
+  * @brief  Reset all used resource by the MenuSelector
   * @param  None
   * @retval None
   */
 void Reset_MenuSelector_Ressource(void)
 {
-  /*DeInit Touch Sense Ressource*/
+  /*DeInit Touch Sense Resource*/
     /*DeInit I2C3 */
   __HAL_RCC_I2C3_CLK_DISABLE();
   __HAL_RCC_I2C3_FORCE_RESET();
@@ -379,7 +379,7 @@ void Reset_MenuSelector_Ressource(void)
     __HAL_RCC_GPIOH_RELEASE_RESET();
     __HAL_RCC_GPIOH_CLK_DISABLE();
     
-    /*DeInit LCD Ressource*/
+    /*DeInit LCD Resource*/
     __HAL_RCC_LTDC_CLK_DISABLE();
     __HAL_RCC_LTDC_FORCE_RESET();
     __HAL_RCC_LTDC_RELEASE_RESET() ;

@@ -39,7 +39,7 @@ suspends itself, the thread 1 toggles the LED5 each 400 ms.
   Supported configuration by STM32F723E-Discovery:
     - XiP From QSPI, Volatile on Internal SRAM
     - XiP From QSPI, Volatile on External PSRAM
-  Make sure that choosen config matches ExtMem_Boot config in memory.h file.
+  Make sure that chosen config matches ExtMem_Boot config in memory.h file.
 
 @note Care must be taken when using HAL_Delay(), this function provides accurate delay (in milliseconds)
       based on variable incremented in HAL time base ISR. This implies that if HAL_Delay() is called from

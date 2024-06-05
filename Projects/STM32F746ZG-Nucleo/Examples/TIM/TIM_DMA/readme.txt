@@ -102,7 +102,7 @@ Timers, DMA, PWM, Frequency, Duty Cycle, Waveform, Oscilloscope, Output, Signal
 
   - NUCLEO-746ZG Rev.B board Set-up
     - Connect the TIM3 pin to an oscilloscope to monitor the different waveforms: 
-    - TIM3 CH3 (PB.00) is connected to Ardiuno D33 : pin 31 on CN10 Connector
+    - TIM3 CH3 (PB.00) is connected to Arduino D33 : pin 31 on CN10 Connector
 
 @par How to use it ? 
 

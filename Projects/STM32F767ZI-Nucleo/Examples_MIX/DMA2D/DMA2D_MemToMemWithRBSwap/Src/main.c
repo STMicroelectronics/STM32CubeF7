@@ -121,7 +121,7 @@ int main(void)
 
     /*** 1a - First image preparation *****************************************/
     /* The first image is created from the ARGB8888 input image */
-    /* Configure the DMA2D Ouput Mode to Pixel Format Conversion */
+    /* Configure the DMA2D Output Mode to Pixel Format Conversion */
     LL_DMA2D_SetMode(DMA2D, LL_DMA2D_MODE_M2M_PFC);
 
     /* Configure the DMA2D output Color Mode */
@@ -238,7 +238,7 @@ int main(void)
 
     blended_image_ready = 0;
 
-    /* Configure the DMA2D Ouput Mode to Pixel Format Conversion */
+    /* Configure the DMA2D Output Mode to Pixel Format Conversion */
     LL_DMA2D_SetMode(DMA2D, LL_DMA2D_MODE_M2M_PFC);
 
     /* Set third image buffer address */

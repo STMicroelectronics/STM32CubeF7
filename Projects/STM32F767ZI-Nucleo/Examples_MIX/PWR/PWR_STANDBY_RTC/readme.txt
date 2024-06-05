@@ -37,7 +37,7 @@ is configured to generate an interrupt on rising edge about 28 sec. afterwards.
 Current consumption in STANDBY mode with RTC feature enabled can be measured during that time.
 More than half a minute is chosen to ensure current convergence to its lowest operating point.
 
-Note: Due to LSI frequency variations, wake-up time is not guarantee. Adjustements need to be
+Note: Due to LSI frequency variations, wake-up time is not guarantee. Adjustments need to be
 done after getting the real measurement of LSI oscillator (or if available, LSE oscillator can
 be used as well)
 

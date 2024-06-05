@@ -25,7 +25,7 @@ How to configure and use, through the LPTIM HAL API, the LPTIM peripheral
 to count pulses.
 
 To reduce power consumption, MCU enters stop mode after starting counting. Each
-time the counter reachs the maximum value (Period/Autoreload), an interruption
+time the counter reaches the maximum value (Period/Autoreload), an interruption
 is generated, the MCU is woke up from stop mode and LED1 toggles the last state.
   
 In this example Period value is set to 1000, so each time the counter counts

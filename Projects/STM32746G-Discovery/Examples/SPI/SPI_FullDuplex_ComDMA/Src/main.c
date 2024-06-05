@@ -276,7 +276,7 @@ static void Error_Handler(void)
   BSP_LED_Off(LED1);
   while(1)
   {
-    /* Toogle LED1 for error */
+    /* Toggle LED1 for error */
     BSP_LED_Toggle(LED1);
     HAL_Delay(1000);
   }

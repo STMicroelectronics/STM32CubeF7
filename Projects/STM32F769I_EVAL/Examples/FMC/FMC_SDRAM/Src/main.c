@@ -368,7 +368,7 @@ static void MPU_Config(void)
 
   HAL_MPU_ConfigRegion(&MPU_InitStruct);
 
-  /* Configure the MPU attributes as WT for SDRAM */
+  /* Configure the MPU attributes as WB for SDRAM */
   MPU_InitStruct.Enable = MPU_REGION_ENABLE;
   MPU_InitStruct.BaseAddress = SDRAM_BANK_ADDR;
   MPU_InitStruct.Size = MPU_REGION_SIZE_32MB;

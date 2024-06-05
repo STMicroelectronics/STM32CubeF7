@@ -87,7 +87,7 @@ SD Card, SDRAM
   - JPEG/JPEG_EncodingFromFLASH_DMA/Inc/ffconf.h                      FAT file system module configuration file
   - JPEG/JPEG_EncodingFromFLASH_DMA/Inc/main.h                        Header for main.c module
   - JPEG/JPEG_EncodingFromFLASH_DMA/Inc/encode_dma.h                  Header for encode_dma.c module
-  - JPEG/JPEG_EncodingFromFLASH_DMA/Inc/jpeg_utils_conf.h             JPEG utilties module configuration file
+  - JPEG/JPEG_EncodingFromFLASH_DMA/Inc/jpeg_utils_conf.h             JPEG utilities module configuration file
   - JPEG/JPEG_EncodingFromFLASH_DMA/Inc/image_320_240_rgb.h           Specification of RGB image to load in FLASH
 
   - JPEG/JPEG_EncodingFromFLASH_DMA/Src/stm32f7xx_it.c                Interrupt handlers

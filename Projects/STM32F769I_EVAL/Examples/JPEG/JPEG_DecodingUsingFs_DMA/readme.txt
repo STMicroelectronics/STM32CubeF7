@@ -95,7 +95,7 @@ FatFS, File system, SD Card, SDRAM
   - JPEG/JPEG_DecodingUsingFs_DMA/Inc/main.h                        Header for main.c module
   - JPEG/JPEG_DecodingUsingFs_DMA/Inc/sd_diskio.h                   FatFS sd_diskio driver header file
   - JPEG/JPEG_DecodingUsingFs_DMA/Inc/decode_dma.h                  Header for decode_dma.c module
-  - JPEG/JPEG_DecodingUsingFs_DMA/Inc/jpeg_utils_conf.h             JPEG utilties module configuration file
+  - JPEG/JPEG_DecodingUsingFs_DMA/Inc/jpeg_utils_conf.h             JPEG utilities module configuration file
 
   - JPEG/JPEG_DecodingUsingFs_DMA/Src/stm32f7xx_it.c                Interrupt handlers
   - JPEG/JPEG_DecodingUsingFs_DMA/Src/main.c                        Main program
@@ -118,10 +118,10 @@ FatFS, File system, SD Card, SDRAM
         - named as "image.jpg"
         - dimensions : less or equal to the display screen:
            * LCD-DSI:
-               - Witdh  : <= 800
+               - Width  : <= 800
                - Height : <= 480
            * HDMI-DSI:
-               - Witdh  : <= 720
+               - Width  : <= 720
                - Height : <= 576
   - Connect the uSD Card to the uSD1 connector (CN17).
 
@@ -130,7 +130,7 @@ FatFS, File system, SD Card, SDRAM
 In order to make the program work, you must do the following :
  - Open your preferred toolchain
  - Rebuild all files and load your image into target memory
- - Mount either the KoD LCD pannel (Board MB1166 rev.A) or the DSI-HDMI bridge(Board MB1232 Rev.A)
+ - Mount either the KoD LCD panel (Board MB1166 rev.A) or the DSI-HDMI bridge(Board MB1232 Rev.A)
    to the DSI connector (CN15).
  - if using the DSI-HDMI bridge then connect a HDMI monitor using a HDMI cable to the
    MB1232 board.

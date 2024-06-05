@@ -153,7 +153,7 @@ static err_t IAP_tftp_send_ack_packet(struct udp_pcb *upcb, const ip_addr_t *to,
   * @brief  Processes data transfers after a TFTP write request
   * @param  _args: used as pointer on TFTP connection args
   * @param  upcb: pointer on udp_pcb structure
-  * @param  pkt_buf: pointer on a pbuf stucture
+  * @param  pkt_buf: pointer on a pbuf structure
   * @param  ip_addr: pointer on the receive IP_address structure
   * @param  port: receive port address
   * @retval None

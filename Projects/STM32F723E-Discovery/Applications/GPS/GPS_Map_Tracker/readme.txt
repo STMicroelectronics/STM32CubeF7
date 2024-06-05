@@ -60,8 +60,8 @@ least three satellite signals.
 It produces a NMEA frame. This frame is then sent to STM32F723xx via a serial link. 
 Once this frame is decoded, the useful information (num of Sat, time, date, Longitude, 
 Altitude, latitude, speed) are displayed on the LCD. 
-If the GoogleEarth Application is runing on PC, the received frame is sent to PC 
-via VCP( St-link in this application) and the correspondig location on Google earth map on run time.
+If the GoogleEarth Application is running on PC, the received frame is sent to PC 
+via VCP( St-link in this application) and the corresponding location on Google earth map on run time.
 
 @par Keywords
 

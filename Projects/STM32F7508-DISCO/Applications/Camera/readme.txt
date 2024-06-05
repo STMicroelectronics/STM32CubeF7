@@ -34,9 +34,9 @@ clock (SYSCLK) to run at 200 MHz.
 
 The LCD is initialized to be used for pictures' display.
 The TouchScreen module is initialized to allow user to switch between snapshot and
-continous mode.
+continuous mode.
 
-The Digital camera interface is configured to receive the capture, in continous mode,
+The Digital camera interface is configured to receive the capture, in continuous mode,
 from the OV9655 camera module that should be connected to STM32F7508-DISCO board.
 The DMA is configured to transfer the picture from DCMI peripheral
 to the external SDRAM memory used by the LCD as a frame buffer.   

@@ -123,7 +123,7 @@ int main(void)
   /*##-3- JPEG decoding with DMA (Not Blocking ) Method ################*/
   JPEG_Decode_DMA(&JPEG_Handle, (uint32_t)image_320_240_jpg, IMAGE_320_240_JPG_SIZE , JPEG_OUTPUT_DATA_BUFFER);
   
-  /*##-4- Wait till end of JPEG decoding and perfom Output Processing in Background  #*/
+  /*##-4- Wait till end of JPEG decoding and perform Output Processing in Background  #*/
   do
   {
     JpegProcessing_End = JPEG_OutputHandler(&JPEG_Handle);

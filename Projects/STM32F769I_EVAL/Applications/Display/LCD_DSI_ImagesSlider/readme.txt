@@ -37,7 +37,7 @@ horizontal draw. The default mode is horizontal. User can change the mode by
 pressing Tamper button.
 
 By moving the finger on TS, a new image will progressively displayed on LCD while
-the old one disapears progresively. When HORIZONTAL_DRAW mode is active, moving 
+the old one disappears progressively. When HORIZONTAL_DRAW mode is active, moving 
 finger left or right causes the display of next or previous image. 
 When VERTICAL_DRAW mode is active, moving finger up or down causes the display of 
 next or previous image.

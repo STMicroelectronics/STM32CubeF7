@@ -80,7 +80,7 @@ FatFS, SD Card, File system, FAT Volume, Format, Mount, Read, Write,
   - FatFs/FatFs_uSD/Inc/stm32f7xx_it.h          Interrupt handlers header file
   - FatFs/FatFs_uSD/Inc/main.h                  Main program header file
   - FatFs/FatFs_uSD/Inc/ffconf.h                FAT file system module configuration file   
- - FatFs/FatFs_uSD/Inc/sd_diskio.h              FatFS uSD diskio drvier header file
+ - FatFs/FatFs_uSD/Inc/sd_diskio.h              FatFS uSD diskio driver header file
   - FatFs/FatFs_uSD/Src/stm32f7xx_it.c          Interrupt handlers
   - FatFs/FatFs_uSD/Src/main.c                  Main program
   - FatFs/FatFs_uSD/Src/system_stm32f7xx.c      STM32F7xx system clock configuration file

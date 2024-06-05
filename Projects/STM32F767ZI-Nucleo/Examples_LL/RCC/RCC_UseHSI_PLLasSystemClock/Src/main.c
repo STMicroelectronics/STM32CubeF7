@@ -268,7 +268,7 @@ uint32_t ChangePLL_HSI_Config(void)
 }
 
 /**
-  * @brief  Fonction to change Main PLL configuration
+  * @brief  Function to change Main PLL configuration
   * @param  PLLSource: This parameter can be one of the following values: 
   *         @arg LL_RCC_PLLSOURCE_HSI
   *         @arg LL_RCC_PLLSOURCE_HSE

@@ -165,7 +165,7 @@ static err_t http_poll(void *arg, struct tcp_pcb *pcb)
 }
 
 /**
-  * @brief callback function called after a successfull TCP data packet transmission
+  * @brief callback function called after a successful TCP data packet transmission
   * @param arg: pointer to an argument to be passed to callback function
   * @param pcb: pointer on tcp_pcb structure
   * @param len
@@ -560,7 +560,7 @@ static err_t http_accept(void *arg, struct tcp_pcb *pcb, err_t err)
 }
 
 /**
-  * @brief  intialize HTTP webserver
+  * @brief  initialize HTTP webserver
   * @param  none
   * @retval None
   */

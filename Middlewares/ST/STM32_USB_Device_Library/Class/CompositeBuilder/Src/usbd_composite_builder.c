@@ -1585,8 +1585,7 @@ static void  USBD_CMPSIT_VIDEODesc(USBD_HandleTypeDef *pdev, uint32_t pConf, __I
 
   /* USB Standard VS Interface  Descriptor - data transfer mode */
   /* Interface 1, Alternate Setting 1*/
-  __USBD_CMPSIT_SET_IF(1U, 1U, 1U, UVC_CC_VIDEO, \
-                       SC_VIDEOSTREAMING, PC_PROTOCOL_UNDEFINED, 0U);
+  __USBD_CMPSIT_SET_IF(1U, 1U, 1U, UVC_CC_VIDEO, SC_VIDEOSTREAMING, PC_PROTOCOL_UNDEFINED, 0U);
 
   /* Standard VS (Video Streaming) data Endpoint */
   pSVCDEP = ((USBD_StandardVCDataEPDescTypeDef *)(pConf + *Sze));
@@ -1735,8 +1734,8 @@ static void  USBD_CMPSIT_MTPDesc(USBD_HandleTypeDef *pdev, uint32_t pConf, __IO 
 
   /* Append MTP Interface descriptor */
   __USBD_CMPSIT_SET_IF((pdev->tclasslist[pdev->classId].Ifs[0]), (0U), \
-                       (uint8_t)(pdev->tclasslist[pdev->classId].NumEps), USB_MTP_INTRERFACE_CLASS, USB_MTP_INTRERFACE_SUB_CLASS,
-                       USB_MTP_INTRERFACE_PROTOCOL, (0U));
+                       (uint8_t)(pdev->tclasslist[pdev->classId].NumEps), USB_MTP_INTRERFACE_CLASS, \
+                       USB_MTP_INTRERFACE_SUB_CLASS, USB_MTP_INTRERFACE_PROTOCOL, (0U));
 
   if (speed == (uint8_t)USBD_SPEED_HIGH)
   {
@@ -1778,7 +1777,8 @@ uint32_t  USBD_CMPSIT_SetClassID(USBD_HandleTypeDef *pdev, USBD_CompositeClassTy
   for (idx = 0U; idx < pdev->NumClasses; idx++)
   {
     /* Check if the class correspond to the requested type and if it is active */
-    if (((USBD_CompositeClassTypeDef)(pdev->tclasslist[idx].ClassType) == Class) && ((pdev->tclasslist[idx].Active) == 1U))
+    if (((USBD_CompositeClassTypeDef)(pdev->tclasslist[idx].ClassType) == Class) &&
+        ((pdev->tclasslist[idx].Active) == 1U))
     {
       if (inst == Instance)
       {
@@ -1817,7 +1817,8 @@ uint32_t  USBD_CMPSIT_GetClassID(USBD_HandleTypeDef *pdev, USBD_CompositeClassTy
   for (idx = 0U; idx < pdev->NumClasses; idx++)
   {
     /* Check if the class correspond to the requested type and if it is active */
-    if (((USBD_CompositeClassTypeDef)(pdev->tclasslist[idx].ClassType) == Class) && ((pdev->tclasslist[idx].Active) == 1U))
+    if (((USBD_CompositeClassTypeDef)(pdev->tclasslist[idx].ClassType) == Class) &&
+        ((pdev->tclasslist[idx].Active) == 1U))
     {
       if (inst == Instance)
       {

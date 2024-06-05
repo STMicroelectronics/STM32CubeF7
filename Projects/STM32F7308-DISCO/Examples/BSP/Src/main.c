@@ -320,7 +320,7 @@ static void MPU_ConfigPSRAM(void)
   /* Disable the MPU */
   HAL_MPU_Disable();
 
-  /* Configure the MPU attributes for TFT-LCD with recomended configurations:
+  /* Configure the MPU attributes for TFT-LCD with recommended configurations:
      Normal memory, Shareable, write-back (Display purposes) */
   MPU_InitStruct.Enable = MPU_REGION_ENABLE;
   MPU_InitStruct.BaseAddress = 0x64000000;

@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    DCMI/DCMI_CaptureMode/Src/main.c
   * @author  MCD Application Team
-  * @brief   This example discribe how to configure the camera in continuous mode
+  * @brief   This example describe how to configure the camera in continuous mode
   *          and QVGA resolution.
   ******************************************************************************
   * @attention

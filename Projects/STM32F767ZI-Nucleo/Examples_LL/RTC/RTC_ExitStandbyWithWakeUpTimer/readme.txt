@@ -31,7 +31,7 @@ the PLL with HSE as clock source.
 Example execution:
    - 1st execution of the system, LED1 is quickly blinking (every 200ms). 
    - Press the user button:
-     * RTC wakup timer is configured to 5 seconds
+     * RTC wakeup timer is configured to 5 seconds
      * System enters in standby mode (LED1 is switched off)
    - After 5 seconds, system resumes from standby mode, then LED1 is slowly blinking (every 500ms).
    - LED1 is toggling every 1 second: This indicates that the system generates an error.   @note LSE oscillator clock is used as RTC clock source by default.

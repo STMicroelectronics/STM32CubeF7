@@ -117,6 +117,10 @@
 			<type>1</type>
 			<location>PARENT-2-PROJECT_LOC/Src/main.c</location>
 		</link><link>
+			<name>Application/SW4STM32/syscalls.c</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/syscalls.c</locationURI>
+		</link><link>
 			<name>Middlewares/STM32_USBH_Library/Core/usbh_ctlreq.c</name>
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ctlreq.c</location>

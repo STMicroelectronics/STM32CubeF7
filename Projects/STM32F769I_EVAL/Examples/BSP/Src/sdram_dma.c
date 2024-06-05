@@ -114,7 +114,7 @@ void SDRAM_DMA_demo (void)
   }
   else
   {
-    BSP_LCD_DisplayStringAt(20, 175, (uint8_t *)"SDRAM TEST      : SUCCESSFULL", LEFT_MODE);
+    BSP_LCD_DisplayStringAt(20, 175, (uint8_t *)"SDRAM TEST      : SUCCESSFUL", LEFT_MODE);
   }
 
   while (1)

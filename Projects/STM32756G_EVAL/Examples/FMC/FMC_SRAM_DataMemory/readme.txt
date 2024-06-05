@@ -1,5 +1,5 @@
 /**
-  @page FMC_SRAM_DataMemory SRAM memory functionnalities example
+  @page FMC_SRAM_DataMemory SRAM memory functionalities example
   
   @verbatim
   ******************************************************************************

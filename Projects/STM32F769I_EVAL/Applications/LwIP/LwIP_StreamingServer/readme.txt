@@ -36,7 +36,7 @@ the RTSP server protocol. Also, it implements the RTP protocol for sending the M
 to the media player.
 
 To run this application, you need to:
-    -Type the URL (rtsp://192.168.0.10) on the VLC media player (Media/Open Network Stream/Open Media window) 
+    -Type the URL (rtsp://"the STM32 board's IP address"), default is "192.168.0.10" on the VLC media player (Media/Open Network Stream/Open Media window) 
     -It is recommended that the caching value is set to 100ms on the VLC to keep the stream running smoothly
      (Media/Open Network Stream/Open Media window => Show more options), then press Play on VLC Play button. 
 
@@ -54,8 +54,11 @@ will be ensured by LEDs:
 If a DHCP server is available, a dynamic IP address can be allocated by enabling 
 the DHCP process (#define LWIP_DHCP in lwipopts.h).
 
+If a dynamic IP address is assigned to the board, make sure it matches with  the IP address in (#define RTSP_URL in main.h),
+in (#define RTSP_MSG_CONTENTS) and (#define RTSP_MSG_SDP_ATTRIBUTES) both in rtsp_protocol.h
+
 If a DHCP server is not available, after timeout connection, the device only gets a static 
-IP address(the switch from static to dynamic IP adress is not available in this application).
+IP address(the switch from static to dynamic IP address is not available in this application).
 
 Note: In this application the Ethernet Link ISR need the System tick interrupt 
 to configure the Ethernet MAC, so the Ethernet Link interrupt priority must be 
@@ -135,8 +138,8 @@ Connectivity, LwIP, LibJPEG, FreeRTOS, API, TCP/IP, RTSP Server, Socket
     - jumper JP10 not fitted (FMC_NE1 signal)
      
   - Remote PC Set-up
-    - Configure a static IP address for your remote PC 
-      The IP address must be 192.168.0.11
+    -If no dynamic IP address is assigned, configure a static IP address for your remote PC (for example 192.168.0.11)
+    -The IP address of the remote PC must match the IP address in (#define TARGET_IP_ADDRESS in main.h)
 
 
 @par How to use it ? 

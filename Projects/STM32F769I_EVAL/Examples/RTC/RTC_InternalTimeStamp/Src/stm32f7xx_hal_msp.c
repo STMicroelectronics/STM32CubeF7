@@ -66,7 +66,7 @@ void HAL_RTC_MspInit(RTC_HandleTypeDef *hrtc)
   __HAL_RCC_PWR_CLK_ENABLE();
   HAL_PWR_EnableBkUpAccess();
 
-  /*##-2- Configue LSE as RTC clock soucre ###################################*/
+  /*##-2- Configure LSE as RTC clock source ###################################*/
   RCC_OscInitStruct.OscillatorType =  RCC_OSCILLATORTYPE_LSE;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
   RCC_OscInitStruct.LSEState = RCC_LSE_ON;

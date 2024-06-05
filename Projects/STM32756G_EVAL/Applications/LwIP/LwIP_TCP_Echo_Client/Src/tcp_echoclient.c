@@ -97,7 +97,7 @@ void tcp_echoclient_connect(void)
 
 /**
   * @brief Function called when TCP connection established
-  * @param tpcb: pointer on the connection contol block
+  * @param tpcb: pointer on the connection control block
   * @param err: when connection correctly established err should be ERR_OK 
   * @retval err_t: returned error 
   */
@@ -165,7 +165,7 @@ static err_t tcp_echoclient_connected(void *arg, struct tcp_pcb *tpcb, err_t err
   * @param arg: argument to be passed to receive callback 
   * @param tpcb: tcp connection control block 
   * @param err: receive error code 
-  * @retval err_t: retuned error  
+  * @retval err_t: returned error  
   */
 static err_t tcp_echoclient_recv(void *arg, struct tcp_pcb *tpcb, struct pbuf *p, err_t err)
 { 

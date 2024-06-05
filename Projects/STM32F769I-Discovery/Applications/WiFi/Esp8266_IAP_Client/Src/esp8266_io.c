@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    WiFi/ESP8266_IAP_Client/Src/esp8266_io.c
   * @author  MCD Application Team
-  * @brief   This file implments the IO operations to deal with the esp8266 wifi
+  * @brief   This file implements the IO operations to deal with the esp8266 wifi
   *          module. It mainly Inits and Deinits the UART interface. Send and
   *          receive data over it.
   ******************************************************************************
@@ -44,7 +44,7 @@ static void WIFI_Handler(void);
 /* Private functions ---------------------------------------------------------*/
 
 /**
-  * @brief  ESP8266 IO Initalization.
+  * @brief  ESP8266 IO Initialization.
   *         This function inits the UART interface to deal with the esp8266,
   *         then starts asynchronous listening on the RX port.
   * @param None
@@ -68,7 +68,7 @@ int8_t ESP8266_IO_Init(void)
     return -1;
   }
  
-  /* Once the WiFi UART is intialized, start an asynchrounous recursive 
+  /* Once the WiFi UART is initialized, start an asynchronous recursive 
    listening. the HAL_UART_Receive_IT() call below will wait until one char is
    received to trigger the HAL_UART_RxCpltCallback(). The latter will recursively
    call the former to read another char.  */
@@ -117,7 +117,7 @@ int8_t ESP8266_IO_Send(uint8_t* pData, uint32_t Length)
 /**
   * @brief  Receive Data from the ESP8266 module over the UART interface.
   *         This function receives data from the  ESP8266 WiFi module, the
-  *         data is fetched from a ring buffer that is asynchonously and continuously
+  *         data is fetched from a ring buffer that is asynchronously and continuously
             filled with the received data.
   * @param  Buffer: a buffer inside which the data will be read.
   * @param  Length: the Maximum size of the data to receive.

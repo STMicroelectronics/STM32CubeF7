@@ -114,7 +114,8 @@ static int8_t CDC_RNDIS_Itf_Init(void)
 static int8_t CDC_RNDIS_Itf_DeInit(void)
 {
 #ifdef USE_USBD_COMPOSITE
-  USBD_CDC_RNDIS_HandleTypeDef *hcdc_cdc_rndis = (USBD_CDC_RNDIS_HandleTypeDef *)(USBD_Device.pClassDataCmsit[USBD_Device.classId]);
+  USBD_CDC_RNDIS_HandleTypeDef *hcdc_cdc_rndis = (USBD_CDC_RNDIS_HandleTypeDef *) \
+                                                 (USBD_Device.pClassDataCmsit[USBD_Device.classId]);
 #else
   USBD_CDC_RNDIS_HandleTypeDef *hcdc_cdc_rndis = (USBD_CDC_RNDIS_HandleTypeDef *)(USBD_Device.pClassData);
 #endif /* USE_USBD_COMPOSITE */
@@ -140,7 +141,8 @@ static int8_t CDC_RNDIS_Itf_DeInit(void)
 static int8_t CDC_RNDIS_Itf_Control(uint8_t cmd, uint8_t *pbuf, uint16_t length)
 {
 #ifdef USE_USBD_COMPOSITE
-  USBD_CDC_RNDIS_HandleTypeDef *hcdc_cdc_rndis = (USBD_CDC_RNDIS_HandleTypeDef *)(USBD_Device.pClassDataCmsit[USBD_Device.classId]);
+  USBD_CDC_RNDIS_HandleTypeDef *hcdc_cdc_rndis = (USBD_CDC_RNDIS_HandleTypeDef *) \
+                                                 (USBD_Device.pClassDataCmsit[USBD_Device.classId]);
 #else
   USBD_CDC_RNDIS_HandleTypeDef *hcdc_cdc_rndis = (USBD_CDC_RNDIS_HandleTypeDef *)(USBD_Device.pClassData);
 #endif /* USE_USBD_COMPOSITE */
@@ -187,7 +189,8 @@ static int8_t CDC_RNDIS_Itf_Receive(uint8_t *Buf, uint32_t *Len)
 {
   /* Get the CDC_RNDIS handler pointer */
 #ifdef USE_USBD_COMPOSITE
-  USBD_CDC_RNDIS_HandleTypeDef *hcdc_cdc_rndis = (USBD_CDC_RNDIS_HandleTypeDef *)(USBD_Device.pClassDataCmsit[USBD_Device.classId]);
+  USBD_CDC_RNDIS_HandleTypeDef *hcdc_cdc_rndis = (USBD_CDC_RNDIS_HandleTypeDef *) \
+                                                 (USBD_Device.pClassDataCmsit[USBD_Device.classId]);
 #else
   USBD_CDC_RNDIS_HandleTypeDef *hcdc_cdc_rndis = (USBD_CDC_RNDIS_HandleTypeDef *)(USBD_Device.pClassData);
 #endif /* USE_USBD_COMPOSITE */

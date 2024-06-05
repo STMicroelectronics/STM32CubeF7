@@ -426,7 +426,8 @@ static uint8_t USBD_CUSTOM_HID_Setup(USBD_HandleTypeDef *pdev,
             {
               /* Let the application decide what to do, keep EP0 data phase in NAK state and
                  use USBD_CtlSendData() when data become available or stall the EP0 data phase */
-              ((USBD_CUSTOM_HID_ItfTypeDef *)pdev->pUserData[pdev->classId])->CtrlReqComplete(req->bRequest, req->wLength);
+              ((USBD_CUSTOM_HID_ItfTypeDef *)pdev->pUserData[pdev->classId])->CtrlReqComplete(req->bRequest,
+                                                                                              req->wLength);
             }
             else
             {
@@ -478,7 +479,15 @@ static uint8_t USBD_CUSTOM_HID_Setup(USBD_HandleTypeDef *pdev,
             }
           }
 
-          (void)USBD_CtlSendData(pdev, pbuf, len);
+          if (pbuf != NULL)
+          {
+            (void)USBD_CtlSendData(pdev, pbuf, len);
+          }
+          else
+          {
+            USBD_CtlError(pdev, req);
+            ret = USBD_FAIL;
+          }
           break;
 
         case USB_REQ_GET_INTERFACE:

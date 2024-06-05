@@ -54,7 +54,7 @@ The program behaves as follows:
     - BKP_DR0 value correct: this means that the RTC is configured and the time
       and date are displayed on LCD.
 
-2. When a reset (exept power-on reset) occurs the BKP domain is not reset and the RTC 
+2. When a reset (except power-on reset) occurs the BKP domain is not reset and the RTC 
    configuration is not lost. LED4 is ON.
 
 3. When power-on reset (POR) occurs:

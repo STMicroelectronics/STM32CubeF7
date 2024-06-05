@@ -73,6 +73,10 @@ ANT7-M24LR-A to CN1 connector of STM32746G-Discovery board.
 
 10th test : QSPI test. This example provides of how to write, read and buffers compare 
 for external flash memory using QSPI communication.
+For the QSPI test, one of the following flags must be defined in the preprocessor:
+- USE_STM32746G_DISCO_REVC03 : Board contains the W25Q128J QSPI component.
+- USE_STM32746G_DISCO        : Board contains the N25Q128A QSPI component.(Defined by default)
+
 
 @note Care must be taken when using HAL_Delay(), this function provides accurate delay (in milliseconds)
       based on variable incremented in SysTick ISR. This implies that if HAL_Delay() is called from

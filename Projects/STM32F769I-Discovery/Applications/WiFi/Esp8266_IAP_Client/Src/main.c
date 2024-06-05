@@ -661,7 +661,7 @@ static void MPU_Config(void)
 
 #ifdef USE_LCD
 /**
-  * @brief  This function intializes the LCD Configuration.
+  * @brief  This function initializes the LCD Configuration.
   * @param  None
   * @retval None
   */

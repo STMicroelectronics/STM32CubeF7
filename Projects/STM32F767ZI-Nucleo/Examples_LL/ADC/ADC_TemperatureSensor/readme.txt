@@ -44,11 +44,11 @@ from ADC data register and stores it into a variable, LED1 is turned on.
 
 ADC conversions raw data are computed to physical values
 using LL ADC driver helper macro:
- - Value of temperature (unit: degree Celcius)
+ - Value of temperature (unit: degree Celsius)
 
 For debug: variables to monitor with debugger watch window:
  - "uhADCxConvertedData": ADC group regular conversion data
- - "hADCxConvertedData_Temperature_DegreeCelsius": Value of temperature (unit: degree Celcius)
+ - "hADCxConvertedData_Temperature_DegreeCelsius": Value of temperature (unit: degree Celsius)
 
 Connection needed:
 None.

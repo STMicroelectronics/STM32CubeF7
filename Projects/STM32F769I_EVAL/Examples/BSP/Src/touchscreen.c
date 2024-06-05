@@ -238,7 +238,7 @@ static uint32_t Touchscreen_Handle_NewTouch(void)
     /* Erase previous information on bottom text bar */
     BSP_LCD_FillRect(0, BSP_LCD_GetYSize() - 80, BSP_LCD_GetXSize(), 80);
 
-    /* Desactivate drawing footprint of touch 1 and touch 2 until validated against boundaries of touch pad values */
+    /* Deactivate drawing footprint of touch 1 and touch 2 until validated against boundaries of touch pad values */
     drawTouch1 = drawTouch2 = 0;
 
     /* Get X and Y position of the first touch post calibrated */

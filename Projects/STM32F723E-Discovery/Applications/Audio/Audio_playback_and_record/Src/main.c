@@ -293,7 +293,7 @@ static void MPU_Config(void)
 
   HAL_MPU_ConfigRegion(&MPU_InitStruct);
 
-  /* Configure the MPU attributes for TFT-LCD with recomended configurations:
+  /* Configure the MPU attributes for TFT-LCD with recommended configurations:
      Normal memory, Shareable, write-back */
   MPU_InitStruct.Enable = MPU_REGION_ENABLE;
   MPU_InitStruct.BaseAddress = 0x64000000;

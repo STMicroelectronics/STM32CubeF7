@@ -35,7 +35,7 @@
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 __IO uint32_t flashdestination;
-/* @note ATTENTION - please keep this variable 32bit alligned */
+/* @note ATTENTION - please keep this variable 32bit aligned */
 uint8_t aPacketData[PACKET_1K_SIZE + PACKET_DATA_INDEX + PACKET_TRAILER_SIZE];
 
 /* Private function prototypes -----------------------------------------------*/

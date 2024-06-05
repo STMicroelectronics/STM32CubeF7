@@ -35,7 +35,7 @@ If a DHCP server is available, a dynamic IP address can be allocated by enabling
 the DHCP process (#define LWIP_DHCP in lwipopts.h). 
 
 If a DHCP server is not available, after timeout connection, the device only gets a static 
-IP address(the switch from static to dynamic IP adress is not available in this application).
+IP address(the switch from static to dynamic IP address is not available in this application).
 
 Ethernet cable status is ensured by LEDs: 
   + LED1: ethernet cable is connected.

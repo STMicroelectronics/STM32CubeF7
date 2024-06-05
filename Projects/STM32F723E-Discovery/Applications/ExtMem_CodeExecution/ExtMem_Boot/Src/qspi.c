@@ -241,7 +241,7 @@ static uint32_t QSPI_ResetMemory(QSPI_HandleTypeDef *hqspi)
     return MEMORY_ERROR;
   }
 
-  /* After reset CMD, 1000ms requested if QSPI memory SWReset occured during full chip erase operation */
+  /* After reset CMD, 1000ms requested if QSPI memory SWReset occurred during full chip erase operation */
   HAL_Delay( 1000 );
 
   /* Configure automatic polling mode to wait the memory is ready */  

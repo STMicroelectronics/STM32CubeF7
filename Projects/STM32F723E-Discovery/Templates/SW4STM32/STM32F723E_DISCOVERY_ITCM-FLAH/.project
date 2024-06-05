@@ -161,6 +161,10 @@
 			<type>1</type>
 			<location>PARENT-5-PROJECT_LOC/Drivers/BSP/Components/ft6x06/ft6x06.c</location>
 		</link><link>
+			<name>Drivers/BSP/Components/ft3x67.c</name>
+			<type>1</type>
+			<location>PARENT-5-PROJECT_LOC/Drivers/BSP/Components/ft3x67/ft3x67.c</location>
+		</link><link>
 			<name>Drivers/BSP/Components/st7789h2.c</name>
 			<type>1</type>
 			<location>PARENT-5-PROJECT_LOC/Drivers/BSP/Components/st7789h2/st7789h2.c</location>
@@ -280,6 +284,10 @@
 			<name>Example/User/main.c</name>
 			<type>1</type>
 			<location>PARENT-2-PROJECT_LOC/Src/main.c</location>
+		</link><link>
+			<name>Example/SW4STM32/syscalls.c</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/syscalls.c</locationURI>
 		</link><link>
 			<name>Drivers/STM32F7xx_HAL_Driver/stm32f7xx_hal_wwdg.c</name>
 			<type>1</type>

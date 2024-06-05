@@ -27,7 +27,7 @@ to transfer data from memory to TIMER Capture Compare Register 3 (TIM2_CCR3).
   The following configuration values are used in this example:
 
     - TIM2CLK = SystemCoreClock
-    - Counter repetion = 3 
+    - Counter repetition = 3 
     - Prescaler = 0 
     - TIM2 counter clock = SystemCoreClock
     - SystemCoreClock is set to 216 MHz for STM32F7xx

@@ -18,13 +18,9 @@
 **  Distribution: The file is distributed as is, without any warranty
 **                of any kind.
 **
-**  (c)Copyright Ac6.
-**  You may use this file as-is or modify it according to the needs of your
-**  project. Distribution of this file (unmodified or modified) is not
-**  permitted. Ac6 permit registered System Workbench for MCU users the
-**  rights to distribute the assembled, compiled & linked contents of this
-**  file as part of an application binary file, provided that it is built
-**  using the System Workbench for MCU toolchain.
+*****************************************************************************
+**
+**  File provided by SW4STM32
 **
 *****************************************************************************
 */
@@ -42,9 +38,9 @@ _Min_Stack_Size = 0x1000; /* required amount of stack */
 MEMORY
 {
 FLASH (rx)      : ORIGIN = 0x8000000, LENGTH = 2048K
-RAM (xrw)        : ORIGIN = 0x20000000, LENGTH = 499K
-Memory_B1(xrw)   : ORIGIN = 0x2007C000, LENGTH = 0xA0
-Memory_B2(xrw)   : ORIGIN = 0x2007C0A0, LENGTH = 0xA0
+RAM (xrw)        : ORIGIN = 0x20000000, LENGTH = 496K
+Memory_B1(rw)   : ORIGIN = 0x2007C000, LENGTH = 0xA0
+Memory_B2(rw)   : ORIGIN = 0x2007C0A0, LENGTH = 0xA0
 }
 
 /* Define output sections */
@@ -132,7 +128,7 @@ SECTIONS
   . = ALIGN(4);
   .bss :
   {
-    /* This is used by the startup in order to initialize the .bss secion */
+    /* This is used by the startup in order to initialize the .bss section */
     _sbss = .;         /* define a global symbol at bss start */
     __bss_start__ = _sbss;
     *(.bss)
@@ -166,8 +162,8 @@ SECTIONS
   }
 
   .ARM.attributes 0 : { *(.ARM.attributes) }
-  .RxDecripSection (NOLOAD) : { *(.RxDescripSection) } >Memory_B1
-  .TxDescripSection (NOLOAD) : { *(.DMATxDscrTab_section) } >Memory_B2
+  .RxDescripSection (NOLOAD) : { *(.RxDescripSection) } >Memory_B1
+  .TxDescripSection (NOLOAD) : { *(.TxDescripSection) } >Memory_B2
 }
 
 

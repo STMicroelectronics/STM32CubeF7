@@ -267,7 +267,7 @@ void GPS_UpdateDisplay(void)
     RefreshFix =0;
   }
   
-  /* Display GPS satelite */
+  /* Display GPS satellite */
   if(strcasecmp(GPS_SatForFix, PrevGPS_SatForFix) !=0)
   {
     strcpy(PrevGPS_SatForFix, GPS_SatForFix );     
@@ -305,11 +305,11 @@ void GPS_UpdateDisplay(void)
     RefreshSat = 0;
   }
   
-  /* Display GPS satelite */
+  /* Display GPS satellite */
   if(strcasecmp(GPS_Time, PrevGPS_Time) !=0)
   {
     strcpy(PrevGPS_Time, GPS_Time ); 
-    /* Dispaly time */
+    /* Display time */
     if (GPS_Time[0] != '\0') 
     {
       tmp_str = GPS_Time;
@@ -327,7 +327,7 @@ void GPS_UpdateDisplay(void)
   }
   else if (RefreshTime==1)
   {
-    /* Dispaly time */
+    /* Display time */
     if (PrevGPS_Time[0] != '\0') 
     {
       tmp_str = PrevGPS_Time;
@@ -645,7 +645,7 @@ static void MPU_ConfigPSRAM(void)
 
   HAL_MPU_ConfigRegion(&MPU_InitStruct);
 
-  /* Configure the MPU attributes for PSRAM with recomended configurations:
+  /* Configure the MPU attributes for PSRAM with recommended configurations:
      Normal memory, Shareable, write-back (Display purposes) */
   MPU_InitStruct.Enable = MPU_REGION_ENABLE;
   MPU_InitStruct.BaseAddress = 0x64000000;

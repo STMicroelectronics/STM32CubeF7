@@ -88,7 +88,7 @@ Display, Graphic, JPEG, Decoding, Flash memory, DMA, ARGB8888, Hardware decoding
   - JPEG/JPEG_DecodingFromFLASH_DMA/Inc/main.h                        Header for main.c module  
   - JPEG/JPEG_DecodingFromFLASH_DMA/Inc/decode_dma.h                  Header for decode_dma.c module   
   - JPEG/JPEG_DecodingFromFLASH_DMA/Inc/image_320_240_jpg.h           JPEG Image 320x240 to be decoded and displayed on LCD
-  - JPEG/JPEG_DecodingFromFLASH_DMA/Inc/jpeg_utils_conf.h             JPEG utilties module configuration file
+  - JPEG/JPEG_DecodingFromFLASH_DMA/Inc/jpeg_utils_conf.h             JPEG utilities module configuration file
   
   - JPEG/JPEG_DecodingFromFLASH_DMA/Src/stm32f7xx_it.c                Interrupt handlers
   - JPEG/JPEG_DecodingFromFLASH_DMA/Src/main.c                        Main program
@@ -110,7 +110,7 @@ Display, Graphic, JPEG, Decoding, Flash memory, DMA, ARGB8888, Hardware decoding
 In order to make the program work, you must do the following :
  - Open your preferred toolchain 
  - Rebuild all files and load your image into target memory
- - Mount either the KoD LCD pannel (Board MB1166 rev.A) or the DSI-HDMI bridge(Board MB1232 Rev.A)
+ - Mount either the KoD LCD panel (Board MB1166 rev.A) or the DSI-HDMI bridge(Board MB1232 Rev.A)
    to the DSI connector (CN15). 
  - if using the DSI-HDMI bridge then connect a HDMI monitor using a HDMI cable to the 
    MB1232 board.  

@@ -728,7 +728,7 @@ void ETH_PhyExitFromPowerDownMode(void)
    GPIO_InitTypeDef GPIO_InitStruct;
    uint32_t phyregval = 0;
    
-  /* ETH CLKs and GPIOs initilization ******************************/
+  /* ETH CLKs and GPIOs initialization ******************************/
   /* To be removed when the function is called from HAL_ETH_MspInit() when 
      exiting from Standby mode */
 	

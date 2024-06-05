@@ -92,7 +92,7 @@ USBH_StatusTypeDef USBH_GetDescriptor(USBH_HandleTypeDef *phost,
                                       uint8_t  req_type, uint16_t value_idx,
                                       uint8_t *buff, uint16_t length);
 
-USBH_StatusTypeDef USBH_Get_DevDesc(USBH_HandleTypeDef *phost, uint8_t length);
+USBH_StatusTypeDef USBH_Get_DevDesc(USBH_HandleTypeDef *phost, uint16_t length);
 
 USBH_StatusTypeDef USBH_Get_StringDesc(USBH_HandleTypeDef *phost,
                                        uint8_t string_index, uint8_t *buff,

@@ -142,7 +142,7 @@ uint32_t JPEG_Decode_DMA(JPEG_HandleTypeDef *hjpeg, FIL *file, uint32_t DestAddr
 }
 
 /**
-  * @brief  JPEG Ouput Data BackGround Postprocessing .
+  * @brief  JPEG Output Data BackGround Postprocessing .
   * @param hjpeg: JPEG handle pointer
   * @retval 1 : if JPEG processing has finiched, 0 : if JPEG processing still ongoing
   */
@@ -230,7 +230,7 @@ void HAL_JPEG_InfoReadyCallback(JPEG_HandleTypeDef *hjpeg, JPEG_ConfTypeDef *pIn
 /**
   * @brief  JPEG Get Data callback
   * @param hjpeg: JPEG handle pointer
-  * @param NbDecodedData: Number of decoded (consummed) bytes from input buffer
+  * @param NbDecodedData: Number of decoded (consumed) bytes from input buffer
   * @retval None
   */
 void HAL_JPEG_GetDataCallback(JPEG_HandleTypeDef *hjpeg, uint32_t NbDecodedData)

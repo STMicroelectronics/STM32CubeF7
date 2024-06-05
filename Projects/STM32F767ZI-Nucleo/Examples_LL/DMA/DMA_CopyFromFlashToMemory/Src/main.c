@@ -35,6 +35,17 @@
 #define BUFFER_SIZE              32
 
 /* Private macro -------------------------------------------------------------*/
+
+
+/* Macro to get variable aligned on 32-bytes,needed for cache maintenance purpose */
+
+#if defined   (__GNUC__)        /* GNU Compiler */
+#define ALIGN_32BYTES(buf)  buf __attribute__ ((aligned (32)))
+#elif defined (__ICCARM__)    /* IAR Compiler */
+#define ALIGN_32BYTES(buf) _Pragma("data_alignment=32") buf
+#elif defined   (__CC_ARM)      /* ARM Compiler */
+#define ALIGN_32BYTES(buf) __align(32) buf
+#endif
 /* Private variables ---------------------------------------------------------*/
 static const uint32_t aSRC_Const_Buffer[BUFFER_SIZE] =
 {
@@ -48,7 +59,9 @@ static const uint32_t aSRC_Const_Buffer[BUFFER_SIZE] =
   0x71727374, 0x75767778, 0x797A7B7C, 0x7D7E7F80
 };
 
-static uint32_t aDST_Buffer[BUFFER_SIZE];
+ALIGN_32BYTES(static uint32_t aDST_Buffer[BUFFER_SIZE]);
+__IO uint32_t TransferErrorDetected = 0;
+__IO uint32_t TransferCompleteDetected = 0;
 
 /* Private function prototypes -----------------------------------------------*/
 void     SystemClock_Config(void);
@@ -78,7 +91,7 @@ int main(void)
 
   /* Configure DMA2 Stream 0                                     */
   /* Enable DMA2 clock                                           */
-  /* Configure the DMA functionnal parameters :                  */
+  /* Configure the DMA functional parameters :                  */
   /*        - Transfer memory word to memory word in normal mode */
   /*        - Memory and Periph increment mode                   */
   /* Configure NVIC for DMA transfer complete/error interrupts   */
@@ -87,10 +100,43 @@ int main(void)
   /* Start the DMA transfer Flash to Memory */
   LL_DMA_EnableStream(DMA2, LL_DMA_STREAM_0);
   
+  /* Wait for the end of the transfer or error in transfer        */
+  while((TransferCompleteDetected == 0) && (TransferErrorDetected == 0))
+  {
+  }
+
+  if(TransferErrorDetected != 0)
+  {
+    /* Error detected during DMA transfer */
+    LED_Blinking(LED_BLINK_ERROR);
+  }
+  else
+  {
+    /*
+      CPU Data Cache maintenance :
+      It is recommended to invalidate the CPU Data cache after the DMA transfer.
+      As the destination buffer may be used by the CPU, this guarantees Up-to-date data when CPU accesses
+      to the destination buffer located in the AXI-SRAM (which is cacheable).
+     */
+     SCB_InvalidateDCache_by_Addr((uint32_t *) aDST_Buffer, sizeof(aDST_Buffer) );
+
+    /* DMA transfer completed */
+    /* Verify the data transferred */
+    if (Buffercmp((uint32_t*)aSRC_Const_Buffer, (uint32_t*)aDST_Buffer, BUFFER_SIZE) != 0)
+    {
+      /* DMA data transferred not correctly */
+      LED_Blinking(LED_BLINK_ERROR);
+    }
+    else
+    {
+      /* DMA data transferred correctly*/
+      LED_On();
+    }
+  }
+
   /* Infinite loop */
   while (1)
   {
-    /* Transfer completion and comparison is done on interrupt callback directly */
   }
 }
 
@@ -99,7 +145,7 @@ int main(void)
   *         Flash memory(aSRC_Const_Buffer) to Internal SRAM(aDST_Buffer).
   * @note   This function is used to :
   *         -1- Enable DMA2 clock
-  *         -2- Configure the DMA functionnal parameters
+  *         -2- Configure the DMA functional parameters
   *         -3- Configure NVIC for DMA transfer complete/error interrupts
   * @note   Peripheral configuration is minimal configuration from reset values.
   *         Thus, some useless LL unitary functions calls below are provided as
@@ -112,7 +158,7 @@ void Configure_DMA(void)
   /* (1) Enable the clock of DMA2 */
   LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_DMA2);
 
-  /* (2) Configure the DMA functionnal parameters */
+  /* (2) Configure the DMA functional parameters */
   /* Configuration of the DMA parameters can be done using unitary functions or using the specific configure function */
   /* Unitary Functions */
 
@@ -295,16 +341,7 @@ void SystemClock_Config(void)
   */
 void TransferComplete()
 {
-  /* DMA transfer completed */
-  /* Verify the data transfered */
-  if (Buffercmp((uint32_t*)aSRC_Const_Buffer, (uint32_t*)aDST_Buffer, BUFFER_SIZE) == 1)
-  {
-    /* DMA data transfered not consistency */
-    LED_Blinking(LED_BLINK_ERROR);
-  }
-
-  /* DMA data transfered consistency */
-  LED_On();
+  TransferCompleteDetected = 1;
 }
 
 /**
@@ -316,7 +353,7 @@ void TransferComplete()
 void TransferError()
 {
   /* Error detected during DMA transfer */
-  LED_Blinking(LED_BLINK_ERROR);
+  TransferErrorDetected = 1;
 }
 
 /**

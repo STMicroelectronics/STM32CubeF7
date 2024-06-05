@@ -94,7 +94,7 @@ Graphic, Display, LCD, DSI, MIPI Alliance, Video mode, Single buffer, LTDC, QVGA
 In order to make the program work, you must do the following :
  - Open your preferred toolchain
  - Rebuild all files and load your image into target memory
- - Mount either the KoD LCD pannel (Board MB1166 rev.A) or the DSI-HDMI bridge(Board MB1232 Rev.A)
+ - Mount either the KoD LCD panel (Board MB1166 rev.A) or the DSI-HDMI bridge(Board MB1232 Rev.A)
    to the DSI connector (CN1). 
  - if using the DSI-HDMI bridge then connect a HDMI monitor using a HDMI cable to the 
    MB1232 board. 

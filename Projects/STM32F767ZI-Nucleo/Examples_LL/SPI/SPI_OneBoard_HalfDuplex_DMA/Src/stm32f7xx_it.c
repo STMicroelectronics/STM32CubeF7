@@ -173,7 +173,7 @@ void DMA2_Stream3_IRQHandler(void)
   if(LL_DMA_IsActiveFlag_TC3(DMA2))
   {
     LL_DMA_ClearFlag_TC3(DMA2);
-    /* Call function Tranmission complete Callback */
+    /* Call function Transmission complete Callback */
     DMA2_TransmitComplete_Callback();
   }
   else if(LL_DMA_IsActiveFlag_TE3(DMA2))

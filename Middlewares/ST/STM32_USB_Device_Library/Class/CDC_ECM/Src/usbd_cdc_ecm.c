@@ -364,7 +364,8 @@ static uint8_t USBD_CDC_ECM_Init(USBD_HandleTypeDef *pdev, uint8_t cfgidx)
   hcdc->TxLength = 0U;
   hcdc->LinkStatus = 0U;
   hcdc->NotificationStatus = 0U;
-  hcdc->MaxPcktLen = (pdev->dev_speed == USBD_SPEED_HIGH) ? CDC_ECM_DATA_HS_MAX_PACKET_SIZE : CDC_ECM_DATA_FS_MAX_PACKET_SIZE;
+  hcdc->MaxPcktLen = (pdev->dev_speed == USBD_SPEED_HIGH) ? CDC_ECM_DATA_HS_MAX_PACKET_SIZE : \
+                     CDC_ECM_DATA_FS_MAX_PACKET_SIZE;
 
   if (hcdc->RxBuffer == NULL)
   {
@@ -427,8 +428,7 @@ static uint8_t USBD_CDC_ECM_DeInit(USBD_HandleTypeDef *pdev, uint8_t cfgidx)
   * @param  req: usb requests
   * @retval status
   */
-static uint8_t USBD_CDC_ECM_Setup(USBD_HandleTypeDef *pdev,
-                                  USBD_SetupReqTypedef *req)
+static uint8_t USBD_CDC_ECM_Setup(USBD_HandleTypeDef *pdev, USBD_SetupReqTypedef *req)
 {
   USBD_CDC_ECM_HandleTypeDef *hcdc = (USBD_CDC_ECM_HandleTypeDef *) pdev->pClassDataCmsit[pdev->classId];
   USBD_CDC_ECM_ItfTypeDef *EcmInterface = (USBD_CDC_ECM_ItfTypeDef *)pdev->pUserData[pdev->classId];
@@ -449,8 +449,7 @@ static uint8_t USBD_CDC_ECM_Setup(USBD_HandleTypeDef *pdev,
       {
         if ((req->bmRequest & 0x80U) != 0U)
         {
-          EcmInterface->Control(req->bRequest,
-                                (uint8_t *)hcdc->data, req->wLength);
+          EcmInterface->Control(req->bRequest, (uint8_t *)hcdc->data, req->wLength);
 
           len = MIN(CDC_ECM_DATA_BUFFER_SIZE, req->wLength);
           (void)USBD_CtlSendData(pdev, (uint8_t *)hcdc->data, len);
@@ -561,7 +560,8 @@ static uint8_t USBD_CDC_ECM_DataIn(USBD_HandleTypeDef *pdev, uint8_t epnum)
       hcdc->TxState = 0U;
       if (((USBD_CDC_ECM_ItfTypeDef *)pdev->pUserData[pdev->classId])->TransmitCplt != NULL)
       {
-        ((USBD_CDC_ECM_ItfTypeDef *)pdev->pUserData[pdev->classId])->TransmitCplt(hcdc->TxBuffer, &hcdc->TxLength, epnum);
+        ((USBD_CDC_ECM_ItfTypeDef *)pdev->pUserData[pdev->classId])->TransmitCplt(hcdc->TxBuffer,
+                                                                                  &hcdc->TxLength, epnum);
       }
     }
   }
@@ -569,8 +569,7 @@ static uint8_t USBD_CDC_ECM_DataIn(USBD_HandleTypeDef *pdev, uint8_t epnum)
   {
     if (hcdc->NotificationStatus != 0U)
     {
-      (void)USBD_CDC_ECM_SendNotification(pdev, CONNECTION_SPEED_CHANGE,
-                                          0U, (uint8_t *)ConnSpeedTab);
+      (void)USBD_CDC_ECM_SendNotification(pdev, CONNECTION_SPEED_CHANGE, 0U, (uint8_t *)ConnSpeedTab);
 
       hcdc->NotificationStatus = 0U;
     }
@@ -807,7 +806,10 @@ static uint8_t *USBD_CDC_ECM_USRStringDescriptor(USBD_HandleTypeDef *pdev, uint8
   /* Check if the requested string interface is supported */
   if (index == CDC_ECM_MAC_STRING_INDEX)
   {
-    USBD_GetString((uint8_t *)((USBD_CDC_ECM_ItfTypeDef *)pdev->pUserData[pdev->classId])->pStrDesc, USBD_StrDesc, length);
+    USBD_GetString((uint8_t *)((USBD_CDC_ECM_ItfTypeDef *)pdev->pUserData[pdev->classId])->pStrDesc,
+                   USBD_StrDesc,
+                   length);
+
     return USBD_StrDesc;
   }
   /* Not supported Interface Descriptor index */
@@ -834,7 +836,7 @@ uint8_t USBD_CDC_ECM_SetTxBuffer(USBD_HandleTypeDef *pdev, uint8_t *pbuff, uint3
 uint8_t USBD_CDC_ECM_SetTxBuffer(USBD_HandleTypeDef *pdev, uint8_t *pbuff, uint32_t length)
 {
   USBD_CDC_ECM_HandleTypeDef *hcdc = (USBD_CDC_ECM_HandleTypeDef *)pdev->pClassDataCmsit[pdev->classId];
-#endif
+#endif /* USE_USBD_COMPOSITE */
 
   if (hcdc == NULL)
   {

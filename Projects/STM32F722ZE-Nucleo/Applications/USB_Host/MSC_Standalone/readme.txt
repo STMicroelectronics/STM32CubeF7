@@ -35,7 +35,7 @@ internally a 48-MHz clock which is coming from the main PLL.
 When the application is started, the connected USB flash disk device is detected in MSC mode and gets 
 initialized. The STM32 MCU behaves as a MSC Host, it enumerates the device and extracts VID, PID, 
 manufacturer name, Serial no and product name information and displays it on the LCD screen. 
-This application is based on read/write file and explore the USB flash disk content trough a MSC routine.
+This application is based on read/write file and explore the USB flash disk content through a MSC routine.
 LCD and joystick are provided by Adafruit 1.8" TFT shield to be plugged on Arduino connectors.
 
 A menu is displayed and the user can select any operation from the menu using the Joystick buttons:

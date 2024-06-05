@@ -229,7 +229,7 @@ int main(void)
   
   while(1)
   {
-    /*Infinit loop*/
+    /*Infinite loop*/
     if((isplaying != 0) || (playOneFrame != 0))
     {
       playOneFrame = 0;
@@ -464,7 +464,7 @@ static void EXTI9_5_IRQHandler_Config(void)
 }
 
 /**
-  * @brief  Display current fractal image dimentions to the LCD screen
+  * @brief  Display current fractal image dimensions to the LCD screen
   * @param  None
   * @retval None
   */
@@ -1042,7 +1042,7 @@ void HAL_DSI_EndOfRefreshCallback(DSI_HandleTypeDef *hdsi)
     {     
       /* Disable DSI Wrapper */
       __HAL_DSI_WRAPPER_DISABLE(hdsi);
-      /* Update LTDC configuaration */
+      /* Update LTDC configuration */
       LTDC_LAYER(&hltdc_eval, 0)->CFBAR = LCD_FRAME_BUFFER + 400 * 4;
       __HAL_LTDC_RELOAD_CONFIG(&hltdc_eval);
       /* Enable DSI Wrapper */
@@ -1058,7 +1058,7 @@ void HAL_DSI_EndOfRefreshCallback(DSI_HandleTypeDef *hdsi)
 
       /* Disable DSI Wrapper */
       __HAL_DSI_WRAPPER_DISABLE(&hdsi_eval);
-      /* Update LTDC configuaration */
+      /* Update LTDC configuration */
       LTDC_LAYER(&hltdc_eval, 0)->CFBAR = LCD_FRAME_BUFFER;
       __HAL_LTDC_RELOAD_CONFIG(&hltdc_eval);
       /* Enable DSI Wrapper */

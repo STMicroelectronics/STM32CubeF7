@@ -32,6 +32,17 @@
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
+
+
+/* Macro to get variable aligned on 32-bytes,needed for cache maintenance purpose */
+
+#if defined   (__GNUC__)        /* GNU Compiler */
+#define ALIGN_32BYTES(buf)  buf __attribute__ ((aligned (32)))
+#elif defined (__ICCARM__)    /* IAR Compiler */
+#define ALIGN_32BYTES(buf) _Pragma("data_alignment=32") buf
+#elif defined   (__CC_ARM)      /* ARM Compiler */
+#define ALIGN_32BYTES(buf) __align(32) buf
+#endif
 /* Private variables ---------------------------------------------------------*/
 /* DMA Handle declaration */
 DMA_HandleTypeDef     DmaHandle;
@@ -48,7 +59,7 @@ static const uint32_t aSRC_Const_Buffer[BUFFER_SIZE] =
   0x71727374, 0x75767778, 0x797A7B7C, 0x7D7E7F80
 };
 
-static uint32_t aDST_Buffer[BUFFER_SIZE];
+ALIGN_32BYTES(static uint32_t aDST_Buffer[BUFFER_SIZE]);
 
 static __IO uint32_t transferErrorDetected;    /* Set to 1 if an error transfer is detected */
 static __IO uint32_t transferCompleteDetected; /* Set to 1 if transfer is correctly completed */
@@ -104,21 +115,32 @@ int main(void)
   /* Configure and enable the DMA stream for Memory to Memory transfer */
   DMA_Config();
 
+  while ((transferCompleteDetected == 0) && (transferErrorDetected == 0))
+  {
+    /* wait until DMA transfer complete or transfer error */
+  }
+
+  if (transferErrorDetected == 1)
+  {
+    /* Turn LED2 on in case of DMA transfer error */
+    BSP_LED_On(LED2);
+  }
+  else if (transferCompleteDetected == 1)
+  {
+    /* Turn LED1 on in case of completed DMA transfer */
+    BSP_LED_On(LED1);
+    /*
+      CPU Data Cache maintenance :
+      It is recommended to invalidate the CPU Data cache after the DMA transfer.
+      As the destination buffer may be used by the CPU, this guarantees Up-to-date data when CPU accesses
+      to the destination buffer located in the AXI-SRAM (which is cacheable).
+    */
+    SCB_InvalidateDCache();
+  }
+
   /* Infinite loop */
   while (1)
   {
-    if (transferErrorDetected == 1)
-    {
-      /* Turn LED2 on*/
-      BSP_LED_On(LED2);
-      transferErrorDetected = 0;
-    }
-    if (transferCompleteDetected == 1)
-    {
-      /* Turn LED1 on*/
-      BSP_LED_On(LED1);
-      transferCompleteDetected = 0;
-    } 
   }
 }
 

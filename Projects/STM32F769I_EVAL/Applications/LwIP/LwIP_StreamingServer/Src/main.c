@@ -95,20 +95,6 @@ int main(void)
   LCD_Config();
 #endif
   
-  /* Initialize the camera module */
-  if(BSP_CAMERA_Init(CAMERA_R160x120) == CAMERA_OK)
-  {
-#ifdef USE_LCD
-  BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()/4 + 10, (uint8_t *)"Camera Initialization...", LEFT_MODE);
-#endif
-  }
-  else
-  {
-    /* Camera Initialization Error */
-    Error_Handler();
-  }
-
-
   /* Init task */
 #if defined(__GNUC__)
   osThreadDef(Start, StartThread, osPriorityNormal, 0, configMINIMAL_STACK_SIZE * 5);
@@ -229,6 +215,8 @@ static void Netif_Config(void)
 
   /*  Registers the default network interface. */
   netif_set_default(&gnetif);
+  
+  ethernet_link_status_updated(&gnetif);
 
 #if LWIP_NETIF_LINK_CALLBACK
   netif_set_link_callback(&gnetif, ethernet_link_status_updated);

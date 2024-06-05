@@ -111,7 +111,7 @@ int main(void)
   }
   else
   {
-    /* Comparison successfull */
+    /* Comparison successful */
     BSP_LED_On(LED6);
   }
 

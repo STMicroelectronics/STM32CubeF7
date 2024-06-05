@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    Camera/Src/main.c
   * @author  MCD Application Team
-  * @brief   This application discribes how to configure the camera in continuous 
+  * @brief   This application describes how to configure the camera in continuous 
   *          or snapshots modes and QVGA resolution.
   ******************************************************************************
   * @attention

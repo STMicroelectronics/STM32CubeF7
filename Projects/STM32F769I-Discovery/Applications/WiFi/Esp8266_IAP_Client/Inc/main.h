@@ -35,7 +35,7 @@
 /* Edit the defines below to suit the WiFi connection
    and the webserver to use. -------------------------------------------------*/
 
-/* Access point connection parametres */
+/* Access point connection parameters */
 #define WIFI_SSID       "AndroidAP"
 #define WIFI_PASSWORD   "welcome0"
 #define HOST_ADDRESS    "192.168.43.1"

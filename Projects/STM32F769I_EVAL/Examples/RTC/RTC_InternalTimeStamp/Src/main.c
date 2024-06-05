@@ -145,13 +145,13 @@ int main(void)
     /* Check if the Power On Reset flag is set */
     if (__HAL_RCC_GET_FLAG(RCC_FLAG_BORRST) != RESET)
     {
-      /* Turn on LED2: Power on reset occured */
+      /* Turn on LED2: Power on reset occurred */
       BSP_LED_On(LED2);
     }
     /* Check if Pin Reset flag is set */
     if (__HAL_RCC_GET_FLAG(RCC_FLAG_PINRST) != RESET)
     {
-      /* Turn on LED4: External reset occured */
+      /* Turn on LED4: External reset occurred */
       BSP_LED_On(LED4);
     }
     /* Clear source Reset Flag */

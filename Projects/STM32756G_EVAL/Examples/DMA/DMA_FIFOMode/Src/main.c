@@ -32,6 +32,16 @@
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
+
+/* Macro to get variable aligned on 32-bytes,needed for cache maintenance purpose */
+
+#if defined   (__GNUC__)        /* GNU Compiler */
+#define ALIGN_32BYTES(buf)  buf __attribute__ ((aligned (32)))
+#elif defined (__ICCARM__)    /* IAR Compiler */
+#define ALIGN_32BYTES(buf) _Pragma("data_alignment=32") buf
+#elif defined   (__CC_ARM)      /* ARM Compiler */
+#define ALIGN_32BYTES(buf) __align(32) buf
+#endif
 /* Private variables ---------------------------------------------------------*/
 /* DMA Handle declaration */
 DMA_HandleTypeDef     DmaHandle;
@@ -48,9 +58,10 @@ static const uint32_t aSRC_Const_Buffer[BUFFER_SIZE] =
   0x71727374, 0x75767778, 0x797A7B7C, 0x7D7E7F80
 };
 
-static uint32_t aDST_Buffer[BUFFER_SIZE];
+ALIGN_32BYTES(static uint32_t aDST_Buffer[BUFFER_SIZE]);
 
-static __IO uint32_t transferErrorDetected; /* Set to 1 if an error transfer is detected */
+static __IO uint32_t transferErrorDetected = 0;    /* Set to 1 if an error transfer is detected */
+static __IO uint32_t transferCompleteDetected = 0; /* Set to 1 if transfer is correctly completed */
 
 /* Private function prototypes -----------------------------------------------*/
 static void MPU_Config(void);
@@ -60,6 +71,7 @@ static void Error_Handler(void);
 static void TransferComplete(DMA_HandleTypeDef *DmaHandle);
 static void TransferError(DMA_HandleTypeDef *DmaHandle);
 static void CPU_CACHE_Enable(void);
+void LED_Blinking(uint32_t Period);
 
 /* Private functions ---------------------------------------------------------*/
 
@@ -95,24 +107,34 @@ int main(void)
   /* Configure the system clock to 216 MHz */
   SystemClock_Config();
 
-  /* Set to 1 if an transfer error is detected */
-  transferErrorDetected = 0;
-
   /* Configure and enable the DMA stream for Memory to Memory transfer */
   DMA_Config();
 
+  while ((transferCompleteDetected == 0) && (transferErrorDetected == 0))
+  {
+    /* wait until DMA transfer complete or transfer error */
+  }
+
+  if (transferErrorDetected == 1)
+  {
+    /* Toggle LED3 on in case of DMA transfer error */
+    LED_Blinking(200);
+  }
+  else if (transferCompleteDetected == 1)
+  {
+    /* Turn LED1 on in case of completed DMA transfer */
+    BSP_LED_On(LED1);
+    /*
+      CPU Data Cache maintenance :
+      It is recommended to invalidate the CPU Data cache after the DMA transfer.
+      As the destination buffer may be used by the CPU, this guarantees Up-to-date data when CPU accesses
+      to the destination buffer located in the AXI-SRAM (which is cacheable).
+    */
+    SCB_InvalidateDCache();
+  }
   /* Infinite loop */
   while (1)
   {
-    if (transferErrorDetected == 1)
-    {
-      transferErrorDetected = 0;
-      /* Toggle LED3 */
-      while(1)
-      {
-        BSP_LED_Toggle(LED3);
-      }
-    }
   }
 }
 
@@ -189,8 +211,7 @@ static void DMA_Config(void)
   */
 static void TransferComplete(DMA_HandleTypeDef *DmaHandle)
 {
-  /* Turn LED1 on: Transfer correct */
-  BSP_LED_On(LED1);
+  transferCompleteDetected = 1;
 }
 
 /**
@@ -265,6 +286,23 @@ void SystemClock_Config(void)
   {
     while(1) { ; }
   }  
+}
+
+/**
+  * @brief  Set LED3 to Blinking mode for an infinite loop (toggle period based on value provided as input parameter).
+  * @param  Period : Period of time (in ms) between each toggling of LED
+  *   This parameter can be user defined values.
+  * @retval None
+  */
+void LED_Blinking(uint32_t Period)
+{  
+  /* Toggle LED3 in an infinite loop */
+  while (1)
+  {
+      /* Toggle LED3 */
+      BSP_LED_Toggle(LED3);
+      HAL_Delay(Period);
+  }
 }
 
 /**

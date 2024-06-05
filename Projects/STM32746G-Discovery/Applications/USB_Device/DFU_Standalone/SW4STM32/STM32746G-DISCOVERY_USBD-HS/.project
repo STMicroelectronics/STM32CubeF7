@@ -53,6 +53,10 @@
 			<type>1</type>
 			<location>PARENT-2-PROJECT_LOC/Src/main.c</location>
 		</link><link>
+			<name>Application/SW4STM32/syscalls.c</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/syscalls.c</locationURI>
+		</link><link>
 			<name>Application/User/usbd_conf.c</name>
 			<type>1</type>
 			<location>PARENT-2-PROJECT_LOC/Src/usbd_conf.c</location>

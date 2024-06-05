@@ -465,7 +465,7 @@ void HAL_I2C_SlaveRxCpltCallback(I2C_HandleTypeDef *I2cHandle)
 
   /* Check Command code receive previously */
   /* If data received match with a Internal Command Code, set the associated index */
-  /* Which will use for Tranmission process if requested by Master */
+  /* Which will use for Transmission process if requested by Master */
   if(strcmp((char *)(aSlaveReceiveBuffer), (char *)(aCommandCode[0][0])) == 0)
   {
     ubSlaveInfoIndex = SLAVE_CHIP_NAME;

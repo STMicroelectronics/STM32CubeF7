@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    DCMI/DCMI_CaptureMode/Src/main.c
   * @author  MCD Application Team
-  * @brief   This example discribe how to configure the camera in continuous mode
+  * @brief   This example describe how to configure the camera in continuous mode
   *          and QVGA resolution.
   ******************************************************************************
   * @attention
@@ -430,7 +430,7 @@ void HAL_DSI_EndOfRefreshCallback(DSI_HandleTypeDef *hdsi)
     {     
       /* Disable DSI Wrapper */
       __HAL_DSI_WRAPPER_DISABLE(hdsi);
-      /* Update LTDC configuaration */
+      /* Update LTDC configuration */
       LTDC_LAYER(&hltdc_eval, 0)->CFBAR = LCD_FRAME_BUFFER + 400 * 4;
       __HAL_LTDC_RELOAD_CONFIG(&hltdc_eval);
       /* Enable DSI Wrapper */
@@ -445,7 +445,7 @@ void HAL_DSI_EndOfRefreshCallback(DSI_HandleTypeDef *hdsi)
     {
       /* Disable DSI Wrapper */
       __HAL_DSI_WRAPPER_DISABLE(&hdsi_eval);
-      /* Update LTDC configuaration */
+      /* Update LTDC configuration */
       LTDC_LAYER(&hltdc_eval, 0)->CFBAR = LCD_FRAME_BUFFER;
       __HAL_LTDC_RELOAD_CONFIG(&hltdc_eval);
       /* Enable DSI Wrapper */

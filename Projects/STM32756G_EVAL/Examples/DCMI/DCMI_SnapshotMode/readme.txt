@@ -34,7 +34,7 @@ the camera module mounted on STM327x6G-EVAL revB evaluation board.
 The DMA is configured to transfer the picture from DCMI peripheral
 to an external RAM used by the LCD as a frame buffer.   
 When each line event callback is raised the pixels coming from sensor are converted from 
-RGB565 to RGB0888 format using DMA2D and transfered to the LCD frame buffer.   
+RGB565 to RGB0888 format using DMA2D and transferred to the LCD frame buffer.   
 
 The camera module is configured to generate QVGA (320x240) image resolution
 and the LCD is configured to display QVGA image resolution

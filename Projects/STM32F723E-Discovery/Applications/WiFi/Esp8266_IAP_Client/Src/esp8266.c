@@ -46,7 +46,7 @@ static ESP8266_StatusTypeDef getData(uint8_t* Buffer, uint32_t Length, uint32_t*
   *          in case of success the string "OK" is returned inside otherwise
   *	         it is an error.
   * @param   None
-  * @retval  ESP8266_OK on sucess, ESP8266_ERROR otherwise.
+  * @retval  ESP8266_OK on success, ESP8266_ERROR otherwise.
   */
 ESP8266_StatusTypeDef ESP8266_Init(void)
 {
@@ -99,7 +99,7 @@ ESP8266_StatusTypeDef ESP8266_Init(void)
   * @details Restarts the module  and stop the IO. AT command can't be executed
              unless the module is reinitialized.
   * @param   None
-  * @retval  ESP8266_OK on sucess, ESP8266_ERROR otherwise.
+  * @retval  ESP8266_OK on success, ESP8266_ERROR otherwise.
   */
 ESP8266_StatusTypeDef ESP8266_DeInit(void)
 {
@@ -121,7 +121,7 @@ ESP8266_StatusTypeDef ESP8266_DeInit(void)
 /**
   * @brief  Restarts the esp8266 module.
   * @param  None
-  * @retval ESP8266_OK on sucess, ESP8266_ERROR otherwise.
+  * @retval ESP8266_OK on success, ESP8266_ERROR otherwise.
   */
 ESP8266_StatusTypeDef ESP8266_Restart(void)
 {
@@ -351,7 +351,7 @@ static ESP8266_StatusTypeDef runAtCmd(uint8_t* cmd, uint32_t Length, const uint8
   /* Wait for reception */
   while (1)
   {	
-	/* Wait to recieve data */
+	/* Wait to receive data */
     if (ESP8266_IO_Receive(&RxChar, 1) != 0)
     {
       RxBuffer[idx++] = RxChar; 
@@ -461,7 +461,7 @@ static ESP8266_StatusTypeDef getData(uint8_t* Buffer, uint32_t Length, uint32_t*
       }
     }
 	
-    /* When a new chunk is met, extact its size */
+    /* When a new chunk is met, extract its size */
     if ((strstr((char *)RxBuffer, AT_IPD_STRING) != NULL) && (newChunk == ESP8266_FALSE)) 
     {
       i = 0;

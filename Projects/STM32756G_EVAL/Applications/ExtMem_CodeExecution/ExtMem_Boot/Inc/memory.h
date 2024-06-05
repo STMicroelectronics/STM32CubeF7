@@ -70,7 +70,7 @@
                      ##### How to use this Config #####
   ==============================================================================
     [..]
-      The configuration bellow allows simple selection switch between configuration
+      The configuration below allows simple selection switch between configuration
 
       The configuration is composed mainly by two area:
       (#) CODE_AREA: Used to specify external memory used for code execution

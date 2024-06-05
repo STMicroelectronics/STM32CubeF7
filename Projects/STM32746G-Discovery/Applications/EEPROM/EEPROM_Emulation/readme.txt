@@ -23,7 +23,7 @@
 
 This application shows how to emulate EEPROM on internal flash.
 
-Please refer to AN3969 for futher details regarding this application.
+Please refer to AN3969 for further details regarding this application.
 
 
 STM32746G-Discovery's LED can be used to monitor the application status:

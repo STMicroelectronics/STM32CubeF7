@@ -67,7 +67,7 @@ On TX side, four possible messages can be transmitted and are indicated on the s
  - when touching right of the screen, send CEC command with opcode 0x9F
 
 On the RX side in case of successful reception, it displays the content of the received 
-CEC command or displays an error message if transmition fails.
+CEC command or displays an error message if transmission fails.
 
 The two boards transmits commands to other by touching the screen and receives the 
 commands from the other and displays the received command on the screen.

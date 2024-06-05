@@ -44,7 +44,7 @@ in the FLASH memory. The written data is then read back and checked.
 
 The STM32746G-DISCOVERY board LEDs can be used to monitor the transfer status:
  - LED1 is ON when there are no errors detected after programmation
- - LED1 is blinking with a 1s period when there are errors dectected after programmation
+ - LED1 is blinking with a 1s period when there are errors detected after programmation
  - LED1 is blinking (100ms on, 2s off) when there is an issue during erase or program procedure
 
 @note Care must be taken when using HAL_Delay(), this function provides accurate delay (in milliseconds)

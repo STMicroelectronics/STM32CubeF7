@@ -1,5 +1,5 @@
 /**
-  @page FMC_SDRAM_LowPower SDRAM memory functionnalities example
+  @page FMC_SDRAM_LowPower SDRAM memory functionalities example
   
   @verbatim
   ******************************************************************************

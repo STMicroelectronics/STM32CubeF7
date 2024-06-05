@@ -4,7 +4,7 @@
   * @author  MCD Application Team
   * @brief   Main program body
   *          This sample code shows how to use FatFs with USB disk drive with 
-  *          mutliple access in RTOS mode.
+  *          multiple access in RTOS mode.
   ******************************************************************************
   * @attention
   *

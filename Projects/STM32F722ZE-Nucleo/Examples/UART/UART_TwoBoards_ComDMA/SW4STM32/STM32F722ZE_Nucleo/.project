@@ -83,7 +83,7 @@
 		</link><link>
 			<name>Example/SW4STM32/syscalls.c</name>
 			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/syscalls.c</locationURI>
+			<location>PARENT-1-PROJECT_LOC/syscalls.c</location>
 		</link><link>
 			<name>Drivers/BSP/STM32F7xx_Nucleo_144/stm32f7xx_nucleo_144.c</name>
 			<type>1</type>

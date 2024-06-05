@@ -1,5 +1,5 @@
 /**
-  @page FMC_SDRAM_MemRemap SDRAM memory remap functionnalities example
+  @page FMC_SDRAM_MemRemap SDRAM memory remap functionalities example
   
   @verbatim
   ******************************************************************************

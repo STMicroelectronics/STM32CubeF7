@@ -49,6 +49,10 @@ extern "C" {
 /** @defgroup USBH_HID_KEYBD_Exported_Types
   * @{
   */
+#ifndef USBH_HID_KEYBD_REPORT_SIZE
+#define USBH_HID_KEYBD_REPORT_SIZE                       0x8U
+#endif /* USBH_HID_KEYBD_REPORT_SIZE */
+
 #define KEY_NONE                               0x00
 #define KEY_ERRORROLLOVER                      0x01
 #define KEY_POSTFAIL                           0x02

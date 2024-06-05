@@ -28,11 +28,14 @@
 #include "ethernetif.h"
 #include "../Components/dp83848/dp83848.h"
 #include <string.h>
+#include "lwip/netifapi.h"
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* The time to block waiting for input. */
 #define TIME_WAITING_FOR_INPUT                 ( osWaitForever )
+/* Time to block waiting for transmissions to finish */
+#define ETHIF_TX_TIMEOUT                       (2000U)
 /* Stack size of the interface thread */
 #define INTERFACE_THREAD_STACK_SIZE            ( 512 )
 
@@ -42,15 +45,15 @@
 
 #define ETH_DMA_TRANSMIT_TIMEOUT                (20U)
 
-#define ETH_RX_BUFFER_CNT             12U
+#define ETH_RX_BUFFER_CNT             8U
 #define ETH_TX_BUFFER_MAX             ((ETH_TX_DESC_CNT) * 2U)
 
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 /*
 @Note: This interface is implemented to operate in zero-copy mode only:
-        - Rx buffers are allocated statically and passed directly to the LwIP stack
-          they will return back to DMA after been processed by the stack.
+        - Rx Buffers will be allocated from LwIP stack Rx memory pool,
+          then passed to ETH HAL driver.
         - Tx Buffers will be allocated from LwIP stack memory heap,
           then passed to ETH HAL driver.
 
@@ -197,7 +200,12 @@ static void low_level_init(struct netif *netif)
   DP83848_RegisterBusIO(&DP83848, &DP83848_IOCtx);
 
   /* Initialize the DP83848 ETH PHY */
-  DP83848_Init(&DP83848);
+  if(DP83848_Init(&DP83848) != DP83848_STATUS_OK)
+  {
+    netif_set_link_down(netif);
+    netif_set_down(netif);
+    return;
+  }
 
   PHYLinkState = DP83848_GetLinkState(&DP83848);
 
@@ -292,13 +300,29 @@ static err_t low_level_output(struct netif *netif, struct pbuf *p)
 
   pbuf_ref(p);
 
-  HAL_ETH_Transmit_IT(&EthHandle, &TxConfig);
-
-  while(osSemaphoreWait(TxPktSemaphore, TIME_WAITING_FOR_INPUT)!=osOK)
+  do
   {
-  }
-
-  HAL_ETH_ReleaseTxPacket(&EthHandle);
+    if(HAL_ETH_Transmit_IT(&EthHandle, &TxConfig) == HAL_OK)
+    {
+      errval = ERR_OK;
+    }
+    else
+    {
+      if(HAL_ETH_GetError(&EthHandle) & HAL_ETH_ERROR_BUSY)
+      {
+        /* Wait for descriptors to become available */
+        osSemaphoreWait( TxPktSemaphore, ETHIF_TX_TIMEOUT);
+        HAL_ETH_ReleaseTxPacket(&EthHandle);
+        errval = ERR_BUF;
+      }
+      else
+      {
+        /* Other error */
+        pbuf_free(p);
+        errval =  ERR_IF;
+      }
+    }
+  }while(errval == ERR_BUF);
 
   return errval;
 }
@@ -476,7 +500,7 @@ void HAL_ETH_MspInit(ETH_HandleTypeDef *heth)
   GPIO_InitStructure.Alternate = GPIO_AF11_ETH;
   GPIO_InitStructure.Pin = GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_7;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStructure);
-  
+
   /* Note : ETH_MDIO is connected to PA2 which is shared with other signals like SAI2_SCKB.
      By default on STM32F769I-EVAL board, PA2 is connected to SAI2_SCKB, so to connect PA2 to ETH_MDIO :
     - unsolder bridge SB24 (SAI2_CKB)
@@ -506,7 +530,7 @@ void HAL_ETH_MspInit(ETH_HandleTypeDef *heth)
   /* Configure PH6, PH7 */
   GPIO_InitStructure.Pin =  GPIO_PIN_6 | GPIO_PIN_7;
   HAL_GPIO_Init(GPIOH, &GPIO_InitStructure);
-  
+
   /* Configure PA0 
   GPIO_InitStructure.Pin =  GPIO_PIN_0;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStructure);
@@ -521,7 +545,7 @@ void HAL_ETH_MspInit(ETH_HandleTypeDef *heth)
   /* Configure PH3 
   GPIO_InitStructure.Pin =  GPIO_PIN_3;
   HAL_GPIO_Init(GPIOH, &GPIO_InitStructure);
-  
+
   Note: Ethernet Full duplex mode works properly in the default setting
   (which MII_COL is not connected to PH3 of STM32F7xx) because PH3 is shared
   with SDRAM chip select SDNE0. 
@@ -539,7 +563,7 @@ void HAL_ETH_MspInit(ETH_HandleTypeDef *heth)
   If RX_ER signal is needed, uncomment PI10 configuration code source (above 
   the note) then remove R248 and solder SB9 of the STM32F769I-EVAL board.
   */
-  
+
   /* Enable the Ethernet global Interrupt */
   HAL_NVIC_SetPriority(ETH_IRQn, 0x7, 0);
   HAL_NVIC_EnableIRQ(ETH_IRQn);
@@ -674,8 +698,8 @@ void ethernet_link_thread( void const * argument )
     if(netif_is_link_up(netif) && (PHYLinkState <= DP83848_STATUS_LINK_DOWN))
     {
       HAL_ETH_Stop_IT(&EthHandle);
-      netif_set_down(netif);
-      netif_set_link_down(netif);
+      netifapi_netif_set_down(netif);
+      netifapi_netif_set_link_down(netif);
     }
     else if(!netif_is_link_up(netif) && (PHYLinkState > DP83848_STATUS_LINK_DOWN))
     {
@@ -713,8 +737,8 @@ void ethernet_link_thread( void const * argument )
         MACConf.Speed = speed;
         HAL_ETH_SetMACConfig(&EthHandle, &MACConf);
         HAL_ETH_Start_IT(&EthHandle);
-        netif_set_up(netif);
-        netif_set_link_up(netif);
+        netifapi_netif_set_up(netif);
+        netifapi_netif_set_link_up(netif);
       }
     }
 
@@ -773,6 +797,9 @@ void HAL_ETH_RxLinkCallback(void **pStart, void **pEnd, uint8_t *buff, uint16_t 
   {
     p->tot_len += Length;
   }
+  
+  /* Invalidate data cache because Rx DMA's writing to physical memory makes it stale. */
+  SCB_InvalidateDCache_by_Addr((uint32_t *)buff, Length);
 }
 
 void HAL_ETH_TxFreeCallback(uint32_t * buff)

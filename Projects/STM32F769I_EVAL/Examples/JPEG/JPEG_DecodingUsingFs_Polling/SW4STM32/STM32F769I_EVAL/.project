@@ -105,6 +105,10 @@
 			<type>1</type>
 			<location>PARENT-2-PROJECT_LOC/Src/main.c</location>
 		</link><link>
+			<name>Example/SW4STM32/syscalls.c</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/syscalls.c</locationURI>
+		</link><link>
 			<name>Utilities/jpeg_utils.c</name>
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Utilities/JPEG/jpeg_utils.c</location>

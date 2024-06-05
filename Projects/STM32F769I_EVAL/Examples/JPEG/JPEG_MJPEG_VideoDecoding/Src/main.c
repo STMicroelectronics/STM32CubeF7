@@ -214,7 +214,7 @@ int main(void)
             /*##-7- Start decoding the current JPEG frame with DMA (Not Blocking ) Method ################*/
             JPEG_Decode_DMA(&JPEG_Handle, &JPEG_File, JPEG_OUTPUT_DATA_BUFFER);
 
-            /*##-8- Wait till end of JPEG decoding, and perfom Input/Output Processing in BackGround  #*/
+            /*##-8- Wait till end of JPEG decoding, and perform Input/Output Processing in BackGround  #*/
             do
             {
               JPEG_InputHandler(&JPEG_Handle);
@@ -589,7 +589,7 @@ void HAL_DSI_EndOfRefreshCallback(DSI_HandleTypeDef *hdsi)
     {
       /* Disable DSI Wrapper */
       __HAL_DSI_WRAPPER_DISABLE(hdsi);
-      /* Update LTDC configuaration */
+      /* Update LTDC configuration */
       LTDC_LAYER(&hltdc_eval, 0)->CFBAR = LCD_FRAME_BUFFER + 400 * 4;
       __HAL_LTDC_RELOAD_CONFIG(&hltdc_eval);
       /* Enable DSI Wrapper */
@@ -605,7 +605,7 @@ void HAL_DSI_EndOfRefreshCallback(DSI_HandleTypeDef *hdsi)
 
       /* Disable DSI Wrapper */
       __HAL_DSI_WRAPPER_DISABLE(&hdsi_eval);
-      /* Update LTDC configuaration */
+      /* Update LTDC configuration */
       LTDC_LAYER(&hltdc_eval, 0)->CFBAR = LCD_FRAME_BUFFER;
       __HAL_LTDC_RELOAD_CONFIG(&hltdc_eval);
       /* Enable DSI Wrapper */

@@ -201,7 +201,7 @@ void HAL_DSI_EndOfRefreshCallback(DSI_HandleTypeDef *hdsi)
   { 
     /* Disable DSI Wrapper */
     __HAL_DSI_WRAPPER_DISABLE(&hdsi_eval);
-    /* Update LTDC configuaration */
+    /* Update LTDC configuration */
     LTDC_LAYER(&hltdc_eval, 0)->CFBAR = ((uint32_t)Buffers[pend_buffer]);
     __HAL_LTDC_RELOAD_CONFIG(&hltdc_eval);
     /* Enable DSI Wrapper */

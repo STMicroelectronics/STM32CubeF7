@@ -89,7 +89,7 @@ int main(void)
   /* Turn off LED1 */
   BSP_LED_Off(LED1);
 
-  /* De-assert trig ouput pin */
+  /* De-assert trig output pin */
   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, GPIO_PIN_RESET);
 
   /* Compute the prescaler value to have TIMx counter clock equal to 10 kHz */
@@ -156,7 +156,7 @@ int main(void)
   /* Turn on LED1 */
   BSP_LED_On(LED1);
 
-  /* Assert trig ouput pin */
+  /* Assert trig output pin */
   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, GPIO_PIN_SET);
 
   

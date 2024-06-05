@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    GPS/GPS_Map_Tracker/Src/nano_gps_click.c
   * @author  MCD Application Team
-  * @brief   This file implments the IO operations to deal with the Nano GPS click
+  * @brief   This file implements the IO operations to deal with the Nano GPS click
   *          module. It mainly Inits and Deinits the UART interface. Send and
   *          receive data over it.
   ******************************************************************************
@@ -45,7 +45,7 @@ char NMEA_String[256] ;
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 /**
-  * @brief  GPS Initalization.
+  * @brief  GPS Initialization.
   *         This function inits the UART interface to deal with the GPS Nano Click,
   *         then starts asynchronous listening on the RX port.
   * @param None
@@ -84,7 +84,7 @@ void GPS_Init(void)
 /**
   * @brief  Receive Data from the GPS Nano module over the UART interface.
   *         This function receives data from the  GPS module, the
-  *         data is fetched from a ring buffer that is asynchonously and continuously
+  *         data is fetched from a ring buffer that is asynchronously and continuously
             filled with the received data.
   * @param  Buffer: a buffer inside which the data will be read.
   * @param  Length: the Maximum size of the data to receive.
@@ -321,7 +321,7 @@ void GPS_DeInit(void)
 }
 
 /**
-  * @brief  VCP Initalization.
+  * @brief  VCP Initialization.
   *         This function inits the UART interface to deal with the ST-link,
   * @param None
   * @retval None

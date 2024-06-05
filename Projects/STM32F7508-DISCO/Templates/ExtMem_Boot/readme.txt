@@ -122,6 +122,9 @@ Following configuration are supported by the firmware, Please refer to fmc.c and
       Set the MSP and then jump to application start.
         - QSPI : @ 0x90000000
             CODE_AREA   USE_QSPI
+            When using QSPI, one of the following flags must be defined in the preprocessor:
+            - USE_STM32F7508_DISCO_REVC03 : Board contains the W25Q128J QSPI component.
+            - USE_STM32F7508_DISCO        : Board contains the N25Q128A QSPI component.
         - SDRAM : @ 0xC0000000
             CODE_AREA   USE_EXTERNAL_SDRAM
 
@@ -169,13 +172,15 @@ In order to load the application to the external memory:
           - Using EWARM or MDK-ARM : Load project image from the IDE: Project->Debug
           - Using SW4STM32 :
             - Open the STM32CubeProgrammer tool
-            - Select the QSPI external flash loader "N25Q128A_STM32F7508-DISCO" in case of XiP from QSPI
+            - Select the QSPI external flash loader "N25Q128A_STM32F7508-DISCO" or "W25Q128JVEIQ_STM32F7508-DK" in case of XiP from QSPI
             - From Erasing & Programming menu, browse and open the output binary file relative to your application
             - Load the file into the external QSPI flash using "Start Programming" at the address APPLICATION_ADDRESS (0x90000000)
 
       - For a BootROM configuration (BootROM external SDRAM):
-        - If BINARY_AREA is USE_SPI_NOR then use the STM32CubeProgarmmer tool, select QSPI external flash loader "N25Q128A_STM32F7508-DISCO"
-          and load the Project.bin (application binary output file) to the QSPI memory at the address 0x90000000
+        - If BINARY_AREA is USE_SPI_NOR then use the STM32CubeProgarmmer tool, select QSPI external flash loader 
+          "N25Q128A_STM32F7508-DISCO" for all boards except STM32F7508 DISCO REVC03 and higher revisions
+          or select "W25Q128JVEIQ_STM32F7508-DK" for STM32F7508 DISCO REVC03 and higher revisions.
+          Then, load the Project.bin (application binary output file) to the QSPI memory at the address 0x90000000
         - If BINARY_AREA is USE_SDCARD then copy the Project.bin to a micro-SD to be plugged on CN3 and reset the board.
         - In order to debug the  external memory application, user shall attach the debugger, and perform a reset
 

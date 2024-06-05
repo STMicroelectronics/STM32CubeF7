@@ -53,7 +53,7 @@ ADC conversions raw data are computed to physical values
 using LL ADC driver helper macro:
  - Value of voltage on GPIO pin (on which is mapped ADC channel) (unit: mV)
  - Value of internal voltage reference VrefInt (unit: mV)
- - Value of temperature (unit: degree Celcius)
+ - Value of temperature (unit: degree Celsius)
  - Value of analog reference voltage (Vref+), connected to analog voltage supply Vdda (unit: mV)
 
 For debug: variables to monitor with debugger watch window:
@@ -61,7 +61,7 @@ For debug: variables to monitor with debugger watch window:
  - "ubDmaTransferStatus": status of DMA transfer of ADC group regular conversions
  - "uhADCxConvertedData_VoltageGPIO_mVolt":        Value of voltage on GPIO pin (on which is mapped ADC channel) (unit: mV)
  - "uhADCxConvertedData_VrefInt_mVolt":            Value of internal voltage reference VrefInt (unit: mV)
- - "hADCxConvertedData_Temperature_DegreeCelsius": Value of temperature (unit: degree Celcius)
+ - "hADCxConvertedData_Temperature_DegreeCelsius": Value of temperature (unit: degree Celsius)
  - "uhADCxConvertedData_VrefAnalog_mVolt":         Value of analog reference voltage (Vref+), connected to analog voltage supply Vdda (unit: mV)
 
 Connection needed:

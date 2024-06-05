@@ -86,7 +86,7 @@ int main(void)
   BSP_LED_Init(LED2);
   BSP_LED_Init(LED3);
 
-  /* De-assert trig ouput pin */
+  /* De-assert trig output pin */
   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_7, GPIO_PIN_RESET);
   /* ---------------------------------------------------------------------------
    * TIM3 input clock is set to APB1 clock (PCLK1), 
@@ -157,7 +157,7 @@ int main(void)
   /* Turn on LED2 */
   BSP_LED_On(LED2);
 
-  /* Assert trig ouput pin */
+  /* Assert trig output pin */
   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_7, GPIO_PIN_SET);
 
   

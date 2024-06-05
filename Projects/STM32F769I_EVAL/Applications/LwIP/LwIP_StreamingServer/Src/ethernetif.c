@@ -41,15 +41,15 @@
 
 #define ETH_DMA_TRANSMIT_TIMEOUT                (20U)
 
-#define ETH_RX_BUFFER_CNT             12U
+#define ETH_RX_BUFFER_CNT              ETH_RX_DESC_CNT
 #define ETH_TX_BUFFER_MAX             ((ETH_TX_DESC_CNT) * 2U)
 
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 /*
 @Note: This interface is implemented to operate in zero-copy mode only:
-        - Rx buffers are allocated statically and passed directly to the LwIP stack
-          they will return back to DMA after been processed by the stack.
+        - Rx Buffers will be allocated from LwIP stack Rx memory pool,
+          then passed to ETH HAL driver.
         - Tx Buffers will be allocated from LwIP stack memory heap,
           then passed to ETH HAL driver.
 
@@ -196,7 +196,12 @@ static void low_level_init(struct netif *netif)
   DP83848_RegisterBusIO(&DP83848, &DP83848_IOCtx);
 
   /* Initialize the DP83848 ETH PHY */
-  DP83848_Init(&DP83848);
+  if(DP83848_Init(&DP83848) != DP83848_STATUS_OK)
+  {
+    netif_set_link_down(netif);
+    netif_set_down(netif);
+    return;
+  }
 
   PHYLinkState = DP83848_GetLinkState(&DP83848);
 
@@ -291,13 +296,18 @@ static err_t low_level_output(struct netif *netif, struct pbuf *p)
 
   pbuf_ref(p);
 
-  HAL_ETH_Transmit_IT(&EthHandle, &TxConfig);
-
-  while(osSemaphoreWait(TxPktSemaphore, TIME_WAITING_FOR_INPUT)!=osOK)
+  if(HAL_ETH_Transmit_IT(&EthHandle, &TxConfig) == HAL_OK)
   {
-  }
+    while(osSemaphoreWait(TxPktSemaphore, TIME_WAITING_FOR_INPUT) != osOK)
+    {
+    }
 
-  HAL_ETH_ReleaseTxPacket(&EthHandle);
+    HAL_ETH_ReleaseTxPacket(&EthHandle);
+  }
+  else
+  {
+    pbuf_free(p);
+  }
 
   return errval;
 }

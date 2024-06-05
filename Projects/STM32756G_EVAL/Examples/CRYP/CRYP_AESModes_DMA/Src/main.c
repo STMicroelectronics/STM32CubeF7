@@ -195,7 +195,7 @@ int main(void)
   /* CPU Data Cache maintenance :
   It is recommended to clean the CPU Data cache before starting the  DMA transfer. 
   As the source buffer may be prepared by the CPU, this guarantees that the source buffer 
-  (if located in the D1 AXI-SRAM which is cacheable) will be up to date before starting the transfer.
+  (if located in the AXI-SRAM which is cacheable) will be up to date before starting the transfer.
   */
   SCB_CleanDCache_by_Addr(Encryptedtext, 64); 
   
@@ -209,7 +209,7 @@ int main(void)
   /* CPU Data Cache maintenance :  
     It is recommended to invalidate the CPU Data cache after the DMA transfer. 
     As the destination buffer may be used by the CPU, this guarantees Up-to-date data when CPU access 
-    to the destination buffer located in the D1 AXI-SRAM (which is cacheable).
+    to the destination buffer located in the AXI-SRAM (which is cacheable).
   */ 
   SCB_InvalidateDCache_by_Addr(Encryptedtext, 64);
   
@@ -226,7 +226,7 @@ int main(void)
   /* CPU Data Cache maintenance :
     It is recommended to clean the CPU Data cache before starting the  DMA transfer. 
     As the source buffer may be prepared by the CPU, this guarantees that the source buffer 
-    (if located in the D1 AXI-SRAM which is cacheable) will be up to date before starting the transfer.
+    (if located in the AXI-SRAM which is cacheable) will be up to date before starting the transfer.
   */
   SCB_CleanDCache_by_Addr(Decryptedtext, 64);
   
@@ -240,7 +240,7 @@ int main(void)
   /* CPU Data Cache maintenance :  
     It is recommended to invalidate the CPU Data cache after the DMA transfer. 
     As the destination buffer may be used by the CPU, this guarantees Up-to-date data when CPU access 
-    to the destination buffer located in the D1 AXI-SRAM (which is cacheable).
+    to the destination buffer located in the AXI-SRAM (which is cacheable).
   */ 
   SCB_InvalidateDCache_by_Addr(Decryptedtext, 64);
   

@@ -427,7 +427,8 @@ static uint8_t USBD_CDC_RNDIS_Init(USBD_HandleTypeDef *pdev, uint8_t cfgidx)
   hcdc->TxLength = 0U;
   hcdc->LinkStatus = 0U;
   hcdc->NotificationStatus = 0U;
-  hcdc->MaxPcktLen = (pdev->dev_speed == USBD_SPEED_HIGH) ? CDC_RNDIS_DATA_HS_MAX_PACKET_SIZE : CDC_RNDIS_DATA_FS_MAX_PACKET_SIZE;
+  hcdc->MaxPcktLen = (pdev->dev_speed == USBD_SPEED_HIGH) ? CDC_RNDIS_DATA_HS_MAX_PACKET_SIZE : \
+                     CDC_RNDIS_DATA_FS_MAX_PACKET_SIZE;
 
   if (hcdc->RxBuffer == NULL)
   {
@@ -664,7 +665,8 @@ static uint8_t USBD_CDC_RNDIS_DataIn(USBD_HandleTypeDef *pdev, uint8_t epnum)
 
       if (((USBD_CDC_RNDIS_ItfTypeDef *)pdev->pUserData[pdev->classId])->TransmitCplt != NULL)
       {
-        ((USBD_CDC_RNDIS_ItfTypeDef *)pdev->pUserData[pdev->classId])->TransmitCplt(hcdc->TxBuffer, &hcdc->TxLength, epnum);
+        ((USBD_CDC_RNDIS_ItfTypeDef *)pdev->pUserData[pdev->classId])->TransmitCplt(hcdc->TxBuffer, \
+                                                                                    &hcdc->TxLength, epnum);
       }
     }
   }
@@ -1614,7 +1616,8 @@ static uint8_t USBD_CDC_RNDIS_ProcessResetMsg(USBD_HandleTypeDef *pdev,
 static uint8_t USBD_CDC_RNDIS_ProcessPacketMsg(USBD_HandleTypeDef *pdev,
                                                USBD_CDC_RNDIS_PacketMsgTypeDef *Msg)
 {
-  uint32_t tmp1, tmp2;
+  uint32_t tmp1;
+  uint32_t tmp2;
 
   /* Get the CDC_RNDIS handle pointer */
   USBD_CDC_RNDIS_HandleTypeDef *hcdc = (USBD_CDC_RNDIS_HandleTypeDef *)pdev->pClassDataCmsit[pdev->classId];

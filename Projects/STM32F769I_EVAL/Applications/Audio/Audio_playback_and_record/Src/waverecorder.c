@@ -71,7 +71,7 @@ static void AUDIO_REC_DisplayButtons(void);
 /*  
   Four MEMS microphone MP34DT01 mounted on STM32F769I-DISCOVERY are connected
   to the DFSDM peripheral. In this example, only two MEMS microphonr are used. 
-  The SAI is configured in master transmiter mode to play the recorded data. 
+  The SAI is configured in master transmitter mode to play the recorded data. 
   In this mode, the SAI provides the clock to the WM8994.
 
   Data acquisition is performed in 16-bit PCM format and using SAI DMA mode.
@@ -471,7 +471,7 @@ static uint32_t WavProcess_HeaderInit(uint8_t* pHeader, WAVE_FormatTypeDef* pWav
   
   /* Write the file length ---------------------------------------------------*/
   /* The sampling time: this value will be written back at the end of the 
-     recording operation.  Example: 661500 Btyes = 0x000A17FC, byte[7]=0x00, byte[4]=0xFC */
+     recording operation.  Example: 661500 Bytes = 0x000A17FC, byte[7]=0x00, byte[4]=0xFC */
   pHeader[4] = 0x00;
   pHeader[5] = 0x4C;
   pHeader[6] = 0x1D;
@@ -550,7 +550,7 @@ static uint32_t WavProcess_HeaderUpdate(uint8_t* pHeader, WAVE_FormatTypeDef* pW
 {
   /* Write the file length ---------------------------------------------------*/
   /* The sampling time: this value will be written back at the end of the 
-     recording operation.  Example: 661500 Btyes = 0x000A17FC, byte[7]=0x00, byte[4]=0xFC */
+     recording operation.  Example: 661500 Bytes = 0x000A17FC, byte[7]=0x00, byte[4]=0xFC */
   pHeader[4] = (uint8_t)(BufferCtl.fptr);
   pHeader[5] = (uint8_t)(BufferCtl.fptr >> 8);
   pHeader[6] = (uint8_t)(BufferCtl.fptr >> 16);

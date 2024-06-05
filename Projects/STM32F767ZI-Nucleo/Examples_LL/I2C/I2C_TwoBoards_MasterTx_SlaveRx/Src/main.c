@@ -499,7 +499,7 @@ void Handle_I2C_Slave(void)
   /* End of I2C_SlaveReceiver_MasterTransmitter_DMA Process */
   LL_I2C_ClearFlag_STOP(I2C2);
 
-  /* Check if datas request to turn on the LED1 */
+  /* Check if data request to turn on the LED1 */
   if(Buffercmp8((uint8_t*)aReceiveBuffer, (uint8_t*)aLedOn, (ubReceiveIndex-1)) == 0)
   {
     /* Turn LED1 On:

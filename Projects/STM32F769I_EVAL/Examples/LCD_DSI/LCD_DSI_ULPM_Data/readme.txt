@@ -41,12 +41,12 @@ The LTDC is reading continuously the LCD Frame buffer from SDRAM, sent it to DSI
 via the DSI DPHY to the KoD display that decodes DSI packets and refresh its internal Graphic RAM to display on glass.
 
 The Frame number display is managed by Line Event callback in which the Frame number is incremented
-each time a line event occurs. When entering to ULPM, The Frame number is unchanged untill the
+each time a line event occurs. When entering to ULPM, The Frame number is unchanged until the
 exit from this mode.
 
 LED1 ON: DSI PHY Data lane in ULPM mode
 LED1 OFF: DSI PHY Data lane in run mode
-LED3 ON: an error occured.
+LED3 ON: an error occurred.
 
 @note Care must be taken when using HAL_Delay(), this function provides accurate
       delay (in milliseconds) based on variable incremented in SysTick ISR. This

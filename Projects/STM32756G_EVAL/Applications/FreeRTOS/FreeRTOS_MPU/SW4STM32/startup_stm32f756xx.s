@@ -120,7 +120,7 @@ LoopFillZeropbss:
   ldr  r3, = _epbss
   cmp  r2, r3
   bcc  FillZeropbss
-/* Call the clock system intitialization function.*/
+/* Call the clock system initialization function.*/
   bl  SystemInit   
 /* Call static constructors */
     bl __libc_init_array

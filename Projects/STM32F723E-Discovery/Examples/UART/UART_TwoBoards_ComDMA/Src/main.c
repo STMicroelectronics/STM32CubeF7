@@ -284,7 +284,7 @@ void SystemClock_Config(void)
   */
 void HAL_UART_TxCpltCallback(UART_HandleTypeDef *UartHandle)
 {
-  /* Set transmission flag: trasfer complete*/
+  /* Set transmission flag: transfer complete*/
   UartReady = SET;
 
   /* Turn LED6 on: Transfer in transmission process is correct */
@@ -301,7 +301,7 @@ void HAL_UART_TxCpltCallback(UART_HandleTypeDef *UartHandle)
   */
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *UartHandle)
 {
-  /* Set transmission flag: trasfer complete*/
+  /* Set transmission flag: transfer complete*/
   UartReady = SET;
 
   /* Turn LED6 on: Transfer in reception process is correct */

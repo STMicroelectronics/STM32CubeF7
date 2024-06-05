@@ -35,7 +35,6 @@ static char* rtsp_version = "RTSP/1.0"; /* RTSP version */
 
 /* Imported variables ---------------------------------------------------------*/
 extern RTP_HandleTypeDef RTP_struct;
-extern osThreadId thr_ID;   /* to terminate the rtp thread */
 extern osThreadId Thr_Send_Sem;
 
 /* Private functions ---------------------------------------------------------*/
@@ -181,7 +180,7 @@ static void rtsp_thread(void * arg)
             /* options response */
             RTSP_ResponseOptions(reception_buffer, rtsp_struct.rtsp_resp);
   
-            /* desribe response */
+            /* describe response */
             RTSP_ResponseDescribe(reception_buffer, rtsp_struct.rtsp_resp);
               
             /* RTSP received SETUP message */
@@ -446,7 +445,7 @@ static void RTSP_ResponseDescribe(char* req, char* resp)
 {  
   if (strncmp(req, "DESCRIBE", 8) == 0)
   {  
-    /* Add the response of url (chech the url) */
+    /* Add the response of url (check the url) */
     resp=RTSP_ResponseURL(req);
     
     /* set the sequence number */
@@ -636,7 +635,7 @@ static void RTSP_ResponseTeardown (char* req,char* resp)
   */
 static void RTSP_NotValidMethod(char* req,char* response)
 {
-   /* reset reponse */
+   /* reset response */
    memset(response, 0x00, sizeof(&response));
    
    /* copy version to response */
@@ -699,9 +698,6 @@ void RTSP_Stop(void)
     /* close the socket */
     if(!close(rtsp_struct.sock_id))
     {  
-      /* Terminate the RTP thread */
-      if(osThreadTerminate(thr_ID) == osOK)
-      {
         /* Reset the offset of the RTP/JPEG header */
         RTP_struct.Offset = 0;
      
@@ -710,7 +706,6 @@ void RTSP_Stop(void)
      
         /* Terminate Thr_Send_Sem thread */
         osThreadTerminate(Thr_Send_Sem);
-      }
     }
   }
       

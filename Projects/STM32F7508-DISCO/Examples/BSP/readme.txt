@@ -160,7 +160,8 @@ In order to load the BSP example to the external memory :
    - Using EWARM or MDK-ARM : Load project image from the IDE: Project->Debug
    - Using SW4STM32 :
        - Open the STM32CubeProgrammer tool
-       - Select the QSPI external flash loader "N25Q128A_STM32F7508-DISCO" 
+       - Select the QSPI external flash loader "N25Q128A_STM32F7508-DISCO" for all boards except STM32F7508 DISCO REVC03 and higher revisions
+         or select "W25Q128JVEIQ_STM32F7508-DK" for STM32F7508 DISCO REVC03 and higher revisions.
        - From Erasing & Programming menu, browse and open the output binary file relative to this BSP example
        - Load the file into the external QSPI flash using "Start Programming" at the address APPLICATION_ADDRESS (0x90000000)
 

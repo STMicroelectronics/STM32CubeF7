@@ -137,7 +137,7 @@ int main(void)
   }
 
   /* Get the computed digest value */
-  if (HAL_HASH_MD5_Finish(&HashHandle, aMD5Digest, 0xFF) != HAL_OK)
+  if (HAL_HASH_MD5_Finish(&HashHandle, aMD5Digest, 0xFFF) != HAL_OK)
   {
     Error_Handler();
   }

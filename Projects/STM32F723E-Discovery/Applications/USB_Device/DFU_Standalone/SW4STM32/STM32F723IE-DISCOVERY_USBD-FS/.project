@@ -93,6 +93,10 @@
 			<type>1</type>
 			<location>PARENT-1-PROJECT_LOC/startup_stm32f723xx.s</location>
 		</link><link>
+			<name>Application/SW4STM32/syscalls.c</name>
+			<type>1</type>
+			<location>PARENT-1-PROJECT_LOC/syscalls.c</location>
+		</link><link>
 			<name>Middlewares/STM32_USBD_Library/Class/DFU/usbd_dfu.c</name>
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Middlewares/ST/STM32_USB_Device_Library/Class/DFU/Src/usbd_dfu.c</location>

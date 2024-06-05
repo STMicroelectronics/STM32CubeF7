@@ -96,7 +96,7 @@ int main(void)
   BSP_LED_On(LED1);
   BSP_LED_On(LED2);
 
-  /*--- If Wake-up button is pushed, Modify BootAddr0/BootAddr1 value to enable or disbale 
+  /*--- If Wake-up button is pushed, Modify BootAddr0/BootAddr1 value to enable or disable 
   boot from Bank2 (active after next reset, regardless of Boot pin value ---*/
 
   while (1)

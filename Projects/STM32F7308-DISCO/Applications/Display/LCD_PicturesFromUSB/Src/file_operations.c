@@ -85,7 +85,7 @@ void IMG_File_Operations(void)
       /* Compare read data with the expected data */
       if((bytesread == bytesWritten))
       {
-        LCD_UsrLog("INFO : FatFs data compare SUCCES");
+        LCD_UsrLog("INFO : FatFs data compare SUCCESS");
         LCD_UsrLog("\n"); 
       }
       else

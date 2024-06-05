@@ -118,7 +118,7 @@ int main(void)
           /*##-7- JPEG Encoding with DMA (Not Blocking ) Method ################*/
           JPEG_Encode_DMA(&JPEG_Handle, &BMP_File, &JPEG_File);
 
-          /*##-8- Wait till end of JPEG encoding and perfom Input/Output Processing in BackGround  #*/
+          /*##-8- Wait till end of JPEG encoding and perform Input/Output Processing in BackGround  #*/
           do
           {
             JPEG_EncodeInputHandler(&JPEG_Handle);
@@ -409,7 +409,7 @@ void BMP_GetInfo(FIL * MyFile, JPEG_ConfTypeDef *pInfo)
     pInfo->ImageHeight        = ImageHeight;
   }
 
-  /* Jpeg Encoding Setting to be setted by users */
+  /* Jpeg Encoding Setting to be set by users */
   pInfo->ChromaSubsampling  = JPEG_CHROMA_SAMPLING;
   pInfo->ColorSpace         = JPEG_COLOR_SPACE;
   pInfo->ImageQuality       = JPEG_IMAGE_QUALITY;

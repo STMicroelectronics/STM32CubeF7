@@ -45,7 +45,7 @@
 #define USARTx_RX_GPIO_PORT              GPIOC
 #define USARTx_RX_AF                     GPIO_AF8_USART6
 
-/* Size of Trasmission buffer */
+/* Size of Transmission buffer */
 #define TXBUFFERSIZE                      (COUNTOF(aTxBuffer) - 1)
 /* Size of Reception buffer */
 #define RXBUFFERSIZE                      TXBUFFERSIZE

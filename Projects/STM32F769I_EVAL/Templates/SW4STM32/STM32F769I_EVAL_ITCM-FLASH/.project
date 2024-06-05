@@ -193,6 +193,10 @@
 			<type>1</type>
 			<location>PARENT-1-PROJECT_LOC/startup_stm32f769xx.s</location>
 		</link><link>
+			<name>Example/SW4STM32/syscalls.c</name>
+			<type>1</type>
+			<location>PARENT-1-PROJECT_LOC/syscalls.c</location>
+		</link><link>
 			<name>Drivers/BSP/Components/s5k5cag.c</name>
 			<type>1</type>
 			<location>PARENT-5-PROJECT_LOC/Drivers/BSP/Components/s5k5cag/s5k5cag.c</location>

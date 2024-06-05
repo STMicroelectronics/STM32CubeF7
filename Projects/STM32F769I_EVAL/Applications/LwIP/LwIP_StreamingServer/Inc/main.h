@@ -57,7 +57,7 @@
 #define GW_ADDR3   1
 
 /* Genaral configuration for RTSP protocol */   
-#define TARGET_IP_ADDRESS    inet_addr("192.168.0.11")      /* Target IP adress */
+#define TARGET_IP_ADDRESS    inet_addr("192.168.0.11")      /* Target IP address */
 #define RTSP_URL             "rtsp://192.168.0.10"          /* RTSP source URL */
 #define RTSP_SERVER_PORT     ";server_port=49152-49153\r\n" /* RTSP server port */
 #define RSTP_PORT            554       /* RTSP network port */
@@ -67,7 +67,7 @@
 #define RTP_PORT                    49152
    
 /* LCD Frame Buffer address */
-#define LCD_FRAME_BUFFER_START_ADRESS   0xC0025800   /* SDRAM start adress + 150k octets */
+#define LCD_FRAME_BUFFER_START_ADRESS   0xC0025800   /* SDRAM start address + 150k octets */
    
 /* Exported types ------------------------------------------------------------*/
 /* Exported variables --------------------------------------------------------*/

@@ -1,5 +1,5 @@
 /**
-  @page USART_Communication_Rx_IT_Continuous USART Receiver example (IT Mode, Continous reception)
+  @page USART_Communication_Rx_IT_Continuous USART Receiver example (IT Mode, Continuous reception)
   
   @verbatim
   ******************************************************************************

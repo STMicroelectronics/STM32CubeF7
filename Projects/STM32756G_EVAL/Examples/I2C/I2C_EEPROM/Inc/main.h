@@ -65,7 +65,7 @@
 #define I2Cx_DMA_TX_IRQHandler          DMA1_Stream6_IRQHandler
 #define I2Cx_DMA_RX_IRQHandler          DMA1_Stream5_IRQHandler
 
-/* Size of Trasmission buffer */
+/* Size of Transmission buffer */
 #define TXBUFFERSIZE                      (COUNTOF(aTxBuffer) - 1)
 /* Size of Reception buffer */
 #define RXBUFFERSIZE                      TXBUFFERSIZE

@@ -23,7 +23,7 @@
 
 This application shows how to emulate EEPROM on internal flash.
 
-Please refer to AN3969 for futher details regarding this application.
+Please refer to AN3969 for further details regarding this application.
 
 NUCLEO-F746ZG board Rev.B LEDs can be used to monitor the application status:
   - LED2 is On when the application runs successfully.

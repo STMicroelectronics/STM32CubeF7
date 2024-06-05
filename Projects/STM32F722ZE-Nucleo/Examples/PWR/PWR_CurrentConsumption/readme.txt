@@ -56,13 +56,13 @@ Here below a detailed description of the example code:
 
  - When MCU enters low power modes, LED1 turns OFF.
 
- - When RTC is configured in the low power mode, the wakup is generated automatically (after 20s). OtherWise, user button should be pressed again to wakup from low power mode.
+ - When RTC is configured in the low power mode, the wakeup is generated automatically (after 20s). OtherWise, user button should be pressed again to wakeup from low power mode.
 
  - In case of STANDBY modes : 
   - If RTC is used: LED1 is blinking fast (100ms) while entering in RTC IT callback
   - If RTC is not used, LED1 is blinking fast (100ms)  while entering IT callback after Pressing user button. 
 
---> In any case, wrong end of test wil turn red LED (LED3) ON
+--> In any case, wrong end of test will turn red LED (LED3) ON
 
  2. Low power modes description:
 

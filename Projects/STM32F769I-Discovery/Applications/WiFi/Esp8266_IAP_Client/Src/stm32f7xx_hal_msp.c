@@ -49,7 +49,7 @@ void HAL_UART_MspInit(UART_HandleTypeDef *huart)
   /* Enable the GPIO clock */
   ESP8266_RST_GPIO_CLK_ENABLE();
   
-  /* Set the GPIO pin configuration parametres */
+  /* Set the GPIO pin configuration parameters */
   GPIO_InitStruct.Pin       = ESP8266_RST_PIN;
   GPIO_InitStruct.Mode      = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull      = GPIO_PULLUP;
