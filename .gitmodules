@@ -138,3 +138,7 @@
 	path = Drivers/BSP/Components/wm8994
 	url = https://github.com/STMicroelectronics/stm32-wm8994.git
 	branch = main
+[submodule "Drivers/BSP/Components/w25q128j"]
+	path = Drivers/BSP/Components/w25q128j
+	url = https://github.com/STMicroelectronics/stm32-w25q128j.git
+	branch = main
