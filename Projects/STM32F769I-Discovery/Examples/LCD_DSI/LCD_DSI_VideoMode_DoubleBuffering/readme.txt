@@ -52,7 +52,11 @@ The LED1 is ON when an error occurs during initialization of the LCD.
 @note The STM32F7xx devices can reach a maximum clock frequency of 216MHz but as this example uses SDRAM,
       the system clock is limited to 200MHz. Indeed proper functioning of the SDRAM is only guaranteed 
       at a maximum system clock frequency of 200MHz.
-      
+
+@Note: The STM32F769I-DISCO board uses an LCD display in landscape mode with a 45° tearing effect
+       limitation during the transition between the first and second images. To avoid this limitation,
+       we suggest using an adapted DSI command mode with a left/right refresh technique
+
 @par Keywords
 
 Graphic, Display, LCD, DSI, MIPI Alliance, Video mode, Double buffering, LTDC, QVGA, ARGB8888, SDRAM

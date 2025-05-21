@@ -65,11 +65,6 @@
 			<locationURI>PARENT-2-PROJECT_LOC/Src/stm32f7xx_it.c</locationURI>
 		</link>
 		<link>
-			<name>Application/User/syscalls.c</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/syscalls.c</locationURI>
-		</link>
-		<link>
 			<name>Application/User/usbh_conf.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/Src/usbh_conf.c</locationURI>

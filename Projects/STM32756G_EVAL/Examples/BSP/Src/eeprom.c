@@ -127,7 +127,7 @@ static void EEPROM_Show_Feature(uint8_t feature)
   uint8_t *Bus = NULL;
   
   uint8_t Rx1Buffer[BUFFER_SIZE1] = {0}; 
-  uint8_t Tx2Buffer[BUFFER_SIZE1] = {0}; 
+  uint8_t Tx2Buffer[2 * BUFFER_SIZE1] = {0}; 
   __IO TestStatus TransferStatus1 = FAILED;
   __IO uint32_t NumDataRead = 0; 
 

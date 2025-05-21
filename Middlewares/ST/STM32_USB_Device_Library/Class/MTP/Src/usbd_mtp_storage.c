@@ -95,9 +95,18 @@ uint8_t USBD_MTP_STORAGE_ReadData(USBD_HandleTypeDef  *pdev)
 {
   USBD_MTP_HandleTypeDef  *hmtp = (USBD_MTP_HandleTypeDef *)pdev->pClassDataCmsit[pdev->classId];
   uint32_t *data_buff;
+  uint32_t buffer_size;
 
   /* Get the data buffer pointer from the low layer interface */
   data_buff = ((USBD_MTP_ItfTypeDef *)pdev->pUserData[pdev->classId])->ScratchBuff;
+
+  /* Get Data Buffer Size */
+  buffer_size = ((USBD_MTP_ItfTypeDef *)pdev->pUserData[pdev->classId])->ScratchBuffSze;
+
+  if ((data_buff == NULL) || (buffer_size < MTP_CONT_HEADER_SIZE))
+  {
+    return (uint8_t)USBD_FAIL;
+  }
 
   switch (ReadDataStatus)
   {
@@ -105,16 +114,19 @@ uint8_t USBD_MTP_STORAGE_ReadData(USBD_HandleTypeDef  *pdev)
       /* Reset the data length */
       MTP_DataLength.temp_length = 0U;
 
-      /* Perform the low layer read operation on the scratch buffer */
-      (void)((USBD_MTP_ItfTypeDef *)pdev->pUserData[pdev->classId])->ReadData(hmtp->OperationsContainer.Param1,
-                                                                              (uint8_t *)data_buff, &MTP_DataLength);
-
       /* Add the container header to the data buffer */
       (void)USBD_memcpy((uint8_t *)data_buff, (uint8_t *)&hmtp->GenericContainer, MTP_CONT_HEADER_SIZE);
 
+      /* Perform the low layer read operation on the scratch buffer
+       * first packet expected data length: MPS - MTP_CONT_HEADER_SIZE
+       */
+      (void)((USBD_MTP_ItfTypeDef *)pdev->pUserData[pdev->classId])->ReadData(hmtp->OperationsContainer.Param1,
+                                                                              (uint8_t *)data_buff +
+                                                                              MTP_CONT_HEADER_SIZE, &MTP_DataLength);
+
       /* Start USB data transmission to the host */
       (void)USBD_MTP_STORAGE_SendData(pdev, (uint8_t *)data_buff,
-                                      MTP_DataLength.readbytes + MTP_CONT_HEADER_SIZE);
+                                      MIN((MTP_DataLength.readbytes + MTP_CONT_HEADER_SIZE), buffer_size));
 
       /* Check if this will be the last packet to send ? */
       if (MTP_DataLength.readbytes < ((uint32_t)hmtp->MaxPcktLen - MTP_CONT_HEADER_SIZE))
@@ -138,18 +150,18 @@ uint8_t USBD_MTP_STORAGE_ReadData(USBD_HandleTypeDef  *pdev)
       if (MTP_DataLength.temp_length == MTP_DataLength.totallen)
       {
         /* Start USB data transmission to the host */
-        (void)USBD_MTP_STORAGE_SendData(pdev, (uint8_t *)data_buff, MTP_DataLength.readbytes);
+        (void)USBD_MTP_STORAGE_SendData(pdev, (uint8_t *)data_buff, MIN(MTP_DataLength.readbytes, buffer_size));
 
         /* Move to response phase */
         hmtp->MTP_ResponsePhase = MTP_RESPONSE_PHASE;
 
-        /* Reset the stat machine */
+        /* Reset the state machine */
         ReadDataStatus = READ_FIRST_DATA;
       }
       else
       {
         /* Start USB data transmission to the host */
-        (void)USBD_MTP_STORAGE_SendData(pdev, (uint8_t *)data_buff, MTP_DataLength.readbytes);
+        (void)USBD_MTP_STORAGE_SendData(pdev, (uint8_t *)data_buff, MIN(MTP_DataLength.readbytes, buffer_size));
 
         /* Keep the state machine into sending next packet of data */
         ReadDataStatus = READ_REST_OF_DATA;
@@ -176,7 +188,8 @@ uint8_t USBD_MTP_STORAGE_SendContainer(USBD_HandleTypeDef  *pdev, MTP_CONTAINER_
   {
     case DATA_TYPE:
       /* send header + data : hmtp->ResponseLength = header size + data size */
-      (void)USBD_MTP_STORAGE_SendData(pdev, (uint8_t *)&hmtp->GenericContainer, hmtp->ResponseLength);
+      (void)USBD_MTP_STORAGE_SendData(pdev, (uint8_t *)&hmtp->GenericContainer, MIN(sizeof(MTP_GenericContainerTypeDef),
+                                                                                    hmtp->ResponseLength));
       break;
     case REP_TYPE:
       /* send header without data */
@@ -185,7 +198,8 @@ uint8_t USBD_MTP_STORAGE_SendContainer(USBD_HandleTypeDef  *pdev, MTP_CONTAINER_
       hmtp->GenericContainer.length = hmtp->ResponseLength;
       hmtp->GenericContainer.type = MTP_CONT_TYPE_RESPONSE;
 
-      (void)USBD_MTP_STORAGE_SendData(pdev, (uint8_t *)&hmtp->GenericContainer, hmtp->ResponseLength);
+      (void)USBD_MTP_STORAGE_SendData(pdev, (uint8_t *)&hmtp->GenericContainer, MIN(sizeof(MTP_GenericContainerTypeDef),
+                                                                                    hmtp->ResponseLength));
       break;
     default:
       break;
@@ -245,7 +259,7 @@ uint8_t USBD_MTP_STORAGE_ReceiveOpt(USBD_HandleTypeDef  *pdev)
   */
 uint8_t USBD_MTP_STORAGE_ReceiveData(USBD_HandleTypeDef  *pdev)
 {
-  USBD_MTP_HandleTypeDef  *hmtp = (USBD_MTP_HandleTypeDef *)pdev->pClassDataCmsit[pdev->classId];
+  USBD_MTP_HandleTypeDef *hmtp = (USBD_MTP_HandleTypeDef *)pdev->pClassDataCmsit[pdev->classId];
   switch (hmtp->RECEIVE_DATA_STATUS)
   {
     case RECEIVE_COMMAND_DATA :
@@ -410,15 +424,21 @@ static uint8_t USBD_MTP_STORAGE_DecodeOperations(USBD_HandleTypeDef  *pdev)
 static uint8_t USBD_MTP_STORAGE_ReceiveContainer(USBD_HandleTypeDef  *pdev,
                                                  uint32_t *pDst, uint32_t len)
 {
-  USBD_MTP_HandleTypeDef  *hmtp = (USBD_MTP_HandleTypeDef *)pdev->pClassDataCmsit[pdev->classId];
+  USBD_MTP_HandleTypeDef *hmtp = (USBD_MTP_HandleTypeDef *)pdev->pClassDataCmsit[pdev->classId];
   uint32_t Counter;
   uint32_t *pdst = pDst;
 
-  for (Counter = 0; Counter < len; Counter++)
+  if ((pDst == NULL) || (len > MTP_MEDIA_PACKET))
+  {
+    return (uint8_t)USBD_FAIL;
+  }
+
+  for (Counter = 0U; Counter < len; Counter++)
   {
     *pdst = (hmtp->rx_buff[Counter]);
     pdst++;
   }
+
   return (uint8_t)USBD_OK;
 }
 
@@ -456,17 +476,14 @@ void USBD_MTP_STORAGE_Cancel(USBD_HandleTypeDef  *pdev,
   * @param  len: Data Length
   * @retval status value
   */
-static uint8_t USBD_MTP_STORAGE_SendData(USBD_HandleTypeDef  *pdev, uint8_t *buf,
-                                         uint32_t len)
+static uint8_t USBD_MTP_STORAGE_SendData(USBD_HandleTypeDef *pdev, uint8_t *buf, uint32_t len)
 {
-  USBD_MTP_HandleTypeDef  *hmtp = (USBD_MTP_HandleTypeDef *)pdev->pClassDataCmsit[pdev->classId];
-  uint32_t length = MIN(hmtp->GenericContainer.length, len);
 #ifdef USE_USBD_COMPOSITE
   /* Get the Endpoints addresses allocated for this class instance */
   MTPInEpAdd = USBD_CoreGetEPAdd(pdev, USBD_EP_IN, USBD_EP_TYPE_BULK, (uint8_t)pdev->classId);
 #endif /* USE_USBD_COMPOSITE */
 
-  (void)USBD_LL_Transmit(pdev, MTPInEpAdd, buf, length);
+  (void)USBD_LL_Transmit(pdev, MTPInEpAdd, buf, len);
 
   return (uint8_t)USBD_OK;
 }

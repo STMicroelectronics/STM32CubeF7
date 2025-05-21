@@ -1452,7 +1452,7 @@ static uint8_t USBD_CDC_RNDIS_ProcessQueryMsg(USBD_HandleTypeDef *pdev,
 
     case OID_GEN_CURRENT_PACKET_FILTER:
       QueryResponse->InfoBufLength = sizeof(uint32_t);
-      QueryResponse->InfoBuf[0] = 0xFFFFFFU; /* USBD_CDC_RNDIS_DEVICE.packetFilter; */
+      QueryResponse->InfoBuf[0] = 0xFFFFFFU; /* USBD_CDC_RNDIS_DEVICE.packetFilter */
       QueryResponse->Status = CDC_RNDIS_STATUS_SUCCESS;
       break;
 

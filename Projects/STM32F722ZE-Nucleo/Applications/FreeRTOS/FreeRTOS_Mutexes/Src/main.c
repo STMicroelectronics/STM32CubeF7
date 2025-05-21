@@ -118,10 +118,10 @@ static void MutexHighPriorityThread(void const *argument)
 
   for (;;)
   {
-    /* The first time through the mutex will be immediately available, on
-    subsequent times through the mutex will be held by the low priority thread
-    at this point and this Take will cause the low priority thread to inherit
-    the priority of this tadhr.  In this case the block time must be
+    /* The first time through, the mutex will be immediately available. On
+    subsequent times through, the mutex will be held by the low priority thread
+    at this point and this will cause the low priority thread to inherit
+    the priority of this thread. In this case the block time must be
     long enough to ensure the low priority thread will execute again before the
     block time expires.  If the block time does expire then the error
     flag will be set here */
