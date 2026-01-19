@@ -162,7 +162,7 @@ SECTIONS
   }
 
    .ARM.attributes 0 : { *(.ARM.attributes) }
-  .RxDecripSection (NOLOAD) : { *(.RxDescripSection) } >Memory_B1
+  .RxDescripSection (NOLOAD) : { *(.RxDescripSection) } >Memory_B1
   .TxDescripSection (NOLOAD) : { *(.TxDescripSection) } >Memory_B2
 }
 
