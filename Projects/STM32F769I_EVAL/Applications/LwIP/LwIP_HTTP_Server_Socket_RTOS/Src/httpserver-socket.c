@@ -32,6 +32,10 @@
 #define WEBSERVER_THREAD_PRIO    ( osPriorityAboveNormal )
 
 /* Private macro -------------------------------------------------------------*/
+/* str must be a string literal so sizeof() yields its length + 1 */
+#define HTTP_REQ_MATCH(buf, buflen, str) \
+  (((size_t)(buflen) >= (sizeof(str) - 1U)) && (memcmp((buf), (str), sizeof(str) - 1U) == 0))
+
 /* Private variables ---------------------------------------------------------*/
 u32_t nPageHits = 0;
 portCHAR PAGE_BODY[512];
@@ -159,32 +163,32 @@ void http_server_serve(int conn)
   if(ret < 0) return;
 
   /* Check if request to get ST.gif */
-  if (strncmp((char *)recv_buffer,"GET /STM32F7xx_files/ST.gif",27)==0)
+  if (HTTP_REQ_MATCH((char *)recv_buffer, ret, "GET /STM32F7xx_files/ST.gif "))
   {
     fs_open(&file, "/STM32F7xx_files/ST.gif"); 
     write(conn, (const unsigned char*)(file.data), (size_t)file.len);
     fs_close(&file);
   }
   /* Check if request to get stm32.jpeg */
-  else if (strncmp((char *)recv_buffer,"GET /STM32F7xx_files/stm32.jpg",30)==0)
+  else if (HTTP_REQ_MATCH((char *)recv_buffer, ret, "GET /STM32F7xx_files/stm32.jpg "))
   {
     fs_open(&file, "/STM32F7xx_files/stm32.jpg"); 
     write(conn, (const unsigned char*)(file.data), (size_t)file.len);
     fs_close(&file);
   }
   /* Check if request to get ST logo.jpeg */
-  else if (strncmp((char *)recv_buffer,"GET /STM32F7xx_files/logo.jpg", 29) == 0)
+  else if (HTTP_REQ_MATCH((char *)recv_buffer, ret, "GET /STM32F7xx_files/logo.jpg "))
   {
     fs_open(&file, "/STM32F7xx_files/logo.jpg"); 
     write(conn, (const unsigned char*)(file.data), (size_t)file.len);
     fs_close(&file);
   }
-  else if(strncmp((char *)recv_buffer, "GET /STM32F7xxTASKS.html", 24) == 0)
+  else if (HTTP_REQ_MATCH((char *)recv_buffer, ret, "GET /STM32F7xxTASKS.html "))
   {
     /* Load dynamic page */
     DynWebPage(conn);
   }
-  else if((strncmp((char *)recv_buffer, "GET /STM32F7xx.html", 19) == 0)||(strncmp((char *)recv_buffer, "GET / ", 6) == 0))
+  else if (HTTP_REQ_MATCH((char *)recv_buffer, ret, "GET /STM32F7xx.html ") || HTTP_REQ_MATCH((char *)recv_buffer, ret, "GET / "))
   {
     /* Load STM32F7xxpage */
     fs_open(&file, "/STM32F7xx.html"); 
