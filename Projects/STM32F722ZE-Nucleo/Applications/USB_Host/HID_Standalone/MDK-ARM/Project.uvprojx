@@ -333,9 +333,9 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls>--C99</MiscControls>
-              <Define>USE_HAL_DRIVER,STM32F722xx,USE_STM32F7XX_NUCLEO_144,USE_USB_FS,ADAFRUIT_TFT_JOY_SD_ID802,AZERTY_KEYBOARD</Define>
+              <Define>USE_HAL_DRIVER,STM32F722xx,USE_STM32F7XX_NUCLEO_144,USE_USB_FS,ADAFRUIT_TFT_JOY_SD_ID802</Define>
               <Undefine></Undefine>
-              <IncludePath>../Inc;../../../../../../Drivers/CMSIS/Device/ST/STM32F7xx/Include;../../../../../../Drivers/STM32F7xx_HAL_Driver/Inc;../../../../../../Middlewares/ST/STM32_USB_Host_Library/Core/Inc;../../../../../../Middlewares/ST/STM32_USB_Host_Library/Class/HID/Inc;../../../../../../Drivers/BSP//STM32F7xx_Nucleo_144;../../../../../../Drivers/BSP/Adafruit_Shield;../../../../../../Drivers/BSP/Components/st7735;../../../../../../Drivers/BSP/Components/Common;../../../../../../Utilities/Log</IncludePath>
+              <IncludePath>../Inc;../../../../../../Drivers/CMSIS/Device/ST/STM32F7xx/Include;../../../../../../Drivers/STM32F7xx_HAL_Driver/Inc;../../../../../../Middlewares/ST/STM32_USB_Host_Library/Core/Inc;../../../../../../Middlewares/ST/STM32_USB_Host_Library/Class/HID/Inc;../../../../../../Drivers/BSP//STM32F7xx_Nucleo_144;../../../../../../Drivers/BSP/Adafruit_Shield;../../../../../../Drivers/BSP/Components/st7735;../../../../../../Drivers/BSP/Components/Common;../../../../../../Utilities/Log;..\..\..\..\..\..\Drivers\CMSIS\Include</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
